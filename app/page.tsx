@@ -12,14 +12,14 @@ const pasos = [
   ["Seguimiento", "Revisamos cada 4 semanas y ajustamos. Entre consultas, me escribes por WhatsApp.", "t-green"],
 ];
 const nutrientes = [
-  ["🩸 Hierro", "Regla, menos carne roja que en casa, mucho café."],
-  ["☀️ Vitamina D", "Latitud alta, inviernos largos y piel morena."],
-  ["🧠 Vitamina B12", "Poca proteína animal, metformina, anticonceptivos."],
-  ["🥬 Folato", "Pocas hojas verdes y leguminosas."],
-  ["🧂 Yodo", "En Alemania y Suiza no toda la sal lo trae."],
-  ["🦴 Calcio", "Dejar los lácteos sin reemplazarlos."],
-  ["🐟 Omega-3", "Poco pescado azul en la semana."],
-  ["🌾 Fibra", "Más pan blanco, menos frijoles y fruta."],
+  ["🩸 Hierro", "Se pierde con la regla y baja cuando comemos menos carne roja y tomamos mucho café."],
+  ["☀️ Vitamina D", "Aquí hay menos sol, los inviernos son largos y la piel morena necesita más."],
+  ["🧠 Vitamina B12", "Baja con poca proteína animal, con metformina o con anticonceptivos."],
+  ["🥬 Folato", "Falta cuando comemos pocas hojas verdes y leguminosas."],
+  ["🧂 Yodo", "Falta porque en Alemania y Suiza no toda la sal lo trae."],
+  ["🦴 Calcio", "Baja cuando dejamos los lácteos y no los reemplazamos."],
+  ["🐟 Omega-3", "Falta cuando comemos poco pescado azul en la semana."],
+  ["🌾 Fibra", "Baja cuando comemos más pan blanco y menos frijoles y fruta."],
 ];
 const precios: { titulo: string; etiqueta: string; items: string[]; destacado: boolean; precio: [string, string, string]; nota?: string }[] = [
   {
