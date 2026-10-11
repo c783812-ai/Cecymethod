@@ -3,18 +3,13 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireNutri } from "@/lib/auth";
 import { supabaseAdmin } from "@/lib/supabase/admin";
-import { HISTORIA } from "@/lib/historia";
-import type { Lab, Plan } from "@/lib/types";
+import type { Plan } from "@/lib/types";
 
 const str = (f: FormData, k: string) => {
   const v = f.get(k);
   return typeof v === "string" && v.trim() ? v.trim() : null;
 };
 const lines = (v: string | null) => (v ? v.split("\n").map((s) => s.trim()).filter(Boolean) : []);
-const num = (f: FormData, k: string) => {
-  const v = str(f, k);
-  return v == null ? null : Number(v.replace(",", "."));
-};
 const siteUrl = () => process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export async function crearPaciente(f: FormData) {
@@ -24,11 +19,10 @@ export async function crearPaciente(f: FormData) {
   if (!nombre || !email) throw new Error("Falta nombre o correo");
   const { data, error } = await sb
     .from("patients")
-    .insert({ nombre, email, ciudad: str(f, "ciudad"), pais_origen: str(f, "pais_origen"), proxima_cita: str(f, "proxima_cita") })
+    .insert({ nombre, email, ciudad: str(f, "ciudad"), proxima_cita: str(f, "proxima_cita") })
     .select("id")
     .single();
   if (error) redirect(`/consultorio?error=${encodeURIComponent(error.code === "23505" ? "Ya hay una paciente con ese correo." : error.message)}`);
-  await sb.from("patient_private").insert({ patient_id: data.id });
   redirect(`/consultorio/${data.id}`);
 }
 
@@ -55,27 +49,19 @@ export async function invitar(id: string) {
 
 export async function guardarResumen(id: string, f: FormData) {
   const { sb } = await requireNutri();
-  const etapa = Number(f.get("etapa") ?? 0);
   await sb
     .from("patients")
     .update({
       nombre: str(f, "nombre") ?? undefined,
       ciudad: str(f, "ciudad"),
-      pais_origen: str(f, "pais_origen"),
-      fecha_nacimiento: str(f, "fecha_nacimiento"),
-      etapa: Number.isFinite(etapa) ? etapa : 0,
-      consulta_numero: Number(f.get("consulta_numero") ?? 0) || 0,
       proxima_cita: str(f, "proxima_cita"),
-      objetivo: str(f, "objetivo"),
       metas: lines(str(f, "metas")).slice(0, 3),
-      logros: lines(str(f, "logros")),
     })
     .eq("id", id);
-  await sb.from("patient_private").upsert({ patient_id: id, alertas: lines(str(f, "alertas")), notas: str(f, "notas"), updated_at: new Date().toISOString() });
   revalidatePath(`/consultorio/${id}`);
 }
 
-export async function cambiarAcceso(id: string, campo: "plan_visible" | "routine_visible" | "labs_visible", valor: boolean) {
+export async function cambiarAcceso(id: string, campo: "plan_visible" | "routine_visible", valor: boolean) {
   const { sb } = await requireNutri();
   await sb.from("patients").update({ [campo]: valor }).eq("id", id);
   revalidatePath(`/consultorio/${id}`);
@@ -84,40 +70,6 @@ export async function cambiarAcceso(id: string, campo: "plan_visible" | "routine
 export async function asignarRutina(id: string, f: FormData) {
   const { sb } = await requireNutri();
   await sb.from("patients").update({ routine_key: str(f, "routine_key") }).eq("id", id);
-  revalidatePath(`/consultorio/${id}`);
-}
-
-export async function guardarHistoria(id: string, f: FormData) {
-  const { sb } = await requireNutri();
-  const historia: Record<string, string> = {};
-  for (const h of HISTORIA) for (const [k] of h.campos) {
-    const v = str(f, k);
-    if (v) historia[k] = v;
-  }
-  await sb.from("patient_private").upsert({ patient_id: id, historia, consentimiento: f.get("consentimiento") === "on", updated_at: new Date().toISOString() });
-  revalidatePath(`/consultorio/${id}`);
-}
-
-export async function guardarLabs(id: string, labs: Lab[], fecha: string) {
-  const { sb } = await requireNutri();
-  await sb.from("patients").update({ labs: labs.filter((l) => l.marcador && l.resultado), labs_fecha: fecha || null }).eq("id", id);
-  revalidatePath(`/consultorio/${id}`);
-}
-
-export async function agregarMedicion(id: string, f: FormData) {
-  const { sb } = await requireNutri();
-  const fecha = str(f, "fecha");
-  if (!fecha) return;
-  await sb.from("measurements").insert({
-    patient_id: id, fecha,
-    peso: num(f, "peso"), cintura: num(f, "cintura"), cadera: num(f, "cadera"), musculo: num(f, "musculo"), grasa: num(f, "grasa"), visceral: num(f, "visceral"),
-  });
-  revalidatePath(`/consultorio/${id}`);
-}
-
-export async function borrarMedicion(id: string, medId: string) {
-  const { sb } = await requireNutri();
-  await sb.from("measurements").delete().eq("id", medId).eq("patient_id", id);
   revalidatePath(`/consultorio/${id}`);
 }
 
@@ -133,21 +85,6 @@ export async function guardarPlan(id: string, planId: string | null, plan: Plan,
   }
   revalidatePath(`/consultorio/${id}`);
   return { ok: true, msg: "Plan guardado." };
-}
-
-export async function agregarSeguimiento(id: string, f: FormData) {
-  const { sb } = await requireNutri();
-  const data: Record<string, string> = {};
-  for (const [k, v] of f.entries()) if (typeof v === "string" && v.trim() && k !== "fecha" && !k.startsWith("$")) data[k] = v.trim();
-  const fecha = str(f, "fecha") ?? new Date().toISOString().slice(0, 10);
-  const { data: p } = await sb.from("patients").select("consulta_numero").eq("id", id).single();
-  const numero = (p?.consulta_numero ?? 0) + 1;
-  await sb.from("followups").insert({ patient_id: id, fecha, numero, data });
-  const upd: Record<string, unknown> = { consulta_numero: numero, etapa: 5 };
-  if (data.metas) upd.metas = lines(data.metas).slice(0, 3);
-  if (data.proxima_cita) upd.proxima_cita = data.proxima_cita;
-  await sb.from("patients").update(upd).eq("id", id);
-  revalidatePath(`/consultorio/${id}`);
 }
 
 export async function guardarVideo(nombre: string, storage_path: string) {

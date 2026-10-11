@@ -37,51 +37,20 @@ export type FilaRutina = { a: Ejercicio; b: Ejercicio; c: Ejercicio };
 export type DiaRutina = { dia: string; calentamiento: [string, string][]; ejercicios: FilaRutina[]; cierre?: string };
 export type Rutina = { titulo: string; subtitulo: string; opciones: [string, string, string]; dias: DiaRutina[] };
 
-export type Lab = { marcador: string; resultado: string; unidad: string; referencia: string; lectura: "Baja" | "Alta" | "Límite" | "En rango" | "" };
-
 export type Patient = {
   id: string;
   user_id: string | null;
   email: string;
   nombre: string;
   ciudad: string | null;
-  pais_origen: string | null;
-  fecha_nacimiento: string | null;
-  etapa: number;
-  consulta_numero: number;
   proxima_cita: string | null;
-  objetivo: string | null;
   metas: string[];
-  logros: string[];
-  labs: Lab[];
-  labs_fecha: string | null;
-  labs_visible: boolean;
   plan_visible: boolean;
   routine_key: string | null;
   routine_visible: boolean;
   invitada_at: string | null;
   created_at: string;
 };
-
-export type Measurement = {
-  id: string;
-  fecha: string;
-  peso: number | null;
-  cintura: number | null;
-  cadera: number | null;
-  musculo: number | null;
-  grasa: number | null;
-  visceral: number | null;
-};
-
-export const ETAPAS: [string, string][] = [
-  ["Antes", "Agenda y lista de análisis"],
-  ["Análisis", "Resultados e InBody"],
-  ["Primera consulta", "Videollamada 60 min"],
-  ["Lectura", "Armar el plan"],
-  ["Entrega", "PDF y bienvenida"],
-  ["Seguimiento", "Cada 4 semanas"],
-];
 
 export function planVacio(): Plan {
   const menu = Object.fromEntries(DIAS.map((d) => [d, TIEMPOS.map(() => ({ titulo: "", detalle: "" }))])) as Record<Dia, Comida[]>;

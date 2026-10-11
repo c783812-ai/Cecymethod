@@ -11,11 +11,11 @@ export default function Privacidad() {
       <h2>Quién cuida tus datos</h2>
       <p>Cecilia Rivera, nutrióloga (@cecy.method). Contacto: cecilia.nutdxb@gmail.com.</p>
       <h2>Qué datos guardo</h2>
-      <p>Tus datos de contacto, tu historia clínica nutricional, tus análisis de laboratorio, tus mediciones, tu plan de alimentación y tu rutina.</p>
+      <p>En esta página solo guardo tu nombre, tu correo, la ciudad donde vives, tu plan de alimentación, tus metas y tu rutina. Tu historia clínica, tus análisis y tus mediciones no se guardan en esta página: los guardo yo en mis archivos.</p>
       <h2>Para qué</h2>
       <p>Solo para darte tu consulta, armar tu plan y darte seguimiento. No los vendo ni los comparto con nadie para publicidad.</p>
       <h2>Dónde se guardan</h2>
-      <p>En servidores de la Unión Europea, cifrados. Solo tú y yo podemos verlos. Tú ves tu plan, tu rutina y tu avance; tu historia clínica y mis notas solo las veo yo.</p>
+      <p>En servidores de la Unión Europea, cifrados. Solo tú y yo podemos verlos.</p>
       <h2>Tu autorización</h2>
       <p>Te pido tu autorización por escrito en la primera consulta antes de guardar tus datos de salud. Puedes retirarla cuando quieras.</p>
       <h2>Tus derechos</h2>

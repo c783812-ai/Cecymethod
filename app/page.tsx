@@ -67,7 +67,7 @@ const faq = [
   ["¿Atiendes en cualquier país?", "Sí, todo es en línea. Agendamos en tu zona horaria y el menú se arma con lo que hay en tu súper."],
   ["¿Cómo pago?", "Por transferencia. Tengo cuenta en México y en Europa, así pagas en pesos o en euros. Te mando los datos al agendar."],
   ["¿Cuándo recibo mi plan?", "De 2 a 3 días después de tu primera consulta, en tu página y con una nota de voz para empezar."],
-  ["¿Quién ve mis datos de salud?", "Solo tú y yo. Se guardan cifrados en servidores de la Unión Europea y te pido tu autorización por escrito antes de usarlos."],
+  ["¿Quién ve mis datos?", "Tu historia clínica y tus análisis los guardo yo, fuera de la página. En tu página solo están tu plan y tu rutina, y solo tú entras con tu correo."],
 ];
 
 export default function Home() {

@@ -4,11 +4,11 @@ Página de Cecilia Rivera, nutrióloga (@cecy.method): página de inicio públic
 
 - **Inicio** (`/`): quién es, cómo trabaja, precios, preguntas y contacto. Es el enlace de Instagram.
 - **Pacientes** (`/entrar`, `/mi-plan`): su día, su semana, porciones y equivalentes, su rutina con videos y su avance. Solo ven lo que Cecy activa.
-- **Consultorio** (`/consultorio`): pacientes, historia clínica (solo Cecy), análisis, mediciones, plan de alimentación, rutina, seguimientos y biblioteca de videos.
+- **Consultorio** (`/consultorio`): pacientes (nombre, correo, ciudad, próxima cita, metas), plan de alimentación, rutina y biblioteca de videos. La historia clínica, análisis y mediciones NO se guardan aquí: Cecy los lleva en su tablet.
 
 ## Tecnología
 
-Next.js 15 (Vercel) + Supabase (Postgres, inicio de sesión por correo, almacenamiento de videos). Las reglas de privacidad viven en la base de datos (Row Level Security, `supabase/migrations/0001_init.sql`): cada paciente solo puede leer su propia fila, su plan si está visible y su rutina si está visible; la historia clínica (`patient_private`) y los seguimientos solo los lee la nutrióloga (`app_admins`).
+Next.js 15 (Netlify, plan gratis; permite uso comercial) + Supabase (plan gratis) (Postgres, inicio de sesión por correo, almacenamiento de videos). Las reglas de privacidad viven en la base de datos (Row Level Security, `supabase/migrations/0001_init.sql`): cada paciente solo puede leer su propia fila, su plan si está visible y su rutina si está visible; la nutrióloga (`app_admins`) lo ve todo.
 
 ## Puesta en marcha
 
@@ -17,9 +17,11 @@ Next.js 15 (Vercel) + Supabase (Postgres, inicio de sesión por correo, almacena
    - Providers > Email: activar; desactivar "Allow new users to sign up" (solo Cecy da de alta).
    - URL Configuration: Site URL `https://cecymethod.com`; Redirect URLs `https://cecymethod.com/**`.
    - Email Templates: pegar `supabase/templates/magic-link.html` e `invite.html`.
-   - SMTP propio (recomendado, el de Supabase tiene límite bajo de correos): p. ej. Resend con el dominio.
-3. **Vercel**: importar el repositorio y poner las variables de `.env.example`.
-4. **Dominio**: apuntar cecymethod.com a Vercel.
+   - SMTP propio (recomendado, el de Supabase tiene límite bajo de correos): p. ej. Resend con el dominio (gratis hasta 3,000 correos al mes).
+
+Videos: el almacenamiento gratis de Supabase es 1 GB; grabar clips cortos (15–30 s, 720p).
+3. **Netlify**: Add new site > Import from GitHub > este repositorio, y poner las variables de `.env.example`.
+4. **Dominio**: apuntar cecymethod.com a Netlify.
 5. Cecy entra en `/entrar` con `cecilia.nutdxb@gmail.com` (está en `app_admins`). La primera vez hay que crear su usuario en Supabase > Authentication > Users > Invite.
 
 ## Desarrollo

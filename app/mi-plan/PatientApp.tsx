@@ -1,20 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { DIAS, TIEMPOS, type Measurement, type Patient, type Plan, type Rutina } from "@/lib/types";
+import { DIAS, TIEMPOS, type Patient, type Plan, type Rutina } from "@/lib/types";
 import { EQUIVALENTES, MANO } from "@/lib/equivalentes";
-import { LabsTable, MedTable, PorcionesTable, TrendChart, tint } from "@/components/shared";
+import { PorcionesTable, tint } from "@/components/shared";
 
 const MEAL_TINT = ["t-yellow", "t-pink", "t-blue", "t-lilac", "t-green"];
 const CORTO = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
-type Tab = "hoy" | "semana" | "porciones" | "rutina" | "avance";
+type Tab = "hoy" | "semana" | "porciones" | "rutina";
 
 const ICON: Record<Tab, React.ReactNode> = {
   hoy: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>,
   semana: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M4 6h16M4 12h16M4 18h10" /></svg>,
   porciones: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="8" /><path d="M12 4v8l6 4" /></svg>,
   rutina: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12" /></svg>,
-  avance: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M4 18l5-6 4 3 7-9" /><path d="M15 6h5v5" /></svg>,
 };
 
 // Lo que la paciente palomea se guarda solo en su teléfono.
@@ -38,10 +37,9 @@ export default function PatientApp(props: {
   planExiste: boolean;
   rutina: Rutina | null;
   videos: Record<string, string>;
-  mediciones: Measurement[];
   vistaPrevia: boolean;
 }) {
-  const { patient: p, plan, rutina, videos, mediciones, vistaPrevia } = props;
+  const { patient: p, plan, rutina, videos, vistaPrevia } = props;
   const [tab, setTab] = useState<Tab>("hoy");
   const first = p.nombre.split(" ")[0];
   const heads: Record<Tab, [string, React.ReactNode]> = {
@@ -49,9 +47,8 @@ export default function PatientApp(props: {
     semana: [plan?.titulo ?? "Tu plan", <>Tu <mark>semana</mark></>],
     porciones: ["Para cambiar un alimento por otro", <>Tus <mark>porciones</mark></>],
     rutina: ["Ejercicio", <>Tu <mark>rutina</mark></>],
-    avance: ["Lejos de casa, pero cuidándote", <>Tu <mark>avance</mark></>],
   };
-  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["semana", "Mi semana"], ["porciones", "Porciones"], ["rutina", "Rutina"], ["avance", "Avance"]];
+  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["semana", "Mi semana"], ["porciones", "Porciones"], ["rutina", "Rutina"]];
 
   return (
     <div className="patient">
@@ -67,11 +64,10 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy plan={plan} planExiste={props.planExiste} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} />}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} />}
             {tab === "porciones" && <Porciones plan={plan} planExiste={props.planExiste} />}
             {tab === "rutina" && <RutinaView rutina={rutina} videos={videos} pid={p.id} />}
-            {tab === "avance" && <Avance p={p} med={mediciones} />}
             {!vistaPrevia && (
               <form action="/salir" method="post" style={{ textAlign: "center" }}>
                 <button className="btn" style={{ fontSize: 13, padding: "6px 12px" }}>Salir</button>
@@ -111,10 +107,23 @@ function Locked({ planExiste }: { planExiste: boolean }) {
   );
 }
 
-function Hoy({ plan, planExiste }: { plan: Plan | null; planExiste: boolean }) {
+function Metas({ p }: { p: Patient }) {
+  const [hechas, toggle] = useLocalChecks(`metas-${p.id}`);
+  if (!p.metas.length) return null;
+  return (
+    <div className="card" style={{ padding: 14 }}>
+      <div className="eyebrow" style={{ marginBottom: 6 }}>Tus metas{p.proxima_cita ? ` hasta el ${p.proxima_cita}` : ""}</div>
+      {p.metas.map((t, i) => (
+        <label key={i} className="check"><input type="checkbox" checked={!!hechas[t]} onChange={() => toggle(t)} /> {t}</label>
+      ))}
+    </div>
+  );
+}
+
+function Hoy({ p, plan, planExiste }: { p: Patient; plan: Plan | null; planExiste: boolean }) {
   const [di, setDi] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); }, []);
-  if (!plan) return <><Locked planExiste={planExiste} /><Whats /></>;
+  if (!plan) return <><Locked planExiste={planExiste} /><Metas p={p} /><Whats /></>;
   const d = di ?? 0;
   return (
     <>
@@ -147,6 +156,7 @@ function Hoy({ plan, planExiste }: { plan: Plan | null; planExiste: boolean }) {
         </div>
       )}
       {plan.tips[0] && <div className={`tint ${tint(plan.tips[0].color)}`}><h4>{plan.tips[0].icono} {plan.tips[0].titulo}</h4><p>{plan.tips[0].texto}</p></div>}
+      <Metas p={p} />
       <Whats />
     </>
   );
@@ -266,38 +276,6 @@ function RutinaView({ rutina, videos, pid }: { rutina: Rutina | null; videos: Re
         );
       })}
       {d.cierre && <div className="tint t-green"><h4>{d.cierre}</h4><p>Para terminar tu sesión.</p></div>}
-    </>
-  );
-}
-
-function Avance({ p, med }: { p: Patient; med: Measurement[] }) {
-  const [hechas, toggle] = useLocalChecks(`metas-${p.id}`);
-  if (!med.length && !p.metas.length) return <div className="locked">Tu avance aparece aquí después de tu primera consulta.</div>;
-  return (
-    <>
-      {p.metas.length > 0 && (
-        <div className="card" style={{ padding: 14 }}>
-          <div className="eyebrow" style={{ marginBottom: 6 }}>Tus metas{p.proxima_cita ? ` hasta el ${p.proxima_cita}` : ""}</div>
-          {p.metas.map((t, i) => (
-            <label key={i} className="check"><input type="checkbox" checked={!!hechas[t]} onChange={() => toggle(t)} /> {t}</label>
-          ))}
-        </div>
-      )}
-      {p.logros.length > 0 && <div className="tint t-green"><h4>🎉 Tus logros</h4>{p.logros.map((l) => <p key={l} style={{ margin: "4px 0" }}>{l}</p>)}</div>}
-      {med.length > 0 && (
-        <div className="card" style={{ padding: 14 }}>
-          <div className="eyebrow" style={{ marginBottom: 6 }}>Tus mediciones</div>
-          <TrendChart med={med} />
-          <MedTable med={med} />
-        </div>
-      )}
-      {p.labs_visible && p.labs.length > 0 && (
-        <div className="card" style={{ padding: 14 }}>
-          <div className="eyebrow" style={{ marginBottom: 6 }}>Lo que dicen tus análisis</div>
-          <LabsTable labs={p.labs} />
-        </div>
-      )}
-      <Whats />
     </>
   );
 }

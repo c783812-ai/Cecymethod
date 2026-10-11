@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getUser, isNutri } from "@/lib/auth";
-import type { Measurement, Patient, Plan, Rutina } from "@/lib/types";
+import type { Patient, Plan, Rutina } from "@/lib/types";
 import PatientApp from "./PatientApp";
 
 export const metadata = { title: "Mi plan · Cecy" };
@@ -29,9 +29,8 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
     );
   }
 
-  const [planRes, medRes, rutRes, vidRes] = await Promise.all([
+  const [planRes, rutRes, vidRes] = await Promise.all([
     sb.from("plans").select("data").eq("patient_id", patient.id).eq("activo", true).order("updated_at", { ascending: false }).limit(1).maybeSingle(),
-    sb.from("measurements").select("*").eq("patient_id", patient.id).order("fecha"),
     patient.routine_key ? sb.from("routine_templates").select("data").eq("key", patient.routine_key).maybeSingle() : Promise.resolve({ data: null }),
     sb.from("exercise_videos").select("nombre, storage_path"),
   ]);
@@ -53,7 +52,6 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
       planExiste={!!planRes.data}
       rutina={rutina}
       videos={videos}
-      mediciones={(medRes.data as Measurement[]) ?? []}
       vistaPrevia={nutri && !!como}
     />
   );
