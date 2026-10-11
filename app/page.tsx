@@ -133,7 +133,7 @@ export default function Home() {
           {nutrientes.map(([t, d]) => (
             <div key={t}>
               <b>{t}</b>
-              {d}
+              <span className="causa">Causa:</span> {d}
             </div>
           ))}
         </div>

@@ -255,3 +255,4 @@ a{color:inherit}
 .legal h1{font-size:30px;margin-bottom:8px}
 .legal h2{font-size:19px;margin:24px 0 6px}
 .legal p,.legal li{color:var(--ink);line-height:1.6}
+.nutr .causa{font-weight:700;color:var(--muted, inherit)}
