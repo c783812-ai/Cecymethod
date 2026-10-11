@@ -10,7 +10,8 @@ const str = (f: FormData, k: string) => {
   return typeof v === "string" && v.trim() ? v.trim() : null;
 };
 const lines = (v: string | null) => (v ? v.split("\n").map((s) => s.trim()).filter(Boolean) : []);
-const siteUrl = () => process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+// En Netlify, URL es la dirección principal del sitio (cecymethod.com cuando se conecte el dominio).
+const siteUrl = () => process.env.NEXT_PUBLIC_SITE_URL ?? process.env.URL ?? "http://localhost:3000";
 
 export async function crearPaciente(f: FormData) {
   const { sb } = await requireNutri();
