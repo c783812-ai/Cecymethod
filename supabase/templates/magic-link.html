@@ -1,0 +1,9 @@
+<!-- Supabase > Authentication > Email Templates > Magic Link. Asunto: Tu enlace para entrar · Cecy -->
+<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#1D2849">
+  <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#5D6884">Cecilia Rivera · Nutrióloga</p>
+  <h2 style="margin:0 0 12px">Entra a tu plan</h2>
+  <p>Toca el botón para entrar. No necesitas contraseña.</p>
+  <p><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email" style="background:#1D2849;color:#fff;padding:12px 20px;border-radius:12px;text-decoration:none;display:inline-block">Ver mi plan</a></p>
+  <p style="font-size:13px;color:#5D6884">El enlace es solo para ti y vence en 1 hora. Si no pediste entrar, ignora este correo.</p>
+  <p>Lejos de casa, pero cuidándote ♥<br><b>Cecy</b> · @cecy.method</p>
+</div>

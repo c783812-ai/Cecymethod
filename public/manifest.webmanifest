@@ -1,0 +1,9 @@
+{
+  "name": "Cecy · Mi plan",
+  "short_name": "Mi plan",
+  "start_url": "/mi-plan",
+  "display": "standalone",
+  "background_color": "#F5F7FB",
+  "theme_color": "#1D2849",
+  "icons": [{ "src": "/icon.png", "sizes": "512x512", "type": "image/png" }]
+}
