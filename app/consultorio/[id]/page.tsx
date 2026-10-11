@@ -90,7 +90,7 @@ async function RutinaTab({ p }: { p: Patient }) {
     <div className="grid">
       <form action={asignarRutina.bind(null, p.id)} className="card" style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "end" }}>
         <label className="field" style={{ minWidth: 240 }}>Rutina asignada
-          <select name="routine_key" defaultValue={p.routine_key ?? ""}>
+          <select name="routine_key" key={p.routine_key ?? ""} defaultValue={p.routine_key ?? ""}>
             <option value="">Sin rutina</option>
             {tpls?.map((t) => <option key={t.key} value={t.key}>{t.titulo}</option>)}
           </select>
