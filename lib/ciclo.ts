@@ -4,6 +4,7 @@ import { MES_2 } from "./rutinas/mes2";
 import { MES_3 } from "./rutinas/mes3";
 import { MES_4 } from "./rutinas/mes4";
 import { MES_5 } from "./rutinas/mes5";
+import { MES_6 } from "./rutinas/mes6";
 
 /**
  * Rutina del mes: todas las pacientes (y Cecy) hacen la misma rutina cada mes del calendario.
@@ -16,6 +17,7 @@ export const CICLO: { key: string; rutina: Rutina }[] = [
   { key: "mes-3", rutina: MES_3 },
   { key: "mes-4", rutina: MES_4 },
   { key: "mes-5", rutina: MES_5 },
+  { key: "mes-6", rutina: MES_6 },
 ];
 export const CICLO_KEY = "ciclo";
 
