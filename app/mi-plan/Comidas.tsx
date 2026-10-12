@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
+import { BANDERA, PAIS, buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
 import type { Comida } from "@/lib/types";
 
 // Los cambios que hace la paciente se guardan solo en su teléfono, por plan.
@@ -40,7 +40,7 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema }:
               const cur = hechos[slot(j)] ?? orig;
               return (
                 <li key={j}>
-                  <span className="ic" aria-hidden="true">{icono(cur.n)}</span>
+                  <span className="ic" aria-hidden="true">{icono(cur.n, cur.g)}</span>
                   <span className="nm">
                     {cur.n}
                     <b className="qt num">{cantidad(cur, orig.x)}</b>
@@ -58,7 +58,7 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema }:
         <SwapSheet
           orig={ings[abierto]}
           actual={hechos[slot(abierto)] ?? ings[abierto]}
-          sistema={sistema}
+          sistema={ings[abierto].s === "sup" ? "suplementos" : sistema}
           onPick={(a) => { setCambio(slot(abierto), a && a.id !== ings[abierto].id ? comoIngrediente(a, ings[abierto].x) : null); setAbierto(null); }}
           onClose={() => setAbierto(null)}
         />
@@ -73,7 +73,11 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
   const [lista, setLista] = useState<Alimento[] | null>(null);
   const [error, setError] = useState(false);
   const [q, setQ] = useState("");
+  const [pais, setPais] = useState("");
   useEffect(() => { cargarAlimentos(sistema).then(setLista, () => setError(true)); }, [sistema]);
+  useEffect(() => { try { setPais(localStorage.getItem("pais") || ""); } catch {} }, []);
+  const elegirPais = (c: string) => { setPais(c); try { localStorage.setItem("pais", c); } catch {} };
+  const esSup = sistema === "suplementos";
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", k);
@@ -81,8 +85,8 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
     return () => { document.removeEventListener("keydown", k); document.body.style.overflow = ""; };
   }, [onClose]);
   const opciones = useMemo(
-    () => (lista ? buscar(lista, q, orig.g).filter((a) => a.id !== orig.id).sort((a, b) => a.n.localeCompare(b.n, "es")) : []),
-    [lista, q, orig],
+    () => (lista ? buscar(lista, q, orig.g).filter((a) => a.id !== orig.id && (!pais || !a.paises || a.paises.includes(pais))).sort((a, b) => a.n.localeCompare(b.n, "es")) : []),
+    [lista, q, orig, pais],
   );
   return (
     <div className="sheet-bg" onClick={onClose}>
@@ -90,11 +94,17 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
         <div className="sheet-head">
           <div>
             <div className="eyebrow">{iconoGrupo(orig.g)} {nombreSubgrupo(orig.g)}</div>
-            <h3>Cambiar {orig.n.toLowerCase()}</h3>
-            <p className="note">Todas estas opciones valen lo mismo que {cantidad(orig, orig.x)} de {orig.n.toLowerCase()}.</p>
+            <h3>Cambiar {esSup ? orig.n : orig.n.toLowerCase()}</h3>
+            <p className="note">{esSup ? "Elige otra opción que encuentres donde vives." : <>Todas estas opciones valen lo mismo que {cantidad(orig, orig.x)} de {orig.n.toLowerCase()}.</>}</p>
           </div>
           <button className="btn" onClick={onClose} aria-label="Cerrar">✕</button>
         </div>
+        {esSup && (
+          <div className="paises" role="group" aria-label="Dónde vives">
+            <button aria-pressed={!pais} onClick={() => elegirPais("")}>Todos</button>
+            {Object.keys(BANDERA).map((c) => <button key={c} aria-pressed={pais === c} onClick={() => elegirPais(c)}>{BANDERA[c]} {PAIS[c]}</button>)}
+          </div>
+        )}
         <input className="sheet-q" type="search" placeholder="Buscar, por ejemplo: pan, queso, fresa" value={q} onChange={(e) => setQ(e.target.value)} />
         <div className="sheet-list">
           {actual.id !== orig.id && (
@@ -107,7 +117,10 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
           {lista && opciones.length === 0 && <p className="note">No encontré nada con “{q}” en este grupo.</p>}
           {opciones.slice(0, 200).map((a) => (
             <button key={a.id} className={`opt ${a.id === actual.id ? "on" : ""}`} onClick={() => onPick(a)}>
-              <span>{icono(a.n) && <>{icono(a.n)} </>}{a.n}</span><b className="num">{cantidad(a, orig.x)}</b>
+              <span>
+                {icono(a.n, a.g) && <>{icono(a.n, a.g)} </>}{a.n}
+                {esSup && <small className="supinfo">{[a.p ? `${a.p} g proteína` : "", a.k != null ? `${a.k} kcal` : "", a.nota ?? ""].filter(Boolean).join(" · ")} {!pais && (a.paises ?? []).map((c) => BANDERA[c]).join(" ")}</small>}
+              </span><b className="num">{cantidad(a, orig.x)}</b>
             </button>
           ))}
         </div>

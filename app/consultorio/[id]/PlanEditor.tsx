@@ -146,7 +146,7 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
                   <textarea value={plan.menu[d][i].detalle} placeholder={plan.menu[d][i].ingredientes?.length ? "Cómo prepararlo (opcional)" : "Cantidades: 2 huevos · 1 taza de espinaca…"} onChange={(e) => up((p) => { p.menu[d][i].detalle = e.target.value; })} aria-label={`${d}, ${t[0]}, cantidades`} />
                   {(plan.menu[d][i].ingredientes ?? []).map((g, j) => (
                     <div key={j} className="eing">
-                      <span>{icono(g.n) && <>{icono(g.n)} </>}{g.n}<small>{cantidad(g, g.x)}</small></span>
+                      <span>{icono(g.n, g.g) && <>{icono(g.n, g.g)} </>}{g.n}<small>{cantidad(g, g.x)}</small></span>
                       <select className="mini num" value={g.x} aria-label={`Equivalentes de ${g.n}`} title="Equivalentes"
                         onChange={(e) => up((p) => { p.menu[d][i].ingredientes![j].x = Number(e.target.value); })}>
                         {[...new Set([...EQS, g.x])].sort((a, b) => a - b).map((v) => <option key={v} value={v}>{fraccion(v)}</option>)}
@@ -154,10 +154,13 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
                       <button className="btn" style={{ padding: "2px 7px", fontSize: 12 }} aria-label={`Quitar ${g.n}`} onClick={() => up((p) => { p.menu[d][i].ingredientes!.splice(j, 1); })}>✕</button>
                     </div>
                   ))}
-                  {buscando === `${d}-${i}` ? (
-                    <BuscarAlimento sistema={plan.sistema ?? "smae"} onPick={(a) => up((p) => { (p.menu[d][i].ingredientes ??= []).push(comoIngrediente(a, 1)); })} />
+                  {buscando === `${d}-${i}` || buscando === `sup-${d}-${i}` ? (
+                    <BuscarAlimento key={buscando} sistema={buscando.startsWith("sup") ? "suplementos" : plan.sistema ?? "smae"} onPick={(a) => up((p) => { (p.menu[d][i].ingredientes ??= []).push(comoIngrediente(a, 1)); })} />
                   ) : (
-                    <button className="btn" style={{ padding: "3px 8px", fontSize: 12 }} onClick={() => setBuscando(`${d}-${i}`)}>+ Ingrediente</button>
+                    <div style={{ display: "flex", gap: 6 }}>
+                      <button className="btn" style={{ padding: "3px 8px", fontSize: 12 }} onClick={() => setBuscando(`${d}-${i}`)}>+ Ingrediente</button>
+                      <button className="btn" style={{ padding: "3px 8px", fontSize: 12 }} onClick={() => setBuscando(`sup-${d}-${i}`)}>+ Suplemento</button>
+                    </div>
                   )}
                 </div>
               ))}

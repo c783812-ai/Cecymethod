@@ -1,14 +1,15 @@
 // Biblioteca de alimentos de Cecy (SMAE + europeos + renal). Los datos viven en public/alimentos/*.json
 // y se arman con scripts/build_alimentos.py. Se cargan solo cuando hacen falta.
 
-export type Sistema = "smae" | "renal";
+export type Sistema = "smae" | "renal" | "suplementos";
 export type Alimento = {
   id: string; n: string; g: string; c: number; u: string; pn: number;
-  k: number; p: number; l: number; h: number; f?: number; o: "smae" | "europa" | "renal";
+  k: number; p: number; l: number; h: number; f?: number; o: "smae" | "europa" | "renal" | "sup";
+  nota?: string; paises?: string[]; // solo suplementos
   k_mg?: number; na?: number; fo?: number; agua?: number; ca?: number;
 };
 /** Un ingrediente de una comida: el alimento (copiado, para no cargar la biblioteca) y cuántos equivalentes. */
-export type Ingrediente = { id: string; n: string; g: string; c: number; u: string; pn: number; x: number };
+export type Ingrediente = { id: string; n: string; g: string; c: number; u: string; pn: number; x: number; s?: "sup" };
 
 const cache: Partial<Record<Sistema, Promise<Alimento[]>>> = {};
 export function cargarAlimentos(s: Sistema = "smae") {
@@ -18,7 +19,7 @@ export function cargarAlimentos(s: Sistema = "smae") {
   }));
 }
 
-export const comoIngrediente = (a: Alimento, x = 1): Ingrediente => ({ id: a.id, n: a.n, g: a.g, c: a.c, u: a.u, pn: a.pn, x });
+export const comoIngrediente = (a: Alimento, x = 1): Ingrediente => ({ id: a.id, n: a.n, g: a.g, c: a.c, u: a.u, pn: a.pn, x, ...(a.o === "sup" ? { s: "sup" as const } : {}) });
 
 const FR: [number, string][] = [[0.25, "¼"], [1 / 3, "⅓"], [0.5, "½"], [2 / 3, "⅔"], [0.75, "¾"]];
 export function fraccion(v: number) {
@@ -72,7 +73,13 @@ const EMOJI: [RegExp, string][] = [
   [/miel|honig/i, "🍯"], [/chocolate|cacao/i, "🍫"], [/az[uú]car|mermelada|konfit[uü]re|cajeta/i, "🍬"], [/helado|nieve/i, "🍨"],
   [/caf[eé]/i, "☕"], [/(^|\s)t[eé](\s|$)/i, "🍵"], [/agua\b/i, "💧"], [/prote[ií]na de suero|whey/i, "🥤"],
 ];
-export const icono = (nombre: string) => EMOJI.find(([r]) => r.test(nombre))?.[1] ?? "";
+const SUP: Record<string, string> = {
+  "Proteína en polvo": "🥤", "Colágeno marino": "🐟", Fibra: "🌾", "Polvo verde": "🥬", Cúrcuma: "🫚", Creatina: "💪",
+  "Vitamina B12": "💊", Probióticos: "💊", Multivitamínico: "💊", Electrolitos: "💧", "Saborizante de agua sin calorías": "💧", Café: "☕",
+};
+export const icono = (nombre: string, g = "") => SUP[g] ?? EMOJI.find(([r]) => r.test(nombre))?.[1] ?? "";
+export const BANDERA: Record<string, string> = { MX: "🇲🇽", US: "🇺🇸", CA: "🇨🇦", ES: "🇪🇸", DE: "🇩🇪", CH: "🇨🇭" };
+export const PAIS: Record<string, string> = { MX: "México", US: "EE. UU.", CA: "Canadá", ES: "España", DE: "Alemania", CH: "Suiza" };
 
 const ICONO_GRUPO: [RegExp, string][] = [
   [/verdura/i, "🥦"], [/fruta/i, "🍎"], [/cereal/i, "🌾"], [/legumin/i, "🫘"], [/a\.o\.a|origen animal/i, "🍗"],
