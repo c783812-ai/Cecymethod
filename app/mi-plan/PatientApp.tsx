@@ -82,7 +82,7 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} irARegistro={() => { setTab("registro"); window.scrollTo(0, 0); }} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} />}
             {tab === "registro" && <><Logros diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
@@ -139,7 +139,7 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste, cambios, orden, diario, gustos, instalar, irARegistro }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean; irARegistro: () => void }) {
+function Hoy({ p, plan, planExiste, cambios, orden, diario, gustos, instalar }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean }) {
   const [di, setDi] = useState<number | null>(null);
   const [hoyIdx, setHoyIdx] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); setHoyIdx(d === 0 ? 6 : d - 1); }, []);
@@ -185,11 +185,6 @@ function Hoy({ p, plan, planExiste, cambios, orden, diario, gustos, instalar, ir
               gusto={gustos[0][m.titulo]} onGusto={(v) => gustos[1](m.titulo, v)} />
           ) : null;
         })
-      )}
-      {esHoy && (
-        <button className="card irregistro" onClick={irARegistro}>
-          <span><b>💧 Mi registro de hoy</b><br /><span className="note">{Object.keys(diario[0][fecha] ?? {}).filter((k) => !["comidas", "de", "pct"].includes(k)).length ? "✓ Ya empezaste" : "Agua, baño, ánimo, sueño y más"}</span></span><span aria-hidden="true" style={{ fontSize: 22, color: "var(--muted)" }}>›</span>
-        </button>
       )}
       <Antojos />
       {plan.suplementos.length > 0 && (
