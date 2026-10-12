@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { BANDERA, PAIS, buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
-import type { Comida } from "@/lib/types";
+import { DIAS, type Comida, type Dia, type Plan } from "@/lib/types";
 
 // Los cambios que hace la paciente se guardan solo en su teléfono, por plan.
 export function useCambios(planId: string | null) {
@@ -23,8 +23,44 @@ export type Cambios = ReturnType<typeof useCambios>;
 
 export const slotDe = (dia: string, comida: number, ing: number) => `${dia}|${comida}|${ing}`;
 
-export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema }: {
+// Qué platillo come cada día: "Miércoles|2" -> "Lunes" quiere decir la comida del lunes, el miércoles.
+export function useOrden(planId: string | null) {
+  const key = `orden-${planId ?? "plan"}`;
+  const [v, setV] = useState<Record<string, Dia>>({});
+  useEffect(() => {
+    try { setV(JSON.parse(localStorage.getItem(key) || "{}")); } catch {}
+  }, [key]);
+  const set = (dia: Dia, i: number, src: Dia) =>
+    setV((old) => {
+      const n = { ...old };
+      if (src === dia) delete n[`${dia}|${i}`]; else n[`${dia}|${i}`] = src;
+      try { localStorage.setItem(key, JSON.stringify(n)); } catch {}
+      return n;
+    });
+  return [v, set] as const;
+}
+export type Orden = ReturnType<typeof useOrden>;
+
+/** La comida que toca en ese día y tiempo, y de qué día del plan viene. Los cambios de ingredientes viajan con el platillo. */
+export function comidaDe(plan: Plan, orden: Record<string, Dia>, dia: Dia, i: number) {
+  const src = orden[`${dia}|${i}`] ?? dia;
+  return { m: plan.menu[src]?.[i] ?? plan.menu[dia][i], src };
+}
+
+/** Las opciones de ese tiempo de comida en la semana (sin repetir platillos iguales). */
+export function opcionesDe(plan: Plan, i: number) {
+  const vistos = new Set<string>();
+  return DIAS.filter((d) => {
+    const t = plan.menu[d][i]?.titulo?.trim();
+    if (!t || vistos.has(t)) return false;
+    vistos.add(t);
+    return true;
+  });
+}
+
+export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, opciones = [], actual, onElegir }: {
   m: Comida; hora: string; tiempo: string; tintClass: string; slot: (j: number) => string; cambios: Cambios; sistema: Sistema;
+  opciones?: [Dia, string][]; actual?: Dia; onElegir?: (d: Dia) => void;
 }) {
   const [hechos, setCambio] = cambios;
   const [abierto, setAbierto] = useState<number | null>(null);
@@ -34,6 +70,11 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema }:
       <div className="hr">{hora}<small>{tiempo}</small></div>
       <div style={{ minWidth: 0 }}>
         <h4>{m.titulo}</h4>
+        {opciones.length > 1 && onElegir && (
+          <select className="elegir" value={actual} onChange={(e) => onElegir(e.target.value as Dia)} aria-label={`Elegir otro platillo para ${tiempo}`}>
+            {opciones.map(([d, t]) => <option key={d} value={d}>{d === actual ? "↻ Elegir otro platillo de la semana" : `${t} (del ${d.toLowerCase()})`}</option>)}
+          </select>
+        )}
         {ings.length > 0 && (
           <ul className="ings">
             {ings.map((orig, j) => {

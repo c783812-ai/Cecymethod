@@ -31,7 +31,7 @@ export function fraccion(v: number) {
   return String(Math.round(v * 10) / 10);
 }
 
-const PLURAL: Record<string, string> = { taza: "tazas", pieza: "piezas", rebanada: "rebanadas", cucharada: "cucharadas", cucharadita: "cucharaditas", medida: "medidas", cuadrito: "cuadritos", lata: "latas", vaso: "vasos", sobre: "sobres", galleta: "galletas", hoja: "hojas", rollo: "rollos", paquete: "paquetes", filete: "filetes", copa: "copas" };
+const PLURAL: Record<string, string> = { taza: "tazas", pieza: "piezas", rebanada: "rebanadas", cucharada: "cucharadas", cucharadita: "cucharaditas", medida: "medidas", cuadrito: "cuadritos", lata: "latas", vaso: "vasos", sobre: "sobres", galleta: "galletas", hoja: "hojas", rollo: "rollos", paquete: "paquetes", filete: "filetes", copa: "copas", botella: "botellas", "cápsula": "cápsulas", tableta: "tabletas", comprimido: "comprimidos", gota: "gotas", cazo: "cazos", barra: "barras", pastilla: "pastillas", vaso: "vasos", perla: "perlas" };
 function unidad(u: string, v: number) {
   const t = u.trim();
   if (v <= 1) return t;
@@ -43,8 +43,9 @@ function unidad(u: string, v: number) {
 export function cantidad(a: { c: number; u: string; pn: number }, x: number) {
   const v = a.c * x;
   const g = Math.round((a.pn * x) / (a.pn * x >= 20 ? 5 : 1)) * (a.pn * x >= 20 ? 5 : 1);
-  if (a.u === "g" || a.u === "ml" || !a.u) return `${Math.round(v)} ${a.u || "g"}`;
-  return `${fraccion(v)} ${unidad(a.u, v)}${a.pn ? ` · ${g} g` : ""}`;
+  const peso = (n: number, u = "g") => (n >= 1000 ? `${String(Math.round(n / 100) / 10).replace(".", ",")} ${u === "ml" ? "l" : "kg"}` : `${n} ${u}`);
+  if (a.u === "g" || a.u === "ml" || !a.u) return peso(Math.round(v), a.u || "g");
+  return `${fraccion(v)} ${unidad(a.u, v)}${a.pn ? ` · ${peso(g)}` : ""}`;
 }
 
 // Emoji por alimento (por palabra del nombre). Si no hay uno que le quede, va solo el nombre.

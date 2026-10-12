@@ -294,3 +294,9 @@ a{color:inherit}
 .paises button{flex:none;border:1px solid var(--line);background:transparent;color:inherit;border-radius:999px;padding:6px 10px;font-size:13px;white-space:nowrap}
 .paises button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 .supinfo{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.elegir{display:block;max-width:100%;margin:4px 0 2px;border:1px dashed var(--line);background:var(--surface);color:var(--accent);font-weight:600;font-size:12.5px;padding:6px 8px;border-radius:10px}
+.meal .elegir{color:inherit;font-weight:500;font-size:13.5px;margin:2px 0}
+.superitem{display:grid !important;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:7px 0;border-top:1px dashed var(--line);font-size:14px}
+.superitem:first-of-type{border-top:0}
+.superitem b{font-size:13px;font-weight:600;white-space:nowrap}
+.superitem.done .nm,.superitem.done b{text-decoration:line-through;color:var(--muted)}

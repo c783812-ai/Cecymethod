@@ -1,18 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { DIAS, TIEMPOS, type Patient, type Plan, type Rutina } from "@/lib/types";
+import { DIAS, TIEMPOS, type Dia, type Patient, type Plan, type Rutina } from "@/lib/types";
 import { MANO } from "@/lib/equivalentes";
-import { MealCard, resumenIngredientes, slotDe, useCambios, type Cambios } from "./Comidas";
+import { MealCard, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden } from "./Comidas";
+import Super from "./Super";
 import { PorcionesTable, tint } from "@/components/shared";
 
 const MEAL_TINT = ["t-yellow", "t-pink", "t-blue", "t-lilac", "t-green"];
 const CORTO = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
-type Tab = "hoy" | "semana" | "porciones" | "rutina";
+type Tab = "hoy" | "semana" | "super" | "porciones" | "rutina";
 
 const ICON: Record<Tab, React.ReactNode> = {
   hoy: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>,
   semana: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M4 6h16M4 12h16M4 18h10" /></svg>,
+  super: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 4h2l2.4 11h11.2L21 8H6.2" /><circle cx="9" cy="19" r="1.5" /><circle cx="17" cy="19" r="1.5" /></svg>,
   porciones: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="8" /><path d="M12 4v8l6 4" /></svg>,
   rutina: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12" /></svg>,
 };
@@ -44,14 +46,16 @@ export default function PatientApp(props: {
   const { patient: p, plan, rutina, videos, vistaPrevia } = props;
   const [tab, setTab] = useState<Tab>("hoy");
   const cambios = useCambios(props.planId);
+  const orden = useOrden(props.planId);
   const first = p.nombre.split(" ")[0];
   const heads: Record<Tab, [string, React.ReactNode]> = {
     hoy: [`Hola, ${first}`, <>Tu <mark>día</mark></>],
     semana: [plan?.titulo ?? "Tu plan", <>Tu <mark>semana</mark></>],
+    super: ["Para tu semana o tu mes", <>Tu lista del <mark>súper</mark></>],
     porciones: ["Cuánto comes en cada tiempo", <>Tus <mark>porciones</mark></>],
     rutina: ["Ejercicio", <>Tu <mark>rutina</mark></>],
   };
-  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["semana", "Mi semana"], ["porciones", "Porciones"], ["rutina", "Rutina"]];
+  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["semana", "Mi semana"], ["super", "Súper"], ["porciones", "Porciones"], ["rutina", "Rutina"]];
 
   return (
     <div className="patient">
@@ -67,8 +71,9 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} />}
-            {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
+            {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
+            {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
             {tab === "porciones" && <Porciones plan={plan} planExiste={props.planExiste} />}
             {tab === "rutina" && <RutinaView rutina={rutina} videos={videos} pid={p.id} />}
             {!vistaPrevia && (
@@ -123,7 +128,7 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste, cambios }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios }) {
+function Hoy({ p, plan, planExiste, cambios, orden }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden }) {
   const [di, setDi] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); }, []);
   if (!plan) return <><Locked planExiste={planExiste} /><Metas p={p} /><Whats /></>;
@@ -141,12 +146,14 @@ function Hoy({ p, plan, planExiste, cambios }: { p: Patient; plan: Plan | null; 
       {d === 6 ? (
         <div className="tint t-yellow"><h4>🌤️ Domingo libre</h4><p>{plan.domingo}</p></div>
       ) : (
-        plan.menu[DIAS[d]].map((m, i) =>
-          m.titulo ? (
-            <MealCard key={`${d}-${i}`} m={m} hora={plan.horarios?.[i] ?? TIEMPOS[i][1]} tiempo={TIEMPOS[i][0]} tintClass={MEAL_TINT[i]}
-              slot={(j) => slotDe(DIAS[d], i, j)} cambios={cambios} sistema={plan.sistema ?? "smae"} />
-          ) : null,
-        )
+        TIEMPOS.map((_, i) => {
+          const { m, src } = comidaDe(plan, orden[0], DIAS[d], i);
+          return m.titulo ? (
+            <MealCard key={`${d}-${i}-${src}`} m={m} hora={plan.horarios?.[i] ?? TIEMPOS[i][1]} tiempo={TIEMPOS[i][0]} tintClass={MEAL_TINT[i]}
+              slot={(j) => slotDe(src, i, j)} cambios={cambios} sistema={plan.sistema ?? "smae"}
+              opciones={opcionesDe(plan, i).map((o) => [o, plan.menu[o][i].titulo])} actual={src} onElegir={(o) => orden[1](DIAS[d], i, o)} />
+          ) : null;
+        })
       )}
       {plan.suplementos.length > 0 && (
         <div className="card" style={{ padding: 14 }}>
@@ -163,7 +170,7 @@ function Hoy({ p, plan, planExiste, cambios }: { p: Patient; plan: Plan | null; 
   );
 }
 
-function Semana({ plan, planExiste, cambios }: { plan: Plan | null; planExiste: boolean; cambios: Cambios }) {
+function Semana({ plan, planExiste, cambios, orden }: { plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden }) {
   if (!plan) return <Locked planExiste={planExiste} />;
   return (
     <>
@@ -171,17 +178,26 @@ function Semana({ plan, planExiste, cambios }: { plan: Plan | null; planExiste: 
       <div className="grid" style={{ gap: 10 }}>
         {plan.enfoques.map((e, i) => <div key={i} className={`tint ${tint(e.color)}`}><h4>{e.icono} {e.titulo}</h4><p>{e.texto}</p></div>)}
       </div>
-      <div className="eyebrow" style={{ marginTop: 6 }}>Puedes cambiar los días de orden</div>
+      <div className="eyebrow" style={{ marginTop: 6 }}>Puedes repetir un platillo en otros días: elígelo en cada comida</div>
       {DIAS.map((d) => (
         <details key={d} className="card" style={{ padding: "12px 14px" }}>
           <summary style={{ cursor: "pointer", fontFamily: "var(--display)", fontWeight: 600 }}>{d}</summary>
-          {plan.menu[d].map((m, i) => m.titulo ? (
-            <div key={i} className="meal">
-              <div className="t">{TIEMPOS[i][0]} · {plan.horarios?.[i] ?? TIEMPOS[i][1]}</div>{m.titulo}
-              {m.ingredientes?.length ? <div className="d">{resumenIngredientes(m, (j) => slotDe(d, i, j), cambios[0])}</div> : null}
-              {m.detalle && <div className="d">{m.detalle}</div>}
-            </div>
-          ) : null)}
+          {TIEMPOS.map((_, i) => {
+            const { m, src } = comidaDe(plan, orden[0], d, i);
+            const ops = opcionesDe(plan, i);
+            return m.titulo ? (
+              <div key={i} className="meal">
+                <div className="t">{TIEMPOS[i][0]} · {plan.horarios?.[i] ?? TIEMPOS[i][1]}</div>
+                {ops.length > 1 ? (
+                  <select className="elegir" value={src} onChange={(e) => orden[1](d, i, e.target.value as Dia)} aria-label={`${d}, ${TIEMPOS[i][0]}: qué platillo`}>
+                    {ops.map((o) => <option key={o} value={o}>{plan.menu[o][i].titulo}{o !== d ? ` (del ${o.toLowerCase()})` : ""}</option>)}
+                  </select>
+                ) : m.titulo}
+                {m.ingredientes?.length ? <div className="d">{resumenIngredientes(m, (j) => slotDe(src, i, j), cambios[0])}</div> : null}
+                {m.detalle && <div className="d">{m.detalle}</div>}
+              </div>
+            ) : null;
+          })}
         </details>
       ))}
       <div className="grid" style={{ gap: 10 }}>

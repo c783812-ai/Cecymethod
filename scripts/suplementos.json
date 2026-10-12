@@ -1121,17 +1121,17 @@
   "g": "Polvo verde",
   "porcion": "1 medida (10 g)",
   "porcion_g": 10,
-  "k": null,
-  "p": null,
-  "h": null,
-  "l": null,
-  "nota": "el que usa Cecy; vegano (pasto de trigo y cebada, espirulina, espinaca, maca, lúcuma)",
+  "k": 30,
+  "p": 1.4,
+  "h": 4.2,
+  "l": 0.3,
+  "nota": "en 200 ml de agua; con probióticos, vitaminas y minerales; 2.7 g de fibra",
   "paises": [
    "DE",
    "CH",
    "ES"
   ],
-  "fuente": "https://www.medpex.de/superfood-pulver-mit-weizen-gerstengras-maca-spirulina-spinat-lucuma-pflanzenritual-300-g-veganes-getraenkepulver-fuer-30-portionen-naturtreu/19359637"
+  "fuente": "Etiqueta de la lata (foto de Cecy)"
  },
  {
   "id": "lebepur-kurkuma-shot",
