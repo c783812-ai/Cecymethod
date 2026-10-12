@@ -1,5 +1,6 @@
 "use server";
-import { GUIA_GLUTEOS, NOMBRE_EN } from "@/lib/gluteos";
+import { NOMBRE_EN } from "@/lib/gluteos";
+import { CICLO } from "@/lib/ciclo";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireNutri } from "@/lib/auth";
@@ -109,7 +110,8 @@ export async function borrarPaciente(id: string, f: FormData) {
 /** Pasa la guía de glúteos guardada a la versión de lib/gluteos.ts y renombra los videos ya subidos. */
 export async function actualizarGluteos() {
   const { sb } = await requireNutri();
-  await sb.from("routine_templates").upsert({ key: "gluteos", titulo: GUIA_GLUTEOS.titulo, data: GUIA_GLUTEOS, updated_at: new Date().toISOString() });
+  // Todas las rutinas del ciclo (Mes 1, Mes 2…) con su versión más nueva
+  await sb.from("routine_templates").upsert(CICLO.map((c, i) => ({ key: c.key, titulo: `Mes ${i + 1} · ${c.rutina.titulo}`, data: c.rutina, updated_at: new Date().toISOString() })));
   const { data: vids } = await sb.from("exercise_videos").select("nombre");
   const hay = new Set((vids ?? []).map((v) => v.nombre as string));
   for (const [es, en] of Object.entries(NOMBRE_EN))

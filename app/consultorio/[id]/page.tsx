@@ -10,6 +10,7 @@ import PlanEditor from "./PlanEditor";
 import SemanaVista from "./SemanaVista";
 import Historial from "./Historial";
 import { hoyISO, type Registro } from "@/lib/diario";
+import { CICLO, CICLO_KEY, mesDelCiclo, proximoCambio } from "@/lib/ciclo";
 
 const TABS = [
   ["resumen", "Ficha y acceso"],
@@ -91,19 +92,22 @@ async function PlanTab({ id }: { id: string }) {
 async function RutinaTab({ p }: { p: Patient }) {
   const { sb } = await requireNutri();
   const { data: tpls } = await sb.from("routine_templates").select("key, titulo, data");
-  const actual = tpls?.find((t) => t.key === p.routine_key);
+  const m = mesDelCiclo();
+  const actual = tpls?.find((t) => t.key === (p.routine_key === CICLO_KEY ? CICLO[m].key : p.routine_key));
   return (
     <div className="grid">
       <form action={asignarRutina.bind(null, p.id)} className="card" style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "end" }}>
         <label className="field" style={{ minWidth: 240 }}>Rutina asignada
           <select name="routine_key" key={p.routine_key ?? ""} defaultValue={p.routine_key ?? ""}>
             <option value="">Sin rutina</option>
+            <option value={CICLO_KEY}>Rutina del mes (la misma para todas)</option>
             {tpls?.map((t) => <option key={t.key} value={t.key}>{t.titulo}</option>)}
           </select>
         </label>
         <button className="btn primary">Guardar</button>
         <span className={`pill ${p.routine_visible ? "p-ok" : "p-mid"}`}>{p.routine_visible ? "Visible para ella" : "Oculta para ella"}</span>
         <span className="note">Muéstrala u ocúltala desde Resumen.</span>
+        {p.routine_key === CICLO_KEY && <p className="note" style={{ flexBasis: "100%", margin: 0 }}>Este mes toca el <b>Mes {m + 1} de {CICLO.length}</b>. Cambia sola el {proximoCambio()}.</p>}
       </form>
       {actual && (
         <div className="card">

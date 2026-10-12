@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getUser, isNutri } from "@/lib/auth";
 import type { Patient, Plan, Rutina } from "@/lib/types";
 import PatientApp from "./PatientApp";
+import { CICLO, CICLO_KEY } from "@/lib/ciclo";
 
 export const metadata = { title: "Mi plan · Cecy" };
 export const dynamic = "force-dynamic";
@@ -31,12 +32,15 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
 
   const [planRes, rutRes, vidRes] = await Promise.all([
     sb.from("plans").select("id, data").eq("patient_id", patient.id).eq("activo", true).order("updated_at", { ascending: false }).limit(1).maybeSingle(),
-    patient.routine_key ? sb.from("routine_templates").select("data").eq("key", patient.routine_key).maybeSingle() : Promise.resolve({ data: null }),
+    patient.routine_key ? sb.from("routine_templates").select("key, data").in("key", patient.routine_key === CICLO_KEY ? CICLO.map((c) => c.key) : [patient.routine_key]) : Promise.resolve({ data: null }),
     sb.from("exercise_videos").select("nombre, storage_path"),
   ]);
 
   const plan = patient.plan_visible ? ((planRes.data?.data as Plan) ?? null) : null;
-  const rutina = patient.routine_visible ? ((rutRes.data?.data as Rutina) ?? null) : null;
+  const filas = (rutRes.data ?? []) as { key: string; data: Rutina }[];
+  // En la rutina del mes van todas las del ciclo, en orden (si falta alguna en la base, se usa la de la página); la paciente ve la de su mes.
+  const ciclo = patient.routine_key === CICLO_KEY ? CICLO.map((c) => filas.find((f) => f.key === c.key)?.data ?? c.rutina) : null;
+  const rutina = patient.routine_visible ? (ciclo ? ciclo[0] : (filas[0]?.data ?? null)) : null;
 
   let videos: Record<string, string> = {};
   const vids = vidRes.data ?? [];
@@ -52,6 +56,7 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
       planId={plan ? (planRes.data?.id as string) : null}
       planExiste={!!planRes.data}
       rutina={rutina}
+      ciclo={patient.routine_visible ? ciclo : null}
       videos={videos}
       vistaPrevia={nutri && !!como}
     />

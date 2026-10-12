@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DIAS, TIEMPOS, type Dia, type Patient, type Plan, type Rutina } from "@/lib/types";
 import { CALENTAMIENTO } from "@/lib/gluteos";
+import { mesDelCiclo, proximoCambio } from "@/lib/ciclo";
 import { MealCard, useGustos, type Gustos, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden } from "./Comidas";
 import Super from "./Super";
 import Antojos from "./Antojos";
@@ -46,6 +47,7 @@ export default function PatientApp(props: {
   planId: string | null;
   planExiste: boolean;
   rutina: Rutina | null;
+  ciclo?: Rutina[] | null;
   videos: Record<string, string>;
   vistaPrevia: boolean;
 }) {
@@ -84,7 +86,7 @@ export default function PatientApp(props: {
             {tab === "registro" && <><Logros diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
-            {tab === "rutina" && <RutinaView rutina={rutina} videos={videos} pid={p.id} remoto={remoto} />}
+            {tab === "rutina" && <RutinaView rutina={rutina} ciclo={props.ciclo ?? null} videos={videos} pid={p.id} remoto={remoto} />}
             {!vistaPrevia && (
               <form action="/salir" method="post" style={{ textAlign: "center" }}>
                 <button className="btn" style={{ fontSize: 13, padding: "6px 12px" }}>Salir</button>
@@ -254,7 +256,11 @@ function VideoBtn({ n, videos }: { n: string; videos: Record<string, string> }) 
   );
 }
 
-function RutinaView({ rutina, videos, pid, remoto }: { rutina: Rutina | null; videos: Record<string, string>; pid: string; remoto: boolean }) {
+function RutinaView({ rutina: fija, ciclo, videos, pid, remoto }: { rutina: Rutina | null; ciclo: Rutina[] | null; videos: Record<string, string>; pid: string; remoto: boolean }) {
+  // La rutina del mes se elige con la fecha de su teléfono, para que cambie a las 12:00 AM de su hora.
+  const [mes, setMes] = useState(0);
+  useEffect(() => { if (ciclo?.length) setMes(mesDelCiclo(new Date(), ciclo.length)); }, [ciclo]);
+  const rutina = ciclo?.length ? ciclo[mes] : fija;
   const [o, setO] = useState<"a" | "b" | "c">("a");
   const [g, setG] = useState(0);
   const [done, toggle] = useLocalChecks(`hechos-${pid}`);
@@ -263,7 +269,8 @@ function RutinaView({ rutina, videos, pid, remoto }: { rutina: Rutina | null; vi
   const d = rutina.dias[g];
   return (
     <>
-      <div className="eyebrow">{rutina.titulo} · {rutina.subtitulo}</div>
+      <div className="eyebrow">{ciclo?.length ? `Rutina del mes · Mes ${mes + 1} · ` : ""}{rutina.titulo} · {rutina.subtitulo}</div>
+      {ciclo?.length ? <p className="note" style={{ margin: "-4px 0 0" }}>Todas hacemos esta rutina este mes. Cambia el {proximoCambio()}.</p> : null}
       <div className="seg" role="group" aria-label="Dónde entrenas" style={{ display: "flex" }}>
         {(["a", "b", "c"] as const).map((k, i) => (
           <button key={k} aria-pressed={o === k} onClick={() => setO(k)} style={{ flex: 1, padding: "7px 6px", fontSize: 12.5 }}>{rutina.opciones[i]}</button>

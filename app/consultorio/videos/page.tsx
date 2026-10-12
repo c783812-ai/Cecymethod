@@ -1,5 +1,6 @@
 import { requireNutri } from "@/lib/auth";
 import { GUIA_GLUTEOS, NOMBRE_EN, ejerciciosDe } from "@/lib/gluteos";
+import { CICLO } from "@/lib/ciclo";
 import { actualizarGluteos } from "../actions";
 import type { Rutina } from "@/lib/types";
 import VideoRow from "./VideoRow";
@@ -31,9 +32,9 @@ export default async function Videos() {
         </div>
         <span className="pill p-info num">{ok} de {lista.length} listos</span>
       </div>
-      {viejaGluteos(tpls?.find((t) => t.key === "gluteos")?.data as Rutina | undefined) && (
+      {(viejaGluteos(tpls?.find((t) => t.key === "gluteos")?.data as Rutina | undefined) || CICLO.some((c, i) => tpls?.find((t) => t.key === c.key)?.titulo !== `Mes ${i + 1} · ${c.rutina.titulo}`)) && (
         <form action={actualizarGluteos} className="tint t-yellow" style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-          <p style={{ margin: 0, flex: "1 1 260px" }}><b>Hay una versión nueva de la Guía de glúteos:</b> días 1, 2 y 3, ejercicios con su nombre en inglés y el calentamiento como un solo video. Los videos que ya subiste se pasan solos.</p>
+          <p style={{ margin: 0, flex: "1 1 260px" }}><b>Hay rutinas nuevas o actualizadas:</b> la rutina del mes (Mes 1, Mes 2…), días 1, 2 y 3, nombres en inglés y el calentamiento como un solo video. Los videos que ya subiste se pasan solos.</p>
           <button className="btn primary">Actualizar</button>
         </form>
       )}
