@@ -350,3 +350,20 @@ a{color:inherit}
 .guiasup .tag{background:#eef4ea;color:#3f5a35;border-radius:999px;padding:1px 8px}
 .guiasup .tag.warn{background:#fdeee0;color:#9a4f12}
 .guiasup p{margin:3px 0}
+.instalar{position:relative;padding:14px 40px 14px 14px;background:var(--accent-soft)}
+.instalar p{margin:4px 0 8px}
+.instalar .x{position:absolute;top:8px;right:8px;border:0;background:none;font-size:15px;color:var(--muted);cursor:pointer;padding:6px}
+.logros{padding:12px 14px}
+.logros .nuevo{background:#fff4d6;border-radius:12px;padding:8px 10px;margin-bottom:8px;font-size:14px}
+.logros .rachas{display:flex;flex-wrap:wrap;gap:6px}
+.logros .rachas span{background:var(--ok-bg);color:var(--ok);border-radius:999px;padding:3px 10px;font-size:13px;font-weight:600}
+.logros summary{cursor:pointer;margin-top:10px;font-weight:600;font-size:14px}
+.logros ul{list-style:none;padding:0;margin:8px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.logros li{display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--muted);background:#f1f2f6;border-radius:10px;padding:6px 8px;opacity:.8}
+.logros li.ok{color:inherit;background:#fff4d6;opacity:1}
+.domingo ul{list-style:none;padding:0;margin:0}
+.domingo li{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line, #e7e9f0)}
+.domingo li:first-child{border-top:0}
+.domingo li a{flex:1;font-weight:600;color:inherit}
+.domingo li.hecha a{text-decoration:line-through;color:var(--muted)}
+.domingo input[type=checkbox]{width:20px;height:20px}

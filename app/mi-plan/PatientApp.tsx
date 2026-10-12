@@ -7,6 +7,8 @@ import { CALENTAMIENTO } from "@/lib/gluteos";
 import { MealCard, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden } from "./Comidas";
 import Super from "./Super";
 import Antojos from "./Antojos";
+import Instalar from "./Instalar";
+import Logros from "./Logros";
 import { MetaBar, RegistroHoy, useDiario } from "./Diario";
 import { aporte, hoyISO } from "@/lib/diario";
 import { PorcionesTable, tint } from "@/components/shared";
@@ -75,7 +77,7 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} remoto={!vistaPrevia && p.id !== "demo"} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} remoto={!vistaPrevia && p.id !== "demo"} instalar={!vistaPrevia} />}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
             {tab === "porciones" && <Porciones plan={plan} planExiste={props.planExiste} />}
@@ -132,7 +134,7 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste, cambios, orden, remoto }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; remoto: boolean }) {
+function Hoy({ p, plan, planExiste, cambios, orden, remoto, instalar }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; remoto: boolean; instalar: boolean }) {
   const [di, setDi] = useState<number | null>(null);
   const [hoyIdx, setHoyIdx] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); setHoyIdx(d === 0 ? 6 : d - 1); }, []);
@@ -155,6 +157,7 @@ function Hoy({ p, plan, planExiste, cambios, orden, remoto }: { p: Patient; plan
   };
   return (
     <>
+      {instalar && <Instalar />}
       <div className="daychips" aria-label="Día">
         {CORTO.map((l, i) => (
           <button key={l} aria-pressed={i === d} onClick={() => setDi(i)} aria-label={i === 6 ? "Domingo" : DIAS[i]}>
@@ -164,6 +167,7 @@ function Hoy({ p, plan, planExiste, cambios, orden, remoto }: { p: Patient; plan
       </div>
       <div className="eyebrow">{d === 6 ? "Domingo" : DIAS[d]}</div>
       {esHoy && d < 6 && plan.meta && <MetaBar meta={plan.meta} aportes={aportes} listas={listas} />}
+      {esHoy && <Logros diario={diario[0]} vasos={plan.agua || 8} />}
       {d === 6 ? (
         <div className="tint t-yellow"><h4>🌤️ Domingo libre</h4><p>{plan.domingo}</p></div>
       ) : (
