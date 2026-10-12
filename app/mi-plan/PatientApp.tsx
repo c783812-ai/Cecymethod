@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DIAS, TIEMPOS, type Dia, type Patient, type Plan, type Rutina } from "@/lib/types";
 import { CALENTAMIENTO } from "@/lib/gluteos";
-import { MealCard, useFavoritos, type Favoritos, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden } from "./Comidas";
+import { MealCard, useGustos, type Gustos, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden } from "./Comidas";
 import Super from "./Super";
 import Antojos from "./Antojos";
 import Instalar from "./Instalar";
 import Logros from "./Logros";
+import { SeriesLog, useCargas } from "./Cargas";
 import { MetaBar, RegistroHoy, useDiario, type DiarioHook } from "./Diario";
 import { aporte, hoyISO } from "@/lib/diario";
 import { tint } from "@/components/shared";
@@ -55,7 +56,7 @@ export default function PatientApp(props: {
   const first = p.nombre.split(" ")[0];
   const remoto = !vistaPrevia && p.id !== "demo";
   const diario = useDiario(p.id, remoto, !!p.diario_consentido_at);
-  const favoritos = useFavoritos(p.id, remoto);
+  const gustos = useGustos(p.id, remoto);
   const heads: Record<Tab, [string, React.ReactNode]> = {
     hoy: [`Hola, ${first}`, <>Tu <mark>día</mark></>],
     registro: ["Cómo te sentiste hoy", <>Mi <mark>registro</mark></>],
@@ -79,11 +80,11 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} diario={diario} favoritos={favoritos} instalar={!vistaPrevia} irARegistro={() => { setTab("registro"); window.scrollTo(0, 0); }} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} irARegistro={() => { setTab("registro"); window.scrollTo(0, 0); }} />}
             {tab === "registro" && <><Logros diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
-            {tab === "rutina" && <RutinaView rutina={rutina} videos={videos} pid={p.id} />}
+            {tab === "rutina" && <RutinaView rutina={rutina} videos={videos} pid={p.id} remoto={remoto} />}
             {!vistaPrevia && (
               <form action="/salir" method="post" style={{ textAlign: "center" }}>
                 <button className="btn" style={{ fontSize: 13, padding: "6px 12px" }}>Salir</button>
@@ -136,7 +137,7 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste, cambios, orden, diario, favoritos, instalar, irARegistro }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; diario: DiarioHook; favoritos: Favoritos; instalar: boolean; irARegistro: () => void }) {
+function Hoy({ p, plan, planExiste, cambios, orden, diario, gustos, instalar, irARegistro }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean; irARegistro: () => void }) {
   const [di, setDi] = useState<number | null>(null);
   const [hoyIdx, setHoyIdx] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); setHoyIdx(d === 0 ? 6 : d - 1); }, []);
@@ -179,7 +180,7 @@ function Hoy({ p, plan, planExiste, cambios, orden, diario, favoritos, instalar,
               slot={(j) => slotDe(src, i, j)} cambios={cambios} sistema={plan.sistema ?? "smae"}
               opciones={opcionesDe(plan, i).map((o) => [o, plan.menu[o][i].titulo])} actual={src} onElegir={(o) => orden[1](DIAS[d], i, o)}
               {...(esHoy ? { lista: listas.includes(i), onLista: () => marcar(i) } : {})}
-              fav={favoritos[0].includes(m.titulo)} onFav={() => favoritos[1](m.titulo)} />
+              gusto={gustos[0][m.titulo]} onGusto={(v) => gustos[1](m.titulo, v)} />
           ) : null;
         })
       )}
@@ -253,10 +254,11 @@ function VideoBtn({ n, videos }: { n: string; videos: Record<string, string> }) 
   );
 }
 
-function RutinaView({ rutina, videos, pid }: { rutina: Rutina | null; videos: Record<string, string>; pid: string }) {
+function RutinaView({ rutina, videos, pid, remoto }: { rutina: Rutina | null; videos: Record<string, string>; pid: string; remoto: boolean }) {
   const [o, setO] = useState<"a" | "b" | "c">("a");
   const [g, setG] = useState(0);
   const [done, toggle] = useLocalChecks(`hechos-${pid}`);
+  const cargas = useCargas(pid, remoto);
   if (!rutina) return <div className="locked">Cecy todavía no comparte una rutina contigo.<br />Si quieres una, pídesela en tu próxima consulta.</div>;
   const d = rutina.dias[g];
   return (
@@ -271,6 +273,10 @@ function RutinaView({ rutina, videos, pid }: { rutina: Rutina | null; videos: Re
         {rutina.dias.map((x, i) => (
           <button key={x.dia} aria-pressed={g === i} onClick={() => setG(i)} style={{ width: "auto", padding: "0 16px", height: 44 }}><b>{x.dia}</b></button>
         ))}
+      </div>
+      <div className="seg unidad" role="group" aria-label="Unidad de peso">
+        <span className="note">Anota tus pesos en</span>
+        {(["kg", "lb"] as const).map((x) => <button key={x} aria-pressed={cargas.u === x} onClick={() => cargas.unidad(x)}>{x}</button>)}
       </div>
       <div className="tint t-yellow">
         <h4>Calentamiento</h4>
@@ -288,6 +294,7 @@ function RutinaView({ rutina, videos, pid }: { rutina: Rutina | null; videos: Re
                 <span className="chip num"><b>{e.series}</b></span>
                 <span className="chip">Descanso {e.descanso}</span>
               </div>
+              <SeriesLog ejercicio={e.nombre} txt={e.series} cargas={cargas} />
               {e.aproximacion && (
                 <details className="warm">
                   <summary>Series de aproximación</summary>

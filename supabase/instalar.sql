@@ -145,8 +145,8 @@ $$;
 grant execute on function public.consentir_diario() to authenticated;
 grant execute on function public.retirar_diario() to authenticated;
 
--- Consultas que Cecy registra (para contar consultas y renovaciones) y platillos favoritos de cada paciente.
--- No guarda nada clínico: solo la fecha y el tipo de consulta, y el nombre del platillo.
+-- Consultas que Cecy registra (para contar consultas y renovaciones), platillos que le gustan o no a cada paciente,
+-- y los pesos que carga en su rutina. No guarda nada clínico.
 -- Copia todo y pégalo en Supabase > SQL Editor > Run (una sola vez).
 
 create table if not exists public.consultas (
@@ -160,17 +160,35 @@ alter table public.consultas enable row level security;
 drop policy if exists nutri_all on public.consultas;
 create policy nutri_all on public.consultas for all using (public.is_nutri()) with check (public.is_nutri());
 
-create table if not exists public.favoritos (
+create table if not exists public.gustos (
   patient_id uuid not null references public.patients (id) on delete cascade,
   platillo text not null,
+  valor smallint not null check (valor in (1, -1)), -- 1 = le gusta, -1 = no le gusta
   created_at timestamptz not null default now(),
   primary key (patient_id, platillo)
 );
-alter table public.favoritos enable row level security;
-drop policy if exists nutri_all on public.favoritos;
-create policy nutri_all on public.favoritos for all using (public.is_nutri()) with check (public.is_nutri());
--- La paciente ve, agrega y quita solo sus favoritos
-drop policy if exists own_rows on public.favoritos;
-create policy own_rows on public.favoritos for all
-  using (exists (select 1 from public.patients p where p.id = favoritos.patient_id and p.user_id = auth.uid()))
-  with check (exists (select 1 from public.patients p where p.id = favoritos.patient_id and p.user_id = auth.uid()));
+alter table public.gustos enable row level security;
+drop policy if exists nutri_all on public.gustos;
+create policy nutri_all on public.gustos for all using (public.is_nutri()) with check (public.is_nutri());
+-- La paciente ve y cambia solo lo suyo
+drop policy if exists own_rows on public.gustos;
+create policy own_rows on public.gustos for all
+  using (exists (select 1 from public.patients p where p.id = gustos.patient_id and p.user_id = auth.uid()))
+  with check (exists (select 1 from public.patients p where p.id = gustos.patient_id and p.user_id = auth.uid()));
+
+-- Pesos que la paciente carga en cada ejercicio, para recordar con cuánto lo hizo la vez pasada
+create table if not exists public.cargas (
+  patient_id uuid not null references public.patients (id) on delete cascade,
+  ejercicio text not null,
+  fecha date not null,
+  data jsonb not null default '{}'::jsonb, -- { u: "kg" | "lb", s: [{ p: peso, r: repeticiones }] }
+  updated_at timestamptz not null default now(),
+  primary key (patient_id, ejercicio, fecha)
+);
+alter table public.cargas enable row level security;
+drop policy if exists nutri_all on public.cargas;
+create policy nutri_all on public.cargas for all using (public.is_nutri()) with check (public.is_nutri());
+drop policy if exists own_rows on public.cargas;
+create policy own_rows on public.cargas for all
+  using (exists (select 1 from public.patients p where p.id = cargas.patient_id and p.user_id = auth.uid()))
+  with check (exists (select 1 from public.patients p where p.id = cargas.patient_id and p.user_id = auth.uid()));

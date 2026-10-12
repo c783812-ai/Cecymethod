@@ -59,9 +59,9 @@ export function opcionesDe(plan: Plan, i: number) {
   });
 }
 
-export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, opciones = [], actual, onElegir, lista, onLista, fav, onFav }: {
+export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, opciones = [], actual, onElegir, lista, onLista, gusto, onGusto }: {
   m: Comida; hora: string; tiempo: string; tintClass: string; slot: (j: number) => string; cambios: Cambios; sistema: Sistema;
-  opciones?: [Dia, string][]; actual?: Dia; onElegir?: (d: Dia) => void; lista?: boolean; onLista?: () => void; fav?: boolean; onFav?: () => void;
+  opciones?: [Dia, string][]; actual?: Dia; onElegir?: (d: Dia) => void; lista?: boolean; onLista?: () => void; gusto?: 1 | -1; onGusto?: (v: 1 | -1) => void;
 }) {
   const [hechos, setCambio] = cambios;
   const [abierto, setAbierto] = useState<number | null>(null);
@@ -72,7 +72,12 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, o
       <div style={{ minWidth: 0 }}>
         <div className="mtitle">
           <h4>{m.titulo}</h4>
-          {onFav && <button className="fav" aria-pressed={!!fav} aria-label={fav ? `Quitar ${m.titulo} de favoritos` : `Marcar ${m.titulo} como favorito`} onClick={onFav}>{fav ? "❤️" : "🤍"}</button>}
+          {onGusto && (
+            <span className="gusto" role="group" aria-label={`¿Te gustó ${m.titulo}?`}>
+              <button aria-pressed={gusto === 1} aria-label="Me gusta" onClick={() => onGusto(1)}>👍</button>
+              <button aria-pressed={gusto === -1} aria-label="No me gusta" onClick={() => onGusto(-1)}>👎</button>
+            </span>
+          )}
         </div>
         {opciones.length > 1 && onElegir && (
           <select className="elegir" value={actual} onChange={(e) => onElegir(e.target.value as Dia)} aria-label={`Elegir otro platillo para ${tiempo}`}>
@@ -198,33 +203,34 @@ export function resumenIngredientes(m: Comida, slot: (j: number) => string, hech
   return (m.ingredientes ?? []).map((o, j) => { const c = hechos[slot(j)] ?? o; return `${c.n} (${cantidad(c, o.x)})`; }).join(" · ");
 }
 
-/** Platillos favoritos: se guardan en su teléfono y, si ya entró con su cuenta, también para que Cecy los vea. */
-export function useFavoritos(pid: string, remoto: boolean) {
-  const key = `favs-${pid}`;
-  const [v, setV] = useState<string[]>([]);
+/** Platillos que le gustan (1) o no (-1): se guardan en su teléfono y, si ya entró con su cuenta, también para que Cecy los vea. */
+export function useGustos(pid: string, remoto: boolean) {
+  const key = `gustos-${pid}`;
+  const [v, setV] = useState<Record<string, 1 | -1>>({});
   useEffect(() => {
-    let l: string[] = [];
-    try { l = JSON.parse(localStorage.getItem(key) || "[]"); } catch {}
+    let l: Record<string, 1 | -1> = {};
+    try { l = JSON.parse(localStorage.getItem(key) || "{}"); } catch {}
     setV(l);
     if (!remoto) return;
-    supabaseBrowser().from("favoritos").select("platillo").eq("patient_id", pid).then(({ data, error }) => {
+    supabaseBrowser().from("gustos").select("platillo, valor").eq("patient_id", pid).then(({ data, error }) => {
       if (error || !data) return;
-      const r = [...new Set([...l, ...data.map((d) => d.platillo as string)])];
+      const r = { ...l, ...Object.fromEntries(data.map((d) => [d.platillo as string, d.valor as 1 | -1])) };
       setV(r);
       try { localStorage.setItem(key, JSON.stringify(r)); } catch {}
     });
   }, [key, pid, remoto]);
-  const toggle = (platillo: string) =>
+  const votar = (platillo: string, valor: 1 | -1) =>
     setV((old) => {
-      const quitar = old.includes(platillo);
-      const n = quitar ? old.filter((x) => x !== platillo) : [...old, platillo];
+      const n = { ...old };
+      const quitar = old[platillo] === valor;
+      if (quitar) delete n[platillo]; else n[platillo] = valor;
       try { localStorage.setItem(key, JSON.stringify(n)); } catch {}
       if (remoto) {
-        const t = supabaseBrowser().from("favoritos");
-        (quitar ? t.delete().eq("patient_id", pid).eq("platillo", platillo) : t.upsert({ patient_id: pid, platillo })).then(() => {});
+        const t = supabaseBrowser().from("gustos");
+        (quitar ? t.delete().eq("patient_id", pid).eq("platillo", platillo) : t.upsert({ patient_id: pid, platillo, valor })).then(() => {});
       }
       return n;
     });
-  return [v, toggle] as const;
+  return [v, votar] as const;
 }
-export type Favoritos = ReturnType<typeof useFavoritos>;
+export type Gustos = ReturnType<typeof useGustos>;
