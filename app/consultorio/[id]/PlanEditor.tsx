@@ -6,6 +6,7 @@ import { guardarPlan } from "../actions";
 import BuscarAlimento from "@/components/BuscarAlimento";
 import { cantidad, comoIngrediente, fraccion, icono } from "@/lib/alimentos";
 import { META } from "@/lib/diario";
+import { GUIA, choques, guiaDe, type Guia } from "@/lib/guiaSuplementos";
 
 const EQS = [0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6];
 
@@ -25,6 +26,25 @@ function normalizar(x: unknown): Plan {
   p.suplementos ??= [];
   p.tips ??= [];
   return p;
+}
+
+/** Solo para Cecy: cuándo conviene el suplemento y con qué no juntarlo. */
+function GuiaSup({ g, tiempo, otros = [] }: { g: Guia; tiempo?: string; otros?: string[] }) {
+  const avisos = choques(g, otros);
+  const fuera = tiempo && !g.cuando.some((c) => tiempo.startsWith(c) || c === "Cualquier hora" || c === "Con cualquier comida");
+  return (
+    <details className="guiasup">
+      <summary>
+        {g.cuando.map((c) => <span key={c} className="tag">🕒 {c}</span>)}
+        {(avisos.length > 0 || fuera) && <span className="tag warn">⚠️ Revisar</span>}
+      </summary>
+      {fuera && <p>⚠️ Mejor en: {g.cuando.join(" o ").toLowerCase()}.</p>}
+      {avisos.map((a) => <p key={a}>⚠️ {a}</p>)}
+      {g.tip && <p>💡 {g.tip}</p>}
+      {(g.separar ?? []).map((x) => <p key={x.de}>⏱️ Separar {x.horas} h de {x.de}</p>)}
+      {(g.ojo ?? []).map((o) => <p key={o}>• {o}</p>)}
+    </details>
+  );
 }
 
 export default function PlanEditor({ id, planId, inicial, anteriores }: { id: string; planId: string | null; inicial: Plan | null; anteriores: number }) {
@@ -153,13 +173,16 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
                   <input value={plan.menu[d][i].titulo} placeholder="Platillo" onChange={(e) => up((p) => { p.menu[d][i].titulo = e.target.value; })} aria-label={`${d}, ${t[0]}, platillo`} />
                   <textarea value={plan.menu[d][i].detalle} placeholder={plan.menu[d][i].ingredientes?.length ? "Cómo prepararlo, en 1 o 2 líneas: Licúa todo con hielo…" : "Cantidades: 2 huevos · 1 taza de espinaca…"} onChange={(e) => up((p) => { p.menu[d][i].detalle = e.target.value; })} maxLength={plan.menu[d][i].ingredientes?.length ? 240 : undefined} aria-label={`${d}, ${t[0]}, cantidades`} />
                   {(plan.menu[d][i].ingredientes ?? []).map((g, j) => (
-                    <div key={j} className="eing">
+                    <div key={j}>
+                    <div className="eing">
                       <span>{icono(g.n, g.g) && <>{icono(g.n, g.g)} </>}{g.n}<small>{cantidad(g, g.x)}</small></span>
                       <select className="mini num" value={g.x} aria-label={`Equivalentes de ${g.n}`} title="Equivalentes"
                         onChange={(e) => up((p) => { p.menu[d][i].ingredientes![j].x = Number(e.target.value); })}>
                         {[...new Set([...EQS, g.x])].sort((a, b) => a - b).map((v) => <option key={v} value={v}>{fraccion(v)}</option>)}
                       </select>
                       <button className="btn" style={{ padding: "2px 7px", fontSize: 12 }} aria-label={`Quitar ${g.n}`} onClick={() => up((p) => { p.menu[d][i].ingredientes!.splice(j, 1); })}>✕</button>
+                    </div>
+                    {g.s === "sup" && (() => { const gu = guiaDe(g.n, g.g); return gu && <GuiaSup g={gu} tiempo={t[0]} otros={[plan.menu[d][i].titulo, ...(plan.menu[d][i].ingredientes ?? []).map((o) => o.n)]} />; })()}
                     </div>
                   ))}
                   {buscando === `${d}-${i}` || buscando === `sup-${d}-${i}` ? (
@@ -182,12 +205,20 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
         <h3>Suplementos</h3>
         {plan.suplementos.map((s, i) => (
           <div key={i} className="form-grid" style={{ marginBottom: 8, alignItems: "end" }}>
-            <label className="field">Qué<input value={s.que} onChange={(e) => up((p) => { p.suplementos[i].que = e.target.value; })} /></label>
+            <label className="field">Qué<input list="sup-guia" value={s.que} onChange={(e) => up((p) => { p.suplementos[i].que = e.target.value; })} /></label>
             <label className="field">Cuánto<input value={s.cuanto} onChange={(e) => up((p) => { p.suplementos[i].cuanto = e.target.value; })} /></label>
             <label className="field">Cuándo<input value={s.cuando} onChange={(e) => up((p) => { p.suplementos[i].cuando = e.target.value; })} /></label>
             <button className="btn" onClick={() => up((p) => { p.suplementos.splice(i, 1); })}>Quitar</button>
+            {(() => { const gu = guiaDe(s.que); return gu && (
+              <div style={{ gridColumn: "1 / -1" }}>
+                <GuiaSup g={gu} />
+                {!s.cuando && <button className="btn" style={{ padding: "2px 8px", fontSize: 12 }} onClick={() => up((p) => { p.suplementos[i].cuando = gu.cuando.join(" o ").toLowerCase().replace(/^./, (c) => c.toUpperCase()); })}>Usar: {gu.cuando.join(" o ").toLowerCase()}</button>}
+              </div>
+            ); })()}
           </div>
         ))}
+        <datalist id="sup-guia">{GUIA.map((g) => <option key={g.nombre} value={g.nombre} />)}</datalist>
+        <p className="note" style={{ margin: "0 0 8px" }}>🕒 y ⚠️ son solo para ti; la paciente no los ve.</p>
         <button className="btn" onClick={() => up((p) => { p.suplementos.push({ que: "", cuanto: "", cuando: "" }); })}>+ Suplemento</button>
       </div>
 
