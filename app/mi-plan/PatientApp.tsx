@@ -9,16 +9,17 @@ import Super from "./Super";
 import Antojos from "./Antojos";
 import Instalar from "./Instalar";
 import Logros from "./Logros";
-import { MetaBar, RegistroHoy, useDiario } from "./Diario";
+import { MetaBar, RegistroHoy, useDiario, type DiarioHook } from "./Diario";
 import { aporte, hoyISO } from "@/lib/diario";
 import { PorcionesTable, tint } from "@/components/shared";
 
 const MEAL_TINT = ["t-yellow", "t-pink", "t-blue", "t-lilac", "t-green"];
 const CORTO = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
-type Tab = "hoy" | "semana" | "super" | "porciones" | "rutina";
+type Tab = "hoy" | "registro" | "semana" | "super" | "porciones" | "rutina";
 
 const ICON: Record<Tab, React.ReactNode> = {
   hoy: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>,
+  registro: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z" /></svg>,
   semana: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M4 6h16M4 12h16M4 18h10" /></svg>,
   super: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 4h2l2.4 11h11.2L21 8H6.2" /><circle cx="9" cy="19" r="1.5" /><circle cx="17" cy="19" r="1.5" /></svg>,
   porciones: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="8" /><path d="M12 4v8l6 4" /></svg>,
@@ -54,14 +55,17 @@ export default function PatientApp(props: {
   const cambios = useCambios(props.planId);
   const orden = useOrden(props.planId);
   const first = p.nombre.split(" ")[0];
+  const remoto = !vistaPrevia && p.id !== "demo";
+  const diario = useDiario(p.id, remoto, !!p.diario_consentido_at);
   const heads: Record<Tab, [string, React.ReactNode]> = {
     hoy: [`Hola, ${first}`, <>Tu <mark>día</mark></>],
+    registro: ["Cómo te sentiste hoy", <>Mi <mark>registro</mark></>],
     semana: [plan?.titulo ?? "Tu plan", <>Tu <mark>semana</mark></>],
     super: ["Para tu semana o tu mes", <>Tu lista del <mark>súper</mark></>],
     porciones: ["Cuánto comes en cada tiempo", <>Tus <mark>porciones</mark></>],
     rutina: ["Ejercicio", <>Tu <mark>rutina</mark></>],
   };
-  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["semana", "Mi semana"], ["super", "Súper"], ["porciones", "Porciones"], ["rutina", "Rutina"]];
+  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["registro", "Registro"], ["semana", "Semana"], ["super", "Súper"], ["porciones", "Porciones"], ["rutina", "Rutina"]];
 
   return (
     <div className="patient">
@@ -77,7 +81,8 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} remoto={!vistaPrevia && p.id !== "demo"} instalar={!vistaPrevia} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} diario={diario} instalar={!vistaPrevia} irARegistro={() => { setTab("registro"); window.scrollTo(0, 0); }} />}
+            {tab === "registro" && <><Logros diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
             {tab === "porciones" && <Porciones plan={plan} planExiste={props.planExiste} />}
@@ -134,11 +139,10 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste, cambios, orden, remoto, instalar }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; remoto: boolean; instalar: boolean }) {
+function Hoy({ p, plan, planExiste, cambios, orden, diario, instalar, irARegistro }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; diario: DiarioHook; instalar: boolean; irARegistro: () => void }) {
   const [di, setDi] = useState<number | null>(null);
   const [hoyIdx, setHoyIdx] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); setHoyIdx(d === 0 ? 6 : d - 1); }, []);
-  const diario = useDiario(p.id, remoto, !!p.diario_consentido_at);
   if (!plan) return <><Locked planExiste={planExiste} /><Metas p={p} /><Whats /></>;
   const d = di ?? 0;
   const esHoy = d === hoyIdx;
@@ -167,7 +171,6 @@ function Hoy({ p, plan, planExiste, cambios, orden, remoto, instalar }: { p: Pat
       </div>
       <div className="eyebrow">{d === 6 ? "Domingo" : DIAS[d]}</div>
       {esHoy && d < 6 && plan.meta && <MetaBar meta={plan.meta} aportes={aportes} listas={listas} />}
-      {esHoy && <Logros diario={diario[0]} vasos={plan.agua || 8} />}
       {d === 6 ? (
         <div className="tint t-yellow"><h4>🌤️ Domingo libre</h4><p>{plan.domingo}</p></div>
       ) : (
@@ -181,7 +184,11 @@ function Hoy({ p, plan, planExiste, cambios, orden, remoto, instalar }: { p: Pat
           ) : null;
         })
       )}
-      {esHoy && <RegistroHoy diario={diario} vasos={plan.agua || 8} />}
+      {esHoy && (
+        <button className="card irregistro" onClick={irARegistro}>
+          <span><b>💧 Mi registro de hoy</b><br /><span className="note">{Object.keys(diario[0][fecha] ?? {}).filter((k) => !["comidas", "de", "pct"].includes(k)).length ? "✓ Ya empezaste" : "Agua, baño, ánimo, sueño y más"}</span></span><span aria-hidden="true" style={{ fontSize: 22, color: "var(--muted)" }}>›</span>
+        </button>
+      )}
       <Antojos />
       {plan.suplementos.length > 0 && (
         <div className="card" style={{ padding: 14 }}>
