@@ -75,7 +75,7 @@ const EMOJI: [RegExp, string][] = [
   [/br[oó]coli/i, "🥦"], [/zanahoria/i, "🥕"], [/pepino|pepinillo/i, "🥒"], [/pimiento|chile|paprika/i, "🫑"],
   [/lechuga|espinaca|acelga|ar[uú]gula|can[oó]nigo|feldsalat|col\b|kale|rucola|hoja/i, "🥬"], [/champi[nñ][oó]n|hongo|seta/i, "🍄"],
   [/ejote|ch[ií]charo|guisante|bohnen/i, "🫛"], [/nopal/i, "🌵"], [/apio|esp[aá]rrago/i, "🥬"], [/casta[nñ]a/i, "🌰"],
-  [/berenjena/i, "🍆"], [/cebolla|puerro/i, "🧅"], [/(^|\s)ajo(\s|$)/i, "🧄"], [/calabac|calabaza|zucchini|hokkaido/i, "🎃"],
+  [/berenjena/i, "🍆"], [/cebolla|puerro/i, "🧅"], [/(^|\s)ajo(\s|$)/i, "🧄"], [/calabacita|zucchini|zucchine/i, "🥒"], [/calabaza|hokkaido/i, "🎃"],
   [/miel|honig/i, "🍯"], [/chocolate|cacao/i, "🍫"], [/az[uú]car|mermelada|konfit[uü]re|cajeta/i, "🍬"], [/helado|nieve/i, "🍨"],
   [/caf[eé]/i, "☕"], [/(^|\s)t[eé](\s|$)/i, "🍵"], [/agua\b/i, "💧"], [/prote[ií]na de suero|whey/i, "🥤"],
 ];
