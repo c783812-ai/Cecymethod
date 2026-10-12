@@ -45,8 +45,10 @@
   "l": 2.2,
   "nota": "sírvelo en tacita, no del bote",
   "paises": [
+   "DE",
    "ES",
-   "DE"
+   "EU",
+   "UK"
   ],
   "fuente": "https://www.fatsecret.de/Kalorien-Ern%C3%A4hrung/halo-top/chocolate-chip-cookie-dough/100ml"
  },
@@ -143,12 +145,15 @@
   "l": 9.4,
   "nota": "solo 2 cuadritos; disfrútalos despacio",
   "paises": [
-   "MX",
-   "US",
+   "AE",
    "CA",
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.rewe.de/shop/p/lindt-excellence-schokolade-edelbitter-kraeftig-85-cacao-100g/1988760"
  },
@@ -437,6 +442,7 @@
   "l": 3.5,
   "nota": "no son fritas; bolsita individual",
   "paises": [
+   "UK",
    "US"
   ],
   "fuente": "https://www.zoro.com/static/cms/enhanced_pdf/Essendant%20Inc_PPH71100xxPRODLITxx01xx7b73aa.pdf"
@@ -582,6 +588,7 @@
   "l": 4.1,
   "nota": "comparte la bolsa: solo 3½ tazas",
   "paises": [
+   "AE",
    "MX"
   ],
   "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/act-ii/palomitas-mantequilla-light/3-1-2-tazas"
@@ -796,5 +803,277 @@
    "CH"
   ],
   "fuente": "https://www.yazio.com/de/kalorientabelle/vollreiswaffeln-coop.html"
+ },
+ {
+  "id": "lindt-excellence-90",
+  "n": "Lindt – Excellence chocolate oscuro 90% cacao",
+  "tipo": "dulce",
+  "porcion": "2 cuadritos (20 g)",
+  "k": 118,
+  "p": 2,
+  "h": 2.8,
+  "azucar": 1.4,
+  "l": 11,
+  "nota": "muy poco azúcar; 2 cuadritos y listo",
+  "paises": [
+   "UK",
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.ocado.com/products/lindt-excellence-intense-dark-90-cocoa-chocolate-bar-46655011"
+ },
+ {
+  "id": "kinder-chocolate-ice-cream-stick",
+  "n": "Kinder – Paleta de helado Kinder Chocolate",
+  "tipo": "dulce",
+  "porcion": "1 paleta (55 ml / 38 g)",
+  "k": 140,
+  "p": 2.3,
+  "h": 12,
+  "azucar": 11.3,
+  "l": 9.2,
+  "nota": "chiquita pero cerca del límite; solo 1",
+  "paises": [
+   "UK",
+   "AE"
+  ],
+  "fuente": "https://www.sainsburys.co.uk/groceries/product/kinder-chocolate-ice-cream-sticks-4-x-55ml"
+ },
+ {
+  "id": "waitrose-essential-fruit-splits",
+  "n": "Waitrose Essential – Fruit Splits (Fresa)",
+  "tipo": "dulce",
+  "porcion": "1 paleta (73 ml)",
+  "k": 60,
+  "p": 0.9,
+  "h": 9.7,
+  "azucar": 7.0,
+  "l": 2.0,
+  "nota": "paleta de fruta con centro cremoso; en EAU en Spinneys",
+  "paises": [
+   "UK",
+   "AE"
+  ],
+  "fuente": "https://www.waitrose.com/ecom/products/essential-fruit-splits/644059-801953-801953"
+ },
+ {
+  "id": "rowntrees-fruit-pastilles-lollies",
+  "n": "Rowntree's – Paleta Fruit Pastilles (frutas)",
+  "tipo": "dulce",
+  "porcion": "1 paleta (65 ml)",
+  "k": 53,
+  "p": 0,
+  "h": 13,
+  "azucar": 11.5,
+  "l": 0,
+  "nota": "paleta de hielo de fruta, sin grasa",
+  "paises": [
+   "UK",
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://sainsburys.co.uk/groceries/product/rowntree-s-fruit-pastille-ice-lollies-4x65ml"
+ },
+ {
+  "id": "walls-calippo-mini-lemon-lime",
+  "n": "Wall's – Calippo Mini (Limón-lima)",
+  "tipo": "dulce",
+  "porcion": "1 paleta (80 ml)",
+  "k": 75,
+  "p": 0,
+  "h": 17.6,
+  "azucar": 11.8,
+  "l": 0,
+  "nota": "la de naranja de la misma caja tiene 87 kcal",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.waitrose.com/ecom/products/calippo-mini-orange-lemon-lime-ice-lollies/831973-688722-688723"
+ },
+ {
+  "id": "mullerlight-toffee",
+  "n": "Müllerlight – Yogur sin grasa (Toffee)",
+  "tipo": "dulce",
+  "porcion": "1 vasito (160 g)",
+  "k": 86,
+  "p": 8.6,
+  "h": 11.5,
+  "azucar": 10.2,
+  "l": 0,
+  "nota": "sabor postre con proteína y sin grasa",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.tesco.com/shop/en-GB/products/303668149"
+ },
+ {
+  "id": "hartleys-10-cal-jelly",
+  "n": "Hartley's – Gelatina 10 Cal lista para comer (Frambuesa)",
+  "tipo": "dulce",
+  "porcion": "1 vasito (175 g)",
+  "k": 7,
+  "p": 0,
+  "h": 0,
+  "azucar": 0,
+  "l": 0,
+  "nota": "casi cero calorías; en el pasillo de postres",
+  "paises": [
+   "UK"
+  ],
+  "fuente": "https://www.tesco.com/shop/en-GB/products/283609677"
+ },
+ {
+  "id": "fage-total-0-raspberry-pomegranate",
+  "n": "Fage – Total 0% split pot (Frambuesa y granada)",
+  "tipo": "dulce",
+  "porcion": "1 vasito (150 g)",
+  "k": 99,
+  "p": 12.5,
+  "h": 12.3,
+  "azucar": 11.4,
+  "l": 0,
+  "nota": "yogur griego con fruta aparte; mucha proteína",
+  "paises": [
+   "AE"
+  ],
+  "fuente": "https://www.spinneys.com/catalogue/fage-greek-yog-0-wpomgrntrspbry-170g_11310/"
+ },
+ {
+  "id": "propercorn-lightly-sea-salted",
+  "n": "Propercorn – Palomitas (Lightly Sea Salted)",
+  "tipo": "salado",
+  "porcion": "1 bolsita (20 g)",
+  "k": 88,
+  "p": 1.7,
+  "h": 11.3,
+  "azucar": 0.1,
+  "l": 3.5,
+  "nota": "en Irlanda vienen en bolsitas de 10 g: comer 2",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.ocado.com/webshop/product/Propercorn-Popcorn-Lightly-Sea-Salted/80099011"
+ },
+ {
+  "id": "snack-a-jacks-salt-vinegar",
+  "n": "Snack a Jacks – Chips de arroz y maíz (Salt & Vinegar)",
+  "tipo": "salado",
+  "porcion": "1 bolsita (23 g)",
+  "k": 97,
+  "p": 1.5,
+  "h": 17,
+  "azucar": 0.5,
+  "l": 2.3,
+  "nota": "horneadas tipo galleta de arroz; en Irlanda bolsitas de 19 g",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.sainsburys.co.uk/groceries/product/snack-a-jacks-salt-vinegar-rice-cakes-crisps-23g"
+ },
+ {
+  "id": "walkers-baked-sea-salt",
+  "n": "Walkers – Baked (Sea Salt)",
+  "tipo": "salado",
+  "porcion": "1 bolsita (22 g)",
+  "k": 96,
+  "p": 1.3,
+  "h": 16,
+  "azucar": 1.2,
+  "l": 2.8,
+  "nota": "horneadas, no fritas; 50% menos grasa",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.tesco.ie/shop/en-IE/products/311687736"
+ },
+ {
+  "id": "ryvita-original",
+  "n": "Ryvita – Pan crujiente de centeno (Original)",
+  "tipo": "salado",
+  "porcion": "3 piezas (31,5 g)",
+  "k": 111,
+  "p": 3.3,
+  "h": 21.6,
+  "azucar": 0.9,
+  "l": 0.3,
+  "nota": "con fibra; bien con un poquito de queso cottage",
+  "paises": [
+   "UK",
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.sainsburys.co.uk/groceries/product/ryvita-original-crispbread-crackers-250g"
+ },
+ {
+  "id": "ryvita-multiseed-thins",
+  "n": "Ryvita – Thins con semillas (Multiseed)",
+  "tipo": "salado",
+  "porcion": "3 piezas (27 g)",
+  "k": 117,
+  "p": 3.9,
+  "h": 17.4,
+  "azucar": 0.6,
+  "l": 3.0,
+  "nota": "crujientes y delgaditas",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.tesco.com/shop/en-GB/products/263831587"
+ },
+ {
+  "id": "walkers-wotsits-baked",
+  "n": "Walkers – Wotsits horneados (Queso)",
+  "tipo": "salado",
+  "porcion": "1 bolsita (16,5 g)",
+  "k": 82,
+  "p": 0.9,
+  "h": 7.6,
+  "azucar": 1.2,
+  "l": 5.3,
+  "nota": "horneados, no fritos; solo la bolsita chica",
+  "paises": [
+   "UK",
+   "AE"
+  ],
+  "fuente": "https://www.tesco.com/shop/en-GB/products/313849986"
+ },
+ {
+  "id": "rice-up-himalayan-salt",
+  "n": "Rice Up! – Galletas de arroz integral (Sal del Himalaya)",
+  "tipo": "salado",
+  "porcion": "25 g (≈2 galletas)",
+  "k": 97,
+  "p": 2.2,
+  "h": 19.5,
+  "azucar": 1.8,
+  "l": 1.0,
+  "nota": "en EAU en Carrefour; en Malta en supermercado",
+  "paises": [
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.supermarket.mt/brands/rice-up/himalayan-salt-rice-cakes-120g-50659"
+ },
+ {
+  "id": "hunters-baked-pretzos-sesame",
+  "n": "Hunter's Gourmet – Baked PretzOs (Ajonjolí blanco y negro)",
+  "tipo": "salado",
+  "porcion": "30 g (1 puñito)",
+  "k": 126,
+  "p": 2.1,
+  "h": 23.4,
+  "azucar": 1.4,
+  "l": 2.6,
+  "nota": "marca de EAU, horneados; en Spinneys y Carrefour",
+  "paises": [
+   "AE"
+  ],
+  "fuente": "https://www.spinneys.com/catalogue/hunters-gourmet-baked-pretzos-blckwht_14038/"
  }
 ]
