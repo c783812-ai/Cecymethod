@@ -1,10 +1,10 @@
 import type { Ejercicio, FilaRutina, Rutina } from "./types";
 
-const e = (nombre: string, series: string, descanso: string, aproximacion?: string[]): Ejercicio =>
+export const e = (nombre: string, series: string, descanso: string, aproximacion?: string[]): Ejercicio =>
   aproximacion ? { nombre, series, descanso, aproximacion } : { nombre, series, descanso };
-const todos = (x: Ejercicio): FilaRutina => ({ a: x, b: x, c: x });
-const ab = (x: Ejercicio, c: Ejercicio): FilaRutina => ({ a: x, b: x, c });
-const a_bc = (a: Ejercicio, bc: Ejercicio): FilaRutina => ({ a, b: bc, c: bc });
+export const todos = (x: Ejercicio): FilaRutina => ({ a: x, b: x, c: x });
+export const ab = (x: Ejercicio, c: Ejercicio): FilaRutina => ({ a: x, b: x, c });
+export const a_bc = (a: Ejercicio, bc: Ejercicio): FilaRutina => ({ a, b: bc, c: bc });
 
 /** Nombre anterior (en español) -> nombre original en inglés, para pasar los videos ya subidos. */
 export const NOMBRE_EN: Record<string, string> = {
