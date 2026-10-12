@@ -131,7 +131,7 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
     return () => { document.removeEventListener("keydown", k); document.body.style.overflow = ""; };
   }, [onClose]);
   const opciones = useMemo(
-    () => (lista ? buscar(lista, q, orig.g).filter((a) => a.id !== orig.id && (!pais || !a.paises || a.paises.includes(pais))).sort((a, b) => a.n.localeCompare(b.n, "es")) : []),
+    () => (lista ? buscar(lista, q, orig.g).filter((a) => a.id !== orig.id && (!pais || !a.paises?.length || a.paises.includes(pais))).sort((a, b) => a.n.localeCompare(b.n, "es")) : []),
     [lista, q, orig, pais],
   );
   return (

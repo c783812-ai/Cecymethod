@@ -1676,5 +1676,228 @@
    "MX"
   ],
   "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/ades/leche-de-soya-sin-az%C3%BAcar/1-taza"
+ },
+ {
+  "id": "atika-kombucha-hibiscus-myrtille",
+  "n": "Atika – Kombucha Bio (Hibiscus Myrtille)",
+  "marca": "Atika",
+  "g": "Kombucha",
+  "porcion": "1 vaso (250 ml)",
+  "porcion_g": 250,
+  "k": 38,
+  "p": 0,
+  "h": 8.8,
+  "l": 0,
+  "nota": "la que toma Cecy; orgánica, francesa; botella de 75 cl ≈ 3 vasos",
+  "paises": [],
+  "fuente": "https://lafourche.fr/products/atika-kombucha-hibiscus-myrtille-bio-0-75l"
+ },
+ {
+  "id": "bebida-viva-kombucha-jamaica-salvaje",
+  "n": "Bebida Viva – Kombucha (Jamaica Salvaje)",
+  "marca": "Bebida Viva",
+  "g": "Kombucha",
+  "porcion": "1 botella (377 ml)",
+  "porcion_g": 377,
+  "k": 57,
+  "p": 0,
+  "h": 15.1,
+  "l": 0,
+  "nota": "~15 g de azúcar por botella, mejor media botella",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fitatu.com/catalog/mx/bebida-viva-kombucha-sabor-jamaica-salvaje--98486132"
+ },
+ {
+  "id": "gts-synergy-gingerade",
+  "n": "GT's – Synergy Raw Kombucha (Gingerade)",
+  "marca": "GT's Living Foods",
+  "g": "Kombucha",
+  "porcion": "1 botella (473 ml)",
+  "porcion_g": 473,
+  "k": 50,
+  "p": 0,
+  "h": 12,
+  "l": 0,
+  "nota": "orgánica y cruda; 12 g de azúcar por botella (≈6 g por vaso de 250 ml)",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.shoprite.com/sm/pickup/rsid/497/product/synergy-gingerade-the-real-kombucha-16-fl-oz-id-00722430200163"
+ },
+ {
+  "id": "liquid-remedy-kombucha-raspberry-lemonade",
+  "n": "Remedy – Kombucha sin azúcar (Raspberry Lemonade)",
+  "marca": "Remedy",
+  "g": "Kombucha",
+  "porcion": "1 lata (355 ml)",
+  "porcion_g": 355,
+  "k": 5,
+  "p": 0,
+  "h": 6,
+  "l": 0,
+  "nota": "orgánica, 0 g de azúcar; endulzada con eritritol y stevia",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.shoprite.com/product/liquid-remedy-organic-raspberry-lemonade-kombucha-12-fl-oz-id-00810117200183"
+ },
+ {
+  "id": "humm-zero-sugar-blood-orange",
+  "n": "Humm – Zero Sugar Kombucha (Blood Orange)",
+  "marca": "Humm",
+  "g": "Kombucha",
+  "porcion": "1 lata (355 ml)",
+  "porcion_g": 355,
+  "k": 10,
+  "p": 0,
+  "h": 10,
+  "l": 0,
+  "nota": "0 g de azúcar; los carbohidratos vienen de edulcorantes/fibra",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.shoprite.com/sm/pickup/rsid/321/product/humm-zero-sugar-blood-orange-flavored-probiotic-kombucha-12-fl-oz-id-00850036042105"
+ },
+ {
+  "id": "komvida-kombucha-original",
+  "n": "Komvida – Kombucha Ecológica (Original)",
+  "marca": "Komvida",
+  "g": "Kombucha",
+  "porcion": "1 botella (250 ml)",
+  "porcion_g": 250,
+  "k": 23,
+  "p": 0.8,
+  "h": 5.7,
+  "l": 0.3,
+  "nota": "ecológica, española; sin azúcar añadida tras fermentar (azúcar exacto no publicado)",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/komvida/kombucha/100ml"
+ },
+ {
+  "id": "onflow-kombucha-te-verde",
+  "n": "Onflow – Kombucha de Té Verde sin pasteurizar",
+  "marca": "Onflow",
+  "g": "Kombucha",
+  "porcion": "1 botella (330 ml)",
+  "porcion_g": 330,
+  "k": 33,
+  "p": 0,
+  "h": 8.6,
+  "l": 0,
+  "nota": "ecológica, sin pasteurizar; 2.6 g de azúcar/100 ml (≈6.5 g por vaso)",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://www.elcorteingles.es/supermercado/0110120721700282-onflow-kombucha-de-te-verde-sin-pasteurizar-botella-330-ml"
+ },
+ {
+  "id": "kombuchery-original-raw",
+  "n": "Kombuchery – Bio Raw Kombucha (Original)",
+  "marca": "Kombuchery",
+  "g": "Kombucha",
+  "porcion": "1 botella (400 ml)",
+  "porcion_g": 400,
+  "k": 36,
+  "p": null,
+  "h": 9.2,
+  "l": null,
+  "nota": "bio y cruda, de Berlín; 2.3 g de azúcar/100 ml (≈5.8 g por vaso)",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/kombuchery-bio-original-raw-kombucha-0-4l/9545978"
+ },
+ {
+  "id": "first8-kombucha-pur",
+  "n": "First8 – Bio Kombucha (Pur)",
+  "marca": "First8",
+  "g": "Kombucha",
+  "porcion": "1 botella (330 ml)",
+  "porcion_g": 330,
+  "k": 40,
+  "p": 0,
+  "h": 9.6,
+  "l": 0,
+  "nota": "bio; 2.9 g de azúcar/100 ml (≈7 g por vaso)",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/frist8-bio-kombucha-pur-0-33l/9581728"
+ },
+ {
+  "id": "karma-kombucha-ginger",
+  "n": "Karma – Kombucha Orgánica (Ginger)",
+  "marca": "Karma Drinks",
+  "g": "Kombucha",
+  "porcion": "1 vaso (250 ml)",
+  "porcion_g": 250,
+  "k": 28,
+  "p": null,
+  "h": 6.3,
+  "l": null,
+  "nota": "orgánica, baja en azúcar: 2.5 g/100 ml (≈6 g por vaso)",
+  "paises": [
+   "CH"
+  ],
+  "fuente": "https://wholesale.suma.coop/bio-ginger-karma-kombucha-ginger-6-x-500ml-cv425-2-html.html"
+ },
+ {
+  "id": "bragg-organic-raw-acv",
+  "n": "Bragg – Vinagre de manzana orgánico crudo con la madre (473 ml)",
+  "marca": "Bragg",
+  "g": "Vinagre de manzana",
+  "porcion": "1 dosis (10 ml)",
+  "porcion_g": 10,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "10 ml en 150 ml de agua tibia, con popote para cuidar el esmalte",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://www.iherb.com/bragg-organic-apple-cider-vinegar-with-the-mother-raw-unfiltered-16-fl-oz-473-ml/5817"
+ },
+ {
+  "id": "hacendado-vinagre-manzana-sin-filtrar",
+  "n": "Hacendado – Vinagre de manzana sin filtrar (con madre)",
+  "marca": "Hacendado (Mercadona)",
+  "g": "Vinagre de manzana",
+  "porcion": "1 dosis (10 ml)",
+  "porcion_g": 10,
+  "k": 2,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "10 ml en 150 ml de agua tibia, con popote para cuidar el esmalte",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://elespanol.com/ciencia/nutricion/20230929/super-vinagre-espanol-natural-mercadona-eligen-expertos-baja-azucar-antioxidante/797670384_0.amp.html"
+ },
+ {
+  "id": "ponti-bio-apfelessig-essigmutter",
+  "n": "Ponti – Bio Apfelessig naturtrüb mit Essigmutter (500 ml)",
+  "marca": "Ponti",
+  "g": "Vinagre de manzana",
+  "porcion": "1 dosis (10 ml)",
+  "porcion_g": 10,
+  "k": 2,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "10 ml en 150 ml de agua tibia, con popote para cuidar el esmalte",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/ponti-bio-naturtrueber-apfelessig-mit-essigmutter-0-5l/8464711"
  }
 ]

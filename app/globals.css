@@ -308,3 +308,9 @@ a{color:inherit}
 .prep summary::after { content: " ▸"; }
 .prep[open] summary::after { content: " ▾"; }
 .prep p { margin: 6px 0 0; line-height: 1.45; }
+.antojos{padding:14px}
+.antojos summary{cursor:pointer;list-style:none;display:grid;gap:2px}
+.antojos summary::-webkit-details-marker{display:none}
+.antojos summary b::after{content:" ▸";color:var(--muted)}
+.antojos[open] summary b::after{content:" ▾"}
+.antojos .seg{margin-top:10px}

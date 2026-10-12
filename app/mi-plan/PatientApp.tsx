@@ -5,6 +5,7 @@ import { DIAS, TIEMPOS, type Dia, type Patient, type Plan, type Rutina } from "@
 import { MANO } from "@/lib/equivalentes";
 import { MealCard, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden } from "./Comidas";
 import Super from "./Super";
+import Antojos from "./Antojos";
 import { PorcionesTable, tint } from "@/components/shared";
 
 const MEAL_TINT = ["t-yellow", "t-pink", "t-blue", "t-lilac", "t-green"];
@@ -155,6 +156,7 @@ function Hoy({ p, plan, planExiste, cambios, orden }: { p: Patient; plan: Plan |
           ) : null;
         })
       )}
+      <Antojos />
       {plan.suplementos.length > 0 && (
         <div className="card" style={{ padding: 14 }}>
           <div className="eyebrow" style={{ marginBottom: 6 }}>Tus suplementos</div>
