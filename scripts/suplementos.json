@@ -12,12 +12,15 @@
   "l": 0,
   "nota": "aislado hidrolizado, muy bajo en lactosa; la que usa Cecy",
   "paises": [
-   "MX",
-   "US",
+   "AE",
    "CA",
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.shoprite.com/sm/planning/rsid/293/product/dymatize-gourmet-vanilla-iso100-hydrolyzed-protein-powder-212-oz-id-00705016358205"
  },
@@ -70,9 +73,10 @@
   "l": 1.6,
   "nota": "whey concentrado; otros sabores: Milk Chocolate, Strawberry Cream, Cinnamon Cereal",
   "paises": [
+   "CH",
    "DE",
    "ES",
-   "CH"
+   "EU"
   ],
   "fuente": "https://www.vitalabo.com/esn/designer-whey-protein-1"
  },
@@ -89,9 +93,10 @@
   "l": 1,
   "nota": "whey sabor café con cafeína (~32 mg/100 ml preparado)",
   "paises": [
+   "CH",
    "DE",
    "ES",
-   "CH"
+   "EU"
   ],
   "fuente": "https://www.vitalabo.com/esn/flexpresso-protein-coffee"
  },
@@ -108,9 +113,10 @@
   "l": 0,
   "nota": "aislado 'clear' tipo jugo, sin lactosa prácticamente",
   "paises": [
+   "CH",
    "DE",
    "ES",
-   "CH"
+   "EU"
   ],
   "fuente": "https://www.fatsecret.de/Kalorien-Ern%C3%A4hrung/esn/isoclear-whey-isolate-ultra-violet/1-portion"
  },
@@ -127,12 +133,15 @@
   "l": 1.5,
   "nota": "whey mezcla aislado/concentrado",
   "paises": [
-   "MX",
-   "US",
+   "AE",
    "CA",
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.harristeeter.com/p/optimum-nutrition-gold-standard-whey-double-rich-chocolate-protein-powder/0074892706014"
  },
@@ -149,11 +158,14 @@
   "l": 1.5,
   "nota": "whey concentrado económico",
   "paises": [
-   "ES",
-   "DE",
+   "AE",
+   "CA",
    "CH",
-   "US",
-   "CA"
+   "DE",
+   "ES",
+   "EU",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.myprotein.com/sports-nutrition/impact-whey-protein/10530943.html"
  },
@@ -170,9 +182,10 @@
   "l": null,
   "nota": "whey de vacas de pastoreo; valores por confirmar",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.foodspring.de/whey-protein-pulver"
  },
@@ -189,9 +202,11 @@
   "l": 0.3,
   "nota": "aislado 90 %, bajo en lactosa",
   "paises": [
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "UK"
   ],
   "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/bulk-powders/pure-whey-isolate-90-unflavoured/100g"
  },
@@ -208,9 +223,10 @@
   "l": null,
   "nota": "marca española; macros por confirmar",
   "paises": [
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU"
   ],
   "fuente": "https://fitia.app/es/calorias-informacion-nutricional/evowhey-20-chocolate-and-caramel-3037346"
  },
@@ -280,9 +296,12 @@
   "l": null,
   "nota": "colágeno de pescado silvestre, sin sabor",
   "paises": [
-   "US",
+   "AE",
    "CA",
-   "MX"
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.swansonvitamins.com/collections/all/p/vital-proteins-marine-collagen-unflavored-7-8-oz-7-8-oz-pwdr"
  },
@@ -336,9 +355,12 @@
   "l": 0,
   "nota": "sin sabor",
   "paises": [
-   "ES",
+   "AE",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "UK"
   ],
   "fuente": "https://lookfantastic.com/sports-nutrition/marine-collagen/12376959.html"
  },
@@ -410,9 +432,11 @@
   "l": 0,
   "nota": "4.5 g fibra prebiótica; puede dar gases al inicio",
   "paises": [
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "UK"
   ],
   "fuente": "https://www.bulk.com/es/products/inulina-en-polvo/bpb-inul"
  },
@@ -446,9 +470,11 @@
   "l": null,
   "nota": "psyllium puro sin sabor; tomar con mucha agua",
   "paises": [
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "UK"
   ],
   "fuente": "https://www.bulk.com/es/products/cascara-de-psyllium-en-polvo/bpb-psyl"
  },
@@ -465,11 +491,13 @@
   "l": 1,
   "nota": "greens + vitaminas + probióticos; caro",
   "paises": [
-   "US",
    "CA",
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU",
+   "UK",
+   "US"
   ],
   "fuente": "https://mobile.fatsecret.com/calories-nutrition/athletic-greens/ag1"
  },
@@ -486,9 +514,10 @@
   "l": 0.5,
   "nota": "vegano, sin endulzantes",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.shop-apotheke.com/ernaehrung/8115707/nu3-daily-super-greens.htm"
  },
@@ -577,9 +606,10 @@
   "l": 0,
   "nota": "cúrcuma con pimienta negra; vegana",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.natural-elements.de/products/kurkuma-kapseln"
  },
@@ -596,9 +626,10 @@
   "l": 0,
   "nota": "monohidrato puro; también versión con Creapure",
   "paises": [
+   "CH",
    "DE",
    "ES",
-   "CH"
+   "EU"
   ],
   "fuente": "https://www.vitalabo.com/esn/ultrapure-creatine-monohydrate-1"
  },
@@ -615,12 +646,15 @@
   "l": 0,
   "nota": "monohidrato; la versión europea es Creapure",
   "paises": [
-   "MX",
-   "US",
+   "AE",
    "CA",
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.optimumnutrition.com/en-us/Products/Muscle-Building/MICRONIZED-CREATINE-POWDER/p/creatine-micronized"
  },
@@ -654,11 +688,14 @@
   "l": 0,
   "nota": "con Creapure",
   "paises": [
-   "ES",
-   "DE",
+   "AE",
+   "CA",
    "CH",
-   "US",
-   "CA"
+   "DE",
+   "ES",
+   "EU",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.myprotein.com/sports-nutrition/creapure-creatine-powder/10530050.html"
  },
@@ -675,11 +712,14 @@
   "l": 0,
   "nota": "cianocobalamina sublingual; útil en dieta vegana",
   "paises": [
-   "US",
-   "MX",
-   "ES",
+   "AE",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.solgar.com/products/sublingual-vitamin-b12-1000-mcg-nuggets/"
  },
@@ -731,9 +771,10 @@
   "l": 0,
   "nota": "gotas; vegana",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.natural-elements.de/products/vitamin-b12-tropfen"
  },
@@ -786,9 +827,10 @@
   "l": null,
   "nota": "polvo multicepa; útil con/después de antibióticos",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.vitalabo.com/omni-biotic/omni-biotic-10-aad"
  },
@@ -822,11 +864,14 @@
   "l": 0,
   "nota": "sin hierro en algunas versiones; revisar etiqueta (evitar hierro sin indicación médica)",
   "paises": [
-   "MX",
-   "US",
+   "AE",
    "CA",
+   "DE",
    "ES",
-   "DE"
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.centrum.com/"
  },
@@ -843,10 +888,11 @@
   "l": 0,
   "nota": "multivitamínico con minerales",
   "paises": [
-   "MX",
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX"
   ],
   "fuente": "https://medikamio.com/de-ch/medikamente/supradyn-energy/pil"
  },
@@ -897,9 +943,11 @@
   "l": 0,
   "nota": "sin azúcar (alulosa); mezclar en 500 ml",
   "paises": [
-   "US",
+   "AE",
    "CA",
-   "MX"
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://fitia.app/calories-nutritional-information/sugar-free-hydration-multiplier-electrolyte-drink-mix-mandarin-orange-F7pphb07lm/"
  },
@@ -916,8 +964,9 @@
   "l": 0,
   "nota": "1000 mg sodio; sin azúcar (stevia)",
   "paises": [
-   "US",
-   "CA"
+   "AE",
+   "CA",
+   "US"
   ],
   "fuente": "https://mobile.fatsecret.com/calories-nutrition/lmnt/electrolyte-drink-mix"
  },
@@ -971,10 +1020,12 @@
   "l": 0,
   "nota": "1 g azúcar; 300 mg sodio; en 500 ml",
   "paises": [
-   "US",
    "CA",
+   "DE",
    "ES",
-   "DE"
+   "EU",
+   "UK",
+   "US"
   ],
   "fuente": "https://well.ca/products/nuun-hydration-sport-orange_153978.html?cat=6080"
  },
@@ -991,9 +1042,11 @@
   "l": 0,
   "nota": "sabor por olfato, sin azúcar ni calorías; requiere botella air up",
   "paises": [
-   "DE",
    "CH",
+   "DE",
    "ES",
+   "EU",
+   "UK",
    "US"
   ],
   "fuente": "https://shop.air-up.com/es/en/does-air-up-contain-sugar"
@@ -1011,9 +1064,11 @@
   "l": 0,
   "nota": "sin azúcar, con vitaminas",
   "paises": [
-   "DE",
    "CH",
+   "DE",
    "ES",
+   "EU",
+   "UK",
    "US"
   ],
   "fuente": "https://www.shop-apotheke.com/ernaehrung/upmWXUL3G/waterdrop-microdrink-limonade-set-getraenkewuerfel.htm"
@@ -1031,11 +1086,13 @@
   "l": 0,
   "nota": "1 parte sirope + 23 de agua; sabores varían por país",
   "paises": [
-   "DE",
+   "CA",
    "CH",
+   "DE",
    "ES",
-   "US",
-   "CA"
+   "EU",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.rewe.de/shop/p/sodastream-getraenkesirup-rote-beeren-ohne-zucker-440ml/7585972"
  },
@@ -1052,8 +1109,9 @@
   "l": 0,
   "nota": "sin azúcar (sucralosa)",
   "paises": [
-   "US",
-   "CA"
+   "AE",
+   "CA",
+   "US"
   ],
   "fuente": "https://stopandshop.com/groceries/beverages/drink-mixes-water-enhancers/water-enhancers/mio-lemonade-liquid-water-enhancer-324-oz-btl.html"
  },
@@ -1105,12 +1163,15 @@
   "l": null,
   "nota": "café soluble negro; aporte calórico mínimo",
   "paises": [
-   "MX",
-   "US",
+   "AE",
    "CA",
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.nescafe.com/"
  },
@@ -1164,12 +1225,15 @@
   "l": 2,
   "nota": "1280 mg EPA+DHA; aceite de pescado",
   "paises": [
-   "US",
+   "AE",
    "CA",
-   "MX",
-   "ES",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.nordic.com/products/ultimate-omega/"
  },
@@ -1205,9 +1269,10 @@
   "l": null,
   "nota": "aceite de pescado líquido, sabor limón",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.norsan.de/products/omega-3-total"
  },
@@ -1224,9 +1289,10 @@
   "l": null,
   "nota": "vegano (aceite de algas)",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.natural-elements.de/products/omega-3-algenoel-kapseln"
  },
@@ -1243,11 +1309,14 @@
   "l": 0,
   "nota": "citrato; bien tolerado",
   "paises": [
-   "US",
-   "MX",
-   "ES",
+   "AE",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.solgar.com/products/magnesium-citrate/"
  },
@@ -1264,9 +1333,10 @@
   "l": 0,
   "nota": "bisglicinato; vegano",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.natural-elements.de/products/magnesium-bisglycinat"
  },
@@ -1354,11 +1424,14 @@
   "l": 0,
   "nota": "dosis según tus análisis",
   "paises": [
-   "US",
-   "MX",
-   "ES",
+   "AE",
+   "CH",
    "DE",
-   "CH"
+   "ES",
+   "EU",
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.solgar.com/products/vitamin-d3-cholecalciferol/"
  },
@@ -1375,9 +1448,10 @@
   "l": 0,
   "nota": "dosis según tus análisis; con K2 MK-7",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.natural-elements.de/products/vitamin-d3-k2-tropfen"
  },
@@ -1431,8 +1505,9 @@
   "l": 4.5,
   "nota": "leche ultrafiltrada sin lactosa; 0 g azúcar añadida",
   "paises": [
-   "US",
-   "CA"
+   "AE",
+   "CA",
+   "US"
   ],
   "fuente": "https://stopandshop.com/groceries/health-beauty/nutrition-weight-management/protein-meal-replacement-shakes/core-power-chocolate-26g-high-protein-shake-14-oz-btl.html"
  },
@@ -1486,9 +1561,10 @@
   "l": 9,
   "nota": "1 g azúcar; 12 g fibra",
   "paises": [
-   "US",
+   "AE",
    "CA",
-   "MX"
+   "MX",
+   "US"
   ],
   "fuente": "https://www.shoprite.com/sm/planning/rsid/245/product/quest-chocolate-chip-cookie-dough-protein-bar-212-oz-4-count-id-00888849003853"
  },
@@ -1505,11 +1581,14 @@
   "l": 8.7,
   "nota": "1.6 g azúcar",
   "paises": [
-   "DE",
+   "AE",
+   "CA",
    "CH",
+   "DE",
    "ES",
-   "US",
-   "CA"
+   "EU",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.shop-apotheke.com/fitness/upmHFM7PR/barebells-protein-bar.htm"
  },
@@ -1526,9 +1605,10 @@
   "l": 8.6,
   "nota": "1.8 g azúcar",
   "paises": [
-   "DE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.rewe.de/shop/p/esn-designer-protein-bar-dark-cookie-white-chocolate-45g/9915314"
  },
@@ -1562,9 +1642,10 @@
   "l": 0,
   "nota": "fruto del monje + eritritol; los 4 g son de eritritol (no se absorbe)",
   "paises": [
-   "US",
+   "AE",
    "CA",
-   "MX"
+   "MX",
+   "US"
   ],
   "fuente": "https://www.lakanto.com/products/classic-monk-fruit-sweetener"
  },
@@ -1602,7 +1683,8 @@
   "paises": [
    "CH",
    "DE",
-   "ES"
+   "ES",
+   "EU"
   ],
   "fuente": "https://www.hermesetas.com/"
  },
@@ -1619,9 +1701,12 @@
   "l": 7,
   "nota": "soya con extra proteína",
   "paises": [
-   "DE",
+   "AE",
    "CH",
-   "ES"
+   "DE",
+   "ES",
+   "EU",
+   "UK"
   ],
   "fuente": "https://www.fatsecret.de/Kalorien-Ern%C3%A4hrung/alpro-soya/plant-protein/100ml"
  },
@@ -1740,8 +1825,10 @@
   "l": 0,
   "nota": "orgánica, 0 g de azúcar; endulzada con eritritol y stevia",
   "paises": [
-   "US",
-   "CA"
+   "AE",
+   "CA",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.shoprite.com/product/liquid-remedy-organic-raspberry-lemonade-kombucha-12-fl-oz-id-00810117200183"
  },
@@ -1843,7 +1930,8 @@
   "l": null,
   "nota": "orgánica, baja en azúcar: 2.5 g/100 ml (≈6 g por vaso)",
   "paises": [
-   "CH"
+   "CH",
+   "UK"
   ],
   "fuente": "https://wholesale.suma.coop/bio-ginger-karma-kombucha-ginger-6-x-500ml-cv425-2-html.html"
  },
@@ -1860,9 +1948,10 @@
   "l": 0,
   "nota": "10 ml en 150 ml de agua tibia, con popote para cuidar el esmalte",
   "paises": [
-   "US",
    "CA",
-   "MX"
+   "MX",
+   "UK",
+   "US"
   ],
   "fuente": "https://www.iherb.com/bragg-organic-apple-cider-vinegar-with-the-mother-raw-unfiltered-16-fl-oz-473-ml/5817"
  },
@@ -1896,8 +1985,535 @@
   "l": 0,
   "nota": "10 ml en 150 ml de agua tibia, con popote para cuidar el esmalte",
   "paises": [
-   "DE"
+   "DE",
+   "EU"
   ],
   "fuente": "https://www.rewe.de/shop/p/ponti-bio-naturtrueber-apfelessig-mit-essigmutter-0-5l/8464711"
+ },
+ {
+  "id": "now-psyllium-husk-powder",
+  "n": "NOW – Psyllium Husk Powder",
+  "marca": "NOW Foods",
+  "g": "Fibra",
+  "porcion": "1 cucharada rasa (9 g)",
+  "porcion_g": 9,
+  "k": 30,
+  "p": 0,
+  "h": 8,
+  "l": 0,
+  "nota": "7 g de fibra por porción; tomar con mucha agua",
+  "paises": [
+   "AE",
+   "US"
+  ],
+  "fuente": "https://www.nowfoods.com/products/supplements/psyllium-husk-powder"
+ },
+ {
+  "id": "kiki-health-psyllium-husks",
+  "n": "KIKI Health – Organic Psyllium Husks (polvo)",
+  "marca": "KIKI Health",
+  "g": "Fibra",
+  "porcion": "1 cucharadita colmada (5 g)",
+  "porcion_g": 5,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "cáscara de psyllium orgánica; tomar con mucha agua",
+  "paises": [
+   "UK",
+   "AE"
+  ],
+  "fuente": "https://admin.lifepharmacy.com/product/kiki-health-organic-psyllium-husks-275-g"
+ },
+ {
+  "id": "bulk-complete-greens",
+  "n": "Bulk – Complete Greens (Sin sabor)",
+  "marca": "Bulk",
+  "g": "Polvo verde",
+  "porcion": "1 porción (9 g)",
+  "porcion_g": 9,
+  "k": 28,
+  "p": 3.7,
+  "h": 1.5,
+  "l": 0.2,
+  "nota": "mezcla de verdes en polvo; sin sabor",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.bulk.com/uk/complete-greens.html"
+ },
+ {
+  "id": "vibrant-health-green-vibrance",
+  "n": "Vibrant Health – Green Vibrance",
+  "marca": "Vibrant Health",
+  "g": "Polvo verde",
+  "porcion": "1 medida (11 g)",
+  "porcion_g": 11,
+  "k": 40,
+  "p": 2,
+  "h": 8,
+  "l": 0,
+  "nota": "verdes + 25 mil millones de probióticos",
+  "paises": [
+   "AE",
+   "US"
+  ],
+  "fuente": "https://www.myaster.com/en/online-pharmacy/p/vibrant-health-green-vibrance-25-billion-probiotics-plant-based-super-food-powder-660g/1059086"
+ },
+ {
+  "id": "garden-of-life-perfect-food-original",
+  "n": "Garden of Life – Perfect Food Super Green Formula (Original)",
+  "marca": "Garden of Life",
+  "g": "Polvo verde",
+  "porcion": "1 medida rasa (≈2 cucharadas)",
+  "porcion_g": null,
+  "k": 40,
+  "p": 3,
+  "h": 5,
+  "l": 1,
+  "nota": "polvo de verdes; mezclar en agua o jugo",
+  "paises": [
+   "AE",
+   "US"
+  ],
+  "fuente": "https://fullscript.com/catalog/products/perfect-food-original-300-g"
+ },
+ {
+  "id": "solgar-full-spectrum-curcumin",
+  "n": "Solgar – Full Spectrum Curcumin (cápsulas blandas)",
+  "marca": "Solgar",
+  "g": "Cúrcuma",
+  "porcion": "1 cápsula blanda",
+  "porcion_g": null,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "curcumina en extracto líquido de alta absorción",
+  "paises": [
+   "UK",
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.hollandandbarrett.com/shop/product/solgar-full-spectrum-curcumin-185x-60013183"
+ },
+ {
+  "id": "holland-barrett-turmeric-600-pimienta",
+  "n": "Holland & Barrett – High Strength Turmeric 600 mg con pimienta negra",
+  "marca": "Holland & Barrett",
+  "g": "Cúrcuma",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "cúrcuma con pimienta negra para mejor absorción",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.ocado.com/products/holland-barrett-high-strength-turmeric-600mg-with-black-pepper/652741011"
+ },
+ {
+  "id": "garden-of-life-mykind-turmeric",
+  "n": "Garden of Life – mykind Organics Extra Strength Turmeric",
+  "marca": "Garden of Life",
+  "g": "Cúrcuma",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "cúrcuma orgánica en tabletas",
+  "paises": [
+   "AE",
+   "US"
+  ],
+  "fuente": "https://lifepharmacy.com/product/garden-of-life-mykind-organics-herbal-extra-strength-turmeric-inflammatory-response"
+ },
+ {
+  "id": "natures-aid-b12-1000-sublingual",
+  "n": "Nature's Aid – Vitamina B12 1000 mcg sublingual",
+  "marca": "Nature's Aid",
+  "g": "Vitamina B12",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "disolver bajo la lengua",
+  "paises": [
+   "UK",
+   "AE"
+  ],
+  "fuente": "https://admin.lifepharmacy.com/product/natures-aid-vitamin-b12-1000ug-sublingual-90-tablets"
+ },
+ {
+  "id": "optibac-every-day-extra",
+  "n": "Optibac – Every Day Extra (probiótico)",
+  "marca": "Optibac",
+  "g": "Probióticos",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "probiótico diario multicepa",
+  "paises": [
+   "UK",
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.myaster.com/en/online-pharmacy/c/probiotics/31297"
+ },
+ {
+  "id": "bio-kult-advanced-multi-strain",
+  "n": "Bio-Kult – Advanced Multi-Strain",
+  "marca": "Bio-Kult",
+  "g": "Probióticos",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "14 cepas; no requiere refrigeración",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.hollandandbarrett.com/shop/brands/bio-kult/"
+ },
+ {
+  "id": "garden-of-life-dr-formulated-womens",
+  "n": "Garden of Life – Dr. Formulated Probiotics Women's",
+  "marca": "Garden of Life",
+  "g": "Probióticos",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "probiótico para mujer",
+  "paises": [
+   "AE",
+   "US"
+  ],
+  "fuente": "https://lifepharmacy.com/category/probiotics"
+ },
+ {
+  "id": "vitabiotics-wellwoman-original",
+  "n": "Vitabiotics – Wellwoman Original",
+  "marca": "Vitabiotics",
+  "g": "Multivitamínico",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "multivitamínico para mujer",
+  "paises": [
+   "UK",
+   "AE"
+  ],
+  "fuente": "https://www.lifepharmacy.com/product/vitabiotics-wellwoman-30-s-capsules"
+ },
+ {
+  "id": "decathlon-electrolitos-sin-azucar-tabletas",
+  "n": "Decathlon – Electrolitos sin azúcar en tabletas efervescentes (Limón)",
+  "marca": "Decathlon",
+  "g": "Electrolitos",
+  "porcion": "1 tableta (4 g) en 500 ml",
+  "porcion_g": 4,
+  "k": 7,
+  "p": 0,
+  "h": 1.4,
+  "l": 0,
+  "nota": "0 g de azúcar; 1 tableta por 500 ml",
+  "paises": [
+   "EU"
+  ],
+  "fuente": "https://www.decathlon.be/fr/p/boisson-electrolytes-sans-sucre-en-tablettes-effervescentes-citron-x40/326880/g29m965975"
+ },
+ {
+  "id": "robinsons-summer-fruits-no-added-sugar",
+  "n": "Robinsons – Squash Summer Fruits sin azúcar añadida",
+  "marca": "Robinsons",
+  "g": "Saborizante de agua sin calorías",
+  "porcion": "1 vaso preparado (250 ml)",
+  "porcion_g": 250,
+  "k": 5,
+  "p": 0,
+  "h": null,
+  "l": 0,
+  "nota": "diluir 1 parte en 4 de agua; con edulcorantes",
+  "paises": [
+   "UK",
+   "AE"
+  ],
+  "fuente": "https://groceries.morrisons.com/products/robinsons-summer-fruits-squash-no-added-sugar/100163667"
+ },
+ {
+  "id": "kenco-smooth-soluble",
+  "n": "Kenco – Smooth café soluble (sin azúcar)",
+  "marca": "Kenco",
+  "g": "Café",
+  "porcion": "1 cucharadita (≈2 g)",
+  "porcion_g": null,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "café soluble; sin azúcar ni crema",
+  "paises": [
+   "UK"
+  ],
+  "fuente": "https://www.tesco.com/shop/en-GB/products/323643868"
+ },
+ {
+  "id": "nescafe-classic-soluble",
+  "n": "Nescafé – Classic soluble (sin azúcar)",
+  "marca": "Nescafé",
+  "g": "Café",
+  "porcion": "1 cucharadita (≈2 g)",
+  "porcion_g": null,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "café soluble; sin azúcar ni crema",
+  "paises": [
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.carrefour.it/p/nescafe-classic-caffe-solubile-barattolo-200-g/3033710038381.html"
+ },
+ {
+  "id": "solgar-triple-strength-omega-3",
+  "n": "Solgar – Triple Strength Omega-3 950 mg",
+  "marca": "Solgar",
+  "g": "Omega-3",
+  "porcion": "1 cápsula blanda",
+  "porcion_g": null,
+  "k": 15,
+  "p": 0,
+  "h": 0,
+  "l": 1.5,
+  "nota": "504 mg EPA + 378 mg DHA por cápsula",
+  "paises": [
+   "UK",
+   "AE",
+   "EU",
+   "US"
+  ],
+  "fuente": "https://www.solgar.com/products/triple-strength-omega-3-950-mg-softgels/"
+ },
+ {
+  "id": "holland-barrett-magnesium-citrate-400",
+  "n": "Holland & Barrett – Citrato de magnesio 400 mg",
+  "marca": "Holland & Barrett",
+  "g": "Magnesio",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "citrato de magnesio",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.hollandandbarrett.com/shop/product/holland-barrett-magnesium-citrate-400mg-tablets-60046952"
+ },
+ {
+  "id": "now-magnesium-glycinate",
+  "n": "NOW – Magnesium Glycinate (tabletas)",
+  "marca": "NOW Foods",
+  "g": "Magnesio",
+  "porcion": "2 tabletas",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "glicinato, suave para el estómago",
+  "paises": [
+   "AE",
+   "US"
+  ],
+  "fuente": "https://medononline.com/product/now-magnesium-glycinate-highly-absorbable-muscle-and-sleep-support-tablets-180s-1412"
+ },
+ {
+  "id": "betteryou-dlux-1000",
+  "n": "BetterYou – DLux 1000 Vitamina D3 en spray oral",
+  "marca": "BetterYou",
+  "g": "Vitamina D",
+  "porcion": "1 disparo",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "1000 UI por disparo; dosis según tus análisis",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.hollandandbarrett.com/shop/product/60036509"
+ },
+ {
+  "id": "21st-century-d3-1000",
+  "n": "21st Century – Vitamina D3 1000 UI",
+  "marca": "21st Century",
+  "g": "Vitamina D",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "dosis según tus análisis",
+  "paises": [
+   "AE",
+   "US"
+  ],
+  "fuente": "https://medononline.com/product/21st-century-d3-1000iu-tablet-110-tablets-5789"
+ },
+ {
+  "id": "huel-black-edition-rtd-chocolate",
+  "n": "Huel – Black Edition Ready-to-drink (Chocolate)",
+  "marca": "Huel",
+  "g": "Batido listo para tomar",
+  "porcion": "1 botella (500 ml)",
+  "porcion_g": 500,
+  "k": 400,
+  "p": 35,
+  "h": 23,
+  "l": 17,
+  "nota": "comida completa; 35 g de proteína",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://www.tesco.com/shop/en-GB/products/317657129"
+ },
+ {
+  "id": "barebells-protein-milkshake-chocolate",
+  "n": "Barebells – Protein Milkshake (Chocolate)",
+  "marca": "Barebells",
+  "g": "Batido listo para tomar",
+  "porcion": "1 botella (330 ml)",
+  "porcion_g": 330,
+  "k": 182,
+  "p": 24,
+  "h": 12,
+  "l": 4.3,
+  "nota": "sin lactosa, sin azúcar añadida",
+  "paises": [
+   "UK",
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.ocado.com/products/barebells-protein-milkshakes-chocolate/436522011"
+ },
+ {
+  "id": "grenade-carb-killa-white-choc-salted-peanut",
+  "n": "Grenade – Carb Killa (White Chocolate Salted Peanut)",
+  "marca": "Grenade",
+  "g": "Barra de proteína",
+  "porcion": "1 barra (60 g)",
+  "porcion_g": 60,
+  "k": 241,
+  "p": 21,
+  "h": 19,
+  "l": 12,
+  "nota": "bajo en azúcar",
+  "paises": [
+   "UK",
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.tesco.com/shop/en-GB/products/303183169"
+ },
+ {
+  "id": "canderel-green-stevia-pastillas",
+  "n": "Canderel – Green Stevia (pastillas)",
+  "marca": "Canderel",
+  "g": "Endulzante sin calorías",
+  "porcion": "1 pastilla (0.085 g)",
+  "porcion_g": 0.085,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "a base de stevia",
+  "paises": [
+   "UK",
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.ocado.com/products/canderel-green-tablets/226645011"
+ },
+ {
+  "id": "truvia-stevia-granulado",
+  "n": "Truvia – Endulzante de stevia granulado",
+  "marca": "Truvia",
+  "g": "Endulzante sin calorías",
+  "porcion": "⅓ cucharadita",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": null,
+  "l": 0,
+  "nota": "stevia + eritritol; ⅓ cdta endulza como 1 cdta de azúcar",
+  "paises": [
+   "UK"
+  ],
+  "fuente": "https://www.tesco.com/groceries/en-GB/products/272063451"
+ },
+ {
+  "id": "alpro-soya-no-sugars",
+  "n": "Alpro – Bebida de soya sin azúcares",
+  "marca": "Alpro",
+  "g": "Bebida vegetal con proteína",
+  "porcion": "1 vaso (250 ml)",
+  "porcion_g": 250,
+  "k": 82.5,
+  "p": 8.3,
+  "h": 0,
+  "l": 4.8,
+  "nota": "0 g de azúcar",
+  "paises": [
+   "UK",
+   "AE",
+   "EU"
+  ],
+  "fuente": "https://www.tesco.com/shop/en-GB/products/253178655"
+ },
+ {
+  "id": "lovearth-organic-acv",
+  "n": "Lovearth – Vinagre de manzana orgánico crudo con la madre (500 ml)",
+  "marca": "Lovearth",
+  "g": "Vinagre de manzana",
+  "porcion": "1 dosis (10 ml)",
+  "porcion_g": 10,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "10 ml en 150 ml de agua tibia, con popote para cuidar el esmalte",
+  "paises": [
+   "AE"
+  ],
+  "fuente": "https://www.lifepharmacy.com/product/lovearth-organic-apple-cider-vinegar-500ml-99470"
  }
 ]
