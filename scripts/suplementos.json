@@ -1,0 +1,1680 @@
+[
+ {
+  "id": "dymatize-iso100-vainilla",
+  "n": "Dymatize – ISO100 Hydrolyzed (Gourmet Vanilla)",
+  "marca": "Dymatize",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": 110,
+  "p": 25,
+  "h": 1,
+  "l": 0,
+  "nota": "aislado hidrolizado, muy bajo en lactosa; la que usa Cecy",
+  "paises": [
+   "MX",
+   "US",
+   "CA",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.shoprite.com/sm/planning/rsid/293/product/dymatize-gourmet-vanilla-iso100-hydrolyzed-protein-powder-212-oz-id-00705016358205"
+ },
+ {
+  "id": "birdman-falcon-performance-vainilla",
+  "n": "Birdman – Falcon Performance (Vainilla)",
+  "marca": "Birdman",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (42 g)",
+  "porcion_g": 42,
+  "k": 160,
+  "p": 31,
+  "h": 2.3,
+  "l": 3,
+  "nota": "vegetal (arroz + chícharo) con 5 g de creatina CreaClean; marca mexicana",
+  "paises": [
+   "MX",
+   "US"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/falcon/performance-golden-vanilla/1-porci%C3%B3n"
+ },
+ {
+  "id": "birdman-falcon-performance-choco-bronze",
+  "n": "Birdman – Falcon Performance (Choco Bronze)",
+  "marca": "Birdman",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (42 g)",
+  "porcion_g": 42,
+  "k": 160,
+  "p": 30,
+  "h": 2.6,
+  "l": 3,
+  "nota": "la que recomienda Cecy; vegetal (arroz + chícharo) con 5 g de creatina CreaClean por porción; bolsa 1.9 kg",
+  "paises": [
+   "MX",
+   "US"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/birdman/prote%C3%ADna-choco-bronze/1-porci%C3%B3n"
+ },
+ {
+  "id": "esn-designer-whey-vanilla-milk",
+  "n": "ESN – Designer Whey (Vanilla Milk)",
+  "marca": "ESN",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": 112,
+  "p": 22,
+  "h": 1.8,
+  "l": 1.6,
+  "nota": "whey concentrado; otros sabores: Milk Chocolate, Strawberry Cream, Cinnamon Cereal",
+  "paises": [
+   "DE",
+   "ES",
+   "CH"
+  ],
+  "fuente": "https://www.vitalabo.com/esn/designer-whey-protein-1"
+ },
+ {
+  "id": "esn-flexpresso-protein-coffee",
+  "n": "ESN – Flexpresso Protein Coffee (Coffee Caramel)",
+  "marca": "ESN",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": 110,
+  "p": 23,
+  "h": 2.5,
+  "l": 1,
+  "nota": "whey sabor café con cafeína (~32 mg/100 ml preparado)",
+  "paises": [
+   "DE",
+   "ES",
+   "CH"
+  ],
+  "fuente": "https://www.vitalabo.com/esn/flexpresso-protein-coffee"
+ },
+ {
+  "id": "esn-isoclear-whey-isolate",
+  "n": "ESN – Isoclear Whey Isolate",
+  "marca": "ESN",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": 105,
+  "p": 25,
+  "h": 0,
+  "l": 0,
+  "nota": "aislado 'clear' tipo jugo, sin lactosa prácticamente",
+  "paises": [
+   "DE",
+   "ES",
+   "CH"
+  ],
+  "fuente": "https://www.fatsecret.de/Kalorien-Ern%C3%A4hrung/esn/isoclear-whey-isolate-ultra-violet/1-portion"
+ },
+ {
+  "id": "on-gold-standard-double-rich-chocolate",
+  "n": "Optimum Nutrition – Gold Standard 100% Whey (Double Rich Chocolate)",
+  "marca": "Optimum Nutrition",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30.4 g)",
+  "porcion_g": 30.4,
+  "k": 120,
+  "p": 24,
+  "h": 3,
+  "l": 1.5,
+  "nota": "whey mezcla aislado/concentrado",
+  "paises": [
+   "MX",
+   "US",
+   "CA",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.harristeeter.com/p/optimum-nutrition-gold-standard-whey-double-rich-chocolate-protein-powder/0074892706014"
+ },
+ {
+  "id": "myprotein-impact-whey-vainilla",
+  "n": "Myprotein – Impact Whey Protein (Vainilla)",
+  "marca": "Myprotein",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (25 g)",
+  "porcion_g": 25,
+  "k": 95,
+  "p": 18,
+  "h": 2.2,
+  "l": 1.5,
+  "nota": "whey concentrado económico",
+  "paises": [
+   "ES",
+   "DE",
+   "CH",
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.myprotein.com/sports-nutrition/impact-whey-protein/10530943.html"
+ },
+ {
+  "id": "foodspring-whey-protein-vanille",
+  "n": "Foodspring – Whey Protein (Vanille)",
+  "marca": "Foodspring",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "whey de vacas de pastoreo; valores por confirmar",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.foodspring.de/whey-protein-pulver"
+ },
+ {
+  "id": "bulk-pure-whey-isolate-90",
+  "n": "Bulk – Pure Whey Isolate 90 (Sin sabor)",
+  "marca": "Bulk",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": 111,
+  "p": 27,
+  "h": 0.6,
+  "l": 0.3,
+  "nota": "aislado 90 %, bajo en lactosa",
+  "paises": [
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/bulk-powders/pure-whey-isolate-90-unflavoured/100g"
+ },
+ {
+  "id": "hsn-evowhey-2-0",
+  "n": "HSN – Evowhey Protein 2.0 (Chocolate & Caramelo)",
+  "marca": "HSN",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": 108,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "marca española; macros por confirmar",
+  "paises": [
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://fitia.app/es/calorias-informacion-nutricional/evowhey-20-chocolate-and-caramel-3037346"
+ },
+ {
+  "id": "allmax-isoflex",
+  "n": "Allmax – IsoFlex Whey Isolate (Chocolate)",
+  "marca": "Allmax",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": 120,
+  "p": 27,
+  "h": null,
+  "l": null,
+  "nota": "aislado, 0 g azúcar; marca canadiense",
+  "paises": [
+   "CA",
+   "US"
+  ],
+  "fuente": "https://www.allmaxnutrition.com/products/isoflex"
+ },
+ {
+  "id": "canadian-protein-whey-isolate-sin-sabor",
+  "n": "Canadian Protein – Whey Isolate (Sin sabor ni endulzante)",
+  "marca": "Canadian Protein",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": 120,
+  "p": 28,
+  "h": 0.3,
+  "l": 0.3,
+  "nota": "aislado de suero de pastoreo NZ, sin endulzante",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://www.eatthismuch.com/calories/unflavored-unsweetened-grass-fed-new-zealand-whey--4051493"
+ },
+ {
+  "id": "vega-sport-premium-protein-chocolate",
+  "n": "Vega – Sport Premium Protein (Chocolate)",
+  "marca": "Vega",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (44 g)",
+  "porcion_g": 44,
+  "k": 160,
+  "p": 30,
+  "h": 6,
+  "l": 3,
+  "nota": "vegana (chícharo, calabaza, girasol)",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.eatthismuch.com/calories/premium-protein-chocolate-2506197"
+ },
+ {
+  "id": "vital-proteins-marine-collagen",
+  "n": "Vital Proteins – Marine Collagen (Sin sabor)",
+  "marca": "Vital Proteins",
+  "g": "Colágeno marino",
+  "porcion": "2 medidas (12 g)",
+  "porcion_g": 12,
+  "k": 45,
+  "p": 11,
+  "h": null,
+  "l": null,
+  "nota": "colágeno de pescado silvestre, sin sabor",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://www.swansonvitamins.com/collections/all/p/vital-proteins-marine-collagen-unflavored-7-8-oz-7-8-oz-pwdr"
+ },
+ {
+  "id": "sports-research-marine-collagen",
+  "n": "Sports Research – Marine Collagen Peptides (Sin sabor)",
+  "marca": "Sports Research",
+  "g": "Colágeno marino",
+  "porcion": "1 medida (10 g)",
+  "porcion_g": 10,
+  "k": 35,
+  "p": 9,
+  "h": null,
+  "l": null,
+  "nota": "pescado silvestre, sin sabor",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://www.vitacost.com/products/sports-research-marine-collagen-unflavored-12-oz-340-g-75241"
+ },
+ {
+  "id": "organika-marine-collagen",
+  "n": "Organika – Marine Collagen Powder (Sin sabor)",
+  "marca": "Organika",
+  "g": "Colágeno marino",
+  "porcion": "2 cucharadas (10 g)",
+  "porcion_g": 10,
+  "k": 35,
+  "p": 9,
+  "h": null,
+  "l": null,
+  "nota": "bacalao del Atlántico; marca canadiense",
+  "paises": [
+   "CA",
+   "US"
+  ],
+  "fuente": "https://us.organika.com/products/marine-collagen-powder"
+ },
+ {
+  "id": "myprotein-marine-collagen",
+  "n": "Myprotein – Marine Collagen (Sin sabor)",
+  "marca": "Myprotein",
+  "g": "Colágeno marino",
+  "porcion": "1 porción (10 g)",
+  "porcion_g": 10,
+  "k": 36,
+  "p": 9,
+  "h": 0.2,
+  "l": 0,
+  "nota": "sin sabor",
+  "paises": [
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://lookfantastic.com/sports-nutrition/marine-collagen/12376959.html"
+ },
+ {
+  "id": "amix-collagen-marine-peptan",
+  "n": "Amix – Colágeno Marino Peptan (Limón)",
+  "marca": "Amix",
+  "g": "Colágeno marino",
+  "porcion": "1 cazo (6 g)",
+  "porcion_g": 6,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "5 g colágeno Peptan + 200 mg ácido hialurónico",
+  "paises": [
+   "ES",
+   "DE"
+  ],
+  "fuente": "https://www.decathlon.es/es/p/mp/colageno-marino-peptan-300g-sabor-limon-amix-nutrition/c31d8796-3d4e-4bb1-9313-9ace5ad2dba0/g29"
+ },
+ {
+  "id": "metamucil-sin-azucar-naranja",
+  "n": "Metamucil – Fibra psyllium sin azúcar (Naranja)",
+  "marca": "Metamucil",
+  "g": "Fibra",
+  "porcion": "1 cucharadita copeteada (5.8 g)",
+  "porcion_g": 5.8,
+  "k": 15,
+  "p": 0,
+  "h": 5,
+  "l": 0,
+  "nota": "psyllium; 3 g fibra por porción",
+  "paises": [
+   "MX",
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.vitacost.com/products/metamucil-4-in-1-fiber-orange-sugar-free-15-oz-425-g-83482"
+ },
+ {
+  "id": "benefiber-original",
+  "n": "Benefiber – Original (Sin sabor)",
+  "marca": "Benefiber",
+  "g": "Fibra",
+  "porcion": "2 cucharaditas (4 g)",
+  "porcion_g": 4,
+  "k": 15,
+  "p": 0,
+  "h": 4,
+  "l": 0,
+  "nota": "dextrina de trigo, se disuelve sin espesar; 3 g fibra",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://mobile.fatsecret.com/calories-nutrition/benefiber/fiber-supplement"
+ },
+ {
+  "id": "bulk-inulina",
+  "n": "Bulk – Inulina en polvo",
+  "marca": "Bulk",
+  "g": "Fibra",
+  "porcion": "1.5 medidas (5 g)",
+  "porcion_g": 5,
+  "k": 11,
+  "p": 0,
+  "h": 0.4,
+  "l": 0,
+  "nota": "4.5 g fibra prebiótica; puede dar gases al inicio",
+  "paises": [
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.bulk.com/es/products/inulina-en-polvo/bpb-inul"
+ },
+ {
+  "id": "hacienda-oro-de-agave-inulina",
+  "n": "Hacienda Oro de Agave – Inulina de agave azul",
+  "marca": "Hacienda Oro de Agave",
+  "g": "Fibra",
+  "porcion": "1 cucharada (5 g)",
+  "porcion_g": 5,
+  "k": 20,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "fibra prebiótica de agave, mexicana",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://fitia.app/calories-nutritional-information/inulina-de-agave-azul-premium-F72l4fldhg/"
+ },
+ {
+  "id": "bulk-psyllium",
+  "n": "Bulk – Cáscara de psyllium en polvo",
+  "marca": "Bulk",
+  "g": "Fibra",
+  "porcion": "1 cucharadita (5 g)",
+  "porcion_g": 5,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "psyllium puro sin sabor; tomar con mucha agua",
+  "paises": [
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.bulk.com/es/products/cascara-de-psyllium-en-polvo/bpb-psyl"
+ },
+ {
+  "id": "ag1-athletic-greens",
+  "n": "AG1 – Daily Foundational Nutrition",
+  "marca": "AG1",
+  "g": "Polvo verde",
+  "porcion": "1 medida (12 g)",
+  "porcion_g": 12,
+  "k": 40,
+  "p": 2,
+  "h": 6,
+  "l": 1,
+  "nota": "greens + vitaminas + probióticos; caro",
+  "paises": [
+   "US",
+   "CA",
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://mobile.fatsecret.com/calories-nutrition/athletic-greens/ag1"
+ },
+ {
+  "id": "nu3-daily-super-greens",
+  "n": "nu3 – Daily Super Greens",
+  "marca": "nu3",
+  "g": "Polvo verde",
+  "porcion": "1 medida (10 g)",
+  "porcion_g": 10,
+  "k": 23,
+  "p": 1.3,
+  "h": 2.8,
+  "l": 0.5,
+  "nota": "vegano, sin endulzantes",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.shop-apotheke.com/ernaehrung/8115707/nu3-daily-super-greens.htm"
+ },
+ {
+  "id": "genuine-health-greens-plus",
+  "n": "Genuine Health – greens+ Original",
+  "marca": "Genuine Health",
+  "g": "Polvo verde",
+  "porcion": "1 medida (8.5 g)",
+  "porcion_g": 8.5,
+  "k": 42,
+  "p": 1.9,
+  "h": 3.9,
+  "l": 2.1,
+  "nota": "marca canadiense",
+  "paises": [
+   "CA",
+   "US"
+  ],
+  "fuente": "https://well.ca/products/genuine-health-greens_5235.html"
+ },
+ {
+  "id": "birdman-parrot-greens-protein",
+  "n": "Birdman – Parrot Greens & Protein",
+  "marca": "Birdman",
+  "g": "Polvo verde",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "k": 110,
+  "p": 15,
+  "h": 7.8,
+  "l": 3.5,
+  "nota": "greens con proteína vegetal; marca mexicana",
+  "paises": [
+   "MX",
+   "US"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/falcon/parrot-greens-protein/1-porci%C3%B3n"
+ },
+ {
+  "id": "qunol-turmeric-extra-strength",
+  "n": "Qunol – Turmeric Curcumin Extra Strength",
+  "marca": "Qunol",
+  "g": "Cúrcuma",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "con pimienta negra/alta absorción; cápsulas",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://www.qunol.com/products/qunol-turmeric-extra-strength"
+ },
+ {
+  "id": "jamieson-turmeric-curcumin",
+  "n": "Jamieson – Turmeric Curcumin",
+  "marca": "Jamieson",
+  "g": "Cúrcuma",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "marca canadiense; cápsulas",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://www.jamiesonvitamins.com/products/turmeric-curcumin"
+ },
+ {
+  "id": "natural-elements-kurkuma",
+  "n": "Natural Elements – Kurkuma + Piperina",
+  "marca": "Natural Elements",
+  "g": "Cúrcuma",
+  "porcion": "2 cápsulas",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "cúrcuma con pimienta negra; vegana",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.natural-elements.de/products/kurkuma-kapseln"
+ },
+ {
+  "id": "esn-ultrapure-creatine",
+  "n": "ESN – Ultrapure Creatine Monohydrate",
+  "marca": "ESN",
+  "g": "Creatina",
+  "porcion": "1 medida (3 g)",
+  "porcion_g": 3,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "monohidrato puro; también versión con Creapure",
+  "paises": [
+   "DE",
+   "ES",
+   "CH"
+  ],
+  "fuente": "https://www.vitalabo.com/esn/ultrapure-creatine-monohydrate-1"
+ },
+ {
+  "id": "on-micronized-creatine",
+  "n": "Optimum Nutrition – Micronized Creatine Powder",
+  "marca": "Optimum Nutrition",
+  "g": "Creatina",
+  "porcion": "1 cucharadita (5 g)",
+  "porcion_g": 5,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "monohidrato; la versión europea es Creapure",
+  "paises": [
+   "MX",
+   "US",
+   "CA",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.optimumnutrition.com/en-us/Products/Muscle-Building/MICRONIZED-CREATINE-POWDER/p/creatine-micronized"
+ },
+ {
+  "id": "birdman-creatina-monohidratada",
+  "n": "Birdman – Creatina monohidratada",
+  "marca": "Birdman",
+  "g": "Creatina",
+  "porcion": "1 medida (5 g)",
+  "porcion_g": 5,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "monohidrato de alta pureza; marca mexicana",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.liverpool.com.mx/tienda/pdp/birdman-creatina-monohidratada-de-alta-pureza-de-450-g/1098361011"
+ },
+ {
+  "id": "myprotein-creatine-creapure",
+  "n": "Myprotein – Creapure Creatine Monohydrate",
+  "marca": "Myprotein",
+  "g": "Creatina",
+  "porcion": "1 medida (3 g)",
+  "porcion_g": 3,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "con Creapure",
+  "paises": [
+   "ES",
+   "DE",
+   "CH",
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.myprotein.com/sports-nutrition/creapure-creatine-powder/10530050.html"
+ },
+ {
+  "id": "solgar-b12-1000-sublingual",
+  "n": "Solgar – Vitamina B12 1000 mcg sublingual",
+  "marca": "Solgar",
+  "g": "Vitamina B12",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "cianocobalamina sublingual; útil en dieta vegana",
+  "paises": [
+   "US",
+   "MX",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.solgar.com/products/sublingual-vitamin-b12-1000-mcg-nuggets/"
+ },
+ {
+  "id": "jamieson-b12-1000",
+  "n": "Jamieson – Vitamina B12 1000 mcg",
+  "marca": "Jamieson",
+  "g": "Vitamina B12",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "marca canadiense",
+  "paises": [
+   "CA",
+   "US"
+  ],
+  "fuente": "https://www.jamiesonvitamins.com/products/vitamin-b12"
+ },
+ {
+  "id": "nature-made-b12-1000",
+  "n": "Nature Made – Vitamina B12 1000 mcg",
+  "marca": "Nature Made",
+  "g": "Vitamina B12",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "verificado USP",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.naturemade.com/products/vitamin-b12-1000-mcg-tablets"
+ },
+ {
+  "id": "natural-elements-b12-tropfen",
+  "n": "Natural Elements – Vitamina B12 gotas",
+  "marca": "Natural Elements",
+  "g": "Vitamina B12",
+  "porcion": "5 gotas",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "gotas; vegana",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.natural-elements.de/products/vitamin-b12-tropfen"
+ },
+ {
+  "id": "culturelle-digestive-daily",
+  "n": "Culturelle – Digestive Daily Probiotic",
+  "marca": "Culturelle",
+  "g": "Probióticos",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "Lactobacillus rhamnosus GG",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.culturelle.com/products/digestive-daily-probiotic-capsules"
+ },
+ {
+  "id": "align-probiotic",
+  "n": "Align – Probiotic Supplement",
+  "marca": "Align",
+  "g": "Probióticos",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "Bifidobacterium 35624",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.alignprobiotics.com/"
+ },
+ {
+  "id": "omni-biotic-10",
+  "n": "OMNi-BiOTiC – 10 AAD",
+  "marca": "OMNi-BiOTiC",
+  "g": "Probióticos",
+  "porcion": "1 sobre (5 g)",
+  "porcion_g": 5,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "polvo multicepa; útil con/después de antibióticos",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.vitalabo.com/omni-biotic/omni-biotic-10-aad"
+ },
+ {
+  "id": "bioleven-probioticos",
+  "n": "Bioleven – Probióticos 30 billones",
+  "marca": "Bioleven",
+  "g": "Probióticos",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "de venta en Costco México",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.costco.com.mx/Grocery/Grocery/Farmacia/Bioleven-Probioticos-30-Billones-2-Cajas-de-30-Capsulas-cu/p/510260"
+ },
+ {
+  "id": "centrum-mujer",
+  "n": "Centrum – Multivitamínico mujer",
+  "marca": "Centrum",
+  "g": "Multivitamínico",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "sin hierro en algunas versiones; revisar etiqueta (evitar hierro sin indicación médica)",
+  "paises": [
+   "MX",
+   "US",
+   "CA",
+   "ES",
+   "DE"
+  ],
+  "fuente": "https://www.centrum.com/"
+ },
+ {
+  "id": "supradyn-energy",
+  "n": "Supradyn – Energy / Activo",
+  "marca": "Supradyn",
+  "g": "Multivitamínico",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "multivitamínico con minerales",
+  "paises": [
+   "MX",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://medikamio.com/de-ch/medikamente/supradyn-energy/pil"
+ },
+ {
+  "id": "jamieson-multi-women",
+  "n": "Jamieson – Multi 100% Complete Women",
+  "marca": "Jamieson",
+  "g": "Multivitamínico",
+  "porcion": "1 comprimido",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "marca canadiense",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://www.jamiesonvitamins.com/products/100-complete-multivitamin-for-women"
+ },
+ {
+  "id": "nature-made-multi-for-her",
+  "n": "Nature Made – Multi for Her",
+  "marca": "Nature Made",
+  "g": "Multivitamínico",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "verificado USP",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.naturemade.com/products/multi-for-her"
+ },
+ {
+  "id": "liquid-iv-sugar-free",
+  "n": "Liquid I.V. – Hydration Multiplier Sugar-Free",
+  "marca": "Liquid I.V.",
+  "g": "Electrolitos",
+  "porcion": "1 sobre (13 g)",
+  "porcion_g": 13,
+  "k": 20,
+  "p": 0,
+  "h": null,
+  "l": 0,
+  "nota": "sin azúcar (alulosa); mezclar en 500 ml",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://fitia.app/calories-nutritional-information/sugar-free-hydration-multiplier-electrolyte-drink-mix-mandarin-orange-F7pphb07lm/"
+ },
+ {
+  "id": "lmnt-electrolyte-drink-mix",
+  "n": "LMNT – Electrolyte Drink Mix",
+  "marca": "LMNT",
+  "g": "Electrolitos",
+  "porcion": "1 sobre (6 g)",
+  "porcion_g": 6,
+  "k": 5,
+  "p": 0,
+  "h": 1,
+  "l": 0,
+  "nota": "1000 mg sodio; sin azúcar (stevia)",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://mobile.fatsecret.com/calories-nutrition/lmnt/electrolyte-drink-mix"
+ },
+ {
+  "id": "electrolit-zero",
+  "n": "Electrolit – Zero",
+  "marca": "Electrolit",
+  "g": "Electrolitos",
+  "porcion": "1 botella (625 ml)",
+  "porcion_g": 625,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "bebida lista, sin azúcar; mexicana",
+  "paises": [
+   "MX",
+   "US"
+  ],
+  "fuente": "https://www.informabtl.com/todo-lo-que-sabemos-del-electrolit-zero-precio-calorias-diferencias-con-el-normal-y-mas/"
+ },
+ {
+  "id": "holy-hydration",
+  "n": "Holy – Hydration (Zitrone)",
+  "marca": "Holy",
+  "g": "Electrolitos",
+  "porcion": "1 sobre (7 g)",
+  "porcion_g": 7,
+  "k": 21,
+  "p": 0,
+  "h": 3.3,
+  "l": 0,
+  "nota": "0 % azúcar añadido; mezclar en 500 ml",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/holy-hydration-zitrone-15x7g/7340553"
+ },
+ {
+  "id": "nuun-sport",
+  "n": "Nuun – Sport (tableta efervescente)",
+  "marca": "Nuun",
+  "g": "Electrolitos",
+  "porcion": "1 tableta (5.5 g)",
+  "porcion_g": 5.5,
+  "k": 15,
+  "p": 0,
+  "h": 2,
+  "l": 0,
+  "nota": "1 g azúcar; 300 mg sodio; en 500 ml",
+  "paises": [
+   "US",
+   "CA",
+   "ES",
+   "DE"
+  ],
+  "fuente": "https://well.ca/products/nuun-hydration-sport-orange_153978.html?cat=6080"
+ },
+ {
+  "id": "air-up-pods",
+  "n": "air up – Pods de aroma",
+  "marca": "air up",
+  "g": "Saborizante de agua sin calorías",
+  "porcion": "1 pod (aprox. 5 L de agua)",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "sabor por olfato, sin azúcar ni calorías; requiere botella air up",
+  "paises": [
+   "DE",
+   "CH",
+   "ES",
+   "US"
+  ],
+  "fuente": "https://shop.air-up.com/es/en/does-air-up-contain-sugar"
+ },
+ {
+  "id": "waterdrop-microdrink",
+  "n": "Waterdrop – Microdrink (cubo)",
+  "marca": "Waterdrop",
+  "g": "Saborizante de agua sin calorías",
+  "porcion": "1 cubo en 500 ml",
+  "porcion_g": 2,
+  "k": 5,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "sin azúcar, con vitaminas",
+  "paises": [
+   "DE",
+   "CH",
+   "ES",
+   "US"
+  ],
+  "fuente": "https://www.shop-apotheke.com/ernaehrung/upmWXUL3G/waterdrop-microdrink-limonade-set-getraenkewuerfel.htm"
+ },
+ {
+  "id": "sodastream-zero-sirup",
+  "n": "SodaStream – Sirope sin azúcar (Frutos rojos)",
+  "marca": "SodaStream",
+  "g": "Saborizante de agua sin calorías",
+  "porcion": "1 vaso preparado (250 ml)",
+  "porcion_g": 250,
+  "k": 0.1,
+  "p": 0,
+  "h": 0.05,
+  "l": 0,
+  "nota": "1 parte sirope + 23 de agua; sabores varían por país",
+  "paises": [
+   "DE",
+   "CH",
+   "ES",
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/sodastream-getraenkesirup-rote-beeren-ohne-zucker-440ml/7585972"
+ },
+ {
+  "id": "mio-liquid-water-enhancer",
+  "n": "MiO – Liquid Water Enhancer",
+  "marca": "MiO",
+  "g": "Saborizante de agua sin calorías",
+  "porcion": "½ cucharadita (2.5 ml)",
+  "porcion_g": 2.5,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "sin azúcar (sucralosa)",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://stopandshop.com/groceries/beverages/drink-mixes-water-enhancers/water-enhancers/mio-lemonade-liquid-water-enhancer-324-oz-btl.html"
+ },
+ {
+  "id": "clight-jamaica",
+  "n": "Clight – Jamaica",
+  "marca": "Clight",
+  "g": "Saborizante de agua sin calorías",
+  "porcion": "1 vaso (200 ml)",
+  "porcion_g": 200,
+  "k": 1,
+  "p": 0,
+  "h": 0.3,
+  "l": 0,
+  "nota": "polvo sin azúcar; mexicano",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/clight/jamaica/1-vaso"
+ },
+ {
+  "id": "crystal-light",
+  "n": "Crystal Light – Classic Lemonade",
+  "marca": "Crystal Light",
+  "g": "Saborizante de agua sin calorías",
+  "porcion": "1 vaso (240 ml)",
+  "porcion_g": 240,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "polvo sin azúcar",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.crystallight.com/"
+ },
+ {
+  "id": "nescafe-gold-soluble",
+  "n": "Nescafé – Gold soluble (sin azúcar)",
+  "marca": "Nescafé",
+  "g": "Café",
+  "porcion": "1 cucharadita (2 g)",
+  "porcion_g": 2,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "café soluble negro; aporte calórico mínimo",
+  "paises": [
+   "MX",
+   "US",
+   "CA",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.nescafe.com/"
+ },
+ {
+  "id": "naturtreu-pflanzenritual",
+  "n": "NATURTREU – Pflanzenritual (Superfood greens)",
+  "marca": "NATURTREU",
+  "g": "Polvo verde",
+  "porcion": "1 medida (10 g)",
+  "porcion_g": 10,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "el que usa Cecy; vegano (pasto de trigo y cebada, espirulina, espinaca, maca, lúcuma)",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.medpex.de/superfood-pulver-mit-weizen-gerstengras-maca-spirulina-spinat-lucuma-pflanzenritual-300-g-veganes-getraenkepulver-fuer-30-portionen-naturtreu/19359637"
+ },
+ {
+  "id": "lebepur-kurkuma-shot",
+  "n": "LEBEPUR – Kurkuma Shot (polvo bio)",
+  "marca": "LEBEPUR",
+  "g": "Cúrcuma",
+  "porcion": "1 cucharadita (3 g)",
+  "porcion_g": 3,
+  "k": 9,
+  "p": 0.2,
+  "h": 1.3,
+  "l": 0.1,
+  "nota": "la que usa Cecy; vegano; cúrcuma 58 %, canela, jengibre, pimienta negra",
+  "paises": [
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://world.openfoodfacts.org/product/4260159455519"
+ },
+ {
+  "id": "nordic-naturals-ultimate-omega",
+  "n": "Nordic Naturals – Ultimate Omega (limón)",
+  "marca": "Nordic Naturals",
+  "g": "Omega-3",
+  "porcion": "2 cápsulas blandas",
+  "porcion_g": null,
+  "k": 20,
+  "p": 0,
+  "h": 0,
+  "l": 2,
+  "nota": "1280 mg EPA+DHA; aceite de pescado",
+  "paises": [
+   "US",
+   "CA",
+   "MX",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.nordic.com/products/ultimate-omega/"
+ },
+ {
+  "id": "kirkland-omega-3-fish-oil",
+  "n": "Kirkland Signature – Omega-3 Fish Oil 1000 mg",
+  "marca": "Kirkland Signature",
+  "g": "Omega-3",
+  "porcion": "1 cápsula blanda",
+  "porcion_g": null,
+  "k": 10,
+  "p": 0,
+  "h": 0,
+  "l": 1,
+  "nota": "económico (Costco)",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://www.costco.com/kirkland-signature-fish-oil-1000-mg.product.html"
+ },
+ {
+  "id": "norsan-omega-3-total",
+  "n": "NORSAN – Omega-3 Total (aceite líquido)",
+  "marca": "NORSAN",
+  "g": "Omega-3",
+  "porcion": "1 cucharadita (5 ml)",
+  "porcion_g": 5,
+  "k": null,
+  "p": null,
+  "h": null,
+  "l": null,
+  "nota": "aceite de pescado líquido, sabor limón",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.norsan.de/products/omega-3-total"
+ },
+ {
+  "id": "natural-elements-omega-3-algae",
+  "n": "Natural Elements – Omega-3 de algas",
+  "marca": "Natural Elements",
+  "g": "Omega-3",
+  "porcion": "2 cápsulas",
+  "porcion_g": null,
+  "k": null,
+  "p": 0,
+  "h": 0,
+  "l": null,
+  "nota": "vegano (aceite de algas)",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.natural-elements.de/products/omega-3-algenoel-kapseln"
+ },
+ {
+  "id": "solgar-magnesium-citrate",
+  "n": "Solgar – Citrato de magnesio",
+  "marca": "Solgar",
+  "g": "Magnesio",
+  "porcion": "2 tabletas",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "citrato; bien tolerado",
+  "paises": [
+   "US",
+   "MX",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.solgar.com/products/magnesium-citrate/"
+ },
+ {
+  "id": "natural-elements-magnesium-bisglycinat",
+  "n": "Natural Elements – Bisglicinato de magnesio",
+  "marca": "Natural Elements",
+  "g": "Magnesio",
+  "porcion": "3 cápsulas",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "bisglicinato; vegano",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.natural-elements.de/products/magnesium-bisglycinat"
+ },
+ {
+  "id": "jamieson-magnesium-citrate",
+  "n": "Jamieson – Citrato de magnesio",
+  "marca": "Jamieson",
+  "g": "Magnesio",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "marca canadiense",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://www.jamiesonvitamins.com/products/magnesium-citrate"
+ },
+ {
+  "id": "nature-made-magnesium-citrate",
+  "n": "Nature Made – Magnesium Citrate 250 mg",
+  "marca": "Nature Made",
+  "g": "Magnesio",
+  "porcion": "2 cápsulas blandas",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "verificado USP",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.naturemade.com/products/magnesium-citrate-250-mg-softgels"
+ },
+ {
+  "id": "kirkland-vitamin-d3",
+  "n": "Kirkland Signature – Vitamina D3 50 mcg (2000 UI)",
+  "marca": "Kirkland Signature",
+  "g": "Vitamina D",
+  "porcion": "1 cápsula blanda",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "dosis según tus análisis",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://www.costco.com/kirkland-signature-vitamin-d3-50-mcg.product.html"
+ },
+ {
+  "id": "jamieson-vitamin-d3-1000",
+  "n": "Jamieson – Vitamina D3 1000 UI",
+  "marca": "Jamieson",
+  "g": "Vitamina D",
+  "porcion": "1 tableta",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "dosis según tus análisis",
+  "paises": [
+   "CA",
+   "US"
+  ],
+  "fuente": "https://www.jamiesonvitamins.com/products/vitamin-d3"
+ },
+ {
+  "id": "solgar-vitamin-d3",
+  "n": "Solgar – Vitamina D3 (colecalciferol)",
+  "marca": "Solgar",
+  "g": "Vitamina D",
+  "porcion": "1 cápsula",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "dosis según tus análisis",
+  "paises": [
+   "US",
+   "MX",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.solgar.com/products/vitamin-d3-cholecalciferol/"
+ },
+ {
+  "id": "natural-elements-d3-k2-tropfen",
+  "n": "Natural Elements – Vitamina D3 + K2 gotas",
+  "marca": "Natural Elements",
+  "g": "Vitamina D",
+  "porcion": "1 gota",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "dosis según tus análisis; con K2 MK-7",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.natural-elements.de/products/vitamin-d3-k2-tropfen"
+ },
+ {
+  "id": "yfood-classic-choco",
+  "n": "yfood – Trinkmahlzeit Classic Choco",
+  "marca": "yfood",
+  "g": "Batido listo para tomar",
+  "porcion": "1 botella (500 ml)",
+  "porcion_g": 500,
+  "k": 500,
+  "p": 30,
+  "h": 36.5,
+  "l": 23.5,
+  "nota": "comida completa; 22 g azúcar por botella",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/yfood-trinkmahlzeit-classic-choco-500ml/9019224"
+ },
+ {
+  "id": "premier-protein-chocolate",
+  "n": "Premier Protein – High Protein Shake (Chocolate)",
+  "marca": "Premier Protein",
+  "g": "Batido listo para tomar",
+  "porcion": "1 botella (325 ml / 11 fl oz)",
+  "porcion_g": 325,
+  "k": 160,
+  "p": 30,
+  "h": 4,
+  "l": 3,
+  "nota": "1 g azúcar, 0 añadida",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.shoprite.com/product/00643843714200"
+ },
+ {
+  "id": "fairlife-core-power-26g-chocolate",
+  "n": "Fairlife – Core Power 26 g (Chocolate)",
+  "marca": "Fairlife",
+  "g": "Batido listo para tomar",
+  "porcion": "1 botella (414 ml / 14 fl oz)",
+  "porcion_g": 414,
+  "k": 170,
+  "p": 26,
+  "h": 8,
+  "l": 4.5,
+  "nota": "leche ultrafiltrada sin lactosa; 0 g azúcar añadida",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://stopandshop.com/groceries/health-beauty/nutrition-weight-management/protein-meal-replacement-shakes/core-power-chocolate-26g-high-protein-shake-14-oz-btl.html"
+ },
+ {
+  "id": "ensure-max-protein",
+  "n": "Ensure – Max Protein",
+  "marca": "Abbott",
+  "g": "Batido listo para tomar",
+  "porcion": "1 botella (330 ml)",
+  "porcion_g": 330,
+  "k": 150,
+  "p": 30,
+  "h": 6,
+  "l": 1.5,
+  "nota": "bajo en azúcar",
+  "paises": [
+   "MX",
+   "US",
+   "CA",
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/abbott/ensure-max-protein/1-porci%C3%B3n"
+ },
+ {
+  "id": "lala-100-proteina",
+  "n": "Lala – 100 Proteína (330 ml)",
+  "marca": "Lala",
+  "g": "Batido listo para tomar",
+  "porcion": "1 botella (330 ml)",
+  "porcion_g": 330,
+  "k": 205,
+  "p": 15.8,
+  "h": 20.8,
+  "l": 6.6,
+  "nota": "mexicana, sin lactosa; más carbohidratos que las otras",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/lala/100-prote%C3%ADna-(330ml)/1-botella"
+ },
+ {
+  "id": "quest-bar-chocolate-chip-cookie-dough",
+  "n": "Quest – Protein Bar (Chocolate Chip Cookie Dough)",
+  "marca": "Quest",
+  "g": "Barra de proteína",
+  "porcion": "1 barra (60 g)",
+  "porcion_g": 60,
+  "k": 190,
+  "p": 21,
+  "h": 21,
+  "l": 9,
+  "nota": "1 g azúcar; 12 g fibra",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://www.shoprite.com/sm/planning/rsid/245/product/quest-chocolate-chip-cookie-dough-protein-bar-212-oz-4-count-id-00888849003853"
+ },
+ {
+  "id": "barebells-white-chocolate-almond",
+  "n": "Barebells – Protein Bar (White Chocolate Almond)",
+  "marca": "Barebells",
+  "g": "Barra de proteína",
+  "porcion": "1 barra (55 g)",
+  "porcion_g": 55,
+  "k": 203,
+  "p": 20,
+  "h": 15,
+  "l": 8.7,
+  "nota": "1.6 g azúcar",
+  "paises": [
+   "DE",
+   "CH",
+   "ES",
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.shop-apotheke.com/fitness/upmHFM7PR/barebells-protein-bar.htm"
+ },
+ {
+  "id": "esn-designer-bar-dark-cookie",
+  "n": "ESN – Designer Protein Bar (Dark Cookie White Chocolate)",
+  "marca": "ESN",
+  "g": "Barra de proteína",
+  "porcion": "1 barra (45 g)",
+  "porcion_g": 45,
+  "k": 178,
+  "p": 13.5,
+  "h": 16.7,
+  "l": 8.6,
+  "nota": "1.8 g azúcar",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/esn-designer-protein-bar-dark-cookie-white-chocolate-45g/9915314"
+ },
+ {
+  "id": "svetia-stevia",
+  "n": "Svetia – Stevia en sobres",
+  "marca": "Svetia",
+  "g": "Endulzante sin calorías",
+  "porcion": "1 sobre (1 g)",
+  "porcion_g": 1,
+  "k": 0,
+  "p": 0,
+  "h": null,
+  "l": 0,
+  "nota": "mexicana",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.svetia.com/"
+ },
+ {
+  "id": "lakanto-monk-fruit-classic",
+  "n": "Lakanto – Monk Fruit Sweetener Classic",
+  "marca": "Lakanto",
+  "g": "Endulzante sin calorías",
+  "porcion": "1 cucharadita (4 g)",
+  "porcion_g": 4,
+  "k": 0,
+  "p": 0,
+  "h": 4,
+  "l": 0,
+  "nota": "fruto del monje + eritritol; los 4 g son de eritritol (no se absorbe)",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://www.lakanto.com/products/classic-monk-fruit-sweetener"
+ },
+ {
+  "id": "xucker-erythrit",
+  "n": "Xucker – Erythrit (eritritol)",
+  "marca": "Xucker",
+  "g": "Endulzante sin calorías",
+  "porcion": "1 cucharadita (4 g)",
+  "porcion_g": 4,
+  "k": 0,
+  "p": 0,
+  "h": null,
+  "l": 0,
+  "nota": "eritritol puro",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.xucker.de/"
+ },
+ {
+  "id": "hermesetas-stevia",
+  "n": "Hermesetas – Stevia (pastillas)",
+  "marca": "Hermesetas",
+  "g": "Endulzante sin calorías",
+  "porcion": "1 pastilla",
+  "porcion_g": null,
+  "k": 0,
+  "p": 0,
+  "h": 0,
+  "l": 0,
+  "nota": "marca suiza",
+  "paises": [
+   "CH",
+   "DE",
+   "ES"
+  ],
+  "fuente": "https://www.hermesetas.com/"
+ },
+ {
+  "id": "alpro-soya-plant-protein",
+  "n": "Alpro – Soya Plant Protein",
+  "marca": "Alpro",
+  "g": "Bebida vegetal con proteína",
+  "porcion": "1 vaso (250 ml)",
+  "porcion_g": 250,
+  "k": 143,
+  "p": 12.5,
+  "h": 6.3,
+  "l": 7,
+  "nota": "soya con extra proteína",
+  "paises": [
+   "DE",
+   "CH",
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.de/Kalorien-Ern%C3%A4hrung/alpro-soya/plant-protein/100ml"
+ },
+ {
+  "id": "silk-protein-almond-cashew-unsweet",
+  "n": "Silk – Protein Almond & Cashew (Sin azúcar)",
+  "marca": "Silk",
+  "g": "Bebida vegetal con proteína",
+  "porcion": "1 taza (240 ml)",
+  "porcion_g": 240,
+  "k": 110,
+  "p": 10,
+  "h": 2,
+  "l": 7,
+  "nota": "sin azúcar",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.myfooddiary.com/foods/7547780/silk-unsweet-almond-cashew-protein-milk"
+ },
+ {
+  "id": "silk-soy-original-unsweetened-ca",
+  "n": "Silk – Bebida de soya Original sin azúcar",
+  "marca": "Silk",
+  "g": "Bebida vegetal con proteína",
+  "porcion": "1 taza (250 ml)",
+  "porcion_g": 250,
+  "k": 90,
+  "p": 8,
+  "h": 4,
+  "l": 4.5,
+  "nota": "sin azúcar",
+  "paises": [
+   "CA",
+   "US"
+  ],
+  "fuente": "https://voila.ca/products/silk-dairy-free-soy-beverage-original-unsweetened-1-89-l/184388EA"
+ },
+ {
+  "id": "ades-soya-sin-azucar",
+  "n": "AdeS – Bebida de soya sin azúcar",
+  "marca": "AdeS",
+  "g": "Bebida vegetal con proteína",
+  "porcion": "1 vaso (200 ml)",
+  "porcion_g": 200,
+  "k": 71,
+  "p": 6.2,
+  "h": 1.5,
+  "l": 4.5,
+  "nota": "mexicana, sin azúcar",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/ades/leche-de-soya-sin-az%C3%BAcar/1-taza"
+ }
+]
