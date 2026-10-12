@@ -1,5 +1,5 @@
 import { requireNutri } from "@/lib/auth";
-import { NOMBRE_EN, ejerciciosDe } from "@/lib/gluteos";
+import { GUIA_GLUTEOS, NOMBRE_EN, ejerciciosDe } from "@/lib/gluteos";
 import { actualizarGluteos } from "../actions";
 import type { Rutina } from "@/lib/types";
 import VideoRow from "./VideoRow";
@@ -33,7 +33,7 @@ export default async function Videos() {
       </div>
       {viejaGluteos(tpls?.find((t) => t.key === "gluteos")?.data as Rutina | undefined) && (
         <form action={actualizarGluteos} className="tint t-yellow" style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-          <p style={{ margin: 0, flex: "1 1 260px" }}><b>Hay una versión nueva de la Guía de glúteos:</b> ejercicios con su nombre en inglés y el calentamiento como un solo video. Los videos que ya subiste se pasan solos.</p>
+          <p style={{ margin: 0, flex: "1 1 260px" }}><b>Hay una versión nueva de la Guía de glúteos:</b> días 1, 2 y 3, ejercicios con su nombre en inglés y el calentamiento como un solo video. Los videos que ya subiste se pasan solos.</p>
           <button className="btn primary">Actualizar</button>
         </form>
       )}
@@ -56,5 +56,6 @@ export default async function Videos() {
 
 /** La guía guardada todavía tiene los nombres en español o la lista de calentamiento. */
 function viejaGluteos(r?: Rutina) {
-  return !r || r.dias.some((d) => d.calentamiento.length > 0) || ejerciciosDe(r).some((e) => e.nombre in NOMBRE_EN);
+  return !r || r.dias.some((d) => d.calentamiento.length > 0) || ejerciciosDe(r).some((e) => e.nombre in NOMBRE_EN)
+    || r.dias.map((d) => d.dia).join() !== GUIA_GLUTEOS.dias.map((d) => d.dia).join();
 }

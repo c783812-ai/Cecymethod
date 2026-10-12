@@ -55,7 +55,7 @@ export const GUIA_GLUTEOS: Rutina = {
       cierre: "10 minutos libres",
     },
     {
-      dia: "Día 3",
+      dia: "Día 2",
       calentamiento: [],
       ejercicios: [
         a_bc(e("Dumbbell 45-Degree Hyperextension", "3 × 12", "2–4 min", ["1 × 8 con ~50% de tu peso de trabajo", "1 × 5 con ~70%"]), e("Braced Dumbbell Single-Leg RDL", "3 × 12 por lado", "2–4 min")),
@@ -67,7 +67,7 @@ export const GUIA_GLUTEOS: Rutina = {
       cierre: "10 minutos libres",
     },
     {
-      dia: "Día 5",
+      dia: "Día 3",
       calentamiento: [],
       ejercicios: [
         ab(e("Sumo Deadlift", "3 × 5", "3–5 min", ["1 × 8 con ~60% de tu peso de trabajo", "1 × 5 con ~70%", "1 × 3 con ~80%"]), e("Dumbbell Sumo Squat", "3 × 12", "2–4 min")),
