@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { BANDERA, NOTA_EU, PAIS, buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
 import { DIAS, type Comida, type Dia, type Plan } from "@/lib/types";
+import { supabaseBrowser } from "@/lib/supabase/client";
 
 // Los cambios que hace la paciente se guardan solo en su teléfono, por plan.
 export function useCambios(planId: string | null) {
@@ -58,9 +59,9 @@ export function opcionesDe(plan: Plan, i: number) {
   });
 }
 
-export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, opciones = [], actual, onElegir, lista, onLista }: {
+export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, opciones = [], actual, onElegir, lista, onLista, fav, onFav }: {
   m: Comida; hora: string; tiempo: string; tintClass: string; slot: (j: number) => string; cambios: Cambios; sistema: Sistema;
-  opciones?: [Dia, string][]; actual?: Dia; onElegir?: (d: Dia) => void; lista?: boolean; onLista?: () => void;
+  opciones?: [Dia, string][]; actual?: Dia; onElegir?: (d: Dia) => void; lista?: boolean; onLista?: () => void; fav?: boolean; onFav?: () => void;
 }) {
   const [hechos, setCambio] = cambios;
   const [abierto, setAbierto] = useState<number | null>(null);
@@ -69,7 +70,10 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, o
     <div className={`pmeal ${tintClass} ${ings.length ? "wide" : ""}`}>
       <div className="hr">{hora}<small>{tiempo}</small></div>
       <div style={{ minWidth: 0 }}>
-        <h4>{m.titulo}</h4>
+        <div className="mtitle">
+          <h4>{m.titulo}</h4>
+          {onFav && <button className="fav" aria-pressed={!!fav} aria-label={fav ? `Quitar ${m.titulo} de favoritos` : `Marcar ${m.titulo} como favorito`} onClick={onFav}>{fav ? "❤️" : "🤍"}</button>}
+        </div>
         {opciones.length > 1 && onElegir && (
           <select className="elegir" value={actual} onChange={(e) => onElegir(e.target.value as Dia)} aria-label={`Elegir otro platillo para ${tiempo}`}>
             {opciones.map(([d, t]) => <option key={d} value={d}>{d === actual ? "↻ Elegir otro platillo de la semana" : `${t} (del ${d.toLowerCase()})`}</option>)}
@@ -193,3 +197,34 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
 export function resumenIngredientes(m: Comida, slot: (j: number) => string, hechos: Record<string, Ingrediente>) {
   return (m.ingredientes ?? []).map((o, j) => { const c = hechos[slot(j)] ?? o; return `${c.n} (${cantidad(c, o.x)})`; }).join(" · ");
 }
+
+/** Platillos favoritos: se guardan en su teléfono y, si ya entró con su cuenta, también para que Cecy los vea. */
+export function useFavoritos(pid: string, remoto: boolean) {
+  const key = `favs-${pid}`;
+  const [v, setV] = useState<string[]>([]);
+  useEffect(() => {
+    let l: string[] = [];
+    try { l = JSON.parse(localStorage.getItem(key) || "[]"); } catch {}
+    setV(l);
+    if (!remoto) return;
+    supabaseBrowser().from("favoritos").select("platillo").eq("patient_id", pid).then(({ data, error }) => {
+      if (error || !data) return;
+      const r = [...new Set([...l, ...data.map((d) => d.platillo as string)])];
+      setV(r);
+      try { localStorage.setItem(key, JSON.stringify(r)); } catch {}
+    });
+  }, [key, pid, remoto]);
+  const toggle = (platillo: string) =>
+    setV((old) => {
+      const quitar = old.includes(platillo);
+      const n = quitar ? old.filter((x) => x !== platillo) : [...old, platillo];
+      try { localStorage.setItem(key, JSON.stringify(n)); } catch {}
+      if (remoto) {
+        const t = supabaseBrowser().from("favoritos");
+        (quitar ? t.delete().eq("patient_id", pid).eq("platillo", platillo) : t.upsert({ patient_id: pid, platillo })).then(() => {});
+      }
+      return n;
+    });
+  return [v, toggle] as const;
+}
+export type Favoritos = ReturnType<typeof useFavoritos>;

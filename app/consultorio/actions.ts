@@ -116,3 +116,17 @@ export async function actualizarGluteos() {
     if (hay.has(es) && !hay.has(en)) await sb.from("exercise_videos").update({ nombre: en }).eq("nombre", es);
   revalidatePath("/consultorio/videos");
 }
+
+export async function registrarConsulta(id: string, f: FormData) {
+  const { sb } = await requireNutri();
+  const tipo = str(f, "tipo") ?? "seguimiento";
+  const fecha = str(f, "fecha") ?? new Date().toISOString().slice(0, 10);
+  await sb.from("consultas").insert({ patient_id: id, fecha, tipo });
+  revalidatePath(`/consultorio/${id}`);
+}
+
+export async function borrarConsulta(id: string, consulta: string) {
+  const { sb } = await requireNutri();
+  await sb.from("consultas").delete().eq("id", consulta).eq("patient_id", id);
+  revalidatePath(`/consultorio/${id}`);
+}

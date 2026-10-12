@@ -132,7 +132,7 @@ details.warm summary{cursor:pointer;font-weight:600;font-size:13px}
 .ph-head h1{font-size:26px;line-height:1.15}
 .ph-head h1 mark{background:linear-gradient(transparent 55%,var(--hl) 55%);color:inherit}
 .ph-body{padding:0 20px 20px;flex:1;display:flex;flex-direction:column;gap:14px}
-.ph-nav{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--line);background:var(--surface);position:sticky;bottom:0}
+.ph-nav{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);background:var(--surface);position:sticky;bottom:0}
 .ph-nav button{border:0;background:none;padding:10px 2px 12px;font-size:11.5px;font-weight:600;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px}
 .ph-nav button svg{width:22px;height:22px}
 .ph-nav button[aria-selected="true"]{color:var(--accent)}
@@ -368,3 +368,16 @@ a{color:inherit}
 .domingo li.hecha a{text-decoration:line-through;color:var(--muted)}
 .domingo input[type=checkbox]{width:20px;height:20px}
 .irregistro{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;text-align:left;padding:14px;cursor:pointer;font:inherit;color:inherit}
+.historial .cuentas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.historial .cuentas div{background:var(--accent-soft);border-radius:12px;padding:10px;text-align:center}
+.historial .cuentas b{display:block;font-size:26px}
+.historial .cuentas span{font-size:12.5px;color:var(--muted)}
+.regconsulta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.regconsulta input,.regconsulta select{padding:8px;border:1px solid var(--line);border-radius:10px;font:inherit}
+.consultas,.favs{list-style:none;padding:0;margin:0 0 8px}
+.consultas li,.favs li{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
+.consultas li:first-child,.favs li:first-child{border-top:0}
+.mtitle{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.pmeal .fav{border:0;background:none;font-size:20px;line-height:1;padding:2px 4px;cursor:pointer}
+.proxima{display:flex;gap:12px;align-items:center;padding:12px 14px}
+.proxima>span:first-child{font-size:26px}

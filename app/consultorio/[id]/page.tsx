@@ -8,6 +8,7 @@ import { asignarRutina, borrarPaciente, guardarResumen } from "../actions";
 import AccessPanel from "./AccessPanel";
 import PlanEditor from "./PlanEditor";
 import SemanaVista from "./SemanaVista";
+import Historial from "./Historial";
 import { hoyISO, type Registro } from "@/lib/diario";
 
 const TABS = [
@@ -53,7 +54,7 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
                 <div className="form-grid">
                   <label className="field">Nombre<input name="nombre" defaultValue={p.nombre} /></label>
                   <label className="field">Vive en<input name="ciudad" defaultValue={p.ciudad ?? ""} /></label>
-                  <label className="field">Próxima cita<input name="proxima_cita" defaultValue={p.proxima_cita ?? ""} /></label>
+                  <label className="field">Próxima consulta · ella la ve<input name="proxima_cita" defaultValue={p.proxima_cita ?? ""} placeholder="16 oct, 18:00 (hora de Alemania)" /></label>
                 </div>
                 <label className="field">Sus metas hasta la próxima consulta (una por renglón, máximo 3) · ella las ve<textarea name="metas" defaultValue={p.metas.join("\n")} /></label>
                 <p className="note" style={{ margin: 0 }}>Su historia clínica, análisis y mediciones se quedan en tus archivos. Aquí no se guardan.</p>
@@ -61,6 +62,7 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
               </form>
               <AccessPanel p={p} />
             </div>
+            <Historial id={id} />
             <details className="card">
               <summary style={{ cursor: "pointer", color: "var(--warn)", fontWeight: 600 }}>Borrar a esta paciente y todos sus datos</summary>
               <form action={borrarPaciente.bind(null, id)} style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 10, alignItems: "end" }}>
