@@ -70,7 +70,7 @@ const EMOJI: [RegExp, string][] = [
   [/galleta|knäcke|tortita de arroz|reiswaffel/i, "🍪"], [/hot ?cake|panqu|waffle/i, "🥞"],
   [/manzana|apfel/i, "🍎"], [/(^|\s)pera(\s|$)|birne/i, "🍐"], [/pl[aá]tano|banana/i, "🍌"], [/naranja|mandarina|toronja/i, "🍊"], [/lim[oó]n|(^|\s)lima(\s|$)/i, "🍋"],
   [/fresa/i, "🍓"], [/ar[aá]ndano|heidelbeer|frambuesa|himbeer|zarzamora|mora\b|frutos rojos|beeren|grosella/i, "🫐"], [/uva|pasa/i, "🍇"],
-  [/sand[ií]a/i, "🍉"], [/mel[oó]n/i, "🍈"], [/pi[nñ]a/i, "🍍"], [/mango/i, "🥭"], [/durazno|melocot[oó]n|chabacano|albaricoque|aprikose/i, "🍑"],
+  [/sand[ií]a/i, "🍉"], [/mel[oó]n/i, "🍈"], [/\bpi[nñ]a\b/i, "🍍"], [/mango/i, "🥭"], [/durazno|melocot[oó]n|chabacano|albaricoque|aprikose/i, "🍑"],
   [/cereza|kirsch/i, "🍒"], [/kiwi/i, "🥝"],
   [/br[oó]coli/i, "🥦"], [/zanahoria/i, "🥕"], [/pepino|pepinillo/i, "🥒"], [/pimiento|chile|paprika/i, "🫑"],
   [/lechuga|espinaca|acelga|ar[uú]gula|can[oó]nigo|feldsalat|col\b|kale|rucola|hoja/i, "🥬"], [/champi[nñ][oó]n|hongo|seta/i, "🍄"],
