@@ -15,7 +15,7 @@ export default function BuscarAlimento({ sistema, onPick }: { sistema: Sistema; 
         <div className="buscaal-res">
           {res.map((a) => (
             <button key={a.id} type="button" onClick={() => { onPick(a); setQ(""); }}>
-              <span>{icono(a.g)} {a.n}</span>
+              <span>{icono(a.n) && <>{icono(a.n)} </>}{a.n}</span>
               <small>{nombreSubgrupo(a.g)} · 1 eq = {cantidad(a, 1)}</small>
             </button>
           ))}

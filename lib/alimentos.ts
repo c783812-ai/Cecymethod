@@ -46,11 +46,39 @@ export function cantidad(a: { c: number; u: string; pn: number }, x: number) {
   return `${fraccion(v)} ${unidad(a.u, v)}${a.pn ? ` · ${g} g` : ""}`;
 }
 
-export const ICONO: [RegExp, string][] = [
-  [/verdura/i, "🥦"], [/fruta/i, "🍎"], [/cereal/i, "🌾"], [/legumin/i, "🫘"], [/a\.o\.a|origen animal/i, "🍗"],
-  [/leche/i, "🥛"], [/grasa|aceite/i, "🥑"], [/az[uú]car/i, "🍯"], [/libre|condimento/i, "🌿"], [/l[ií]quido/i, "💧"], [/etanol/i, "🍷"],
+// Emoji por alimento (por palabra del nombre). Si no hay uno que le quede, va solo el nombre.
+const EMOJI: [RegExp, string][] = [
+  [/jitomate|tomate/i, "🍅"],
+  [/cacahuate|man[ií]\b|erdnuss/i, "🥜"],
+  [/huevo|clara/i, "🥚"], [/pollo|pavo|gallina/i, "🍗"], [/(^|\s)res\b|bistec|carne|cerdo|lomo|ternera|cordero|rinderhack/i, "🥩"],
+  [/jam[oó]n|tocino|salchicha|chorizo|salami/i, "🥓"], [/camar[oó]n|langost|garnel/i, "🦐"], [/almeja|ostion|ostión|mejill[oó]n/i, "🦪"], [/pulpo|calamar/i, "🦑"],
+  [/salm[oó]n|at[uú]n|pescado|bacalao|abadejo|merluza|trucha|sardina|arenque|caballa|tilapia|mojarra|robalo|huachinango|sierra/i, "🐟"],
+  [/queso|cottage|reques[oó]n|quark|mozzarella|parmesano/i, "🧀"], [/yogur|skyr|k[eé]fir|leche|griego/i, "🥛"], [/mantequilla/i, "🧈"],
+  [/tofu|tempeh|edamame|soya|soja/i, "🫘"], [/frijol|lenteja|garbanzo|alubia|haba|chícharo seco|linsen/i, "🫘"],
+[/almendra|nuez|nueces|avellana|pistache|anacardo/i, "🌰"], [/semilla|ch[ií]a|linaza|ajonjol[ií]|pepita/i, "🌱"],
+  [/aguacate/i, "🥑"], [/aceite|oliva\b/i, "🫒"], [/aceituna/i, "🫒"], [/(^|\s)coco(\s|$)/i, "🥥"],
+  [/(^|\s)pan(\s|$)|bolillo|baguette|brot|br[oö]tchen|toast|tostado|pumpernickel|telera|bagel|croissant/i, "🍞"], [/pretzel|brezel/i, "🥨"],
+  [/tortilla|taco|wrap|pita/i, "🫓"], [/arroz/i, "🍚"], [/pasta|espagueti|spaghetti|fideo|macarr[oó]n|tallar[ií]n|nudeln|spätzle|[ñn]oqui/i, "🍝"],
+  [/avena|hafer|granola|m[uü]sli|cereal|hojuela/i, "🥣"], [/elote|ma[ií]z|palomita|polenta/i, "🌽"], [/(^|\s)papas?(\s|$)|kartoffel/i, "🥔"], [/camote|batata/i, "🍠"],
+  [/galleta|knäcke|tortita de arroz|reiswaffel/i, "🍪"], [/hot ?cake|panqu|waffle/i, "🥞"],
+  [/manzana|apfel/i, "🍎"], [/(^|\s)pera(\s|$)|birne/i, "🍐"], [/pl[aá]tano|banana/i, "🍌"], [/naranja|mandarina|toronja/i, "🍊"], [/lim[oó]n|(^|\s)lima(\s|$)/i, "🍋"],
+  [/fresa/i, "🍓"], [/ar[aá]ndano|heidelbeer|frambuesa|himbeer|zarzamora|mora\b|frutos rojos|beeren|grosella/i, "🫐"], [/uva|pasa/i, "🍇"],
+  [/sand[ií]a/i, "🍉"], [/mel[oó]n/i, "🍈"], [/pi[nñ]a/i, "🍍"], [/mango/i, "🥭"], [/durazno|melocot[oó]n|chabacano|albaricoque|aprikose/i, "🍑"],
+  [/cereza|kirsch/i, "🍒"], [/kiwi/i, "🥝"],
+  [/br[oó]coli/i, "🥦"], [/zanahoria/i, "🥕"], [/pepino|pepinillo/i, "🥒"], [/pimiento|chile|paprika/i, "🫑"],
+  [/lechuga|espinaca|acelga|ar[uú]gula|can[oó]nigo|feldsalat|col\b|kale|rucola|hoja/i, "🥬"], [/champi[nñ][oó]n|hongo|seta/i, "🍄"],
+  [/ejote|ch[ií]charo|guisante|bohnen/i, "🫛"], [/nopal/i, "🌵"], [/apio|esp[aá]rrago/i, "🥬"], [/casta[nñ]a/i, "🌰"],
+  [/berenjena/i, "🍆"], [/cebolla|puerro/i, "🧅"], [/(^|\s)ajo(\s|$)/i, "🧄"], [/calabac|calabaza|zucchini|hokkaido/i, "🎃"],
+  [/miel|honig/i, "🍯"], [/chocolate|cacao/i, "🍫"], [/az[uú]car|mermelada|konfit[uü]re|cajeta/i, "🍬"], [/helado|nieve/i, "🍨"],
+  [/caf[eé]/i, "☕"], [/(^|\s)t[eé](\s|$)/i, "🍵"], [/agua\b/i, "💧"], [/prote[ií]na de suero|whey/i, "🥤"],
 ];
-export const icono = (g: string) => ICONO.find(([r]) => r.test(g))?.[1] ?? "🍽️";
+export const icono = (nombre: string) => EMOJI.find(([r]) => r.test(nombre))?.[1] ?? "";
+
+const ICONO_GRUPO: [RegExp, string][] = [
+  [/verdura/i, "🥦"], [/fruta/i, "🍎"], [/cereal/i, "🌾"], [/legumin/i, "🫘"], [/a\.o\.a|origen animal/i, "🍗"],
+  [/leche/i, "🥛"], [/grasa|aceite/i, "🥑"], [/az[uú]car/i, "🍯"],
+];
+export const iconoGrupo = (g: string) => ICONO_GRUPO.find(([r]) => r.test(g))?.[1] ?? "";
 
 /** Nombre que entiende la paciente para el subgrupo. */
 export function nombreSubgrupo(g: string) {

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { buscar, cantidad, cargarAlimentos, icono, nombreSubgrupo, type Alimento, type Sistema } from "@/lib/alimentos";
+import { buscar, cantidad, cargarAlimentos, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Sistema } from "@/lib/alimentos";
 
 const ORIGEN = { smae: "SMAE", europa: "Europa", renal: "Renal" } as const;
 
@@ -26,7 +26,7 @@ export default function Biblioteca() {
         <label className="field">Subgrupo
           <select value={g} onChange={(e) => setG(e.target.value)}>
             <option value="">Todos</option>
-            {grupos.map((x) => <option key={x} value={x}>{icono(x)} {nombreSubgrupo(x)}</option>)}
+            {grupos.map((x) => <option key={x} value={x}>{iconoGrupo(x)} {nombreSubgrupo(x)}</option>)}
           </select>
         </label>
         <label className="field">Buscar<input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="skyr, pan, lenteja…" /></label>
@@ -44,8 +44,8 @@ export default function Biblioteca() {
           <tbody>
             {res.slice(0, 300).map((a) => (
               <tr key={a.id}>
-                <td>{a.n}</td>
-                <td className="note">{icono(a.g)} {nombreSubgrupo(a.g)}</td>
+                <td>{icono(a.n) && <>{icono(a.n)} </>}{a.n}</td>
+                <td className="note">{nombreSubgrupo(a.g)}</td>
                 <td className="num">{cantidad(a, 1)}</td>
                 <td className="c num">{a.k ?? "·"}</td><td className="c num">{a.p ?? "·"}</td><td className="c num">{a.l ?? "·"}</td><td className="c num">{a.h ?? "·"}</td>
                 {renal ? <><td className="c num">{a.k_mg ?? "·"}</td><td className="c num">{a.fo ?? "·"}</td><td className="c num">{a.na ?? "·"}</td></> : <td className="note">{ORIGEN[a.o]}</td>}

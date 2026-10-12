@@ -258,12 +258,12 @@ a{color:inherit}
 .nutr .causa{font-weight:700;color:var(--muted, inherit)}
 
 /* Ingredientes y botón Cambiar */
-.pimg{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;margin-bottom:8px;display:block;background:var(--bg)}
 .ings{list-style:none;margin:6px 0 4px;padding:0;display:grid;gap:2px}
-.ings li{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:center;padding:6px 0;border-top:1px dashed var(--line);font-size:14px}
+.ings li{display:flex;gap:8px;align-items:center;padding:6px 0;border-top:1px dashed var(--line);font-size:14px}
 .ings li:first-child{border-top:0}
-.ings .ic{font-size:16px;text-align:center}
-.ings .nm{min-width:0;line-height:1.3}
+.ings .ic{font-size:16px;text-align:center;width:22px;flex:none}
+.ings .ic:empty{display:none}
+.ings .nm{min-width:0;flex:1;line-height:1.3}
 .ings .qt{display:block;font-weight:600;font-size:13px}
 .ings small{display:block;color:var(--muted);font-size:11.5px}
 .swap{border:0;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:12.5px;padding:8px 12px;border-radius:999px;min-height:36px}

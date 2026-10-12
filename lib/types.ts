@@ -13,8 +13,8 @@ export type Color = (typeof COLORES)[number];
 
 import type { Ingrediente, Sistema } from "./alimentos";
 
-/** detalle: texto libre (o cómo prepararlo si hay ingredientes). imagen: nombre de una foto de public/platos. */
-export type Comida = { titulo: string; detalle: string; ingredientes?: Ingrediente[]; imagen?: string };
+/** detalle: texto libre (o cómo prepararlo si hay ingredientes). */
+export type Comida = { titulo: string; detalle: string; ingredientes?: Ingrediente[] };
 export type Enfoque = { icono: string; titulo: string; texto: string; color: Color };
 export type Suplemento = { que: string; cuanto: string; cuando: string };
 export type Tip = { icono: string; titulo: string; texto: string; color: Color };

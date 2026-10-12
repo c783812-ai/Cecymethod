@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { buscar, cantidad, cargarAlimentos, comoIngrediente, icono, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
+import { buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
 import type { Comida } from "@/lib/types";
 
 // Los cambios que hace la paciente se guardan solo en su teléfono, por plan.
@@ -33,7 +33,6 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema }:
     <div className={`pmeal ${tintClass} ${ings.length ? "wide" : ""}`}>
       <div className="hr">{hora}<small>{tiempo}</small></div>
       <div style={{ minWidth: 0 }}>
-        {m.imagen && <img className="pimg" src={`/platos/${m.imagen}.webp`} alt="" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }} />}
         <h4>{m.titulo}</h4>
         {ings.length > 0 && (
           <ul className="ings">
@@ -41,7 +40,7 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema }:
               const cur = hechos[slot(j)] ?? orig;
               return (
                 <li key={j}>
-                  <span className="ic" aria-hidden="true">{icono(cur.g)}</span>
+                  <span className="ic" aria-hidden="true">{icono(cur.n)}</span>
                   <span className="nm">
                     {cur.n}
                     <b className="qt num">{cantidad(cur, orig.x)}</b>
@@ -90,7 +89,7 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
       <div className="sheet" role="dialog" aria-modal="true" aria-label={`Cambiar ${orig.n}`} onClick={(e) => e.stopPropagation()}>
         <div className="sheet-head">
           <div>
-            <div className="eyebrow">{icono(orig.g)} {nombreSubgrupo(orig.g)}</div>
+            <div className="eyebrow">{iconoGrupo(orig.g)} {nombreSubgrupo(orig.g)}</div>
             <h3>Cambiar {orig.n.toLowerCase()}</h3>
             <p className="note">Todas estas opciones valen lo mismo que {cantidad(orig, orig.x)} de {orig.n.toLowerCase()}.</p>
           </div>
@@ -108,7 +107,7 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
           {lista && opciones.length === 0 && <p className="note">No encontré nada con “{q}” en este grupo.</p>}
           {opciones.slice(0, 200).map((a) => (
             <button key={a.id} className={`opt ${a.id === actual.id ? "on" : ""}`} onClick={() => onPick(a)}>
-              <span>{a.n}</span><b className="num">{cantidad(a, orig.x)}</b>
+              <span>{icono(a.n) && <>{icono(a.n)} </>}{a.n}</span><b className="num">{cantidad(a, orig.x)}</b>
             </button>
           ))}
         </div>
