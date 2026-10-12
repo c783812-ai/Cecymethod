@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { BANDERA, PAIS, buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
+import { BANDERA, NOTA_EU, PAIS, buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
 import { DIAS, type Comida, type Dia, type Plan } from "@/lib/types";
 
 // Los cambios que hace la paciente se guardan solo en su teléfono, por plan.
@@ -159,6 +159,7 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
             {Object.keys(BANDERA).map((c) => <button key={c} aria-pressed={pais === c} onClick={() => elegirPais(c)}>{BANDERA[c]} {PAIS[c]}</button>)}
           </div>
         )}
+        {esSup && pais === "EU" && <p className="note" style={{ margin: "2px 0 6px" }}>{NOTA_EU}</p>}
         {hayLac && (
           <div className="paises" role="group" aria-label="Filtro">
             <button aria-pressed={sinLac} onClick={toggleLac}>🌱 Sin lactosa</button>

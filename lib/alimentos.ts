@@ -87,8 +87,10 @@ const SUP: Record<string, string> = {
   Kombucha: "🫖", "Vinagre de manzana": "🍎",
 };
 export const icono = (nombre: string, g = "") => SUP[g] ?? EMOJI.find(([r]) => r.test(nombre))?.[1] ?? "";
-export const BANDERA: Record<string, string> = { MX: "🇲🇽", US: "🇺🇸", CA: "🇨🇦", ES: "🇪🇸", DE: "🇩🇪", CH: "🇨🇭" };
-export const PAIS: Record<string, string> = { MX: "México", US: "EE. UU.", CA: "Canadá", ES: "España", DE: "Alemania", CH: "Suiza" };
+export const BANDERA: Record<string, string> = { MX: "🇲🇽", US: "🇺🇸", CA: "🇨🇦", UK: "🇬🇧", ES: "🇪🇸", DE: "🇩🇪", CH: "🇨🇭", EU: "🇪🇺", AE: "🇦🇪" };
+export const PAIS: Record<string, string> = { MX: "México", US: "EE. UU.", CA: "Canadá", UK: "Reino Unido", ES: "España", DE: "Alemania", CH: "Suiza", EU: "Resto de Europa", AE: "Emiratos" };
+/** Aclaración que se ve al elegir "Resto de Europa". */
+export const NOTA_EU = "Francia, Italia, Países Bajos, Portugal, Bélgica, Austria y demás países de la Unión Europea. España y Alemania tienen su propia opción.";
 
 const ICONO_GRUPO: [RegExp, string][] = [
   [/verdura/i, "🥦"], [/fruta/i, "🍎"], [/cereal/i, "🌾"], [/legumin/i, "🫘"], [/a\.o\.a|origen animal/i, "🍗"],

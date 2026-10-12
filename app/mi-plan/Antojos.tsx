@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { BANDERA, PAIS } from "@/lib/alimentos";
+import { BANDERA, NOTA_EU, PAIS } from "@/lib/alimentos";
 
 type Antojo = { id: string; n: string; tipo: "dulce" | "salado"; porcion: string; k: number | null; p: number | null; nota?: string; paises: string[] };
 
@@ -42,6 +42,7 @@ export default function Antojos() {
         <button aria-pressed={!pais} onClick={() => elegirPais("")}>Todos</button>
         {Object.keys(BANDERA).map((c) => <button key={c} aria-pressed={pais === c} onClick={() => elegirPais(c)}>{BANDERA[c]} {PAIS[c]}</button>)}
       </div>
+        {pais === "EU" && <p className="note" style={{ margin: "2px 0 6px" }}>{NOTA_EU}</p>}
       {!lista ? <p className="note">Cargando…</p> : ver.length === 0 ? <p className="note">No hay opciones para este país todavía.</p> : (
         <ul className="ings">
           {ver.map((a) => (
