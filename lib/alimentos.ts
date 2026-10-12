@@ -6,6 +6,7 @@ export type Alimento = {
   id: string; n: string; g: string; c: number; u: string; pn: number;
   k: number; p: number; l: number; h: number; f?: number; o: "smae" | "europa" | "renal" | "sup";
   nota?: string; paises?: string[]; // solo suplementos
+  lac?: 1; // tiene lactosa
   k_mg?: number; na?: number; fo?: number; agua?: number; ca?: number;
 };
 /** Un ingrediente de una comida: el alimento (copiado, para no cargar la biblioteca) y cuántos equivalentes. */
@@ -106,7 +107,7 @@ export function nombreSubgrupo(g: string) {
 }
 
 const quitaAcentos = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-export function buscar(lista: Alimento[], q: string, g?: string) {
+export function buscar(lista: Alimento[], q: string, g?: string | RegExp) {
   const words = quitaAcentos(q).split(/\s+/).filter(Boolean);
-  return lista.filter((a) => (!g || a.g === g) && words.every((w) => quitaAcentos(a.n).includes(w)));
+  return lista.filter((a) => (!g || (typeof g === "string" ? a.g === g : g.test(a.g))) && words.every((w) => quitaAcentos(a.n).includes(w)));
 }

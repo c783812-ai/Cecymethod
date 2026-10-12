@@ -126,6 +126,11 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
   useEffect(() => { cargarAlimentos(sistema).then(setLista, () => setError(true)); }, [sistema]);
   useEffect(() => { try { setPais(localStorage.getItem("pais") || ""); } catch {} }, []);
   const elegirPais = (c: string) => { setPais(c); try { localStorage.setItem("pais", c); } catch {} };
+  const [sinLac, setSinLac] = useState(false);
+  useEffect(() => { try { setSinLac(localStorage.getItem("sinlactosa") === "1"); } catch {} }, []);
+  const toggleLac = () => setSinLac((v) => { try { localStorage.setItem("sinlactosa", v ? "0" : "1"); } catch {} return !v; });
+  const hayLac = !!lista?.some((a) => a.g === orig.g && a.lac);
+  // Sin lactosa, la leche se puede cambiar por cualquier leche o bebida sin lactosa (mismas proteínas e hidratos por equivalente)
   const esSup = sistema === "suplementos";
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -134,8 +139,8 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
     return () => { document.removeEventListener("keydown", k); document.body.style.overflow = ""; };
   }, [onClose]);
   const opciones = useMemo(
-    () => (lista ? buscar(lista, q, orig.g).filter((a) => a.id !== orig.id && (!pais || !a.paises?.length || a.paises.includes(pais))).sort((a, b) => a.n.localeCompare(b.n, "es")) : []),
-    [lista, q, orig, pais],
+    () => (lista ? buscar(lista, q, sinLac && /^Leche/.test(orig.g) ? /^Leche/ : orig.g).filter((a) => a.id !== orig.id && (!pais || !a.paises?.length || a.paises.includes(pais)) && !(sinLac && a.lac)).sort((a, b) => a.n.localeCompare(b.n, "es")) : []),
+    [lista, q, orig, pais, sinLac],
   );
   return (
     <div className="sheet-bg" onClick={onClose}>
@@ -152,6 +157,11 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
           <div className="paises" role="group" aria-label="Dónde vives">
             <button aria-pressed={!pais} onClick={() => elegirPais("")}>Todos</button>
             {Object.keys(BANDERA).map((c) => <button key={c} aria-pressed={pais === c} onClick={() => elegirPais(c)}>{BANDERA[c]} {PAIS[c]}</button>)}
+          </div>
+        )}
+        {hayLac && (
+          <div className="paises" role="group" aria-label="Filtro">
+            <button aria-pressed={sinLac} onClick={toggleLac}>🌱 Sin lactosa</button>
           </div>
         )}
         <input className="sheet-q" type="search" placeholder="Buscar, por ejemplo: pan, queso, fresa" value={q} onChange={(e) => setQ(e.target.value)} />

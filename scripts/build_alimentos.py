@@ -159,6 +159,11 @@ if __name__ == "__main__":
         ws.freeze_panes = "A2"; ws.auto_filter.ref = ws.dimensions
         wb.save(sys.argv[3])
     print("no saludables quitados:", len(quitados))
+    # lac: tiene lactosa (para el filtro "Sin lactosa" de la paciente)
+    LAC = re.compile(r"leche|yog|queso|cheddar|mozzarella|parmesano|gouda|emmental|halloumi|harzer|quark|skyr|k[eé]fir|jocoque|reques[oó]n|crema(?! de (cacahuate|almendra|cacao))|nata\b|mantequilla|butter|ghee|cajeta|lactium|activia|vitalin|whey|suero de leche|milch|lactobacil|shirota|jcoque|lerche", re.I)
+    SIN = re.compile(r"deslact|sin lactosa|laktosefrei|soya|soja|almendra|avena|coco|arroz|anacardo|nuez de la india|vegan|vegetal|tofu|cacah|cacach|pera mantequilla", re.I)
+    for f in s + eu + rn:
+        if LAC.search(f["n"]) and not SIN.search(f["n"]): f["lac"] = 1
     for name, data in (("smae", s + eu), ("renal", rn)):
         (OUT / f"{name}.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"SMAE: {len(s)} + europeos {len(eu)} (repetidos omitidos: {dup})")
