@@ -74,7 +74,7 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} remoto={!vistaPrevia && p.id !== "demo"} />}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
             {tab === "porciones" && <Porciones plan={plan} planExiste={props.planExiste} />}
@@ -131,21 +131,27 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste, cambios, orden }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden }) {
+function Hoy({ p, plan, planExiste, cambios, orden, remoto }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; remoto: boolean }) {
   const [di, setDi] = useState<number | null>(null);
   const [hoyIdx, setHoyIdx] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); setHoyIdx(d === 0 ? 6 : d - 1); }, []);
-  const diario = useDiario(p.id);
+  const diario = useDiario(p.id, remoto, !!p.diario_consentido_at);
   if (!plan) return <><Locked planExiste={planExiste} /><Metas p={p} /><Whats /></>;
   const d = di ?? 0;
   const esHoy = d === hoyIdx;
   const fecha = hoyISO();
   const listas = diario[0][fecha]?.comidas ?? [];
-  const marcar = (i: number) => diario[1](fecha, { comidas: listas.includes(i) ? listas.filter((x) => x !== i) : [...listas, i] });
   const delDia = d < 6 ? TIEMPOS.map((_, i) => {
     const { m, src } = comidaDe(plan, orden[0], DIAS[d], i);
     return { ...m, ingredientes: m.ingredientes?.map((o, j) => cambios[0][slotDe(src, i, j)] ?? o) };
   }) : [];
+  const aportes = aporte(delDia, plan.meta ?? "comidas");
+  const marcar = (i: number) => {
+    const nuevas = listas.includes(i) ? listas.filter((x) => x !== i) : [...listas, i];
+    const total = aportes.reduce((a, b) => a + b, 0);
+    const pct = total ? Math.min(100, Math.round((nuevas.reduce((s, k) => s + (aportes[k] ?? 0), 0) / total) * 100)) : 0;
+    diario[1](fecha, { comidas: nuevas, de: delDia.filter((m) => m.titulo).length, pct });
+  };
   return (
     <>
       <div className="daychips" aria-label="Día">
@@ -156,7 +162,7 @@ function Hoy({ p, plan, planExiste, cambios, orden }: { p: Patient; plan: Plan |
         ))}
       </div>
       <div className="eyebrow">{d === 6 ? "Domingo" : DIAS[d]}</div>
-      {esHoy && d < 6 && plan.meta && <MetaBar meta={plan.meta} aportes={aporte(delDia, plan.meta)} listas={listas} />}
+      {esHoy && d < 6 && plan.meta && <MetaBar meta={plan.meta} aportes={aportes} listas={listas} />}
       {d === 6 ? (
         <div className="tint t-yellow"><h4>🌤️ Domingo libre</h4><p>{plan.domingo}</p></div>
       ) : (

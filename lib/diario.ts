@@ -4,6 +4,8 @@ import type { Comida } from "./types";
 /** Lo que la paciente marca cada día. Las llaves son fechas "2026-10-12". */
 export type Registro = {
   comidas?: number[]; // tiempos de comida marcados como listos (0 a 4)
+  de?: number; // cuántas comidas tenía ese día
+  pct?: number; // avance de su meta (0 a 100), calculado con sus cambios
   agua?: number; // vasos de 250 ml
   bano?: number; // veces que fue al baño
   heces?: "normal" | "diarrea" | "estrenimiento";

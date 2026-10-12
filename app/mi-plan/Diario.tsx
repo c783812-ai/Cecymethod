@@ -1,19 +1,59 @@
 "use client";
 import { useEffect, useState } from "react";
+import { supabaseBrowser } from "@/lib/supabase/client";
 import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, SUENO, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
 
-// Por ahora el diario vive en el teléfono de la paciente.
-export function useDiario(pid: string) {
+/**
+ * El diario de la paciente. Sin consentimiento se guarda solo en su teléfono;
+ * con consentimiento se guarda en la página para que Cecy vea su semana.
+ */
+export function useDiario(pid: string, remoto: boolean, consentidoInicial: boolean) {
   const key = `diario-${pid}`;
   const [v, setV] = useState<Diario>({});
-  useEffect(() => { try { setV(JSON.parse(localStorage.getItem(key) || "{}")); } catch {} }, [key]);
+  const [consentido, setConsentido] = useState(remoto && consentidoInicial);
+  const local = () => { try { return JSON.parse(localStorage.getItem(key) || "{}") as Diario; } catch { return {}; } };
+  const guardarLocal = (d: Diario) => { try { localStorage.setItem(key, JSON.stringify(d)); } catch {} };
+
+  useEffect(() => {
+    const l = local();
+    setV(l);
+    if (!consentido) return;
+    const desde = new Date(Date.now() - 60 * 864e5).toISOString().slice(0, 10);
+    supabaseBrowser().from("diario").select("fecha, data").eq("patient_id", pid).gte("fecha", desde).then(({ data, error }) => {
+      if (error || !data) return;
+      const remotoD = Object.fromEntries(data.map((r) => [r.fecha as string, r.data as Registro]));
+      setV({ ...l, ...remotoD });
+      guardarLocal({ ...l, ...remotoD });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, consentido]);
+
+  const subir = (filas: [string, Registro][]) =>
+    supabaseBrowser().from("diario").upsert(filas.map(([fecha, data]) => ({ patient_id: pid, fecha, data, updated_at: new Date().toISOString() })));
+
   const set = (fecha: string, cambio: Partial<Registro>) =>
     setV((old) => {
-      const n = { ...old, [fecha]: { ...old[fecha], ...cambio } };
-      try { localStorage.setItem(key, JSON.stringify(n)); } catch {}
+      const reg = { ...old[fecha], ...cambio };
+      const n = { ...old, [fecha]: reg };
+      guardarLocal(n);
+      if (consentido) subir([[fecha, reg]]);
       return n;
     });
-  return [v, set] as const;
+
+  const consentir = async () => {
+    const sb = supabaseBrowser();
+    const { error } = await sb.rpc("consentir_diario");
+    if (error) return false;
+    setConsentido(true);
+    const filas = Object.entries(local());
+    if (filas.length) await subir(filas);
+    return true;
+  };
+  const retirar = async () => {
+    const { error } = await supabaseBrowser().rpc("retirar_diario");
+    if (!error) setConsentido(false);
+  };
+  return [v, set, { remoto, consentido, consentir, retirar }] as const;
 }
 export type DiarioHook = ReturnType<typeof useDiario>;
 
@@ -100,7 +140,34 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
         <input className="medtxt" placeholder="¿Qué empezaste a tomar y por qué?" defaultValue={r.meds ?? ""} maxLength={200}
           onBlur={(e) => set({ meds: e.target.value.trim() || undefined })} />
       )}
-      <p className="note" style={{ margin: "10px 0 0" }}>Se guarda solo en tu teléfono.</p>
+      <Compartir diario={diario} />
+    </div>
+  );
+}
+
+/** Consentimiento para que Cecy vea el registro. */
+function Compartir({ diario }: { diario: DiarioHook }) {
+  const { remoto, consentido, consentir, retirar } = diario[2];
+  const [acepto, setAcepto] = useState(false);
+  const [estado, setEstado] = useState<"" | "enviando" | "error">("");
+  if (!remoto) return <p className="note" style={{ margin: "10px 0 0" }}>Se guarda solo en tu teléfono.</p>;
+  if (consentido)
+    return (
+      <p className="note" style={{ margin: "12px 0 0" }}>
+        ✓ Cecy ve tu registro para revisar tu semana.{" "}
+        <button className="linklike" onClick={() => { if (confirm("Se borrará tu registro de la página y Cecy ya no lo verá. ¿Seguro?")) retirar(); }}>Dejar de compartir y borrarlo</button>
+      </p>
+    );
+  return (
+    <div className="compartir">
+      <b>¿Compartes tu registro con Cecy?</b>
+      <p className="note" style={{ margin: "4px 0 8px" }}>Así lo revisa cada domingo y te escribe cómo vas. Son datos de salud: solo tú y ella los ven, y se borran cuando terminas tu seguimiento o cuando tú lo pidas. Por ahora se guarda solo en tu teléfono.</p>
+      <label className="check"><input type="checkbox" checked={acepto} onChange={(e) => setAcepto(e.target.checked)} /> Acepto que Cecy vea mi registro diario</label>
+      <button className="btn primary" disabled={!acepto || estado === "enviando"} style={{ marginTop: 8 }}
+        onClick={async () => { setEstado("enviando"); setEstado((await consentir()) ? "" : "error"); }}>
+        {estado === "enviando" ? "Guardando…" : "Compartir con Cecy"}
+      </button>
+      {estado === "error" && <p className="note" style={{ color: "var(--warn)" }}>No se pudo guardar. Inténtalo más tarde.</p>}
     </div>
   );
 }

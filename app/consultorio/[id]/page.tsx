@@ -7,17 +7,20 @@ import Sidebar from "../Sidebar";
 import { asignarRutina, borrarPaciente, guardarResumen } from "../actions";
 import AccessPanel from "./AccessPanel";
 import PlanEditor from "./PlanEditor";
+import SemanaVista from "./SemanaVista";
+import { hoyISO, type Registro } from "@/lib/diario";
 
 const TABS = [
   ["resumen", "Ficha y acceso"],
+  ["semana", "Su semana"],
   ["plan", "Plan de alimentación"],
   ["rutina", "Rutina"],
 ] as const;
 type Tab = (typeof TABS)[number][0];
 
-export default async function Ficha({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ tab?: string }> }) {
+export default async function Ficha({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ tab?: string; semana?: string }> }) {
   const { id } = await params;
-  const { tab: t } = await searchParams;
+  const { tab: t, semana } = await searchParams;
   const tab: Tab = (TABS.find(([k]) => k === t)?.[0] ?? "resumen") as Tab;
   const { sb } = await requireNutri();
 
@@ -68,6 +71,7 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
           </div>
         )}
 
+        {tab === "semana" && <SemanaTab p={p} lunes={semana} />}
         {tab === "plan" && <PlanTab id={id} />}
         {tab === "rutina" && <RutinaTab p={p} />}
       </section>
@@ -113,4 +117,24 @@ async function RutinaTab({ p }: { p: Patient }) {
       )}
     </div>
   );
+}
+
+const masDias = (d: Date, n: number) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+function lunesDe(iso?: string) {
+  const d = iso && /^\d{4}-\d{2}-\d{2}$/.test(iso) ? new Date(`${iso}T12:00:00`) : new Date();
+  d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+  return d;
+}
+
+async function SemanaTab({ p, lunes: l }: { p: Patient; lunes?: string }) {
+  const { sb } = await requireNutri();
+  const lunes = lunesDe(l);
+  const fechas = Array.from({ length: 7 }, (_, i) => hoyISO(masDias(lunes, i)));
+  const [{ data: filas }, { data: planRow }] = await Promise.all([
+    sb.from("diario").select("fecha, data").eq("patient_id", p.id).gte("fecha", fechas[0]).lte("fecha", fechas[6]),
+    sb.from("plans").select("data").eq("patient_id", p.id).eq("activo", true).order("updated_at", { ascending: false }).limit(1).maybeSingle(),
+  ]);
+  const regs = Object.fromEntries((filas ?? []).map((f) => [f.fecha as string, f.data as Registro]));
+  const nav = (n: number) => `/consultorio/${p.id}?tab=semana&semana=${hoyISO(masDias(lunes, n))}`;
+  return <SemanaVista p={p} plan={(planRow?.data as Plan | undefined) ?? null} regs={regs} fechas={fechas} antes={nav(-7)} despues={nav(7)} />;
 }

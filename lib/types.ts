@@ -56,6 +56,7 @@ export type Patient = {
   routine_key: string | null;
   routine_visible: boolean;
   invitada_at: string | null;
+  diario_consentido_at?: string | null; // aceptó compartir su diario con Cecy
   created_at: string;
 };
 
