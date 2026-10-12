@@ -6,6 +6,37 @@ const todos = (x: Ejercicio): FilaRutina => ({ a: x, b: x, c: x });
 const ab = (x: Ejercicio, c: Ejercicio): FilaRutina => ({ a: x, b: x, c });
 const a_bc = (a: Ejercicio, bc: Ejercicio): FilaRutina => ({ a, b: bc, c: bc });
 
+/** Nombre anterior (en español) -> nombre original en inglés, para pasar los videos ya subidos. */
+export const NOMBRE_EN: Record<string, string> = {
+  "Peso muerto con piernas rígidas con mancuernas": "Dumbbell Stiff Leg Deadlift",
+  "Peso muerto con piernas rígidas": "Stiff Leg Deadlift",
+  "Sentadilla frontal": "Front Squat",
+  "Sentadilla goblet": "Goblet Squat",
+  "Hip thrust con barra en pulsos": "Barbell Hip Thrust Pulse",
+  "Hip thrust con compañera con pausa": "Pause Partner Hip Thrust",
+  "Hip thrust con compañera": "Partner Hip Thrust",
+  "Hip thrust con mancuerna en pulsos": "Dumbbell Hip Thrust Pulse",
+  "Patada de glúteo en polea, de rodillas": "Cable Kneeling Glute Kickback",
+  "Extensión de cadera en cuadrupedia con banda": "Band Quadruped Hip Extension",
+  "Abducción de cadera en máquina, inclinada al frente": "Forward Lean Machine Seated Hip Abduction",
+  "Abducción de cadera sentada con banda, inclinada al frente": "Forward Lean Band Seated Hip Abduction",
+  "Hiperextensión a 45° con mancuerna": "Dumbbell 45-Degree Hyperextension",
+  "Peso muerto rumano a una pierna con apoyo, con mancuerna": "Braced Dumbbell Single-Leg RDL",
+  "Prensa de piernas": "Leg Press",
+  "Sentadilla skater": "Skater Squat",
+  "Hip thrust a una pierna con mancuerna": "Dumbbell Single-Leg Hip Thrust",
+  "Patada de glúteo de pie con banda": "Band Standing Glute Kickback",
+  "Abducción de cadera de pie con banda": "Band Standing Hip Abduction",
+  "Peso muerto sumo": "Sumo Deadlift",
+  "Sentadilla sumo con mancuerna": "Dumbbell Sumo Squat",
+  "Zancada inversa con carga al frente": "Front-Loaded Reverse Lunge",
+  "Zancada inversa en déficit con mancuernas": "Dumbbell Deficit Reverse Lunge",
+  "Hip thrust con barra con pausa": "Pause Barbell Hip Thrust",
+  "Hip thrust con mancuerna con pausa": "Pause Dumbbell Hip Thrust",
+  "Elevación de cadera de lado con apoyo, rango extra": "Braced Extra Range Side-Lying Hip Raise",
+  "Caminata lateral con banda": "Lateral Band Walk"
+};
+
 export const GUIA_GLUTEOS: Rutina = {
   titulo: "Guía de glúteos",
   subtitulo: "3 días por semana",
@@ -13,50 +44,37 @@ export const GUIA_GLUTEOS: Rutina = {
   dias: [
     {
       dia: "Día 1",
-      calentamiento: [
-        ["Estiramiento dinámico de flexores de cadera e isquiotibiales", "2 × 8 por lado"],
-        ["Enhebrar la aguja", "2 × 8 por lado"],
-        ["Limpiaparabrisas lumbar", "2 × 10 por lado"],
-        ["Apretar glúteos de pie", "2 × 30 s"],
-      ],
+      calentamiento: [],
       ejercicios: [
-        ab(e("Peso muerto con piernas rígidas", "3 × 8", "3–5 min", ["1 × 8 con ~60% de tu peso de trabajo", "1 × 5 con ~80%"]), e("Peso muerto con piernas rígidas con mancuernas", "3 × 12", "2–4 min")),
-        ab(e("Sentadilla frontal", "3 × 5", "3–5 min", ["1 × 8 con ~50% de tu peso de trabajo", "1 × 5 con ~60%", "1 × 3 con ~75%"]), e("Sentadilla goblet", "3 × 12", "2–4 min")),
-        { a: e("Hip thrust con barra en pulsos", "3 × 15", "2–4 min"), b: e("Hip thrust con compañera", "3 × máximo de repeticiones", "2–4 min"), c: e("Hip thrust con mancuerna en pulsos", "3 × 20", "2–3 min") },
-        a_bc(e("Patada de glúteo en polea, de rodillas", "2 × 10 por lado", "1–2 min"), e("Extensión de cadera en cuadrupedia con banda", "2 × 20 por lado", "1–2 min")),
-        a_bc(e("Abducción de cadera en máquina, inclinada al frente", "2 × 20", "1–2 min"), e("Abducción de cadera sentada con banda, inclinada al frente", "2 × 30", "1–2 min")),
+        ab(e("Stiff Leg Deadlift", "3 × 8", "3–5 min", ["1 × 8 con ~60% de tu peso de trabajo", "1 × 5 con ~80%"]), e("Dumbbell Stiff Leg Deadlift", "3 × 12", "2–4 min")),
+        ab(e("Front Squat", "3 × 5", "3–5 min", ["1 × 8 con ~50% de tu peso de trabajo", "1 × 5 con ~60%", "1 × 3 con ~75%"]), e("Goblet Squat", "3 × 12", "2–4 min")),
+        { a: e("Barbell Hip Thrust Pulse", "3 × 15", "2–4 min"), b: e("Partner Hip Thrust", "3 × máximo de repeticiones", "2–4 min"), c: e("Dumbbell Hip Thrust Pulse", "3 × 20", "2–3 min") },
+        a_bc(e("Cable Kneeling Glute Kickback", "2 × 10 por lado", "1–2 min"), e("Band Quadruped Hip Extension", "2 × 20 por lado", "1–2 min")),
+        a_bc(e("Forward Lean Machine Seated Hip Abduction", "2 × 20", "1–2 min"), e("Forward Lean Band Seated Hip Abduction", "2 × 30", "1–2 min")),
       ],
       cierre: "10 minutos libres",
     },
     {
       dia: "Día 3",
-      calentamiento: [
-        ["Gato-vaca", "3 × 10 cada dirección"],
-        ["Rodilla al pecho con rotación", "3 × 8 cada dirección"],
-        ["Caminata lateral con banda", "3 × 10 cada dirección"],
-      ],
+      calentamiento: [],
       ejercicios: [
-        a_bc(e("Hiperextensión a 45° con mancuerna", "3 × 12", "2–4 min", ["1 × 8 con ~50% de tu peso de trabajo", "1 × 5 con ~70%"]), e("Peso muerto rumano a una pierna con apoyo, con mancuerna", "3 × 12 por lado", "2–4 min")),
-        a_bc(e("Prensa de piernas", "3 × 8", "3–5 min", ["1 × 8 con ~60% de tu peso de trabajo", "1 × 5 con ~80%"]), e("Sentadilla skater", "3 × 10 por lado", "2–4 min")),
-        todos(e("Hip thrust a una pierna con mancuerna", "3 × 8 por lado", "2–4 min")),
-        todos(e("Patada de glúteo de pie con banda", "2 × 20 por lado", "1–2 min")),
-        todos(e("Abducción de cadera de pie con banda", "2 × 20 por lado", "1–2 min")),
+        a_bc(e("Dumbbell 45-Degree Hyperextension", "3 × 12", "2–4 min", ["1 × 8 con ~50% de tu peso de trabajo", "1 × 5 con ~70%"]), e("Braced Dumbbell Single-Leg RDL", "3 × 12 por lado", "2–4 min")),
+        a_bc(e("Leg Press", "3 × 8", "3–5 min", ["1 × 8 con ~60% de tu peso de trabajo", "1 × 5 con ~80%"]), e("Skater Squat", "3 × 10 por lado", "2–4 min")),
+        todos(e("Dumbbell Single-Leg Hip Thrust", "3 × 8 por lado", "2–4 min")),
+        todos(e("Band Standing Glute Kickback", "2 × 20 por lado", "1–2 min")),
+        todos(e("Band Standing Hip Abduction", "2 × 20 por lado", "1–2 min")),
       ],
       cierre: "10 minutos libres",
     },
     {
       dia: "Día 5",
-      calentamiento: [
-        ["Bird dog", "2 × 6 por lado"],
-        ["Balanceo de pierna adelante y atrás", "2 × 12 por pierna"],
-        ["Balanceo de pierna de lado a lado", "2 × 12 cada dirección"],
-      ],
+      calentamiento: [],
       ejercicios: [
-        ab(e("Peso muerto sumo", "3 × 5", "3–5 min", ["1 × 8 con ~60% de tu peso de trabajo", "1 × 5 con ~70%", "1 × 3 con ~80%"]), e("Sentadilla sumo con mancuerna", "3 × 12", "2–4 min")),
-        ab(e("Zancada inversa con carga al frente", "3 × 5 por lado", "3–5 min", ["1 × 8 con ~50% de tu peso de trabajo", "1 × 5 con ~70%"]), e("Zancada inversa en déficit con mancuernas", "3 × 10 por lado", "2–4 min")),
-        { a: e("Hip thrust con barra con pausa", "3 × 6 · 3 s arriba", "2–4 min", ["1 × 8 con ~60% de tu peso de trabajo", "1 × 5 con ~80%"]), b: e("Hip thrust con compañera con pausa", "3 × máximo de repeticiones · 3 s arriba", "2–4 min"), c: e("Hip thrust con mancuerna con pausa", "3 × 15 · 3 s arriba", "2–4 min") },
-        todos(e("Elevación de cadera de lado con apoyo, rango extra", "2 × 15 por lado", "1–2 min")),
-        todos(e("Caminata lateral con banda", "2 × 20 cada dirección", "1–2 min")),
+        ab(e("Sumo Deadlift", "3 × 5", "3–5 min", ["1 × 8 con ~60% de tu peso de trabajo", "1 × 5 con ~70%", "1 × 3 con ~80%"]), e("Dumbbell Sumo Squat", "3 × 12", "2–4 min")),
+        ab(e("Front-Loaded Reverse Lunge", "3 × 5 por lado", "3–5 min", ["1 × 8 con ~50% de tu peso de trabajo", "1 × 5 con ~70%"]), e("Dumbbell Deficit Reverse Lunge", "3 × 10 por lado", "2–4 min")),
+        { a: e("Pause Barbell Hip Thrust", "3 × 6 · 3 s arriba", "2–4 min", ["1 × 8 con ~60% de tu peso de trabajo", "1 × 5 con ~80%"]), b: e("Pause Partner Hip Thrust", "3 × máximo de repeticiones · 3 s arriba", "2–4 min"), c: e("Pause Dumbbell Hip Thrust", "3 × 15 · 3 s arriba", "2–4 min") },
+        todos(e("Braced Extra Range Side-Lying Hip Raise", "2 × 15 por lado", "1–2 min")),
+        todos(e("Lateral Band Walk", "2 × 20 cada dirección", "1–2 min")),
       ],
       cierre: "10 minutos libres",
     },

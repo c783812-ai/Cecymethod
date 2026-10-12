@@ -1,4 +1,5 @@
 "use server";
+import { GUIA_GLUTEOS, NOMBRE_EN } from "@/lib/gluteos";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireNutri } from "@/lib/auth";
@@ -103,4 +104,15 @@ export async function borrarPaciente(id: string, f: FormData) {
   await sb.from("patients").delete().eq("id", id);
   if (p?.user_id) await supabaseAdmin().auth.admin.deleteUser(p.user_id);
   redirect("/consultorio");
+}
+
+/** Pasa la guía de glúteos guardada a la versión de lib/gluteos.ts y renombra los videos ya subidos. */
+export async function actualizarGluteos() {
+  const { sb } = await requireNutri();
+  await sb.from("routine_templates").upsert({ key: "gluteos", titulo: GUIA_GLUTEOS.titulo, data: GUIA_GLUTEOS, updated_at: new Date().toISOString() });
+  const { data: vids } = await sb.from("exercise_videos").select("nombre");
+  const hay = new Set((vids ?? []).map((v) => v.nombre as string));
+  for (const [es, en] of Object.entries(NOMBRE_EN))
+    if (hay.has(es) && !hay.has(en)) await sb.from("exercise_videos").update({ nombre: en }).eq("nombre", es);
+  revalidatePath("/consultorio/videos");
 }

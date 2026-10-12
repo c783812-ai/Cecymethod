@@ -1,5 +1,6 @@
 import { requireNutri } from "@/lib/auth";
-import { ejerciciosDe } from "@/lib/gluteos";
+import { NOMBRE_EN, ejerciciosDe } from "@/lib/gluteos";
+import { actualizarGluteos } from "../actions";
 import type { Rutina } from "@/lib/types";
 import VideoRow from "./VideoRow";
 
@@ -30,6 +31,12 @@ export default async function Videos() {
         </div>
         <span className="pill p-info num">{ok} de {lista.length} listos</span>
       </div>
+      {viejaGluteos(tpls?.find((t) => t.key === "gluteos")?.data as Rutina | undefined) && (
+        <form action={actualizarGluteos} className="tint t-yellow" style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+          <p style={{ margin: 0, flex: "1 1 260px" }}><b>Hay una versión nueva de la Guía de glúteos:</b> ejercicios con su nombre en inglés y el calentamiento como un solo video. Los videos que ya subiste se pasan solos.</p>
+          <button className="btn primary">Actualizar</button>
+        </form>
+      )}
       <div className="card">
         <div className="tablewrap">
           <table>
@@ -45,4 +52,9 @@ export default async function Videos() {
       </div>
     </section>
   );
+}
+
+/** La guía guardada todavía tiene los nombres en español o la lista de calentamiento. */
+function viejaGluteos(r?: Rutina) {
+  return !r || r.dias.some((d) => d.calentamiento.length > 0) || ejerciciosDe(r).some((e) => e.nombre in NOMBRE_EN);
 }
