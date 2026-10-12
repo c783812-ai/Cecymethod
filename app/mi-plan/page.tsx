@@ -30,7 +30,7 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
   }
 
   const [planRes, rutRes, vidRes] = await Promise.all([
-    sb.from("plans").select("data").eq("patient_id", patient.id).eq("activo", true).order("updated_at", { ascending: false }).limit(1).maybeSingle(),
+    sb.from("plans").select("id, data").eq("patient_id", patient.id).eq("activo", true).order("updated_at", { ascending: false }).limit(1).maybeSingle(),
     patient.routine_key ? sb.from("routine_templates").select("data").eq("key", patient.routine_key).maybeSingle() : Promise.resolve({ data: null }),
     sb.from("exercise_videos").select("nombre, storage_path"),
   ]);
@@ -49,6 +49,7 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
     <PatientApp
       patient={patient}
       plan={plan}
+      planId={plan ? (planRes.data?.id as string) : null}
       planExiste={!!planRes.data}
       rutina={rutina}
       videos={videos}

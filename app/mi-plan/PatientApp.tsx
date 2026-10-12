@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DIAS, TIEMPOS, type Patient, type Plan, type Rutina } from "@/lib/types";
-import { EQUIVALENTES, MANO } from "@/lib/equivalentes";
+import { MANO } from "@/lib/equivalentes";
+import { MealCard, resumenIngredientes, slotDe, useCambios, type Cambios } from "./Comidas";
 import { PorcionesTable, tint } from "@/components/shared";
 
 const MEAL_TINT = ["t-yellow", "t-pink", "t-blue", "t-lilac", "t-green"];
@@ -34,6 +35,7 @@ function useLocalChecks(key: string) {
 export default function PatientApp(props: {
   patient: Patient;
   plan: Plan | null;
+  planId: string | null;
   planExiste: boolean;
   rutina: Rutina | null;
   videos: Record<string, string>;
@@ -41,11 +43,12 @@ export default function PatientApp(props: {
 }) {
   const { patient: p, plan, rutina, videos, vistaPrevia } = props;
   const [tab, setTab] = useState<Tab>("hoy");
+  const cambios = useCambios(props.planId);
   const first = p.nombre.split(" ")[0];
   const heads: Record<Tab, [string, React.ReactNode]> = {
     hoy: [`Hola, ${first}`, <>Tu <mark>día</mark></>],
     semana: [plan?.titulo ?? "Tu plan", <>Tu <mark>semana</mark></>],
-    porciones: ["Para cambiar un alimento por otro", <>Tus <mark>porciones</mark></>],
+    porciones: ["Cuánto comes en cada tiempo", <>Tus <mark>porciones</mark></>],
     rutina: ["Ejercicio", <>Tu <mark>rutina</mark></>],
   };
   const tabs: [Tab, string][] = [["hoy", "Hoy"], ["semana", "Mi semana"], ["porciones", "Porciones"], ["rutina", "Rutina"]];
@@ -64,8 +67,8 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} />}
-            {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} />}
+            {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} />}
             {tab === "porciones" && <Porciones plan={plan} planExiste={props.planExiste} />}
             {tab === "rutina" && <RutinaView rutina={rutina} videos={videos} pid={p.id} />}
             {!vistaPrevia && (
@@ -120,7 +123,7 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste }: { p: Patient; plan: Plan | null; planExiste: boolean }) {
+function Hoy({ p, plan, planExiste, cambios }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios }) {
   const [di, setDi] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); }, []);
   if (!plan) return <><Locked planExiste={planExiste} /><Metas p={p} /><Whats /></>;
@@ -140,10 +143,8 @@ function Hoy({ p, plan, planExiste }: { p: Patient; plan: Plan | null; planExist
       ) : (
         plan.menu[DIAS[d]].map((m, i) =>
           m.titulo ? (
-            <div key={i} className={`pmeal ${MEAL_TINT[i]}`}>
-              <div className="hr">{plan.horarios?.[i] ?? TIEMPOS[i][1]}<small>{TIEMPOS[i][0]}</small></div>
-              <div><h4>{m.titulo}</h4><p>{m.detalle}</p></div>
-            </div>
+            <MealCard key={`${d}-${i}`} m={m} hora={plan.horarios?.[i] ?? TIEMPOS[i][1]} tiempo={TIEMPOS[i][0]} tintClass={MEAL_TINT[i]}
+              slot={(j) => slotDe(DIAS[d], i, j)} cambios={cambios} sistema={plan.sistema ?? "smae"} />
           ) : null,
         )
       )}
@@ -162,7 +163,7 @@ function Hoy({ p, plan, planExiste }: { p: Patient; plan: Plan | null; planExist
   );
 }
 
-function Semana({ plan, planExiste }: { plan: Plan | null; planExiste: boolean }) {
+function Semana({ plan, planExiste, cambios }: { plan: Plan | null; planExiste: boolean; cambios: Cambios }) {
   if (!plan) return <Locked planExiste={planExiste} />;
   return (
     <>
@@ -176,7 +177,9 @@ function Semana({ plan, planExiste }: { plan: Plan | null; planExiste: boolean }
           <summary style={{ cursor: "pointer", fontFamily: "var(--display)", fontWeight: 600 }}>{d}</summary>
           {plan.menu[d].map((m, i) => m.titulo ? (
             <div key={i} className="meal">
-              <div className="t">{TIEMPOS[i][0]} · {plan.horarios?.[i] ?? TIEMPOS[i][1]}</div>{m.titulo}<div className="d">{m.detalle}</div>
+              <div className="t">{TIEMPOS[i][0]} · {plan.horarios?.[i] ?? TIEMPOS[i][1]}</div>{m.titulo}
+              {m.ingredientes?.length ? <div className="d">{resumenIngredientes(m, (j) => slotDe(d, i, j), cambios[0])}</div> : null}
+              {m.detalle && <div className="d">{m.detalle}</div>}
             </div>
           ) : null)}
         </details>
@@ -193,15 +196,9 @@ function Porciones({ plan, planExiste }: { plan: Plan | null; planExiste: boolea
   return (
     <>
       <p style={{ margin: 0, fontSize: 14, color: "var(--muted)" }}>
-        {plan.kcal && <>Tu día: ≈ {plan.kcal} kcal · ≈ {plan.proteina} g de proteína. </>}Cambia un alimento por otro del mismo grupo.
+        {plan.kcal && <>Tu día: ≈ {plan.kcal} kcal · ≈ {plan.proteina} g de proteína. </>}Para cambiar un alimento, toca <b>Cambiar</b> junto a él en tu menú de Hoy.
       </p>
       <div className="card" style={{ padding: 10 }}><PorcionesTable plan={plan} /></div>
-      {EQUIVALENTES.map((g) => (
-        <div key={g.grupo} className={`tint ${tint(g.color)}`}>
-          <h4>{g.grupo} <span className="note">· 1 porción {g.kcal}</span></h4>
-          {g.items.map(([n, c]) => <div key={n} className="ex"><span>{n}</span><span className="num">{c}</span></div>)}
-        </div>
-      ))}
       <div className="tint t-blue">
         <h4>Tu mano como medida</h4>
         {MANO.map(([i, t, d]) => <div key={t} className="ex"><span>{i} {t}<br /><span className="note">{d}</span></span></div>)}

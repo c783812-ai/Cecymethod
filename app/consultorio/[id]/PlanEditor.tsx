@@ -3,13 +3,22 @@ import { useState, useTransition } from "react";
 import { COLORES, DIAS, GRUPOS, TIEMPOS, planVacio, type Color, type Plan } from "@/lib/types";
 import { tint } from "@/components/shared";
 import { guardarPlan } from "../actions";
+import BuscarAlimento from "@/components/BuscarAlimento";
+import { cantidad, comoIngrediente, fraccion, icono } from "@/lib/alimentos";
+
+const EQS = [0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6];
+import { PLATOS } from "@/lib/platos";
 
 /** Acepta un plan pegado (el que Claude le prepara a Cecy) y lo completa con lo que falte. */
 function normalizar(x: unknown): Plan {
   const base = planVacio();
   const p = { ...base, ...(x as Partial<Plan>) };
   p.menu = { ...base.menu, ...(p.menu ?? {}) };
-  for (const d of DIAS) p.menu[d] = TIEMPOS.map((_, i) => ({ titulo: p.menu[d]?.[i]?.titulo ?? "", detalle: p.menu[d]?.[i]?.detalle ?? "" }));
+  for (const d of DIAS)
+    p.menu[d] = TIEMPOS.map((_, i) => {
+      const m = p.menu[d]?.[i];
+      return { titulo: m?.titulo ?? "", detalle: m?.detalle ?? "", ...(m?.ingredientes?.length ? { ingredientes: m.ingredientes } : {}), ...(m?.imagen ? { imagen: m.imagen } : {}) };
+    });
   p.porciones = { ...base.porciones, ...(p.porciones ?? {}) };
   p.horarios = TIEMPOS.map((t, i) => p.horarios?.[i] ?? t[1]);
   p.enfoques ??= [];
@@ -24,6 +33,7 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
   const [msg, setMsg] = useState<{ ok: boolean; msg: string } | null>(null);
   const [pending, start] = useTransition();
   const [pegar, setPegar] = useState("");
+  const [buscando, setBuscando] = useState<string | null>(null);
 
   const up = (fn: (p: Plan) => void) => {
     setPlan((old) => { const n = structuredClone(old); fn(n); return n; });
@@ -119,7 +129,13 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
 
       <div className="card">
         <h3>Menú de lunes a sábado</h3>
-        <p className="note" style={{ marginTop: -4 }}>Arroz, pasta y leguminosas se miden ya cocidos. Deja vacío un tiempo de comida para que no aparezca.</p>
+        <p className="note" style={{ marginTop: -4 }}>Arroz, pasta y leguminosas se miden ya cocidos. Deja vacío un tiempo de comida para que no aparezca. Con ingredientes, ella ve la cantidad de cada uno y puede tocar Cambiar; el texto queda como nota de preparación.</p>
+        <label className="field" style={{ maxWidth: 320, marginBottom: 10 }}>Lista de alimentos para los cambios
+          <select value={plan.sistema ?? "smae"} onChange={(e) => up((p) => { p.sistema = e.target.value as "smae" | "renal"; })}>
+            <option value="smae">SMAE + europeos</option>
+            <option value="renal">Renal</option>
+          </select>
+        </label>
         <div className="menu-grid">
           {DIAS.map((d) => (
             <div key={d} className="day">
@@ -128,7 +144,27 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
                 <div key={i} className="editmeal">
                   <span className="eyebrow">{t[0]}</span>
                   <input value={plan.menu[d][i].titulo} placeholder="Platillo" onChange={(e) => up((p) => { p.menu[d][i].titulo = e.target.value; })} aria-label={`${d}, ${t[0]}, platillo`} />
-                  <textarea value={plan.menu[d][i].detalle} placeholder="Cantidades: 2 huevos · 1 taza de espinaca…" onChange={(e) => up((p) => { p.menu[d][i].detalle = e.target.value; })} aria-label={`${d}, ${t[0]}, cantidades`} />
+                  <textarea value={plan.menu[d][i].detalle} placeholder={plan.menu[d][i].ingredientes?.length ? "Cómo prepararlo (opcional)" : "Cantidades: 2 huevos · 1 taza de espinaca…"} onChange={(e) => up((p) => { p.menu[d][i].detalle = e.target.value; })} aria-label={`${d}, ${t[0]}, cantidades`} />
+                  {(plan.menu[d][i].ingredientes ?? []).map((g, j) => (
+                    <div key={j} className="eing">
+                      <span>{icono(g.g)} {g.n}<small>{cantidad(g, g.x)}</small></span>
+                      <select className="mini num" value={g.x} aria-label={`Equivalentes de ${g.n}`} title="Equivalentes"
+                        onChange={(e) => up((p) => { p.menu[d][i].ingredientes![j].x = Number(e.target.value); })}>
+                        {[...new Set([...EQS, g.x])].sort((a, b) => a - b).map((v) => <option key={v} value={v}>{fraccion(v)}</option>)}
+                      </select>
+                      <button className="btn" style={{ padding: "2px 7px", fontSize: 12 }} aria-label={`Quitar ${g.n}`} onClick={() => up((p) => { p.menu[d][i].ingredientes!.splice(j, 1); })}>✕</button>
+                    </div>
+                  ))}
+                  {buscando === `${d}-${i}` ? (
+                    <BuscarAlimento sistema={plan.sistema ?? "smae"} onPick={(a) => up((p) => { (p.menu[d][i].ingredientes ??= []).push(comoIngrediente(a, 1)); })} />
+                  ) : (
+                    <button className="btn" style={{ padding: "3px 8px", fontSize: 12 }} onClick={() => setBuscando(`${d}-${i}`)}>+ Ingrediente</button>
+                  )}
+                  <select className="mini" style={{ width: "100%", textAlign: "left" }} value={plan.menu[d][i].imagen ?? ""} aria-label={`${d}, ${t[0]}, foto`}
+                    onChange={(e) => up((p) => { if (e.target.value) p.menu[d][i].imagen = e.target.value; else delete p.menu[d][i].imagen; })}>
+                    <option value="">Sin foto</option>
+                    {PLATOS.map(([k, n]) => <option key={k} value={k}>{n}</option>)}
+                  </select>
                 </div>
               ))}
             </div>

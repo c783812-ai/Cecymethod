@@ -8,7 +8,7 @@ const CORREO = "cecilia.nutdxb@gmail.com";
 const pasos = [
   ["Tus análisis", "Te mando la lista de estudios al agendar. Con biometría, ferritina y vitamina D ya podemos empezar.", "t-pink"],
   ["Primera consulta", "Videollamada de 60 minutos: tu salud, tu ciclo, cómo comes y qué dicen tus análisis.", "t-blue"],
-  ["Tu plan, en 2 o 3 días", "Menú con productos de tu súper, porciones y lista de equivalentes, todo en tu página.", "t-yellow"],
+  ["Tu plan, en 2 o 3 días", "Menú con productos de tu súper y un botón para cambiar cualquier alimento por otro, todo en tu página.", "t-yellow"],
   ["Seguimiento", "Revisamos cada 4 semanas y ajustamos. Entre consultas, me escribes por WhatsApp.", "t-green"],
 ];
 const nutrientes = [

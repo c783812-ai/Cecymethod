@@ -11,6 +11,7 @@ export default async function ConsultorioLayout({ children }: { children: React.
         <Link className="brand" href="/consultorio"><b>Cecilia Rivera</b><span>Mi consultorio</span></Link>
         <nav>
           <Link href="/consultorio">Pacientes</Link>
+          <Link href="/consultorio/alimentos">Alimentos</Link>
           <Link href="/consultorio/videos">Videos</Link>
           <Link href="/" target="_blank">Mi página</Link>
           <form action="/salir" method="post"><button className="btn" style={{ padding: "6px 12px" }}>Salir</button></form>

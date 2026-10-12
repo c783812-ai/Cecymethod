@@ -11,7 +11,10 @@ export const GRUPOS = ["Verduras", "Frutas", "Cereales", "Leguminosas", "Proteí
 export const COLORES = ["rosa", "azul", "amarillo", "verde", "lila"] as const;
 export type Color = (typeof COLORES)[number];
 
-export type Comida = { titulo: string; detalle: string };
+import type { Ingrediente, Sistema } from "./alimentos";
+
+/** detalle: texto libre (o cómo prepararlo si hay ingredientes). imagen: nombre de una foto de public/platos. */
+export type Comida = { titulo: string; detalle: string; ingredientes?: Ingrediente[]; imagen?: string };
 export type Enfoque = { icono: string; titulo: string; texto: string; color: Color };
 export type Suplemento = { que: string; cuanto: string; cuando: string };
 export type Tip = { icono: string; titulo: string; texto: string; color: Color };
@@ -30,6 +33,7 @@ export type Plan = {
   domingo: string;
   suplementos: Suplemento[];
   tips: Tip[];
+  sistema?: Sistema; // de qué lista salen los cambios; smae si no se dice
 };
 
 export type Ejercicio = { nombre: string; series: string; descanso: string; aproximacion?: string[] };
@@ -65,7 +69,7 @@ export function planVacio(): Plan {
     enfoques: [],
     porciones: Object.fromEntries(GRUPOS.map((g) => [g, [null, null, null, null, null]])),
     menu,
-    domingo: "Repite tu día favorito o arma tus comidas con la guía del plato y tu lista de equivalentes. Si comes fuera, usa tu mano para medir.",
+    domingo: "Repite tu día favorito o arma tus comidas con la guía del plato. Si comes fuera, usa tu mano para medir.",
     suplementos: [],
     tips: [],
   };

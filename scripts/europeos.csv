@@ -1,0 +1,104 @@
+nombre;subgrupo;kcal;p;l;hc;fibra;unidad;g_unidad
+Canónigos (Feldsalat);Verduras;21;1.8;0.4;0.7;1.5;taza;20
+Arúgula (Rucola);Verduras;25;2.6;0.7;2.1;1.6;taza;20
+Colinabo (Kohlrabi) crudo;Verduras;27;1.7;0.1;4.4;3.6;taza;135
+Chucrut (Sauerkraut) escurrido;Verduras;19;0.9;0.1;4.3;2.9;taza;140
+Col rizada (Grünkohl) cocida;Verduras;33;2.9;0.9;3.6;3.8;taza;130
+Puerro (Lauch) cocido;Verduras;31;0.8;0.2;7.6;1.0;taza;105
+Hinojo (Fenchel) crudo;Verduras;31;1.2;0.2;7.3;3.1;taza;90
+Chirivía (Pastinake) cocida;Verduras;71;1.3;0.3;17;3.6;taza;155
+Rábano (Radieschen);Verduras;16;0.7;0.1;3.4;1.6;pieza;10
+Endivia (Chicorée);Verduras;17;1.3;0.2;3.4;3.1;pieza;100
+Espárrago blanco (Spargel) cocido;Verduras;20;1.9;0.1;3.0;1.4;pieza;20
+Betabel cocido (Rote Bete, vakuumiert);Verduras;43;1.7;0.2;9.6;2.8;pieza;80
+Calabaza Hokkaido cocida;Verduras;40;1.1;0.2;8.5;2.0;taza;120
+Mezcla de verduras congelada (Gemüsemischung);Verduras;45;2.6;0.3;8.0;3.0;taza;135
+Ejote congelado (grüne Bohnen TK) cocido;Verduras;31;1.8;0.2;7.0;3.4;taza;125
+Frutos rojos congelados (Beerenmischung TK);Frutas;45;1.0;0.4;9.0;4.0;taza;140
+Frambuesas congeladas (Himbeeren TK);Frutas;52;1.2;0.7;12;6.5;taza;125
+Arándanos (Heidelbeeren);Frutas;57;0.7;0.3;14;2.4;taza;150
+Grosella roja (Johannisbeeren);Frutas;56;1.4;0.2;14;4.3;taza;110
+Ciruela europea (Zwetschge);Frutas;46;0.7;0.3;11;1.4;pieza;35
+Albaricoque (Aprikose);Frutas;48;1.4;0.4;11;2.0;pieza;40
+Manzana roja europea (Apfel);Frutas;54;0.3;0.2;14;2.4;pieza;150
+Pera europea (Birne);Frutas;57;0.4;0.1;15;3.1;pieza;170
+Cerezas (Kirschen);Frutas;63;1.1;0.2;16;2.1;pieza;6
+Uvas pasas sultanas (Sultaninen);Frutas;299;3.1;0.5;79;3.7;cucharada;10
+Compota de manzana sin azúcar (Apfelmark ohne Zucker);Frutas;45;0.2;0.1;11;1.5;taza;250
+Pan integral de centeno (Vollkornbrot);Cereales S/G;210;6.8;1.2;39;8.0;rebanada;50
+Pumpernickel;Cereales S/G;181;5.5;1.0;35;8.5;rebanada;45
+Pan de espelta integral (Dinkelvollkornbrot);Cereales S/G;235;8.5;2.0;43;7.0;rebanada;45
+Pan mixto (Mischbrot);Cereales S/G;220;6.5;1.2;44;4.5;rebanada;45
+Pan crujiente de centeno (Knäckebrot);Cereales S/G;330;9.5;1.5;66;15;pieza;10
+Bollo de pan (Brötchen) blanco;Cereales S/G;270;8.5;1.5;55;3.0;pieza;55
+Bollo integral (Vollkornbrötchen);Cereales S/G;245;9.0;2.5;44;6.5;pieza;60
+Pretzel alemán (Laugenbrezel);Cereales S/G;275;8.5;2.5;54;2.5;pieza;80
+Tortitas de arroz (Reiswaffeln);Cereales S/G;387;8.0;2.8;81;3.5;pieza;8
+Hojuelas de avena (Haferflocken);Cereales S/G;372;13.5;7.0;59;10;cucharada;10
+Muesli sin azúcar (Müsli ohne Zuckerzusatz);Cereales S/G;360;10;6.5;60;8.0;cucharada;12
+Cuscús cocido;Cereales S/G;112;3.8;0.2;23;1.4;taza;160
+Bulgur cocido;Cereales S/G;83;3.1;0.2;19;4.5;taza;180
+Trigo sarraceno cocido (Buchweizen);Cereales S/G;92;3.4;0.6;20;2.7;taza;170
+Polenta cocida;Cereales S/G;70;1.6;0.3;15;0.8;taza;240
+Ñoquis de papa (Gnocchi);Cereales S/G;150;3.5;0.4;33;1.5;taza;150
+Spätzle cocidos;Cereales S/G;150;5.5;1.8;28;1.2;taza;150
+Pasta integral cocida (Vollkornnudeln);Cereales S/G;149;6.0;1.5;27;4.5;taza;140
+Papa cocida (Kartoffel);Cereales S/G;72;2.0;0.1;15;2.0;pieza;100
+Pan pita integral;Cereales S/G;266;9.8;2.6;55;7.4;pieza;65
+Wrap de trigo integral (Vollkorn-Wrap);Cereales C/G;300;8.5;7.0;48;6.0;pieza;62
+Croissant de mantequilla;Cereales C/G;406;8.2;21;45;2.6;pieza;45
+Edamame cocido;Leguminosas;121;12;5.2;8.9;5.2;taza;155
+Lentejas rojas cocidas (rote Linsen);Leguminosas;116;9.0;0.4;20;4.0;taza;200
+Garbanzos de lata escurridos (Kichererbsen);Leguminosas;119;7.0;2.6;14;5.0;taza;160
+Frijol blanco de lata (weiße Bohnen);Leguminosas;105;7.0;0.5;15;6.0;taza;180
+Skyr natural;A.O.A MBAG;63;11;0.2;4.0;0;cucharada;20
+Quark descremado (Magerquark);A.O.A MBAG;67;12;0.3;4.0;0;cucharada;25
+Queso cottage alemán (Hüttenkäse);A.O.A BAG;98;12.5;4.3;2.6;0;cucharada;20
+Yogur griego 0% (griechischer Joghurt 0%);A.O.A MBAG;57;10;0.2;4.0;0;cucharada;20
+Proteína de suero en polvo (Whey);A.O.A MBAG;380;78;5.5;6.0;0;medida;30
+Pechuga de pavo en rebanadas (Putenbrust Aufschnitt);A.O.A MBAG;105;21;1.5;1.5;0;rebanada;15
+Bacalao (Kabeljau) crudo;A.O.A MBAG;77;17.7;0.6;0;0;g;
+Abadejo (Seelachs) crudo;A.O.A MBAG;81;18.3;0.9;0;0;g;
+Merluza (Seehecht) cruda;A.O.A MBAG;86;17.2;1.8;0;0;g;
+Camarón cocido (Garnelen);A.O.A MBAG;99;24;0.3;0.2;0;g;
+Carne molida de res 5% grasa (Rinderhack 5%);A.O.A BAG;121;21;4.5;0;0;g;
+Filete de cerdo (Schweinefilet) crudo;A.O.A BAG;104;21;2.0;0;0;g;
+Jamón cocido magro (Kochschinken);A.O.A BAG;110;19.5;3.0;1.0;0;rebanada;20
+Tofu natural;A.O.A BAG;122;13;7.0;1.0;0.5;g;
+Tempeh;A.O.A MAG;192;20;11;7.6;5.0;g;
+Salmón ahumado (Räucherlachs);A.O.A BAG;161;20;9.0;0;0;rebanada;20
+Caballa ahumada (Räuchermakrele);A.O.A AAG;222;19;16;0;0;g;
+Atún en lata al natural (Thunfisch naturell);A.O.A MBAG;110;25;1.0;0;0;g;
+Huevo de gallina (Ei);A.O.A MAG;137;12.5;9.3;0.7;0;pieza;55
+Queso Harzer;A.O.A MBAG;123;27;0.5;0;0;g;
+Queso feta;A.O.A AAG;264;14;21;4.0;0;g;
+Queso halloumi;A.O.A AAG;321;21;25;2.2;0;rebanada;30
+Mozzarella light;A.O.A MAG;160;19;9.5;1.0;0;g;
+Parmesano;A.O.A AAG;402;32;29;0;0;cucharada;5
+Queso gouda en rebanadas;A.O.A AAG;356;25;27;0;0;rebanada;20
+Queso Emmental en rebanadas;A.O.A AAG;380;28;30;0;0;rebanada;20
+Leche descremada 0.3% (Magermilch);Leche descremada;35;3.4;0.2;4.8;0;taza;240
+Leche semidescremada 1.5% (fettarme Milch);Leche semi;47;3.4;1.5;4.8;0;taza;240
+Leche entera 3.5% (Vollmilch);Leche entera;64;3.3;3.5;4.8;0;taza;240
+Leche sin lactosa 1.5% (laktosefreie Milch);Leche semi;47;3.4;1.5;4.8;0;taza;240
+Kéfir natural 1.5%;Leche semi;48;3.4;1.5;4.0;0;taza;240
+Yogur natural 1.5% (Naturjoghurt);Leche semi;50;3.8;1.5;4.5;0;taza;240
+Yogur natural 3.5% (Naturjoghurt);Leche entera;66;3.7;3.5;4.5;0;taza;240
+Bebida de soya sin azúcar (Sojadrink ungesüßt);Leche descremada;33;3.0;1.8;0.5;0.6;taza;240
+Bebida de almendra sin azúcar (Mandeldrink ungesüßt);Grasas S/Proteínas;13;0.4;1.1;0.1;0.2;taza;240
+Bebida de avena (Haferdrink);Cereales S/G;46;0.6;1.5;7.0;0.8;taza;240
+Aceite de oliva (Olivenöl);Grasas S/Proteínas;884;0;100;0;0;cucharadita;5
+Aceite de colza (Rapsöl);Grasas S/Proteínas;884;0;100;0;0;cucharadita;5
+Mantequilla (Butter);Grasas S/Proteínas;741;0.7;82;0.6;0;cucharadita;5
+Aceitunas verdes;Grasas S/Proteínas;145;1.0;15;3.8;3.3;pieza;4
+Aguacate Hass;Grasas S/Proteínas;160;2.0;14.7;8.5;6.7;cucharada;15
+Crema de cacahuate 100% (Erdnussmus);Grasas C/Proteínas;600;25;50;12;8.0;cucharadita;5
+Crema de almendra 100% (Mandelmus);Grasas C/Proteínas;620;21;55;6.0;12;cucharadita;5
+Nueces (Walnüsse);Grasas C/Proteínas;654;15;65;7.0;6.7;pieza;5
+Semillas de girasol (Sonnenblumenkerne);Grasas C/Proteínas;584;21;51;20;8.6;cucharada;10
+Linaza molida (Leinsamen geschrotet);Grasas C/Proteínas;534;18;42;29;27;cucharada;7
+Semillas de chía;Grasas C/Proteínas;486;17;31;42;34;cucharada;10
+Hummus de súper;Grasas C/Proteínas;240;7.0;18;12;5.0;cucharada;15
+Miel (Honig);Azucares S/grasa;304;0.3;0;82;0.2;cucharadita;7
+Mermelada (Konfitüre);Azucares S/grasa;250;0.4;0.1;61;1.0;cucharadita;7
+Chocolate amargo 85%;Azucares C/grasa;580;12;50;19;12;cuadrito;5
