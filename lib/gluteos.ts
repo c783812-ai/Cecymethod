@@ -63,14 +63,14 @@ export const GUIA_GLUTEOS: Rutina = {
   ],
 };
 
+/** El calentamiento es un solo video de Cecy para todos los días. */
+export const CALENTAMIENTO = "Calentamiento";
+
 /** Todos los ejercicios distintos de una rutina, con los días en que aparecen. */
 export function ejerciciosDe(r: Rutina) {
   const m = new Map<string, { dias: Set<string>; calentamiento: boolean }>();
+  m.set(CALENTAMIENTO, { dias: new Set(r.dias.map((d) => d.dia)), calentamiento: true });
   for (const d of r.dias) {
-    for (const [n] of d.calentamiento) {
-      if (!m.has(n)) m.set(n, { dias: new Set(), calentamiento: true });
-      m.get(n)!.dias.add(d.dia);
-    }
     for (const f of d.ejercicios)
       for (const o of [f.a, f.b, f.c]) {
         if (!m.has(o.nombre)) m.set(o.nombre, { dias: new Set(), calentamiento: false });

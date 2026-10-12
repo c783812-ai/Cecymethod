@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DIAS, TIEMPOS, type Dia, type Patient, type Plan, type Rutina } from "@/lib/types";
 import { MANO } from "@/lib/equivalentes";
+import { CALENTAMIENTO } from "@/lib/gluteos";
 import { MealCard, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden } from "./Comidas";
 import Super from "./Super";
 import Antojos from "./Antojos";
@@ -279,9 +280,7 @@ function RutinaView({ rutina, videos, pid }: { rutina: Rutina | null; videos: Re
       </div>
       <div className="tint t-yellow">
         <h4>Calentamiento</h4>
-        {d.calentamiento.map(([n, s]) => (
-          <div key={n} className="ex"><span>{n}<br /><VideoBtn n={n} videos={videos} /></span><span className="note num">{s}</span></div>
-        ))}
+        <div style={{ marginTop: 6 }}><VideoBtn n={CALENTAMIENTO} videos={videos} /></div>
       </div>
       {d.ejercicios.map((f, i) => {
         const e = f[o];
