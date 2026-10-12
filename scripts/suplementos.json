@@ -2515,5 +2515,637 @@
    "AE"
   ],
   "fuente": "https://www.lifepharmacy.com/product/lovearth-organic-apple-cider-vinegar-500ml-99470"
+ },
+ {
+  "id": "edeka-herzstuecke-pollo-brocoli",
+  "n": "EDEKA Herzstücke – Pollo con brócoli en salsa de yogur (High-Protein Meal Hähnchen mit Brokkoli)",
+  "marca": "EDEKA Herzstücke",
+  "g": "Meal prep",
+  "porcion": "1 porción (400 g)",
+  "porcion_g": 400,
+  "k": null,
+  "p": 30.5,
+  "h": null,
+  "l": null,
+  "nota": "congelado para microondas; posiblemente el 'EDK' de la paciente (EDEKA); solo se publicó la proteína",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://verbund.edeka/presse/pressemeldungen/schnelle-proteinpower-f%C3%BCr-den-alltag-die-neuen-edeka-herzst%C3%BCcke-high-protein-meals.html"
+ },
+ {
+  "id": "edeka-herzstuecke-salmon-ejotes",
+  "n": "EDEKA Herzstücke – Salmón con ejotes en salsa cremosa (High-Protein Meal Lachs mit grünen Bohnen)",
+  "marca": "EDEKA Herzstücke",
+  "g": "Meal prep",
+  "porcion": "1 porción (400 g)",
+  "porcion_g": 400,
+  "k": null,
+  "p": 25.6,
+  "h": null,
+  "l": null,
+  "nota": "congelado para microondas; posiblemente el 'EDK' de la paciente (EDEKA); solo se publicó la proteína",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://verbund.edeka/presse/pressemeldungen/schnelle-proteinpower-f%C3%BCr-den-alltag-die-neuen-edeka-herzst%C3%BCcke-high-protein-meals.html"
+ },
+ {
+  "id": "prepmymeal-pollo-arroz-brocoli",
+  "n": "prepmymeal – Pollo con arroz y brócoli (Hähnchen, Reis, Brokkoli)",
+  "marca": "prepmymeal",
+  "g": "Meal prep",
+  "porcion": "1 porción (500 g)",
+  "porcion_g": 500,
+  "k": 455,
+  "p": 41,
+  "h": 59,
+  "l": 4.5,
+  "nota": "pollo con arroz y brócoli; entrega refrigerada a domicilio; carbs y grasa = mitad del paquete XL de 2 porciones",
+  "paises": [
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://prepmymeal.com/products/ch-hahnchen-reis-borkkoli-xl-2-portionen-3"
+ },
+ {
+  "id": "prepmymeal-abadejo-satay",
+  "n": "prepmymeal – Abadejo satay con arroz y ensalada de col (Satay Seelachs)",
+  "marca": "prepmymeal",
+  "g": "Meal prep",
+  "porcion": "1 porción (450 g)",
+  "porcion_g": 450,
+  "k": 599,
+  "p": 45,
+  "h": 54,
+  "l": 21,
+  "nota": "pescado blanco al vapor, arroz, col y salsa satay de cacahuate/coco; entrega a domicilio",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://prepmymeal.com/products/satay-seelachs"
+ },
+ {
+  "id": "fuelyourbody-arroz-pollo-brocoli",
+  "n": "Fuel Your Body – Arroz con pollo y brócoli (Reis - Hähnchen - Brokkoli)",
+  "marca": "Fuel Your Body",
+  "g": "Meal prep",
+  "porcion": "1 porción (405 g)",
+  "porcion_g": 405,
+  "k": 408,
+  "p": 41.5,
+  "h": 50.6,
+  "l": 4.4,
+  "nota": "pollo con arroz y brócoli; meal prep a domicilio",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.fuelyourbody.de/reis-hahnchen-brokkoli"
+ },
+ {
+  "id": "fuelyourbody-pollo-teriyaki-arroz-integral",
+  "n": "Fuel Your Body – Pollo teriyaki con arroz integral y verduras al wok",
+  "marca": "Fuel Your Body",
+  "g": "Meal prep",
+  "porcion": "1 porción (445 g)",
+  "porcion_g": 445,
+  "k": 437,
+  "p": 40.2,
+  "h": 57.5,
+  "l": 5.2,
+  "nota": "pollo teriyaki, arroz integral, verduras salteadas; ojo: 14 g de azúcar",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.fuelyourbody.de/brauner-reis-hahnchen-teriyaki-wok-gemuse"
+ },
+ {
+  "id": "mercichef-merluza-limon-arroz-salvaje",
+  "n": "merciChef – Merluza al limón con salsa de mango y arroz salvaje (Seehecht Zitrone)",
+  "marca": "merciChef (PowerMeals)",
+  "g": "Meal prep",
+  "porcion": "1 porción (400 g)",
+  "porcion_g": 400,
+  "k": 484,
+  "p": 30.3,
+  "h": 55.8,
+  "l": 13.8,
+  "nota": "pescado blanco, arroz salvaje, calabacita asada; entrega refrigerada en Suiza; menú cambia cada semana",
+  "paises": [
+   "CH"
+  ],
+  "fuente": "https://mercichef.ch/de/proteinreiche-mahlzeiten"
+ },
+ {
+  "id": "mercichef-planted-mango-arroz-salvaje",
+  "n": "merciChef – Planted (proteína vegetal) con salsa de mango y arroz salvaje",
+  "marca": "merciChef (PowerMeals)",
+  "g": "Meal prep",
+  "porcion": "1 porción (400 g)",
+  "porcion_g": 400,
+  "k": 517,
+  "p": 31.7,
+  "h": 57.9,
+  "l": 15.0,
+  "nota": "opción vegetal alta en proteína; entrega en Suiza; menú semanal",
+  "paises": [
+   "CH"
+  ],
+  "fuente": "https://mercichef.ch/de/proteinreiche-mahlzeiten"
+ },
+ {
+  "id": "myprotein-pollo-peri-peri-ch",
+  "n": "Myprotein – Comida de pollo peri peri (Peri Peri Hähnchen-Mahlzeit)",
+  "marca": "Myprotein",
+  "g": "Meal prep",
+  "porcion": "1 porción (300 g)",
+  "porcion_g": 300,
+  "k": 286,
+  "p": 29.4,
+  "h": 27.9,
+  "l": 5.1,
+  "nota": "pouch listo para calentar; envío online; la lista de ingredientes de la página parece la del curry tailandés",
+  "paises": [
+   "CH"
+  ],
+  "fuente": "https://www.myprotein.ch/p/sporternahrung/peri-peri-hahnchen-mahlzeit/10984881"
+ },
+ {
+  "id": "factor-bowl-pavo-cajun",
+  "n": "Factor – Bowl de pavo estilo cajún con camote, calabaza y chícharos (Cajun-Style Turkey Grain Bowl)",
+  "marca": "Factor",
+  "g": "Meal prep",
+  "porcion": "1 porción (386 g)",
+  "porcion_g": 386,
+  "k": 410,
+  "p": 32,
+  "h": 45,
+  "l": 13,
+  "nota": "pavo, granos, camote y verduras; entrega a domicilio lista para calentar",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.factor75.com/recipes/cajun-style-turkey-grain-bowl-69de9a749ea78ae7334cd2a4"
+ },
+ {
+  "id": "factor-salmon-ancho-lima-quinoa",
+  "n": "Factor – Salmón ancho-lima con quinoa, ensalada de frijol negro y elote (Ancho Lime Salmon)",
+  "marca": "Factor",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 520,
+  "p": 37,
+  "h": 38,
+  "l": 25,
+  "nota": "salmón con quinoa y frijol; entrega a domicilio",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.factor75.com/recipes/ancho-lime-salmon-w16-623ca6ddb9a8b421dd4c7e80"
+ },
+ {
+  "id": "snapkitchen-bowl-carnitas-pollo",
+  "n": "Snap Kitchen – Bowl de carnitas de pollo con arroz cilantro-limón y camote (Chicken Carnitas Bowl)",
+  "marca": "Snap Kitchen",
+  "g": "Meal prep",
+  "porcion": "1 porción (254 g)",
+  "porcion_g": 254,
+  "k": 520,
+  "p": 33,
+  "h": 38,
+  "l": 27,
+  "nota": "pollo, arroz, camote y elote; refrigerado, tiendas y entrega (Texas y otras zonas)",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://snapkitchen.com/product/chicken-carnitas-bowl"
+ },
+ {
+  "id": "megafit-go-to-meal",
+  "n": "MegaFit Meals – Pollo cítrico con arroz jazmín y brocolini (The Go-To Meal)",
+  "marca": "MegaFit Meals",
+  "g": "Meal prep",
+  "porcion": "1 porción (327 g)",
+  "porcion_g": 327,
+  "k": 400,
+  "p": 41,
+  "h": 47,
+  "l": 4,
+  "nota": "pollo a la plancha, arroz y brocolini; valores sin la salsa sriracha (+90 kcal, 8 g grasa)",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://megafitmeals.com/products/the-go-to-meal"
+ },
+ {
+  "id": "healthychoice-pollo-feta-farro",
+  "n": "Healthy Choice – Power Bowl de pollo, feta y farro (Chicken Feta & Farro)",
+  "marca": "Healthy Choice",
+  "g": "Meal prep",
+  "porcion": "1 porción (269 g)",
+  "porcion_g": 269,
+  "k": 310,
+  "p": 23,
+  "h": 34,
+  "l": 9,
+  "nota": "congelado de supermercado; algo menos de 25 g de proteína",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.conagrabrands.ca/en/brands/healthy-choice/power-bowls/chicken-feta-farro-bowl"
+ },
+ {
+  "id": "factor-ca-pollo-harissa-basmati",
+  "n": "Factor Canadá – Pollo harissa con arroz basmati, zanahoria chermoula y calabacita",
+  "marca": "Factor",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 470,
+  "p": 43,
+  "h": 32,
+  "l": 19,
+  "nota": "pollo con arroz y verduras; entrega a domicilio en Canadá",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://www.factormeals.ca/recipes/harissa-chicken-w44-66f79e7a4c65e1fd73e1eb8f"
+ },
+ {
+  "id": "factor-ca-tikka-masala-arroz-integral",
+  "n": "Factor Canadá – Pollo tikka masala con arroz integral, garbanzos y coliflor al curry",
+  "marca": "Factor",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 490,
+  "p": 46,
+  "h": 31,
+  "l": 20,
+  "nota": "pollo con arroz integral y garbanzo; entrega a domicilio en Canadá",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://www.factormeals.ca/recipes/chicken-tikka-masala-w42-659c0c32145e14b9dce08610"
+ },
+ {
+  "id": "fitfuel-pollo-arroz",
+  "n": "Fit Fuel Meals – Pollo con arroz (Chicken & Rice)",
+  "marca": "Fit Fuel Meals",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 376,
+  "p": 40.5,
+  "h": 41,
+  "l": 4.8,
+  "nota": "meal prep fresco; entrega en Columbia Británica (Vancouver, Surrey, Victoria)",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://www.fitfuelmeals.ca/menu/lunch-dinner/chicken-and-rice"
+ },
+ {
+  "id": "fitfuel-camaron-miso",
+  "n": "Fit Fuel Meals – Camarón glaseado con miso (Miso Glazed Shrimp)",
+  "marca": "Fit Fuel Meals",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 307,
+  "p": 30,
+  "h": 36,
+  "l": 4.4,
+  "nota": "camarón con guarnición; entrega en Columbia Británica",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://www.fitfuelmeals.ca/menu/lunch-dinner/miso-glazed-shrimp"
+ },
+ {
+  "id": "prepkitchen-pollo-limon-hierbas",
+  "n": "Prep Kitchen – Pollo al limón y hierbas (Lemon and Herb Chicken)",
+  "marca": "Prep Kitchen",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 473,
+  "p": 50,
+  "h": 44,
+  "l": 11,
+  "nota": "meal prep a domicilio en Reino Unido",
+  "paises": [
+   "UK"
+  ],
+  "fuente": "https://prepkitchen.co.uk/menu/lemon-and-herb-chicken"
+ },
+ {
+  "id": "musclefood-pollo-chipotle",
+  "n": "Musclefood – Pollo chipotle ahumado con arroz mexicano y frijol negro (Smoky Chipotle Chicken)",
+  "marca": "Musclefood",
+  "g": "Meal prep",
+  "porcion": "1 porción (400 g)",
+  "porcion_g": 400,
+  "k": 444,
+  "p": 31.2,
+  "h": 42.8,
+  "l": 14.4,
+  "nota": "pollo, arroz, frijol negro, elote y camote; alto en fibra; ojo 17.6 g azúcar",
+  "paises": [
+   "UK"
+  ],
+  "fuente": "https://www.musclefood.com/products/smoky-chipotle-chicken"
+ },
+ {
+  "id": "tesco-high-protein-pollo-shawarma",
+  "n": "Tesco High Protein – Pollo shawarma con bulgur y ejotes (Chicken Shawarma)",
+  "marca": "Tesco",
+  "g": "Meal prep",
+  "porcion": "1 porción (400 g)",
+  "porcion_g": 400,
+  "k": 474,
+  "p": 37.7,
+  "h": 43.4,
+  "l": 13.7,
+  "nota": "comida lista de supermercado; bulgur, lenteja roja y pollo",
+  "paises": [
+   "UK"
+  ],
+  "fuente": "https://www.tesco.com/groceries/en-GB/products/323410038"
+ },
+ {
+  "id": "ms-count-on-us-tikka-masala",
+  "n": "M&S Count On Us – Pollo tikka masala con arroz basmati",
+  "marca": "Marks & Spencer",
+  "g": "Meal prep",
+  "porcion": "1 porción (400 g)",
+  "porcion_g": 400,
+  "k": 368,
+  "p": 27.6,
+  "h": 47.2,
+  "l": 6.8,
+  "nota": "comida lista de supermercado, línea controlada en calorías",
+  "paises": [
+   "UK"
+  ],
+  "fuente": "https://mcgrocer.com/products/m-s-count-on-us-chicken-tikka-masala-rice-indian-meal-400g-674787"
+ },
+ {
+  "id": "birdseye-get-real-pollo-marroqui",
+  "n": "Birds Eye / iglo Get Real Protein – Bowl de pollo marroquí con garbanzo y arroz",
+  "marca": "Birds Eye (iglo en NL/BE)",
+  "g": "Meal prep",
+  "porcion": "1 porción (350 g)",
+  "porcion_g": 350,
+  "k": 356,
+  "p": 35,
+  "h": 35,
+  "l": 6,
+  "nota": "congelado de supermercado; en NL/BE se vende como iglo Get Real Protein (valores tomados de la versión UK)",
+  "paises": [
+   "UK",
+   "EU"
+  ],
+  "fuente": "https://groceries.morrisons.com/products/birds-eye-get-real-protein-moroccan-style-chicken-rice-bowl/115803698"
+ },
+ {
+  "id": "wetaca-judiones-pollo",
+  "n": "Wetaca – Judiones guisados con pollo",
+  "marca": "Wetaca",
+  "g": "Meal prep",
+  "porcion": "1 porción (450 g)",
+  "porcion_g": 450,
+  "k": 463,
+  "p": 34.2,
+  "h": 36.9,
+  "l": 16.7,
+  "nota": "guiso de alubia con pollo; táper refrigerado a domicilio (península)",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://wetaca.com/carta/detalle/judiones-guisados-con-pollo"
+ },
+ {
+  "id": "wetaca-merluza-allada",
+  "n": "Wetaca – Merluza con allada gallega, patatas y champiñones",
+  "marca": "Wetaca",
+  "g": "Meal prep",
+  "porcion": "1 porción (415 g)",
+  "porcion_g": 415,
+  "k": 571,
+  "p": 37.8,
+  "h": 32.8,
+  "l": 35.3,
+  "nota": "pescado blanco con papa y champiñón; grasa alta (aceite)",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://wetaca.com/carta/detalle/merluza-con-allada-gallega-patatas-y-champinones"
+ },
+ {
+  "id": "wetaca-pollo-tandoori-garbanzos",
+  "n": "Wetaca – Pollo tandoori con garbanzos masala",
+  "marca": "Wetaca",
+  "g": "Meal prep",
+  "porcion": "1 porción (430 g)",
+  "porcion_g": 430,
+  "k": 593,
+  "p": 50.7,
+  "h": 40.9,
+  "l": 22.4,
+  "nota": "muslo de pollo con garbanzo; la web indica que volverá pronto a la carta",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://wetaca.com/carta/detalle/pollo-tandoori-con-garbanzos-masala"
+ },
+ {
+  "id": "purepower-tikka-masala-arroz",
+  "n": "Purepower Nutrition – Pollo tikka masala con Power Rice",
+  "marca": "Purepower Nutrition",
+  "g": "Meal prep",
+  "porcion": "1 porción (400 g)",
+  "porcion_g": 400,
+  "k": 336,
+  "p": 28,
+  "h": 49.2,
+  "l": 3.7,
+  "nota": "comida lista irlandesa; en Tesco Irlanda",
+  "paises": [
+   "EU"
+  ],
+  "fuente": "https://www.tesco.ie/groceries/en-IE/products/312718538"
+ },
+ {
+  "id": "fitfoods-pollo-sweet-chilli-fideos-integrales",
+  "n": "Fit Foods – Pollo sweet chilli con fideos integrales",
+  "marca": "Fit Foods",
+  "g": "Meal prep",
+  "porcion": "1 porción (400 g)",
+  "porcion_g": 400,
+  "k": 562,
+  "p": 40,
+  "h": 58.4,
+  "l": 16,
+  "nota": "comida lista irlandesa; en Tesco Irlanda; salsa dulce",
+  "paises": [
+   "EU"
+  ],
+  "fuente": "https://www.tesco.ie/groceries/en-IE/products/313749767"
+ },
+ {
+  "id": "kcal-pollo-desmenuzado-arroz",
+  "n": "Kcal – Pollo desmenuzado con arroz especiado (Pulled Chicken with Spiced Rice)",
+  "marca": "Kcal",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 464,
+  "p": 46.9,
+  "h": 44.7,
+  "l": 13.2,
+  "nota": "comida lista / plan de comidas en EAU",
+  "paises": [
+   "AE"
+  ],
+  "fuente": "https://deliveroo.ae/en/menu/Abu%20Dhabi/al-reem-island/kcal-khalifa-park"
+ },
+ {
+  "id": "kcal-pollo-verduras-asadas",
+  "n": "Kcal – Pollo a la parrilla con verduras asadas (Grilled Chicken & Roast Veggies)",
+  "marca": "Kcal",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 376,
+  "p": 41.3,
+  "h": 26.3,
+  "l": 13,
+  "nota": "pollo con verduras; EAU",
+  "paises": [
+   "AE"
+  ],
+  "fuente": "https://deliveroo.ae/en/menu/Abu%20Dhabi/al-reem-island/kcal-khalifa-park"
+ },
+ {
+  "id": "calo-shish-tawook",
+  "n": "Calo – Plato levantino de shish tawook (Levantine Shish Tawook Plate)",
+  "marca": "Calo",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 437,
+  "p": 51,
+  "h": 28,
+  "l": 13,
+  "nota": "pollo marinado estilo libanés; plan de comidas por suscripción en EAU; menú rotativo",
+  "paises": [
+   "AE"
+  ],
+  "fuente": "https://calo.app/en-ae/menu"
+ },
+ {
+  "id": "calo-bowl-pollo-freekeh-granada",
+  "n": "Calo – Bowl de pollo con freekeh y granada (Pomegranate Chicken Freekeh Bowl)",
+  "marca": "Calo",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 508,
+  "p": 62,
+  "h": 34,
+  "l": 14,
+  "nota": "pollo con grano integral (freekeh); EAU; menú rotativo",
+  "paises": [
+   "AE"
+  ],
+  "fuente": "https://calo.app/en-ae/menu"
+ },
+ {
+  "id": "myprotein-curry-thai-pollo-ae",
+  "n": "Myprotein – Comida de curry tailandés de pollo con arroz integral (Thai Chicken Curry)",
+  "marca": "Myprotein",
+  "g": "Meal prep",
+  "porcion": "1 porción (300 g)",
+  "porcion_g": 300,
+  "k": 285,
+  "p": 33,
+  "h": 15.9,
+  "l": 9,
+  "nota": "pouch listo para calentar; marcado como agotado en la tienda de EAU",
+  "paises": [
+   "AE"
+  ],
+  "fuente": "https://ar.myprotein.ae/p/sports-nutrition/myprotein-protein-meal-thai-chicken/10984883/"
+ },
+ {
+  "id": "myfitnesschef-pollo-tomate-rostizado",
+  "n": "My Fitness Chef – Pollo con tomate rostizado (Chicken Roasted Tomate)",
+  "marca": "My Fitness Chef",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 479,
+  "p": 49,
+  "h": 44,
+  "l": 10,
+  "nota": "meal prep a domicilio en CDMX y Pachuca",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://myfitnesschef.mx/menu"
+ },
+ {
+  "id": "myfitnesschef-bowl-pescado-curry",
+  "n": "My Fitness Chef – Bowl de pescado en salsa curry (Curry Sauce Fish Bowl)",
+  "marca": "My Fitness Chef",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 483,
+  "p": 36,
+  "h": 54,
+  "l": 14,
+  "nota": "pescado con arroz; CDMX y Pachuca",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://myfitnesschef.mx/menu"
+ },
+ {
+  "id": "myfitnesschef-fiesta-turkey-bowl",
+  "n": "My Fitness Chef – Bowl de pavo (Fiesta Turkey Bowl)",
+  "marca": "My Fitness Chef",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 542,
+  "p": 43,
+  "h": 53,
+  "l": 16,
+  "nota": "pavo con guarnición; CDMX y Pachuca",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://myfitnesschef.mx/menu"
+ },
+ {
+  "id": "manzanaverde-bowl-mexicano",
+  "n": "Manzana Verde – Bowl mexicano",
+  "marca": "Manzana Verde",
+  "g": "Meal prep",
+  "porcion": "1 porción",
+  "porcion_g": null,
+  "k": 580,
+  "p": 34,
+  "h": 52,
+  "l": 22,
+  "nota": "comida saludable a domicilio en CDMX, Guadalajara y Monterrey; menú diario",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://manzanaverde.la/mexico"
  }
 ]
