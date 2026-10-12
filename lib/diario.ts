@@ -31,7 +31,7 @@ export const hoyISO = (d = new Date()) => `${d.getFullYear()}-${String(d.getMont
 
 // Proteína, hidratos y grasa de 1 equivalente por subgrupo SMAE, para platillos armados antes de guardar los macros.
 const REF: [RegExp, [number, number, number]][] = [
-  [/prote[ií]na en polvo/i, [24, 3, 1.5]], [/batido listo/i, [20, 10, 3]], [/barra de prote/i, [20, 15, 7]], [/bebida vegetal con prote/i, [7, 3, 3]],
+  [/prote[ií]na en polvo/i, [24, 3, 1.5]], [/meal prep/i, [35, 40, 15]], [/batido listo/i, [20, 10, 3]], [/barra de prote/i, [20, 15, 7]], [/bebida vegetal con prote/i, [7, 3, 3]],
   [/col[aá]geno/i, [9, 0, 0]], [/^(fibra|polvo verde|c[uú]rcuma|creatina|vitamina|probi|multivit|electrolit|saborizante|caf[eé]|omega|magnesio|endulzante|kombucha|vinagre)/i, [0, 0, 0]],
   [/verdura/i, [2, 4, 0]], [/fruta/i, [0, 15, 0]], [/cereales? c\/g|cereales con grasa/i, [2, 15, 5]], [/cereal/i, [2, 15, 0]],
   [/legumin/i, [8, 20, 1]], [/mbag|muy bajo aporte/i, [7, 0, 1]], [/a\.o\.a bag|bajo aporte/i, [7, 0, 3]], [/mag|moderado aporte/i, [7, 0, 5]],

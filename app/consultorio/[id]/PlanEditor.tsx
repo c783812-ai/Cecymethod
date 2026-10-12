@@ -190,7 +190,7 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
                   ) : (
                     <div style={{ display: "flex", gap: 6 }}>
                       <button className="btn" style={{ padding: "3px 8px", fontSize: 12 }} onClick={() => setBuscando(`${d}-${i}`)}>+ Ingrediente</button>
-                      <button className="btn" style={{ padding: "3px 8px", fontSize: 12 }} onClick={() => setBuscando(`sup-${d}-${i}`)}>+ Suplemento</button>
+                      <button className="btn" style={{ padding: "3px 8px", fontSize: 12 }} onClick={() => setBuscando(`sup-${d}-${i}`)}>+ Producto o meal prep</button>
                     </div>
                   )}
                 </div>

@@ -84,7 +84,7 @@ const SUP: Record<string, string> = {
   "Vitamina B12": "💊", Probióticos: "💊", Multivitamínico: "💊", Electrolitos: "💧", "Saborizante de agua sin calorías": "💧", Café: "☕",
   "Omega-3": "🐟", Magnesio: "💊", "Vitamina D": "☀️", "Batido listo para tomar": "🥤", "Barra de proteína": "🍫",
   "Endulzante sin calorías": "🍃", "Bebida vegetal con proteína": "🥛",
-  Kombucha: "🫖", "Vinagre de manzana": "🍎",
+  Kombucha: "🫖", "Vinagre de manzana": "🍎", "Meal prep": "🍱",
 };
 export const icono = (nombre: string, g = "") => SUP[g] ?? EMOJI.find(([r]) => r.test(nombre))?.[1] ?? "";
 export const BANDERA: Record<string, string> = { MX: "🇲🇽", US: "🇺🇸", CA: "🇨🇦", UK: "🇬🇧", ES: "🇪🇸", DE: "🇩🇪", CH: "🇨🇭", EU: "🇪🇺", AE: "🇦🇪" };
