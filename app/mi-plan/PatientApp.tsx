@@ -9,7 +9,7 @@ import Super from "./Super";
 import Antojos from "./Antojos";
 import Instalar from "./Instalar";
 import Logros from "./Logros";
-import { SeriesLog, useCargas } from "./Cargas";
+import { Descanso, SeriesLog, useCargas } from "./Cargas";
 import { MetaBar, RegistroHoy, useDiario, type DiarioHook } from "./Diario";
 import { aporte, hoyISO } from "@/lib/diario";
 import { tint } from "@/components/shared";
@@ -281,6 +281,7 @@ function RutinaView({ rutina: fija, ciclo, videos, pid, remoto }: { rutina: Ruti
           <button key={x.dia} aria-pressed={g === i} onClick={() => setG(i)} style={{ width: "auto", padding: "0 16px", height: 44 }}><b>{x.dia}</b></button>
         ))}
       </div>
+      <Descanso />
       <div className="seg unidad" role="group" aria-label="Unidad de peso">
         <span className="note">Anota tus pesos en</span>
         {(["kg", "lb"] as const).map((x) => <button key={x} aria-pressed={cargas.u === x} onClick={() => cargas.unidad(x)}>{x}</button>)}
@@ -301,7 +302,7 @@ function RutinaView({ rutina: fija, ciclo, videos, pid, remoto }: { rutina: Ruti
                 <span className="chip num"><b>{e.series}</b></span>
                 <span className="chip">Descanso {e.descanso}</span>
               </div>
-              <SeriesLog ejercicio={e.nombre} txt={e.series} cargas={cargas} />
+              <SeriesLog ejercicio={e.nombre} txt={e.series} descanso={e.descanso} cargas={cargas} />
               {e.aproximacion && (
                 <details className="warm">
                   <summary>Series de aproximación</summary>
