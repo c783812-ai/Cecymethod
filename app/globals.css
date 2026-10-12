@@ -314,3 +314,30 @@ a{color:inherit}
 .antojos summary b::after{content:" ▸";color:var(--muted)}
 .antojos[open] summary b::after{content:" ▾"}
 .antojos .seg{margin-top:10px}
+.lista{margin-top:10px;border:1px solid currentColor;background:rgba(255,255,255,.7);color:inherit;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13.5px;opacity:.8}
+.lista[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--surface);opacity:1}
+.metabar{padding:14px}
+.metabar .mb-top{display:flex;justify-content:space-between;align-items:baseline}
+.metabar .mb-top b{font-size:22px}
+.metabar .mb-label{font-weight:600;font-size:15px;margin:2px 0 8px}
+.mb-track{height:12px;border-radius:999px;background:var(--line);overflow:hidden}
+.mb-track div{height:100%;border-radius:999px;background:var(--accent);transition:width .3s}
+.registro{padding:14px}
+.registro h5{margin:16px 0 6px;font-size:15px}
+.registro h5 .note{font-weight:400;font-size:12.5px;margin-left:4px}
+.vasos{display:flex;flex-wrap:wrap;gap:6px}
+.vasos button{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:18px;color:var(--muted)}
+.vasos button[aria-pressed="true"]{background:#e6f1fb;border-color:#9cc3ea}
+.vasos .mas{font-weight:700;color:var(--accent)}
+.stepper{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.stepper button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:18px;color:inherit}
+.stepper b{font-size:20px;min-width:16px;text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1px solid var(--line);background:transparent;color:inherit;border-radius:999px;padding:6px 11px;font-size:13.5px}
+.chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.caritas{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.caritas button{border:1px solid var(--line);background:transparent;color:inherit;border-radius:14px;padding:6px 2px;display:grid;justify-items:center;gap:2px}
+.caritas button span{font-size:24px}
+.caritas button small{font-size:11.5px;color:var(--muted)}
+.caritas button[aria-pressed="true"]{border-color:var(--accent);background:#eef3fd}
+.medtxt{margin-top:8px;width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:inherit;font-size:14px;background:var(--surface);color:inherit}

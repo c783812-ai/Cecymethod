@@ -6,6 +6,8 @@ import { MANO } from "@/lib/equivalentes";
 import { MealCard, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden } from "./Comidas";
 import Super from "./Super";
 import Antojos from "./Antojos";
+import { MetaBar, RegistroHoy, useDiario } from "./Diario";
+import { aporte, hoyISO } from "@/lib/diario";
 import { PorcionesTable, tint } from "@/components/shared";
 
 const MEAL_TINT = ["t-yellow", "t-pink", "t-blue", "t-lilac", "t-green"];
@@ -131,9 +133,19 @@ function Metas({ p }: { p: Patient }) {
 
 function Hoy({ p, plan, planExiste, cambios, orden }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden }) {
   const [di, setDi] = useState<number | null>(null);
-  useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); }, []);
+  const [hoyIdx, setHoyIdx] = useState<number | null>(null);
+  useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); setHoyIdx(d === 0 ? 6 : d - 1); }, []);
+  const diario = useDiario(p.id);
   if (!plan) return <><Locked planExiste={planExiste} /><Metas p={p} /><Whats /></>;
   const d = di ?? 0;
+  const esHoy = d === hoyIdx;
+  const fecha = hoyISO();
+  const listas = diario[0][fecha]?.comidas ?? [];
+  const marcar = (i: number) => diario[1](fecha, { comidas: listas.includes(i) ? listas.filter((x) => x !== i) : [...listas, i] });
+  const delDia = d < 6 ? TIEMPOS.map((_, i) => {
+    const { m, src } = comidaDe(plan, orden[0], DIAS[d], i);
+    return { ...m, ingredientes: m.ingredientes?.map((o, j) => cambios[0][slotDe(src, i, j)] ?? o) };
+  }) : [];
   return (
     <>
       <div className="daychips" aria-label="Día">
@@ -144,6 +156,7 @@ function Hoy({ p, plan, planExiste, cambios, orden }: { p: Patient; plan: Plan |
         ))}
       </div>
       <div className="eyebrow">{d === 6 ? "Domingo" : DIAS[d]}</div>
+      {esHoy && d < 6 && plan.meta && <MetaBar meta={plan.meta} aportes={aporte(delDia, plan.meta)} listas={listas} />}
       {d === 6 ? (
         <div className="tint t-yellow"><h4>🌤️ Domingo libre</h4><p>{plan.domingo}</p></div>
       ) : (
@@ -152,10 +165,12 @@ function Hoy({ p, plan, planExiste, cambios, orden }: { p: Patient; plan: Plan |
           return m.titulo ? (
             <MealCard key={`${d}-${i}-${src}`} m={m} hora={plan.horarios?.[i] ?? TIEMPOS[i][1]} tiempo={TIEMPOS[i][0]} tintClass={MEAL_TINT[i]}
               slot={(j) => slotDe(src, i, j)} cambios={cambios} sistema={plan.sistema ?? "smae"}
-              opciones={opcionesDe(plan, i).map((o) => [o, plan.menu[o][i].titulo])} actual={src} onElegir={(o) => orden[1](DIAS[d], i, o)} />
+              opciones={opcionesDe(plan, i).map((o) => [o, plan.menu[o][i].titulo])} actual={src} onElegir={(o) => orden[1](DIAS[d], i, o)}
+              {...(esHoy ? { lista: listas.includes(i), onLista: () => marcar(i) } : {})} />
           ) : null;
         })
       )}
+      {esHoy && <RegistroHoy diario={diario} vasos={plan.agua || 8} />}
       <Antojos />
       {plan.suplementos.length > 0 && (
         <div className="card" style={{ padding: 14 }}>

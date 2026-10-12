@@ -12,6 +12,7 @@ export const COLORES = ["rosa", "azul", "amarillo", "verde", "lila"] as const;
 export type Color = (typeof COLORES)[number];
 
 import type { Ingrediente, Sistema } from "./alimentos";
+import type { Meta } from "./diario";
 
 /** detalle: texto libre (o cómo prepararlo si hay ingredientes). */
 export type Comida = { titulo: string; detalle: string; ingredientes?: Ingrediente[] };
@@ -34,6 +35,8 @@ export type Plan = {
   suplementos: Suplemento[];
   tips: Tip[];
   sistema?: Sistema; // de qué lista salen los cambios; smae si no se dice
+  agua?: number; // vasos de 250 ml al día
+  meta?: Meta; // la barrita de avance del día
 };
 
 export type Ejercicio = { nombre: string; series: string; descanso: string; aproximacion?: string[] };

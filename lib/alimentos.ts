@@ -9,7 +9,8 @@ export type Alimento = {
   k_mg?: number; na?: number; fo?: number; agua?: number; ca?: number;
 };
 /** Un ingrediente de una comida: el alimento (copiado, para no cargar la biblioteca) y cuántos equivalentes. */
-export type Ingrediente = { id: string; n: string; g: string; c: number; u: string; pn: number; x: number; s?: "sup" };
+/** m: [proteína, hidratos, grasa] de 1 porción (x = 1); los platillos viejos no lo traen. */
+export type Ingrediente = { id: string; n: string; g: string; c: number; u: string; pn: number; x: number; s?: "sup"; m?: [number, number, number] };
 
 const cache: Partial<Record<Sistema, Promise<Alimento[]>>> = {};
 export function cargarAlimentos(s: Sistema = "smae") {
@@ -19,7 +20,10 @@ export function cargarAlimentos(s: Sistema = "smae") {
   }));
 }
 
-export const comoIngrediente = (a: Alimento, x = 1): Ingrediente => ({ id: a.id, n: a.n, g: a.g, c: a.c, u: a.u, pn: a.pn, x, ...(a.o === "sup" ? { s: "sup" as const } : {}) });
+export const comoIngrediente = (a: Alimento, x = 1): Ingrediente => ({
+  id: a.id, n: a.n, g: a.g, c: a.c, u: a.u, pn: a.pn, x, ...(a.o === "sup" ? { s: "sup" as const } : {}),
+  ...(a.p != null || a.h != null || a.l != null ? { m: [a.p ?? 0, a.h ?? 0, a.l ?? 0] as [number, number, number] } : {}),
+});
 
 const FR: [number, string][] = [[0.25, "¼"], [1 / 3, "⅓"], [0.5, "½"], [2 / 3, "⅔"], [0.75, "¾"]];
 export function fraccion(v: number) {

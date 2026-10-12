@@ -58,9 +58,9 @@ export function opcionesDe(plan: Plan, i: number) {
   });
 }
 
-export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, opciones = [], actual, onElegir }: {
+export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, opciones = [], actual, onElegir, lista, onLista }: {
   m: Comida; hora: string; tiempo: string; tintClass: string; slot: (j: number) => string; cambios: Cambios; sistema: Sistema;
-  opciones?: [Dia, string][]; actual?: Dia; onElegir?: (d: Dia) => void;
+  opciones?: [Dia, string][]; actual?: Dia; onElegir?: (d: Dia) => void; lista?: boolean; onLista?: () => void;
 }) {
   const [hechos, setCambio] = cambios;
   const [abierto, setAbierto] = useState<number | null>(null);
@@ -99,6 +99,9 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, o
             <p>{m.detalle}</p>
           </details>
         ) : <p>{m.detalle}</p>)}
+        {onLista && (
+          <button className="lista" aria-pressed={!!lista} onClick={onLista}>{lista ? "✓ Lista" : "Marcar como lista"}</button>
+        )}
       </div>
       {abierto !== null && (
         <SwapSheet

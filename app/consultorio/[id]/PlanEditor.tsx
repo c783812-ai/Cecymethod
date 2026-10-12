@@ -5,6 +5,7 @@ import { tint } from "@/components/shared";
 import { guardarPlan } from "../actions";
 import BuscarAlimento from "@/components/BuscarAlimento";
 import { cantidad, comoIngrediente, fraccion, icono } from "@/lib/alimentos";
+import { META } from "@/lib/diario";
 
 const EQS = [0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6];
 
@@ -71,6 +72,13 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
           <label className="field">Próxima revisión<input value={plan.proxima_revision} onChange={(e) => up((p) => { p.proxima_revision = e.target.value; })} /></label>
           <label className="field">kcal al día<input value={plan.kcal} onChange={(e) => up((p) => { p.kcal = e.target.value; })} placeholder="1,700" /></label>
           <label className="field">Proteína (g)<input value={plan.proteina} onChange={(e) => up((p) => { p.proteina = e.target.value; })} placeholder="95" /></label>
+          <label className="field">Agua al día (vasos de 250 ml)<input type="number" min={1} max={20} value={plan.agua ?? ""} onChange={(e) => up((p) => { p.agua = Number(e.target.value) || undefined; })} placeholder="8" /></label>
+          <label className="field">Meta de la barrita del día
+            <select value={plan.meta ?? ""} onChange={(e) => up((p) => { p.meta = (e.target.value || undefined) as Plan["meta"]; })}>
+              <option value="">Sin barrita</option>
+              {Object.entries(META).map(([k, t]) => <option key={k} value={k}>{t}</option>)}
+            </select>
+          </label>
         </div>
         <label className="field">Objetivo, como lo lee ella<textarea value={plan.objetivo} onChange={(e) => up((p) => { p.objetivo = e.target.value; })} placeholder="Recuperar tu energía y tus reservas de hierro, sin dejar de comer lo que te gusta." /></label>
       </div>
