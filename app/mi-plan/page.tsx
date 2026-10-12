@@ -32,15 +32,15 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
 
   const [planRes, rutRes, vidRes] = await Promise.all([
     sb.from("plans").select("id, data").eq("patient_id", patient.id).eq("activo", true).order("updated_at", { ascending: false }).limit(1).maybeSingle(),
-    patient.routine_key ? sb.from("routine_templates").select("key, data").in("key", patient.routine_key === CICLO_KEY ? CICLO.map((c) => c.key) : [patient.routine_key]) : Promise.resolve({ data: null }),
+    patient.routine_key && patient.routine_key !== CICLO_KEY ? sb.from("routine_templates").select("key, data").in("key", [patient.routine_key]) : Promise.resolve({ data: null }),
     sb.from("exercise_videos").select("nombre, storage_path"),
   ]);
 
   const plan = patient.plan_visible ? ((planRes.data?.data as Plan) ?? null) : null;
   const filas = (rutRes.data ?? []) as { key: string; data: Rutina }[];
-  // En la rutina del mes van todas las del ciclo, en orden (si falta alguna en la base, se usa la de la página); la paciente ve la de su mes.
-  const ciclo = patient.routine_key === CICLO_KEY ? CICLO.map((c) => filas.find((f) => f.key === c.key)?.data ?? c.rutina) : null;
-  const rutina = patient.routine_visible ? (ciclo ? ciclo[0] : (filas[0]?.data ?? null)) : null;
+  // En la rutina del mes van todas las del ciclo, en orden, tal como están en la página (nombres en inglés); la paciente ve la de su mes.
+  const ciclo = patient.routine_key === CICLO_KEY ? CICLO.map((c) => c.rutina) : null;
+  const rutina = patient.routine_visible ? (ciclo ? ciclo[0] : (CICLO.find((c) => c.key === patient.routine_key)?.rutina ?? filas[0]?.data ?? null)) : null;
 
   let videos: Record<string, string> = {};
   const vids = vidRes.data ?? [];
