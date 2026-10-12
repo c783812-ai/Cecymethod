@@ -1,8 +1,16 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { BANDERA, PAIS, icono } from "@/lib/alimentos";
+import { BANDERA, PAIS } from "@/lib/alimentos";
 
 type Antojo = { id: string; n: string; tipo: "dulce" | "salado"; porcion: string; k: number | null; p: number | null; nota?: string; paises: string[] };
+
+const ICONO: [RegExp, string][] = [
+  [/paleta|polo|calippo|capri|rakete|lolly|solero|outshine/i, "🍧"], [/helado|halo top|skinny cow|yasso/i, "🍨"], [/gelatina|pud|mousse/i, "🍮"],
+  [/gomitas|sweets/i, "🍬"], [/palomitas|skinnypop/i, "🍿"], [/pretzel|saltletts/i, "🥨"], [/alga/i, "🌿"],
+  [/edamame|garbanzo|lenteja|bean/i, "🫘"], [/arroz|tortitas|rice/i, "🍘"], [/maíz|tostadit|salmas/i, "🌽"], [/chips/i, "🥔"],
+  [/chocolate|amaranto/i, "🍫"],
+];
+const iconoAntojo = (a: Antojo) => ICONO.find(([r]) => r.test(a.n))?.[1] ?? (a.tipo === "dulce" ? "🍫" : "🥨");
 
 let cache: Promise<Antojo[]> | null = null;
 const cargar = () => (cache ??= fetch("/alimentos/antojos.json").then((r) => (r.ok ? r.json() : Promise.reject(r.status))).catch((e) => { cache = null; throw e; }));
@@ -38,7 +46,7 @@ export default function Antojos() {
         <ul className="ings">
           {ver.map((a) => (
             <li key={a.id}>
-              <span className="ic" aria-hidden="true">{icono(a.n) || (tipo === "dulce" ? "🍫" : "🥨")}</span>
+              <span className="ic" aria-hidden="true">{iconoAntojo(a)}</span>
               <span className="nm">
                 {a.n}
                 <b className="qt num">{a.porcion}{a.k != null ? ` · ${a.k} kcal` : ""}</b>

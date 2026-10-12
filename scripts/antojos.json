@@ -1,0 +1,800 @@
+[
+ {
+  "id": "yasso-chocolate-fudge",
+  "n": "Yasso – Barra de yogur griego congelado (Chocolate Fudge)",
+  "tipo": "dulce",
+  "porcion": "1 barra (89 ml)",
+  "k": 80,
+  "p": 5,
+  "h": 15,
+  "azucar": 12,
+  "l": 0,
+  "nota": "en el congelador del súper; con proteína",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://foodlion.com/groceries/frozen/ice-cream-frozen-treats/ice-cream-frozen-treats-novelties/yasso-chocolate-fudge-greek-yogurt-bars-4-ct-14-oz-box.html"
+ },
+ {
+  "id": "halo-top-vanilla-bean",
+  "n": "Halo Top – Helado light (Vanilla Bean)",
+  "tipo": "dulce",
+  "porcion": "2/3 taza (85 g)",
+  "k": 90,
+  "p": 5,
+  "h": 22,
+  "azucar": 8,
+  "l": 2,
+  "nota": "mídelo, no te comas el pint entero",
+  "paises": [
+   "US",
+   "CA",
+   "MX"
+  ],
+  "fuente": "https://wellsfoodservice.com/products/halo-top/dairy/vanilla-bean"
+ },
+ {
+  "id": "halo-top-cookie-dough-eu",
+  "n": "Halo Top – Helado light (Chocolate Chip Cookie Dough, versión europea)",
+  "tipo": "dulce",
+  "porcion": "100 ml (≈1 bola grande)",
+  "k": 76,
+  "p": 3.9,
+  "h": 12,
+  "azucar": null,
+  "l": 2.2,
+  "nota": "sírvelo en tacita, no del bote",
+  "paises": [
+   "ES",
+   "DE"
+  ],
+  "fuente": "https://www.fatsecret.de/Kalorien-Ern%C3%A4hrung/halo-top/chocolate-chip-cookie-dough/100ml"
+ },
+ {
+  "id": "outshine-strawberry",
+  "n": "Outshine – Paleta de fruta (Fresa)",
+  "tipo": "dulce",
+  "porcion": "1 paleta",
+  "k": 60,
+  "p": null,
+  "h": 15,
+  "azucar": 14,
+  "l": 0,
+  "nota": "paleta de fruta, sin grasa",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://foodlion.com/groceries/frozen/ice-cream-frozen-treats/outshine-strawberry-fruit-ice-bars-6-ct-15-oz-box.html"
+ },
+ {
+  "id": "smartsweets-sweet-fish",
+  "n": "SmartSweets – Gomitas bajas en azúcar (Sweet Fish)",
+  "tipo": "dulce",
+  "porcion": "1 bolsita (50 g)",
+  "k": 130,
+  "p": 0,
+  "h": 40,
+  "azucar": 3,
+  "l": 0,
+  "nota": "solo 3 g de azúcar; alta en fibra",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.vitacost.com/products/smartsweets-sweet-fish-candy-berry-1-8-oz-50-g-100613"
+ },
+ {
+  "id": "skinny-cow-sandwich",
+  "n": "Skinny Cow – Sándwich de helado light (Chocolate y Vainilla)",
+  "tipo": "dulce",
+  "porcion": "1 sándwich",
+  "k": 150,
+  "p": 4,
+  "h": 27,
+  "azucar": 14,
+  "l": 3,
+  "nota": "porción ya medida; en el congelador",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://stopandshop.com/groceries/product/skinny-cow-sandwiches-chocolate-vanilla-light-ice-cream-sandwiches-4ct-16-oz-box/376576"
+ },
+ {
+  "id": "quaker-rice-cake-chocolate",
+  "n": "Quaker – Galleta de arroz (Chocolate)",
+  "tipo": "dulce",
+  "porcion": "1 galleta",
+  "k": 60,
+  "p": 1,
+  "h": 12,
+  "azucar": 4,
+  "l": 1,
+  "nota": "crujiente y ligera; 1–2 piezas",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://giantfoodstores.com/groceries/product/quaker-gluten-free-chocolate-rice-cakes-7-23-oz-bag/48100"
+ },
+ {
+  "id": "jello-zero-sugar-chocolate",
+  "n": "Jell-O – Pudín Zero Sugar (Chocolate)",
+  "tipo": "dulce",
+  "porcion": "1 vasito (103 g)",
+  "k": 60,
+  "p": 2,
+  "h": 11,
+  "azucar": 0,
+  "l": 1.5,
+  "nota": "sin azúcar; en el refrigerador del súper",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.shoprite.com/product/00043000042083"
+ },
+ {
+  "id": "lindt-excellence-85",
+  "n": "Lindt – Excellence chocolate oscuro 85% cacao",
+  "tipo": "dulce",
+  "porcion": "2 cuadritos (20 g)",
+  "k": 118,
+  "p": 2.4,
+  "h": 4.4,
+  "azucar": 2.6,
+  "l": 9.4,
+  "nota": "solo 2 cuadritos; disfrútalos despacio",
+  "paises": [
+   "MX",
+   "US",
+   "CA",
+   "ES",
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/lindt-excellence-schokolade-edelbitter-kraeftig-85-cacao-100g/1988760"
+ },
+ {
+  "id": "chapmans-super-fudge",
+  "n": "Chapman's – Paleta Super Fudge (Chocolate)",
+  "tipo": "dulce",
+  "porcion": "1 paleta (75 ml)",
+  "k": 120,
+  "p": 2,
+  "h": 22,
+  "azucar": 16,
+  "l": 2.5,
+  "nota": "clásico canadiense; porción ya medida",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://chapmans.ca/?p=1063"
+ },
+ {
+  "id": "chapmans-lil-lolly",
+  "n": "Chapman's – Paleta de hielo Lil Lolly (Plátano)",
+  "tipo": "dulce",
+  "porcion": "1 paleta (50 ml)",
+  "k": 35,
+  "p": null,
+  "h": 9,
+  "azucar": 7,
+  "l": null,
+  "nota": "mini paleta de hielo, muy ligera",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://voila.ca/products/952797EA/details"
+ },
+ {
+  "id": "holanda-kolorix",
+  "n": "Holanda – Paleta de agua Kolorix",
+  "tipo": "dulce",
+  "porcion": "1 paleta (32 ml)",
+  "k": 26,
+  "p": 0,
+  "h": 6.4,
+  "azucar": null,
+  "l": 0,
+  "nota": "mini paleta de hielo",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/holanda/kolorix/1-paleta"
+ },
+ {
+  "id": "holanda-solero-mango",
+  "n": "Holanda – Solero Artesanal (Mango)",
+  "tipo": "dulce",
+  "porcion": "1 paleta (79 ml)",
+  "k": 78,
+  "p": 0.3,
+  "h": 18.8,
+  "azucar": null,
+  "l": 0.2,
+  "nota": "paleta de fruta, sin grasa",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/holanda/paleta-solero-artesanal-de-mango/1-paleta"
+ },
+ {
+  "id": "nutriwell-amaranto-chocolate",
+  "n": "Nutri-Well – Barra de amaranto con chocolate con leche",
+  "tipo": "dulce",
+  "porcion": "1 barra (20 g)",
+  "k": 99,
+  "p": 2,
+  "h": 10.7,
+  "azucar": null,
+  "l": 5.0,
+  "nota": "antojo mexicano; 1 barrita",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/nutri-well/barra-de-amaranto-con-chocolate-con-leche/1-barra"
+ },
+ {
+  "id": "pronto-gelatina-light",
+  "n": "Pronto – Gelatina light (preparada)",
+  "tipo": "dulce",
+  "porcion": "1 taza preparada (130 g)",
+  "k": 12,
+  "p": 2,
+  "h": 1,
+  "azucar": null,
+  "l": 0,
+  "nota": "casi sin calorías; hazla con anticipación",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/pronto/gelatina-light/1-porci%C3%B3n"
+ },
+ {
+  "id": "hersheys-amargo-60",
+  "n": "Hershey's – Chocolate amargo 60% cacao",
+  "tipo": "dulce",
+  "porcion": "1 porción (25 g)",
+  "k": 129,
+  "p": 2.1,
+  "h": 10.6,
+  "azucar": null,
+  "l": 8.7,
+  "nota": "mejor que chocolate con leche",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/hersheys/chocolate-amargo-60-de-cacao/1-porci%C3%B3n"
+ },
+ {
+  "id": "hacendado-polo-mango",
+  "n": "Hacendado (Mercadona) – Polo de mango",
+  "tipo": "dulce",
+  "porcion": "1 polo (77 g)",
+  "k": 77,
+  "p": 0,
+  "h": 19,
+  "azucar": null,
+  "l": 0,
+  "nota": "en el congelador de Mercadona",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/hacendado/polo-de-mango/1-unidad"
+ },
+ {
+  "id": "frigo-calippo-fresa",
+  "n": "Frigo – Calippo (Fresa)",
+  "tipo": "dulce",
+  "porcion": "1 polo (105 ml)",
+  "k": 95,
+  "p": 0.5,
+  "h": 22,
+  "azucar": null,
+  "l": 0.5,
+  "nota": "polo de hielo, sin grasa",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/frigo/calippo-de-fresa/1-helado"
+ },
+ {
+  "id": "hacendado-mousse-proteinas-chocolate",
+  "n": "Hacendado (Mercadona) – Mousse +Proteínas (Chocolate)",
+  "tipo": "dulce",
+  "porcion": "100 g",
+  "k": 74,
+  "p": 10,
+  "h": 4.5,
+  "azucar": null,
+  "l": 1.5,
+  "nota": "alta en proteína; en la nevera de Mercadona",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/hacendado/mousse-prote%C3%ADnas-(chocolate)/100g"
+ },
+ {
+  "id": "ehrmann-high-protein-pudding-schoko",
+  "n": "Ehrmann – High Protein Pudding (Schoko)",
+  "tipo": "dulce",
+  "porcion": "1 vaso (200 g)",
+  "k": 151,
+  "p": 20,
+  "h": 11,
+  "azucar": 8,
+  "l": 3,
+  "nota": "alta en proteína (20 g); sin azúcar añadido",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/ehrmann-high-protein-pudding-schoko-200g/8215446"
+ },
+ {
+  "id": "langnese-capri",
+  "n": "Langnese – Capri (Naranja)",
+  "tipo": "dulce",
+  "porcion": "1 paleta (55 ml)",
+  "k": 54,
+  "p": 0,
+  "h": 12.7,
+  "azucar": 12.7,
+  "l": 0,
+  "nota": "paleta de hielo clásica, pequeña",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/capri-eis-55ml/5034396"
+ },
+ {
+  "id": "rewe-bio-reiswaffel-zartbitter",
+  "n": "REWE Bio – Galleta de arroz con chocolate amargo",
+  "tipo": "dulce",
+  "porcion": "1 galleta (16,7 g)",
+  "k": 82,
+  "p": 1.1,
+  "h": 10.4,
+  "azucar": 4.7,
+  "l": 3.8,
+  "nota": "solo 1 pieza",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/rewe-bio-reiswaffeln-zartbitter-100g/8281895"
+ },
+ {
+  "id": "migros-oh-high-protein-pudding-vanille",
+  "n": "Migros Oh! – High Protein Pudding (Vainilla)",
+  "tipo": "dulce",
+  "porcion": "150 g",
+  "k": 114,
+  "p": 15,
+  "h": 7.8,
+  "azucar": 6.6,
+  "l": 2.7,
+  "nota": "alta en proteína; en la nevera de Migros",
+  "paises": [
+   "CH"
+  ],
+  "fuente": "https://www.fitatu.com/catalog/de/oh-high-protein-pudding-vanille--57829032"
+ },
+ {
+  "id": "frisco-rakete",
+  "n": "Frisco – Rakete (paleta de hielo)",
+  "tipo": "dulce",
+  "porcion": "1 paleta",
+  "k": 51,
+  "p": null,
+  "h": null,
+  "azucar": null,
+  "l": null,
+  "nota": "la paleta de hielo clásica suiza",
+  "paises": [
+   "CH"
+  ],
+  "fuente": "https://www.blick.ch/life/gesundheit/ernaehrung/abkuehlung-gefaellig-diese-glacesorten-haben-wenig-kalorien-id15380593.html"
+ },
+ {
+  "id": "coop-bio-reiswaffeln-zartbitter",
+  "n": "Coop Naturaplan – Galleta de arroz bio con chocolate amargo",
+  "tipo": "dulce",
+  "porcion": "15 g (≈1 galleta)",
+  "k": 74,
+  "p": 1.1,
+  "h": 8.9,
+  "azucar": 4.1,
+  "l": 3.6,
+  "nota": "solo 1 pieza",
+  "paises": [
+   "CH"
+  ],
+  "fuente": "https://www.wikifit.de/kalorientabelle/kekse/bio-reiswaffeln-mit-zartbitterschokolade"
+ },
+ {
+  "id": "skinnypop-original",
+  "n": "SkinnyPop – Palomitas (Original)",
+  "tipo": "salado",
+  "porcion": "1 bolsita (18 g)",
+  "k": 100,
+  "p": 1,
+  "h": 10,
+  "azucar": 0,
+  "l": 7,
+  "nota": "bolsita individual ya porcionada",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://www.shoprite.com/product/skinny-pop-original-popcorn-065-oz-6-count-id-00816925022887"
+ },
+ {
+  "id": "popchips-sea-salt",
+  "n": "Popchips – Chips de papa popped (Sea Salt)",
+  "tipo": "salado",
+  "porcion": "1 bolsita (23 g)",
+  "k": 100,
+  "p": 1,
+  "h": 15,
+  "azucar": 0,
+  "l": 3.5,
+  "nota": "no son fritas; bolsita individual",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.zoro.com/static/cms/enhanced_pdf/Essendant%20Inc_PPH71100xxPRODLITxx01xx7b73aa.pdf"
+ },
+ {
+  "id": "quest-protein-chips-nacho",
+  "n": "Quest – Protein Chips (Nacho Cheese)",
+  "tipo": "salado",
+  "porcion": "1 bolsita (32 g)",
+  "k": 150,
+  "p": 18,
+  "h": 5,
+  "azucar": 1,
+  "l": 6,
+  "nota": "alta en proteína (18 g)",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.vitacost.com/products/quest-nutrition-tortilla-style-protein-chips-nacho-cheese-8-bags-1-1-oz-32-g-each-119047"
+ },
+ {
+  "id": "gimme-seaweed-sea-salt",
+  "n": "gimMe – Snack de alga tostada (Sea Salt)",
+  "tipo": "salado",
+  "porcion": "1 paquetito (5 g)",
+  "k": 30,
+  "p": 1,
+  "h": 1,
+  "azucar": 0,
+  "l": 2,
+  "nota": "crujiente y muy ligero",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://gimmeseaweed.com/products/sea-salt"
+ },
+ {
+  "id": "seapoint-edamame-sea-salt",
+  "n": "Seapoint Farms – Edamame tostado (Sea Salt)",
+  "tipo": "salado",
+  "porcion": "1 bolsita (22,5 g)",
+  "k": 100,
+  "p": 10,
+  "h": 7,
+  "azucar": 1,
+  "l": 4,
+  "nota": "alto en proteína (10 g)",
+  "paises": [
+   "US"
+  ],
+  "fuente": "https://www.shoprite.com/sm/planning/rsid/800/product/seapoint-farms-sea-salt-dry-roasted-edamame-079-oz-8-count-id-00711575007898"
+ },
+ {
+  "id": "snack-factory-pretzel-crisps",
+  "n": "Snack Factory – Pretzel Crisps (Original)",
+  "tipo": "salado",
+  "porcion": "7 piezas (20 g)",
+  "k": 80,
+  "p": 2,
+  "h": 17,
+  "azucar": 1,
+  "l": null,
+  "nota": "pretzel horneado; cuenta 7 piezas",
+  "paises": [
+   "US",
+   "CA"
+  ],
+  "fuente": "https://voila.ca/products/622396EA/details"
+ },
+ {
+  "id": "quaker-crispy-minis-salt-vinegar",
+  "n": "Quaker – Crispy Minis rice chips (Salt & Vinegar)",
+  "tipo": "salado",
+  "porcion": "9 chips (15 g)",
+  "k": 60,
+  "p": 1,
+  "h": 11,
+  "azucar": 1,
+  "l": 2,
+  "nota": "chips de arroz, no fritas",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://voila.ca/products/198620EA/details"
+ },
+ {
+  "id": "quaker-crispy-minis-original",
+  "n": "Quaker – Crispy Minis mini galletas de arroz integral (Original)",
+  "tipo": "salado",
+  "porcion": "2 galletitas (19 g)",
+  "k": 70,
+  "p": 2,
+  "h": 15,
+  "azucar": null,
+  "l": 1,
+  "nota": "bajas en grasa",
+  "paises": [
+   "CA"
+  ],
+  "fuente": "https://voila.ca/products/198594EA/details"
+ },
+ {
+  "id": "sanissimo-tostaditas",
+  "n": "Sanissimo – Tostaditas de maíz horneadas",
+  "tipo": "salado",
+  "porcion": "1 bolsita (18 g, 3 tostaditas)",
+  "k": 63,
+  "p": 1.5,
+  "h": 12.6,
+  "azucar": null,
+  "l": 0.6,
+  "nota": "horneadas, no fritas",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/sanissimo/tostaditas-de-ma%C3%ADz-horneadas/1-bolsita-(3-tostaditas)"
+ },
+ {
+  "id": "sanissimo-salmas",
+  "n": "Sanissimo – Salmas horneadas de maíz",
+  "tipo": "salado",
+  "porcion": "4 piezas (24 g)",
+  "k": 84,
+  "p": 1.6,
+  "h": 16.8,
+  "azucar": null,
+  "l": 1.2,
+  "nota": "con limón y chilito en polvo",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/sanissimo/salmas-de-ma%C3%ADz-horneadas/1-pieza"
+ },
+ {
+  "id": "act-ii-mantequilla-light",
+  "n": "Act II – Palomitas de microondas (Mantequilla Light)",
+  "tipo": "salado",
+  "porcion": "3½ tazas preparadas (30 g)",
+  "k": 127,
+  "p": 3.5,
+  "h": 19,
+  "azucar": null,
+  "l": 4.1,
+  "nota": "comparte la bolsa: solo 3½ tazas",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/act-ii/palomitas-mantequilla-light/3-1-2-tazas"
+ },
+ {
+  "id": "slim-pop-natural",
+  "n": "Slim Pop – Palomitas naturales",
+  "tipo": "salado",
+  "porcion": "1 bolsita (18 g)",
+  "k": 74,
+  "p": 1.6,
+  "h": 8.6,
+  "azucar": null,
+  "l": 3.7,
+  "nota": "bolsita individual ya porcionada",
+  "paises": [
+   "MX"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/slim-pop/palomitas/1-porci%C3%B3n"
+ },
+ {
+  "id": "quaker-rice-cakes-natural",
+  "n": "Quaker – Rice Cakes (Natural)",
+  "tipo": "salado",
+  "porcion": "2 piezas (18 g)",
+  "k": 70,
+  "p": 2,
+  "h": 14,
+  "azucar": null,
+  "l": 0,
+  "nota": "ponle limón y chile en polvo",
+  "paises": [
+   "MX",
+   "US"
+  ],
+  "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/quaker/rice-cakes/1-pieza"
+ },
+ {
+  "id": "hacendado-palomitas-sal",
+  "n": "Hacendado (Mercadona) – Palomitas microondas (Sal)",
+  "tipo": "salado",
+  "porcion": "25 g (≈¼ de bolsa)",
+  "k": 114,
+  "p": 2.5,
+  "h": 13.8,
+  "azucar": null,
+  "l": 5.0,
+  "nota": "comparte la bolsa: solo ¼",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/hacendado/palomitas-microondas-sal/100g"
+ },
+ {
+  "id": "hacendado-garbanzo-tostado",
+  "n": "Hacendado (Mercadona) – Garbanzo tostado",
+  "tipo": "salado",
+  "porcion": "30 g (1 puñito)",
+  "k": 116,
+  "p": 5.8,
+  "h": 17.4,
+  "azucar": null,
+  "l": 1.5,
+  "nota": "con proteína y fibra",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/hacendado/garbanzo-tostado/100g"
+ },
+ {
+  "id": "hacendado-tortitas-arroz",
+  "n": "Hacendado (Mercadona) – Tortitas de arroz",
+  "tipo": "salado",
+  "porcion": "25 g (≈3 tortitas)",
+  "k": 91,
+  "p": 2.1,
+  "h": 18.8,
+  "azucar": null,
+  "l": 0.7,
+  "nota": "crujientes y bajas en grasa",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/hacendado/tortitas-de-arroz/100g"
+ },
+ {
+  "id": "hacendado-tortitas-maiz-serrano",
+  "n": "Hacendado (Mercadona) – Tortitas de maíz (sabor jamón serrano)",
+  "tipo": "salado",
+  "porcion": "4 tortitas (35 g)",
+  "k": 146,
+  "p": 2.4,
+  "h": 27,
+  "azucar": null,
+  "l": 3,
+  "nota": "máximo 4 tortitas",
+  "paises": [
+   "ES"
+  ],
+  "fuente": "https://www.fatsecret.es/calor%C3%ADas-nutrici%C3%B3n/hacendado/tortitas-de-ma%C3%ADz-serrano/4-tortitas"
+ },
+ {
+  "id": "lorenz-saltletts-sticks",
+  "n": "Lorenz – Saltletts Sticks (integrales)",
+  "tipo": "salado",
+  "porcion": "30 g (1 puñito)",
+  "k": 118,
+  "p": 3.9,
+  "h": 20.4,
+  "azucar": 0.8,
+  "l": 1.9,
+  "nota": "palitos horneados, bajos en grasa",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/lorenz-saltletts-sticks-175g/975096"
+ },
+ {
+  "id": "rewe-bio-linsenwaffeln",
+  "n": "REWE Bio – Galletas de lenteja con sal de mar",
+  "tipo": "salado",
+  "porcion": "4 galletas (≈28 g)",
+  "k": 104,
+  "p": 6.8,
+  "h": 16.4,
+  "azucar": 0.7,
+  "l": 0.6,
+  "nota": "con proteína vegetal",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/rewe-bio-linsenwaffeln-mit-meersalz-90g/8962009"
+ },
+ {
+  "id": "chio-mikrowellenpopcorn-salzig",
+  "n": "Chio – Palomitas de microondas (Sal)",
+  "tipo": "salado",
+  "porcion": "⅓ de bolsa (33 g)",
+  "k": 134,
+  "p": 2.9,
+  "h": 19.8,
+  "azucar": 0.3,
+  "l": 5.6,
+  "nota": "comparte la bolsa: solo ⅓",
+  "paises": [
+   "DE"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/chio-mikrowellenpopcorn-salzig-100g/8903951"
+ },
+ {
+  "id": "zweifel-vaya-bean-salt",
+  "n": "Zweifel – Vaya Bean Snack (Salt)",
+  "tipo": "salado",
+  "porcion": "30 g",
+  "k": 124,
+  "p": 5.1,
+  "h": 17.1,
+  "azucar": 0.4,
+  "l": 3.9,
+  "nota": "de garbanzo y legumbres; con proteína",
+  "paises": [
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://foodbenchmark.com/products/7610095231505/vaya-bean-salt-snack"
+ },
+ {
+  "id": "zweifel-baked-pretzel-salt",
+  "n": "Zweifel – Baked Pretzel (Salt)",
+  "tipo": "salado",
+  "porcion": "30 g (⅙ de bolsa)",
+  "k": 127,
+  "p": 2.1,
+  "h": 24,
+  "azucar": 1.2,
+  "l": 2.4,
+  "nota": "pretzel horneado",
+  "paises": [
+   "DE",
+   "CH"
+  ],
+  "fuente": "https://www.rewe.de/shop/p/zweifel-baked-pretzel-salt-180g/7098351"
+ },
+ {
+  "id": "migros-popcorn-gesalzen",
+  "n": "Migros M-Classic – Palomitas saladas",
+  "tipo": "salado",
+  "porcion": "25 g",
+  "k": 111,
+  "p": 2.3,
+  "h": 14.3,
+  "azucar": 0.2,
+  "l": 4.3,
+  "nota": "sírvelas en un tazón, no de la bolsa",
+  "paises": [
+   "CH"
+  ],
+  "fuente": "https://www.yazio.com/de/kalorientabelle/popcorn-gesalzen-m-classic.html"
+ },
+ {
+  "id": "coop-vollreiswaffeln",
+  "n": "Coop – Galletas de arroz integral",
+  "tipo": "salado",
+  "porcion": "25 g (≈3 galletas)",
+  "k": 103,
+  "p": 2,
+  "h": 20.3,
+  "azucar": null,
+  "l": 0.3,
+  "nota": "muy bajas en grasa",
+  "paises": [
+   "CH"
+  ],
+  "fuente": "https://www.yazio.com/de/kalorientabelle/vollreiswaffeln-coop.html"
+ }
+]
