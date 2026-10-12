@@ -31,7 +31,7 @@ export function fraccion(v: number) {
   return String(Math.round(v * 10) / 10);
 }
 
-const PLURAL: Record<string, string> = { taza: "tazas", pieza: "piezas", rebanada: "rebanadas", cucharada: "cucharadas", cucharadita: "cucharaditas", medida: "medidas", cuadrito: "cuadritos", lata: "latas", vaso: "vasos", sobre: "sobres", galleta: "galletas", hoja: "hojas", rollo: "rollos", paquete: "paquetes", filete: "filetes", copa: "copas", botella: "botellas", "cápsula": "cápsulas", tableta: "tabletas", comprimido: "comprimidos", gota: "gotas", cazo: "cazos", barra: "barras", pastilla: "pastillas", vaso: "vasos", perla: "perlas" };
+const PLURAL: Record<string, string> = { taza: "tazas", pieza: "piezas", rebanada: "rebanadas", cucharada: "cucharadas", cucharadita: "cucharaditas", medida: "medidas", cuadrito: "cuadritos", lata: "latas", vaso: "vasos", sobre: "sobres", galleta: "galletas", hoja: "hojas", rollo: "rollos", paquete: "paquetes", filete: "filetes", copa: "copas", botella: "botellas", "cápsula": "cápsulas", tableta: "tabletas", comprimido: "comprimidos", gota: "gotas", cazo: "cazos", barra: "barras", pastilla: "pastillas", perla: "perlas" };
 function unidad(u: string, v: number) {
   const t = u.trim();
   if (v <= 1) return t;
