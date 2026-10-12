@@ -143,7 +143,7 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
                 <div key={i} className="editmeal">
                   <span className="eyebrow">{t[0]}</span>
                   <input value={plan.menu[d][i].titulo} placeholder="Platillo" onChange={(e) => up((p) => { p.menu[d][i].titulo = e.target.value; })} aria-label={`${d}, ${t[0]}, platillo`} />
-                  <textarea value={plan.menu[d][i].detalle} placeholder={plan.menu[d][i].ingredientes?.length ? "Cómo prepararlo (opcional)" : "Cantidades: 2 huevos · 1 taza de espinaca…"} onChange={(e) => up((p) => { p.menu[d][i].detalle = e.target.value; })} aria-label={`${d}, ${t[0]}, cantidades`} />
+                  <textarea value={plan.menu[d][i].detalle} placeholder={plan.menu[d][i].ingredientes?.length ? "Cómo prepararlo, en 1 o 2 líneas: Licúa todo con hielo…" : "Cantidades: 2 huevos · 1 taza de espinaca…"} onChange={(e) => up((p) => { p.menu[d][i].detalle = e.target.value; })} maxLength={plan.menu[d][i].ingredientes?.length ? 240 : undefined} aria-label={`${d}, ${t[0]}, cantidades`} />
                   {(plan.menu[d][i].ingredientes ?? []).map((g, j) => (
                     <div key={j} className="eing">
                       <span>{icono(g.n, g.g) && <>{icono(g.n, g.g)} </>}{g.n}<small>{cantidad(g, g.x)}</small></span>

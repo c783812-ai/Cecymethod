@@ -300,3 +300,11 @@ a{color:inherit}
 .superitem:first-of-type{border-top:0}
 .superitem b{font-size:13px;font-weight:600;white-space:nowrap}
 .superitem.done .nm,.superitem.done b{text-decoration:line-through;color:var(--muted)}
+
+.prep { margin-top: 8px; font-size: 14px; }
+.prep summary { cursor: pointer; font-weight: 600; color: inherit; opacity: .85; list-style: none; }
+.prep summary::-webkit-details-marker { display: none; }
+.prep summary::before { content: "👩‍🍳 "; }
+.prep summary::after { content: " ▸"; }
+.prep[open] summary::after { content: " ▾"; }
+.prep p { margin: 6px 0 0; line-height: 1.45; }

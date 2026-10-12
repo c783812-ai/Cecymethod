@@ -1,10 +1,11 @@
 """Arma public/alimentos/{smae,renal}.json a partir del SMAE de Cecy y de scripts/europeos.csv.
 
-Uso: python3 scripts/build_alimentos.py <Smae.xlsm> <SMAE_datos_a_revisar.xlsx>
+Uso: python3 scripts/build_alimentos.py <Smae.xlsm> <SMAE_datos_a_revisar.xlsx> [quitados.xlsx]
 """
 import csv, json, re, sys, unicodedata
 from pathlib import Path
 import openpyxl
+from saludable import motivo
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "public" / "alimentos"
@@ -144,6 +145,20 @@ if __name__ == "__main__":
     ids.clear()
     rn, malos = renal(sys.argv[1])
     OUT.mkdir(parents=True, exist_ok=True)
+    quitados = []  # no saludables (criterio en scripts/saludable.py)
+    def sanos(lista, sistema):
+        q = [(sistema, f["g"], f["n"], motivo(f["n"], f["g"])) for f in lista if motivo(f["n"], f["g"])]
+        quitados.extend(q)
+        return [f for f in lista if not motivo(f["n"], f["g"])]
+    s, eu, rn = sanos(s, "SMAE"), sanos(eu, "Europa"), sanos(rn, "Renal")
+    if len(sys.argv) > 3:  # lista para que Cecy revise lo que se quitó
+        wb = openpyxl.Workbook(); ws = wb.active; ws.title = "Quitados"
+        ws.append(["Sistema", "Subgrupo", "Alimento", "Motivo", "¿Regresar? (sí)"])
+        for r in sorted(quitados, key=lambda r: (r[3], r[0], r[1], r[2])): ws.append(list(r))
+        for col, w in zip("ABCDE", (9, 30, 55, 42, 14)): ws.column_dimensions[col].width = w
+        ws.freeze_panes = "A2"; ws.auto_filter.ref = ws.dimensions
+        wb.save(sys.argv[3])
+    print("no saludables quitados:", len(quitados))
     for name, data in (("smae", s + eu), ("renal", rn)):
         (OUT / f"{name}.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"SMAE: {len(s)} + europeos {len(eu)} (repetidos omitidos: {dup})")

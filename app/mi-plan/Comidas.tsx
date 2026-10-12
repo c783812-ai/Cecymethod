@@ -93,7 +93,12 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, o
             })}
           </ul>
         )}
-        {m.detalle && <p>{m.detalle}</p>}
+        {m.detalle && (ings.length > 0 ? (
+          <details className="prep">
+            <summary>Cómo prepararlo</summary>
+            <p>{m.detalle}</p>
+          </details>
+        ) : <p>{m.detalle}</p>)}
       </div>
       {abierto !== null && (
         <SwapSheet
