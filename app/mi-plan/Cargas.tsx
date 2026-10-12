@@ -8,9 +8,12 @@ type Carga = { u: "kg" | "lb"; s: Serie[] };
 type Cargas = Record<string, Record<string, Carga>>; // ejercicio -> fecha -> carga
 
 /** "3 × 12" -> 3 series de "12"; "2 × 10 por lado" -> 2 series de "10 por lado". */
-export function series(txt: string) {
-  const m = txt.match(/^\s*(\d+)\s*[×x]\s*(.+)$/i);
-  return m ? { n: Math.min(Number(m[1]), 8), reps: m[2].replace(/máximo de repeticiones/i, "al máximo") } : { n: 1, reps: txt };
+/** "3 × 12" -> 3 series de 12; "1 × 20, 1 × 15, 1 × 10" -> 3 series de 20, 15 y 10. Devuelve las reps de cada serie. */
+export function series(txt: string): string[] {
+  const partes = txt.split(",").map((p) => p.match(/^\s*(\d+)\s*[×x]\s*(.+?)\s*$/i));
+  if (!partes.every(Boolean)) return [txt];
+  const reps = partes.flatMap((m) => Array(Number(m![1])).fill(m![2].replace(/máximo de repeticiones/i, "al máximo")));
+  return reps.slice(0, 8);
 }
 
 /** Pesos por ejercicio: en su teléfono y, si ya entró con su cuenta, en la página para no perderlos. */
@@ -49,7 +52,8 @@ const num = (s: string) => { const n = parseFloat(s.replace(",", ".")); return N
 /** Las series del ejercicio con su peso y repeticiones de hoy, y lo que hizo la vez pasada. */
 export function SeriesLog({ ejercicio, txt, cargas }: { ejercicio: string; txt: string; cargas: CargasHook }) {
   const hoy = hoyISO();
-  const { n, reps } = series(txt);
+  const reps = series(txt);
+  const n = reps.length;
   const mias = cargas.v[ejercicio] ?? {};
   const hoyC: Carga = mias[hoy] ?? { u: cargas.u, s: [] };
   const antes = Object.keys(mias).filter((f) => f < hoy && mias[f].s.some((x) => x.p != null)).sort().pop();
@@ -65,7 +69,7 @@ export function SeriesLog({ ejercicio, txt, cargas }: { ejercicio: string; txt: 
       <div className="filas">
         <span className="h">Serie</span><span className="h">Reps</span><span className="h">Peso ({cargas.u})</span>
         {Array.from({ length: n }, (_, i) => (
-          <SerieFila key={`${hoy}-${i}`} i={i} reps={reps} prevP={prev?.s[i]?.p} s={hoyC.s[i] ?? {}} onSet={(c) => set(i, c)} />
+          <SerieFila key={`${hoy}-${i}`} i={i} reps={reps[i]} prevP={prev?.s[i]?.p} s={hoyC.s[i] ?? {}} onSet={(c) => set(i, c)} />
         ))}
       </div>
     </div>

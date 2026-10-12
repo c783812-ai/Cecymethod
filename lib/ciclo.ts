@@ -1,6 +1,8 @@
 import { GUIA_GLUTEOS } from "./gluteos";
 import type { Rutina } from "./types";
 import { MES_2 } from "./rutinas/mes2";
+import { MES_3 } from "./rutinas/mes3";
+import { MES_4 } from "./rutinas/mes4";
 
 /**
  * Rutina del mes: todas las pacientes (y Cecy) hacen la misma rutina cada mes del calendario.
@@ -10,6 +12,8 @@ import { MES_2 } from "./rutinas/mes2";
 export const CICLO: { key: string; rutina: Rutina }[] = [
   { key: "gluteos", rutina: GUIA_GLUTEOS },
   { key: "mes-2", rutina: MES_2 },
+  { key: "mes-3", rutina: MES_3 },
+  { key: "mes-4", rutina: MES_4 },
 ];
 export const CICLO_KEY = "ciclo";
 
