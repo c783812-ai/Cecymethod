@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, SUENO, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
+import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, PASOS, SUENO, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
 
 /**
  * El diario de la paciente. Sin consentimiento se guarda solo en su teléfono;
@@ -124,6 +124,9 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
 
       <h5>😴 Anoche dormí</h5>
       <Chips label="Horas de sueño" ops={SUENO} value={r.sueno} onPick={(v) => set({ sueno: v })} />
+
+      <h5>👟 Pasos de hoy</h5>
+      <Chips label="Pasos de hoy" ops={PASOS} value={r.pasos} onPick={(v) => set({ pasos: v })} />
 
       <h5>🌡️ Estrés</h5>
       <Chips label="Nivel de estrés" ops={ESTRES.map((t, i) => [i + 1, t] as [number, string])} value={r.estres} onPick={(v) => set({ estres: v })} />

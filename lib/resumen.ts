@@ -1,4 +1,4 @@
-import { ANIMOS, CICLO, ESTRES, HECES, META, SUENO, type Meta, type Registro } from "./diario";
+import { ANIMOS, CICLO, ESTRES, HECES, META, PASOS, SUENO, type Meta, type Registro } from "./diario";
 
 const prom = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null);
 const etiqueta = <T,>(ops: [T, string][], v: T | undefined) => ops.find(([k]) => k === v)?.[1];
@@ -21,6 +21,8 @@ export function resumenSemana(regs: Record<string, Registro>, fechas: string[], 
   const estres = prom(r.filter((x) => x.estres != null).map((x) => x.estres!));
   const sueno = r.map((x) => x.sueno).filter(Boolean) as string[];
   const suenoCorto = sueno.filter((s) => s === "<6").length;
+  const pasos = r.map((x) => x.pasos).filter(Boolean) as string[];
+  const pasos7 = pasos.filter((p) => p === "7-10k" || p === ">10k").length;
   const animos = dias.map((d) => d.r?.animo ?? "·");
   const ciclo = con.filter((d) => d.r!.ciclo === "irregular" || d.r!.ciclo === "regla").map((d) => `${d.fecha.slice(8)}/${d.fecha.slice(5, 7)}: ${etiqueta(CICLO, d.r!.ciclo)}`);
   const meds = con.filter((d) => d.r!.meds).map((d) => ({ fecha: d.fecha, que: d.r!.meds! }));
@@ -36,6 +38,7 @@ export function resumenSemana(regs: Record<string, Registro>, fechas: string[], 
     else mejorar.push(`tu ${META[opts.meta].toLowerCase()} quedó en ${Math.round(metaProm)}% en promedio`);
   }
   if (agua != null) (agua >= opts.vasos * 0.85 ? bien : mejorar).push(agua >= opts.vasos * 0.85 ? `tomaste tu agua (${agua.toFixed(1)} vasos al día)` : `tomaste ${agua.toFixed(1)} de tus ${opts.vasos} vasos de agua al día`);
+  if (pasos7 >= 4) bien.push(`caminaste más de 7,000 pasos ${pasos7} días`);
   if (estrenida >= 2) mejorar.push(`te sentiste estreñida ${estrenida} días`);
   if (suenoCorto >= 2) mejorar.push(`dormiste menos de 6 horas ${suenoCorto} noches`);
   const nombre = opts.nombre.split(" ")[0];
@@ -48,9 +51,9 @@ export function resumenSemana(regs: Record<string, Registro>, fechas: string[], 
   ].filter(Boolean).join("\n\n");
 
   return {
-    dias, registrados: con.length, comidas, deComidas, metaProm, diasMeta, agua, bano, estrenida, diarrea, estres, sueno, suenoCorto,
+    dias, registrados: con.length, comidas, deComidas, metaProm, diasMeta, agua, bano, estrenida, diarrea, estres, sueno, suenoCorto, pasos, pasos7,
     animos, animosMalos, ciclo, meds, mensaje,
-    textoSueno: (s?: string) => etiqueta(SUENO, s), textoHeces: (h?: Registro["heces"]) => etiqueta(HECES, h),
+    textoSueno: (s?: string) => etiqueta(SUENO, s), textoPasos: (p?: string) => etiqueta(PASOS, p), textoHeces: (h?: Registro["heces"]) => etiqueta(HECES, h),
     textoEstres: (n?: number) => (n ? ESTRES[n - 1] : undefined), textoAnimo: (a?: string) => ANIMOS.find(([e]) => e === a)?.[1],
   };
 }
