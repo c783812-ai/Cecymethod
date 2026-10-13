@@ -28,6 +28,14 @@ for x in out:
                 x["urls"].setdefault(k, v)
             if y.get("ml"):
                 x.setdefault("ml", y["ml"])
+# Dosis según la etiqueta de cada fabricante (scripts/tienda_dosis.json, clave "marca|nombre").
+dos = os.path.join(D, "tienda_dosis.json")
+if os.path.exists(dos):
+    dd = json.load(open(dos))
+    for x in out:
+        v = dd.get(f'{x["marca"].lower().strip()}|{x["n"].lower().strip()}')
+        if v:
+            x["dosis"] = v
 # Links de afiliada de Mercado Libre (los saca Cecy): link nuevo, o null si el producto ya no se vende ahí.
 mla = os.path.join(D, "ml_afiliados.json")
 if os.path.exists(mla):

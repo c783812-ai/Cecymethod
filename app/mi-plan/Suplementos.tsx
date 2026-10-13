@@ -64,7 +64,7 @@ function Tarjeta({ c, pais, abierta, onAbrir, dosis }: { c: Categoria; pais: str
           <p>{c.sirve}</p>
           {dosis && <p className="tuya"><b>Lo que te indicó Cecy:</b> {[dosis.cuanto, dosis.cuando].filter(Boolean).join(" · ")}</p>}
           <dl>
-            <dt>Cuánto</dt><dd>{c.como}</dd>
+            <dt>Cuánto</dt><dd>La dosis de la etiqueta viene abajo en cada producto. Si Cecy te indicó otra, sigue la de Cecy.</dd>
             <dt>Cuándo</dt><dd>{c.cuando}</dd>
             {c.separar && <><dt>No juntar</dt><dd>{c.separar}</dd></>}
             {c.ojo && <><dt>Ojo</dt><dd>{c.ojo}</dd></>}
@@ -74,6 +74,7 @@ function Tarjeta({ c, pais, abierta, onAbrir, dosis }: { c: Categoria; pais: str
               {prods.map((p) => (
                 <div key={p.n + p.marca} className="prod">
                   <div><b>{p.marca}</b> · {p.n}{p.pres && <span className="note"> · {p.pres}</span>}{p.nota && <span className="nivel cecy">{p.nota}</span>}{p.nivel && <span className={`nivel ${p.nivel}`}>{p.nivel === "accesible" ? "Accesible" : "Premium"}</span>}</div>
+                  {p.dosis && <div className="etq"><b>Dice la etiqueta:</b> {p.dosis}</div>}
                   <div className="prod-btns">
                     {enMercado(p, m) && <a className="btn amz" href={linkAmazon(p, m)} target="_blank" rel="sponsored noopener">Amazon</a>}
                     {pais === "MX" && p.ml && <a className="btn ml" href={linkML(p)} target="_blank" rel="sponsored noopener">Mercado Libre</a>}

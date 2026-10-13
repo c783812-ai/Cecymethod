@@ -15,7 +15,7 @@ export type Mercado = keyof typeof MERCADOS;
 export const MERCADO_DE: Record<string, Mercado> = { MX: "MX", US: "US", CA: "CA", UK: "UK", ES: "ES", DE: "DE", CH: "DE", EU: "DE", AE: "AE" };
 
 /** Un producto recomendado. urls: su página en cada Amazon (si no hay, se busca por `busca`); ml: Mercado Libre México. */
-export type Producto = { cat: string; n: string; marca: string; pres?: string; busca: string; urls: Partial<Record<Mercado, string>>; ml?: string; paises?: Mercado[]; nivel?: "accesible" | "premium"; precio?: string; nota?: string; sup?: string };
+export type Producto = { cat: string; n: string; marca: string; pres?: string; busca: string; urls: Partial<Record<Mercado, string>>; ml?: string; paises?: Mercado[]; nivel?: "accesible" | "premium"; precio?: string; nota?: string; sup?: string; dosis?: string };
 export type Categoria = {
   id: string; emoji: string; nombre: string; para: string[];
   sirve: string; como: string; cuando: string; separar?: string; ojo?: string;
