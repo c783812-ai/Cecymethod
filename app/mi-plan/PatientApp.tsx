@@ -63,7 +63,7 @@ export default function PatientApp(props: {
     hoy: [`Hola, ${first}`, <>Tu <mark>día</mark></>],
     registro: ["Cómo te sentiste hoy", <>Mi <mark>registro</mark></>],
     semana: [plan?.titulo ?? "Tu plan", <>Tu <mark>semana</mark></>],
-    super: ["Para tu semana o tu mes", <>Tu lista del <mark>súper</mark></>],
+    super: ["Para tu día, semana o mes", <>Tu lista del <mark>súper</mark></>],
     rutina: ["Ejercicio", <>Tu <mark>rutina</mark></>],
   };
   const tabs: [Tab, string][] = [["hoy", "Hoy"], ["registro", "Registro"], ["semana", "Semana"], ["super", "Súper"], ["rutina", "Rutina"]];
