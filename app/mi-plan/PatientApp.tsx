@@ -9,6 +9,7 @@ import Super from "./Super";
 import Antojos from "./Antojos";
 import Instalar from "./Instalar";
 import Logros from "./Logros";
+import Suplementos from "./Suplementos";
 import Estadisticas from "./Estadisticas";
 import { Descanso, SeriesLog, useCargas } from "./Cargas";
 import { MetaBar, RegistroHoy, useDiario, type DiarioHook } from "./Diario";
@@ -17,13 +18,14 @@ import { tint } from "@/components/shared";
 
 const MEAL_TINT = ["t-yellow", "t-pink", "t-blue", "t-lilac", "t-green"];
 const CORTO = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
-type Tab = "hoy" | "registro" | "semana" | "super" | "rutina";
+type Tab = "hoy" | "registro" | "semana" | "super" | "suple" | "rutina";
 
 const ICON: Record<Tab, React.ReactNode> = {
   hoy: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>,
   registro: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z" /></svg>,
   semana: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M4 6h16M4 12h16M4 18h10" /></svg>,
   super: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 4h2l2.4 11h11.2L21 8H6.2" /><circle cx="9" cy="19" r="1.5" /><circle cx="17" cy="19" r="1.5" /></svg>,
+  suple: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="7" y="3" width="10" height="4" rx="1" /><path d="M8 7h8v12a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z" /><path d="M8 12h8" /></svg>,
   rutina: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12" /></svg>,
 };
 
@@ -65,9 +67,10 @@ export default function PatientApp(props: {
     registro: ["Cómo te sentiste hoy", <>Mi <mark>registro</mark></>],
     semana: [plan?.titulo ?? "Tu plan", <>Tu <mark>semana</mark></>],
     super: ["Para tu día, semana o mes", <>Tu lista del <mark>súper</mark></>],
+    suple: ["Para qué sirven y dónde comprarlos", <>Mis <mark>suplementos</mark></>],
     rutina: ["Ejercicio", <>Tu <mark>rutina</mark></>],
   };
-  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["registro", "Registro"], ["semana", "Semana"], ["super", "Súper"], ["rutina", "Rutina"]];
+  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["registro", "Registro"], ["semana", "Semana"], ["super", "Súper"], ["suple", "Suplementos"], ["rutina", "Rutina"]];
 
   return (
     <div className="patient">
@@ -87,6 +90,7 @@ export default function PatientApp(props: {
             {tab === "registro" && <><Logros diario={diario[0]} vasos={plan?.agua || 8} /><Estadisticas diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
+            {tab === "suple" && <Suplementos recomendados={plan?.suplementos ?? []} />}
             {tab === "rutina" && <RutinaView rutina={rutina} ciclo={props.ciclo ?? null} videos={videos} pid={p.id} remoto={remoto} />}
             {!vistaPrevia && (
               <form action="/salir" method="post" style={{ textAlign: "center" }}>

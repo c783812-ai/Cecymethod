@@ -8,6 +8,7 @@ import { asignarRutina, borrarPaciente, guardarResumen } from "../actions";
 import AccessPanel from "./AccessPanel";
 import PlanEditor from "./PlanEditor";
 import SemanaVista from "./SemanaVista";
+import IdeasSuplementos from "./IdeasSuplementos";
 import Historial from "./Historial";
 import { hoyISO, type Registro } from "@/lib/diario";
 import { CICLO, CICLO_KEY, mesDelCiclo, proximoCambio } from "@/lib/ciclo";
@@ -63,6 +64,7 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
               </form>
               <AccessPanel p={p} />
             </div>
+            <IdeasSuplementos metas={p.metas} />
             <Historial id={id} />
             <details className="card">
               <summary style={{ cursor: "pointer", color: "var(--warn)", fontWeight: 600 }}>Borrar a esta paciente y todos sus datos</summary>
