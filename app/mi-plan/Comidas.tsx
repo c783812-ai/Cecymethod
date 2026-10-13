@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { BANDERA, NOTA_EU, PAIS, buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
+import { MERCADO_DE, linkAmazon, linkML, productoDeSup } from "@/lib/tienda";
 import { DIAS, type Comida, type Dia, type Plan } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
@@ -141,6 +142,9 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
   const hayLac = !!lista?.some((a) => a.g === orig.g && a.lac);
   // Sin lactosa, la leche se puede cambiar por cualquier leche o bebida sin lactosa (mismas proteínas e hidratos por equivalente)
   const esSup = sistema === "suplementos";
+  // Las proteínas en polvo se compran en línea: en vez de en qué países hay, se muestra el link de su tienda.
+  const enLinea = esSup && orig.g === "Proteína en polvo";
+  const m = MERCADO_DE[pais];
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", k);
@@ -158,17 +162,18 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
           <div>
             <div className="eyebrow">{iconoGrupo(orig.g)} {nombreSubgrupo(orig.g)}</div>
             <h3>Cambiar {esSup ? orig.n : orig.n.toLowerCase()}</h3>
-            <p className="note">{esSup ? "Elige otra opción que encuentres donde vives." : <>Todas estas opciones valen lo mismo que {cantidad(orig, orig.x)} de {orig.n.toLowerCase()}.</>}</p>
+            <p className="note">{enLinea ? "Elige la que prefieras y cómprala en línea con el botón 🛒." : esSup ? "Elige otra opción que encuentres donde vives." : <>Todas estas opciones valen lo mismo que {cantidad(orig, orig.x)} de {orig.n.toLowerCase()}.</>}</p>
           </div>
           <button className="btn" onClick={onClose} aria-label="Cerrar">✕</button>
         </div>
         {esSup && (
           <div className="paises" role="group" aria-label="Dónde vives">
-            <button aria-pressed={!pais} onClick={() => elegirPais("")}>Todos</button>
+            {!enLinea && <button aria-pressed={!pais} onClick={() => elegirPais("")}>Todos</button>}
             {Object.keys(BANDERA).map((c) => <button key={c} aria-pressed={pais === c} onClick={() => elegirPais(c)}>{BANDERA[c]} {PAIS[c]}</button>)}
           </div>
         )}
-        {esSup && pais === "EU" && <p className="note" style={{ margin: "2px 0 6px" }}>{NOTA_EU}</p>}
+        {enLinea && !pais && <p className="note" style={{ margin: "2px 0 6px" }}>Elige dónde vives para ver dónde comprarla en línea.</p>}
+        {esSup && !enLinea && pais === "EU" && <p className="note" style={{ margin: "2px 0 6px" }}>{NOTA_EU}</p>}
         {hayLac && (
           <div className="paises" role="group" aria-label="Filtro">
             <button aria-pressed={sinLac} onClick={toggleLac}>🌱 Sin lactosa</button>
@@ -184,14 +189,27 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
           {error && <p className="note">No se pudo cargar la lista. Revisa tu internet e inténtalo otra vez.</p>}
           {!lista && !error && <p className="note">Cargando opciones…</p>}
           {lista && opciones.length === 0 && <p className="note">No encontré nada con “{q}” en este grupo.</p>}
-          {opciones.slice(0, 200).map((a) => (
-            <button key={a.id} className={`opt ${a.id === actual.id ? "on" : ""}`} onClick={() => onPick(a)}>
-              <span>
-                {icono(a.n, a.g) && <>{icono(a.n, a.g)} </>}{a.n}
-                {esSup && <small className="supinfo">{[a.p ? `${a.p} g proteína` : "", a.k != null ? `${a.k} kcal` : "", a.nota ?? ""].filter(Boolean).join(" · ")} {!pais && (a.paises ?? []).map((c) => BANDERA[c]).join(" ")}</small>}
-              </span><b className="num">{cantidad(a, orig.x)}</b>
-            </button>
-          ))}
+          {opciones.slice(0, 200).map((a) => {
+            const fila = (
+              <button key={a.id} className={`opt ${a.id === actual.id ? "on" : ""}`} onClick={() => onPick(a)}>
+                <span>
+                  {icono(a.n, a.g) && <>{icono(a.n, a.g)} </>}{a.n}
+                  {esSup && <small className="supinfo">{[a.p ? `${a.p} g proteína` : "", a.k != null ? `${a.k} kcal` : "", a.nota ?? ""].filter(Boolean).join(" · ")} {!pais && !enLinea && (a.paises ?? []).map((c) => BANDERA[c]).join(" ")}</small>}
+                </span><b className="num">{cantidad(a, orig.x)}</b>
+              </button>
+            );
+            const pr = enLinea && m ? productoDeSup(a.id) : undefined;
+            if (!pr) return fila;
+            return (
+              <div key={a.id} className="opt-compra">
+                {fila}
+                <div className="opt-links">
+                  <a href={linkAmazon(pr, m!)} target="_blank" rel="sponsored noopener">🛒 Amazon</a>
+                  {pais === "MX" && <a className="ml" href={linkML(pr)} target="_blank" rel="sponsored noopener">🛒 Mercado Libre</a>}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

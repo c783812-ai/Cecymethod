@@ -15,7 +15,7 @@ export type Mercado = keyof typeof MERCADOS;
 export const MERCADO_DE: Record<string, Mercado> = { MX: "MX", US: "US", CA: "CA", UK: "UK", ES: "ES", DE: "DE", CH: "DE", EU: "DE", AE: "AE" };
 
 /** Un producto recomendado. urls: su página en cada Amazon (si no hay, se busca por `busca`); ml: Mercado Libre México. */
-export type Producto = { cat: string; n: string; marca: string; pres?: string; busca: string; urls: Partial<Record<Mercado, string>>; ml?: string; paises?: Mercado[]; nivel?: "accesible" | "premium"; precio?: string };
+export type Producto = { cat: string; n: string; marca: string; pres?: string; busca: string; urls: Partial<Record<Mercado, string>>; ml?: string; paises?: Mercado[]; nivel?: "accesible" | "premium"; precio?: string; nota?: string; sup?: string };
 export type Categoria = {
   id: string; emoji: string; nombre: string; para: string[];
   sirve: string; como: string; cuando: string; separar?: string; ojo?: string;
@@ -117,6 +117,8 @@ export const POR_META: { meta: string; r: RegExp; cats: string[]; nota: string }
 ];
 
 export const PRODUCTOS = productos as Producto[];
+/** El producto de la tienda que corresponde a un suplemento de la lista de cambios (por su id). */
+export const productoDeSup = (id: string) => PRODUCTOS.find((p) => p.sup === id);
 
 /** Tus IDs de afiliada de Amazon por país (no son contraseñas). Vacío = el link funciona, pero sin comisión. */
 export const AFILIADO: Partial<Record<Mercado, string>> = {};

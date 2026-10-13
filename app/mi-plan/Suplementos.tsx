@@ -43,6 +43,7 @@ export default function Suplementos({ recomendados }: { recomendados: Suplemento
       <p className="note tienda-aviso">
         Antes de empezar un suplemento nuevo, pregúntale a Cecy, sobre todo si tomas medicamentos, estás embarazada o tienes alguna enfermedad.
         Algunos links son de afiliada: si compras con ellos, Cecy gana una pequeña comisión y a ti no te cuesta más.
+        Como Afiliado de Amazon, percibo dinero con las compras elegibles.{["DE", "CH", "EU"].includes(pais) && " Als Amazon-Partner verdiene ich an qualifizierten Verkäufen."}
       </p>
     </>
   );
@@ -50,7 +51,7 @@ export default function Suplementos({ recomendados }: { recomendados: Suplemento
 
 function Tarjeta({ c, pais, abierta, onAbrir, dosis }: { c: Categoria; pais: string; abierta: boolean; onAbrir: () => void; dosis?: Suplemento }) {
   const m = MERCADO_DE[pais];
-  const prods = m ? PRODUCTOS.filter((p) => p.cat === c.id && (enMercado(p, m) || (pais === "MX" && !!p.ml))) : [];
+  const prods = m ? PRODUCTOS.filter((p) => p.cat === c.id && (enMercado(p, m) || (pais === "MX" && !!p.ml))).sort((a, b) => (a.nota ? -1 : 0) - (b.nota ? -1 : 0) || (a.nivel === "premium" ? 1 : 0) - (b.nivel === "premium" ? 1 : 0)) : [];
   return (
     <div className={`card supcat ${abierta ? "abierta" : ""}`}>
       <button className="supcat-top" onClick={onAbrir} aria-expanded={abierta}>
@@ -72,7 +73,7 @@ function Tarjeta({ c, pais, abierta, onAbrir, dosis }: { c: Categoria; pais: str
             <div className="prods">
               {prods.map((p) => (
                 <div key={p.n + p.marca} className="prod">
-                  <div><b>{p.marca}</b> · {p.n}{p.pres && <span className="note"> · {p.pres}</span>}{p.nivel && <span className={`nivel ${p.nivel}`}>{p.nivel === "accesible" ? "Accesible" : "Premium"}</span>}</div>
+                  <div><b>{p.marca}</b> · {p.n}{p.pres && <span className="note"> · {p.pres}</span>}{p.nota && <span className="nivel cecy">{p.nota}</span>}{p.nivel && <span className={`nivel ${p.nivel}`}>{p.nivel === "accesible" ? "Accesible" : "Premium"}</span>}</div>
                   <div className="prod-btns">
                     {enMercado(p, m) && <a className="btn amz" href={linkAmazon(p, m)} target="_blank" rel="sponsored noopener">Amazon</a>}
                     {pais === "MX" && p.ml && <a className="btn ml" href={linkML(p)} target="_blank" rel="sponsored noopener">Mercado Libre</a>}
