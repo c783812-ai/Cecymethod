@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, SUENO, ACTIVIDADES, MINUTOS, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
+import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, SUENO, ACTIVIDADES, MINUTOS, ALCOHOL, BEBIDAS, FUERA, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
 
 /**
  * El diario de la paciente. Sin consentimiento se guarda solo en su teléfono;
@@ -149,6 +149,28 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
         <input className="medtxt" inputMode="numeric" style={{ width: 90, flex: "none" }} placeholder="pasos" defaultValue={r.pasos ?? ""} key={`pasos-${fecha}-${r.pasos ?? ""}`}
           onBlur={(e) => { const n = parseInt(e.target.value.replace(/[^0-9]/g, ""), 10); set({ pasos: Number.isFinite(n) && n > 0 && n < 100000 ? n : undefined }); }} />
       </label>
+
+      <h5>🍕 ¿Comiste algo fuera de tu plan?</h5>
+      <Chips label="Comida fuera del plan" ops={FUERA} value={r.fuera} onPick={(v) => set({ fuera: v, ...(v === "no" || !v ? { fueraQue: undefined } : {}) })} />
+      {!!r.fuera && r.fuera !== "no" && (
+        <input className="medtxt" placeholder="¿Qué comiste? (si quieres contarle a Cecy)" defaultValue={r.fueraQue ?? ""} maxLength={150} key={`fq-${fecha}`}
+          onBlur={(e) => set({ fueraQue: e.target.value.trim() || undefined })} />
+      )}
+
+      <h5>🍷 ¿Tomaste alcohol?</h5>
+      <Chips label="Alcohol" ops={ALCOHOL} value={r.alcohol} onPick={(v) => set({ alcohol: v, ...(v === "no" || !v ? { bebida: undefined } : {}) })} />
+      {!!r.alcohol && r.alcohol !== "no" && (
+        <>
+          <p className="note" style={{ margin: "8px 0 4px" }}>¿Qué tomaste?</p>
+          <div className="chips" role="group" aria-label="Qué tomaste">
+            {BEBIDAS.map(([v, t]) => {
+              const on = !!r.bebida?.includes(v);
+              const sig = on ? r.bebida!.filter((x) => x !== v) : [...(r.bebida ?? []), v];
+              return <button key={v} aria-pressed={on} onClick={() => set({ bebida: sig.length ? sig : undefined })}>{t}</button>;
+            })}
+          </div>
+        </>
+      )}
 
       <h5>🌡️ Estrés</h5>
       <Chips label="Nivel de estrés" ops={ESTRES.map((t, i) => [i + 1, t] as [number, string])} value={r.estres} onPick={(v) => set({ estres: v })} />

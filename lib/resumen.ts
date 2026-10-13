@@ -1,4 +1,4 @@
-import { ANIMOS, CICLO, ESTRES, HECES, META, SUENO, ACTIVIDADES, MINUTOS, type Meta, type Registro } from "./diario";
+import { ANIMOS, CICLO, ESTRES, HECES, META, SUENO, ACTIVIDADES, MINUTOS, ALCOHOL, BEBIDAS, FUERA, type Meta, type Registro } from "./diario";
 
 const prom = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null);
 const etiqueta = <T,>(ops: [T, string][], v: T | undefined) => ops.find(([k]) => k === v)?.[1];
@@ -23,6 +23,10 @@ export function resumenSemana(regs: Record<string, Registro>, fechas: string[], 
   const suenoCorto = sueno.filter((s) => s === "<6").length;
   const pasos = r.map((x) => x.pasos).filter((p): p is number => typeof p === "number");
   const activos = r.filter((x) => x.act?.some((a) => a !== "descanso")).length;
+  const alcoholDias = r.filter((x) => x.alcohol && x.alcohol !== "no").length;
+  const bebidas = r.reduce((s, x) => s + (x.alcohol === "1" ? 1 : x.alcohol === "2" ? 2 : x.alcohol === "3+" ? 3 : 0), 0);
+  const bebidasMas = r.some((x) => x.alcohol === "3+");
+  const fueraDias = r.filter((x) => x.fuera && x.fuera !== "no").length;
   const pasos7 = pasos.filter((p) => p >= 7000).length;
   const pasosProm = pasos.length ? Math.round(pasos.reduce((a, b) => a + b, 0) / pasos.length) : 0;
   const animos = dias.map((d) => d.r?.animo ?? "·");
@@ -54,10 +58,12 @@ export function resumenSemana(regs: Record<string, Registro>, fechas: string[], 
   ].filter(Boolean).join("\n\n");
 
   return {
-    dias, registrados: con.length, comidas, deComidas, metaProm, diasMeta, agua, bano, estrenida, diarrea, estres, sueno, suenoCorto, pasos, pasos7, pasosProm, activos,
+    dias, registrados: con.length, comidas, deComidas, metaProm, diasMeta, agua, bano, estrenida, diarrea, estres, sueno, suenoCorto, pasos, pasos7, pasosProm, activos, alcoholDias, bebidas, bebidasMas, fueraDias,
     animos, animosMalos, ciclo, meds, mensaje,
     textoSueno: (s?: string) => etiqueta(SUENO, s), textoPasos: (p?: number) => (typeof p === "number" ? p.toLocaleString("en-US") : undefined),
-    textoActividad: (x?: Registro) => (x?.act?.length ? [x.act.map((a) => etiqueta(ACTIVIDADES, a)).join(", "), etiqueta(MINUTOS, x.min), x.kcal ? `${x.kcal} kcal` : ""].filter(Boolean).join(" · ") : undefined), textoHeces: (h?: Registro["heces"]) => etiqueta(HECES, h),
+    textoActividad: (x?: Registro) => (x?.act?.length ? [x.act.map((a) => etiqueta(ACTIVIDADES, a)).join(", "), etiqueta(MINUTOS, x.min), x.kcal ? `${x.kcal} kcal` : ""].filter(Boolean).join(" · ") : undefined), textoAlcohol: (x?: Registro) => (x?.alcohol ? [x.alcohol === "2" ? "2 vasos o copas" : x.alcohol === "3+" ? "3 o más vasos o copas" : etiqueta(ALCOHOL, x.alcohol), x.bebida?.map((b) => etiqueta(BEBIDAS, b)).join(", ")].filter(Boolean).join(": ") : undefined),
+    textoFuera: (x?: Registro) => (x?.fuera ? (x.fuera === "no" ? "No" : [etiqueta(FUERA, x.fuera), x.fueraQue].filter(Boolean).join(": ")) : undefined),
+    textoHeces: (h?: Registro["heces"]) => etiqueta(HECES, h),
     textoEstres: (n?: number) => (n ? ESTRES[n - 1] : undefined), textoAnimo: (a?: string) => ANIMOS.find(([e]) => e === a)?.[1],
   };
 }

@@ -7,6 +7,8 @@ import Copiar from "./Copiar";
 const CORTOS = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 
 /** La semana de la paciente para Cecy: resumen, día por día y un borrador de mensaje. */
+const dias7 = (n: number) => `${n} de 7 días`;
+
 export default function SemanaVista({ p, plan, regs, fechas, antes, despues }: {
   p: Pick<Patient, "nombre" | "diario_consentido_at">; plan: Plan | null; regs: Record<string, Registro>; fechas: string[]; antes: string; despues: string;
 }) {
@@ -37,13 +39,15 @@ export default function SemanaVista({ p, plan, regs, fechas, antes, despues }: {
             <Dato t="Estrés" v={s.estres != null ? s.textoEstres(Math.round(s.estres)) ?? "—" : "—"} n={s.suenoCorto ? `durmió menos de 6 h ${s.suenoCorto} noches` : ""} />
             <Dato t="Actividad" v={`${s.activos} de 7 días`} n="días que hizo ejercicio" />
             <Dato t="Pasos" v={s.pasos.length ? s.pasosProm.toLocaleString("en-US") : "—"} n={s.pasos.length ? `promedio · ${s.pasos7} de ${s.pasos.length} días con 7,000+` : ""} />
+            <Dato t="Fuera del plan" v={dias7(s.fueraDias)} n="días que comió algo fuera de su plan" />
+            <Dato t="Alcohol" v={dias7(s.alcoholDias)} n={s.bebidas ? `${s.bebidas}${s.bebidasMas ? " o más" : ""} vasos o copas en la semana` : ""} />
             <Dato t="Ánimo" v={s.animos.join(" ")} n={s.ciclo.join(" · ")} />
           </div>
           <div className="card">
             <h3>Día por día</h3>
             <div className="tablewrap">
               <table>
-                <thead><tr><th>Día</th><th>Comidas</th><th>Meta</th><th>Agua</th><th>Baño</th><th>Ánimo</th><th>Sueño</th><th>Pasos</th><th>Actividad</th><th>Estrés</th><th>Ciclo</th></tr></thead>
+                <thead><tr><th>Día</th><th>Comidas</th><th>Meta</th><th>Agua</th><th>Baño</th><th>Ánimo</th><th>Sueño</th><th>Pasos</th><th>Actividad</th><th>Fuera del plan</th><th>Alcohol</th><th>Estrés</th><th>Ciclo</th></tr></thead>
                 <tbody>
                   {s.dias.map(({ fecha, r }, i) => (
                     <tr key={fecha}>
@@ -56,6 +60,8 @@ export default function SemanaVista({ p, plan, regs, fechas, antes, despues }: {
                       <td>{s.textoSueno(r?.sueno) ?? "—"}</td>
                       <td>{s.textoPasos(r?.pasos) ?? "—"}</td>
                       <td>{s.textoActividad(r) ?? "—"}</td>
+                      <td>{s.textoFuera(r) ?? "—"}</td>
+                      <td>{s.textoAlcohol(r) ?? "—"}</td>
                       <td>{s.textoEstres(r?.estres) ?? "—"}</td>
                       <td className="note">{r?.ciclo && r.ciclo !== "na" && r.ciclo !== "normal" ? (r.ciclo === "regla" ? "En su regla" : "Irregular") : ""}</td>
                     </tr>
