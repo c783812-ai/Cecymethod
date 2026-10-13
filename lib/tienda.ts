@@ -123,7 +123,7 @@ export const TIENDA_PUBLICA = false;
 export const productoDeSup = (id: string) => PRODUCTOS.find((p) => p.sup === id);
 
 /** Tus IDs de afiliada de Amazon por país (no son contraseñas). Vacío = el link funciona, pero sin comisión. */
-export const AFILIADO: Partial<Record<Mercado, string>> = {};
+export const AFILIADO: Partial<Record<Mercado, string>> = { DE: "cecymethod-21" };
 /** Links de afiliada de Mercado Libre por producto (los genera Cecy en su portal), por `busca`. */
 export const AFILIADO_ML: Record<string, string> = {};
 
