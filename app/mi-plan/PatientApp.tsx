@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { DIAS, TIEMPOS, type Dia, type Patient, type Plan, type Rutina } from "@/lib/types";
+import { DIAS, TIEMPOS, type Patient, type Plan, type Rutina } from "@/lib/types";
 import { CALENTAMIENTO } from "@/lib/gluteos";
 import { mesDelCiclo, proximoCambio } from "@/lib/ciclo";
-import { MealCard, useGustos, type Gustos, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden, TiendaAbierta } from "./Comidas";
+import { MealCard, useGustos, type Gustos, comidaDe, opcionesDe, slotDe, useCambios, useOrden, type Cambios, type Orden, TiendaAbierta } from "./Comidas";
 import Super from "./Super";
 import Antojos from "./Antojos";
 import Instalar from "./Instalar";
@@ -19,12 +19,11 @@ import { tint } from "@/components/shared";
 
 const MEAL_TINT = ["t-yellow", "t-pink", "t-blue", "t-lilac", "t-green"];
 const CORTO = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
-type Tab = "hoy" | "registro" | "semana" | "super" | "suple" | "rutina";
+type Tab = "hoy" | "registro" | "super" | "suple" | "rutina";
 
 const ICON: Record<Tab, React.ReactNode> = {
   hoy: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>,
   registro: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z" /></svg>,
-  semana: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M4 6h16M4 12h16M4 18h10" /></svg>,
   super: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 4h2l2.4 11h11.2L21 8H6.2" /><circle cx="9" cy="19" r="1.5" /><circle cx="17" cy="19" r="1.5" /></svg>,
   suple: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="7" y="3" width="10" height="4" rx="1" /><path d="M8 7h8v12a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z" /><path d="M8 12h8" /></svg>,
   rutina: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12" /></svg>,
@@ -67,12 +66,11 @@ export default function PatientApp(props: {
   const heads: Record<Tab, [string, React.ReactNode]> = {
     hoy: [`Hola, ${first}`, <>Tu <mark>día</mark></>],
     registro: ["Cómo te sentiste hoy", <>Mi <mark>registro</mark></>],
-    semana: [plan?.titulo ?? "Tu plan", <>Tu <mark>semana</mark></>],
     super: ["Para tu día, semana o mes", <>Tu lista del <mark>súper</mark></>],
     suple: ["Para qué sirven y dónde comprarlos", <>Mis <mark>suplementos</mark></>],
     rutina: ["Ejercicio", <>Tu <mark>rutina</mark></>],
   };
-  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["registro", "Registro"], ["semana", "Semana"], ["super", "Súper"], ["suple", "Suplementos"], ["rutina", "Rutina"]];
+  const tabs: [Tab, string][] = [["hoy", "Hoy"], ["registro", "Registro"], ["super", "Súper"], ["suple", "Suplementos"], ["rutina", "Rutina"]];
 
   return (
     <TiendaAbierta.Provider value={!!p.suplementos_visible}>
@@ -91,7 +89,6 @@ export default function PatientApp(props: {
           <div className="ph-body">
             {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} planId={props.planId} planDesde={props.planDesde} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} />}
             {tab === "registro" && <><Logros diario={diario[0]} vasos={plan?.agua || 8} /><Estadisticas diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
-            {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
             {tab === "suple" && (p.suplementos_visible ? <Suplementos recomendados={plan?.suplementos ?? []} /> : <PorAbrir />)}
             {tab === "rutina" && <RutinaView rutina={rutina} ciclo={props.ciclo ?? null} videos={videos} pid={p.id} remoto={remoto} />}
@@ -216,47 +213,15 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
           ))}
         </div>
       )}
-      {plan.tips[0] && <div className={`tint ${tint(plan.tips[0].color)}`}><h4>{plan.tips[0].icono} {plan.tips[0].titulo}</h4><p>{plan.tips[0].texto}</p></div>}
+      {plan.tips.length > 0 && (
+        <>
+          <div className="eyebrow" style={{ marginTop: 6 }}>Recomendaciones para ti</div>
+          {plan.tips.map((t, i) => <div key={i} className={`tint ${tint(t.color)}`}><h4>{t.icono} {t.titulo}</h4><p>{t.texto}</p></div>)}
+        </>
+      )}
       <Encuesta nombre={p.nombre} desde={planDesde} planId={planId} />
       <Metas p={p} />
       <Whats />
-    </>
-  );
-}
-
-function Semana({ plan, planExiste, cambios, orden }: { plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden }) {
-  if (!plan) return <Locked planExiste={planExiste} />;
-  return (
-    <>
-      {plan.objetivo && <p style={{ margin: 0, color: "var(--muted)", fontSize: 14 }}>{plan.objetivo}</p>}
-      <div className="grid" style={{ gap: 10 }}>
-        {plan.enfoques.map((e, i) => <div key={i} className={`tint ${tint(e.color)}`}><h4>{e.icono} {e.titulo}</h4><p>{e.texto}</p></div>)}
-      </div>
-      <div className="eyebrow" style={{ marginTop: 6 }}>Puedes repetir un platillo en otros días: elígelo en cada comida</div>
-      {DIAS.map((d) => (
-        <details key={d} className="card" style={{ padding: "12px 14px" }}>
-          <summary style={{ cursor: "pointer", fontFamily: "var(--display)", fontWeight: 600 }}>{d}</summary>
-          {TIEMPOS.map((_, i) => {
-            const { m, src } = comidaDe(plan, orden[0], d, i);
-            const ops = opcionesDe(plan, i);
-            return m.titulo ? (
-              <div key={i} className="meal">
-                <div className="t">{TIEMPOS[i][0]} · {plan.horarios?.[i] ?? TIEMPOS[i][1]}</div>
-                {ops.length > 1 ? (
-                  <select className="elegir" value={src} onChange={(e) => orden[1](d, i, e.target.value as Dia)} aria-label={`${d}, ${TIEMPOS[i][0]}: qué platillo`}>
-                    {ops.map((o) => <option key={o} value={o}>{plan.menu[o][i].titulo}{o !== d ? ` (del ${o.toLowerCase()})` : ""}</option>)}
-                  </select>
-                ) : m.titulo}
-                {m.ingredientes?.length ? <div className="d">{resumenIngredientes(m, (j) => slotDe(src, i, j), cambios[0])}</div> : null}
-                {m.detalle && <div className="d">{m.detalle}</div>}
-              </div>
-            ) : null;
-          })}
-        </details>
-      ))}
-      <div className="grid" style={{ gap: 10 }}>
-        {plan.tips.map((t, i) => <div key={i} className={`tint ${tint(t.color)}`}><h4>{t.icono} {t.titulo}</h4><p>{t.texto}</p></div>)}
-      </div>
     </>
   );
 }

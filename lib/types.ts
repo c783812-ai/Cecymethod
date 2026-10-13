@@ -15,7 +15,7 @@ import type { Ingrediente, Sistema } from "./alimentos";
 import type { Meta } from "./diario";
 
 /** detalle: texto libre (o cómo prepararlo si hay ingredientes). */
-export type Comida = { titulo: string; detalle: string; ingredientes?: Ingrediente[] };
+export type Comida = { titulo: string; detalle: string; ingredientes?: Ingrediente[]; recomendacion?: string };
 export type Enfoque = { icono: string; titulo: string; texto: string; color: Color };
 export type Suplemento = { que: string; cuanto: string; cuando: string };
 export type Tip = { icono: string; titulo: string; texto: string; color: Color };

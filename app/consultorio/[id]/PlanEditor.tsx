@@ -18,7 +18,7 @@ function normalizar(x: unknown): Plan {
   for (const d of DIAS)
     p.menu[d] = TIEMPOS.map((_, i) => {
       const m = p.menu[d]?.[i];
-      return { titulo: m?.titulo ?? "", detalle: m?.detalle ?? "", ...(m?.ingredientes?.length ? { ingredientes: m.ingredientes } : {}) };
+      return { titulo: m?.titulo ?? "", detalle: m?.detalle ?? "", ...(m?.ingredientes?.length ? { ingredientes: m.ingredientes } : {}), ...(m?.recomendacion ? { recomendacion: m.recomendacion } : {}) };
     });
   p.porciones = { ...base.porciones, ...(p.porciones ?? {}) };
   p.horarios = TIEMPOS.map((t, i) => p.horarios?.[i] ?? t[1]);
@@ -172,6 +172,7 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
                   <span className="eyebrow">{t[0]}</span>
                   <input value={plan.menu[d][i].titulo} placeholder="Platillo" onChange={(e) => up((p) => { p.menu[d][i].titulo = e.target.value; })} aria-label={`${d}, ${t[0]}, platillo`} />
                   <textarea value={plan.menu[d][i].detalle} placeholder={plan.menu[d][i].ingredientes?.length ? "Cómo prepararlo, en 1 o 2 líneas: Licúa todo con hielo…" : "Cantidades: 2 huevos · 1 taza de espinaca…"} onChange={(e) => up((p) => { p.menu[d][i].detalle = e.target.value; })} maxLength={plan.menu[d][i].ingredientes?.length ? 240 : undefined} aria-label={`${d}, ${t[0]}, cantidades`} />
+                  <input value={plan.menu[d][i].recomendacion ?? ""} placeholder="💡 Recomendación para esta comida (opcional)" onChange={(e) => up((p) => { const v = e.target.value; if (v) p.menu[d][i].recomendacion = v; else delete p.menu[d][i].recomendacion; })} aria-label={`${d}, ${t[0]}, recomendación`} />
                   {(plan.menu[d][i].ingredientes ?? []).map((g, j) => (
                     <div key={j}>
                     <div className="eing">

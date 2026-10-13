@@ -106,12 +106,13 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, o
             })}
           </ul>
         )}
-        {m.detalle && (ings.length > 0 ? (
+        {(m.detalle || m.recomendacion) && (ings.length > 0 ? (
           <details className="prep">
             <summary>Cómo prepararlo</summary>
-            <p>{m.detalle}</p>
+            {m.detalle && <p>{m.detalle}</p>}
+            {m.recomendacion && <p className="reco"><b>💡 Recomendación</b>{m.recomendacion}</p>}
           </details>
-        ) : <p>{m.detalle}</p>)}
+        ) : <>{m.detalle && <p>{m.detalle}</p>}{m.recomendacion && <p className="reco"><b>💡 Recomendación</b>{m.recomendacion}</p>}</>)}
         {onLista && (
           <button className="lista" aria-pressed={!!lista} onClick={onLista}>{lista ? "✓ Lista" : "Marcar como lista"}</button>
         )}
