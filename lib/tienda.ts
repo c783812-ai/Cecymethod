@@ -117,6 +117,8 @@ export const POR_META: { meta: string; r: RegExp; cats: string[]; nota: string }
 ];
 
 export const PRODUCTOS = productos as Producto[];
+/** La página pública /suplementos. En false muestra "muy pronto" (Cecy la abre cuando tenga sus links de afiliada). */
+export const TIENDA_PUBLICA = false;
 /** El producto de la tienda que corresponde a un suplemento de la lista de cambios (por su id). */
 export const productoDeSup = (id: string) => PRODUCTOS.find((p) => p.sup === id);
 

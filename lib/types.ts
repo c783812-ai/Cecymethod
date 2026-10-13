@@ -55,6 +55,7 @@ export type Patient = {
   plan_visible: boolean;
   routine_key: string | null;
   routine_visible: boolean;
+  suplementos_visible?: boolean; // puede ver la pestaña Suplementos (columna de la migración 0004)
   invitada_at: string | null;
   diario_consentido_at?: string | null; // aceptó compartir su diario con Cecy
   created_at: string;

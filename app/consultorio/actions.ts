@@ -64,7 +64,7 @@ export async function guardarResumen(id: string, f: FormData) {
   revalidatePath(`/consultorio/${id}`);
 }
 
-export async function cambiarAcceso(id: string, campo: "plan_visible" | "routine_visible", valor: boolean) {
+export async function cambiarAcceso(id: string, campo: "plan_visible" | "routine_visible" | "suplementos_visible", valor: boolean) {
   const { sb } = await requireNutri();
   await sb.from("patients").update({ [campo]: valor }).eq("id", id);
   revalidatePath(`/consultorio/${id}`);

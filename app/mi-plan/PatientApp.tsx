@@ -4,7 +4,7 @@ import Link from "next/link";
 import { DIAS, TIEMPOS, type Dia, type Patient, type Plan, type Rutina } from "@/lib/types";
 import { CALENTAMIENTO } from "@/lib/gluteos";
 import { mesDelCiclo, proximoCambio } from "@/lib/ciclo";
-import { MealCard, useGustos, type Gustos, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden } from "./Comidas";
+import { MealCard, useGustos, type Gustos, comidaDe, opcionesDe, resumenIngredientes, slotDe, useCambios, useOrden, type Cambios, type Orden, TiendaAbierta } from "./Comidas";
 import Super from "./Super";
 import Antojos from "./Antojos";
 import Instalar from "./Instalar";
@@ -75,6 +75,7 @@ export default function PatientApp(props: {
   const tabs: [Tab, string][] = [["hoy", "Hoy"], ["registro", "Registro"], ["semana", "Semana"], ["super", "Súper"], ["suple", "Suplementos"], ["rutina", "Rutina"]];
 
   return (
+    <TiendaAbierta.Provider value={!!p.suplementos_visible}>
     <div className="patient">
       <div style={{ width: "100%", maxWidth: 430 }}>
         {vistaPrevia && (
@@ -92,7 +93,7 @@ export default function PatientApp(props: {
             {tab === "registro" && <><Logros diario={diario[0]} vasos={plan?.agua || 8} /><Estadisticas diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
-            {tab === "suple" && <Suplementos recomendados={plan?.suplementos ?? []} />}
+            {tab === "suple" && (p.suplementos_visible ? <Suplementos recomendados={plan?.suplementos ?? []} /> : <PorAbrir />)}
             {tab === "rutina" && <RutinaView rutina={rutina} ciclo={props.ciclo ?? null} videos={videos} pid={p.id} remoto={remoto} />}
             {!vistaPrevia && (
               <form action="/salir" method="post" style={{ textAlign: "center" }}>
@@ -109,6 +110,18 @@ export default function PatientApp(props: {
           </nav>
         </div>
       </div>
+    </div>
+    </TiendaAbierta.Provider>
+  );
+}
+
+/** Suplementos todavía cerrado para esta paciente. */
+function PorAbrir() {
+  return (
+    <div className="card" style={{ padding: 16, textAlign: "center" }}>
+      <div style={{ fontSize: 36 }} aria-hidden="true">🔒</div>
+      <h4 style={{ fontSize: 16, margin: "6px 0 4px" }}>Muy pronto</h4>
+      <p className="note" style={{ margin: 0 }}>Esta sección todavía no está habilitada para ti. Cecy te avisará cuando esté lista.</p>
     </div>
   );
 }

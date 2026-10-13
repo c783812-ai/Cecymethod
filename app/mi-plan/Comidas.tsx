@@ -1,11 +1,14 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, createContext, useContext } from "react";
 import { BANDERA, NOTA_EU, PAIS, buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
 import { MERCADO_DE, linkAmazon, linkML, productoDeSup } from "@/lib/tienda";
 import { DIAS, type Comida, type Dia, type Plan } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 // Los cambios que hace la paciente se guardan solo en su teléfono, por plan.
+/** Si la paciente ya tiene abierta la sección de Suplementos: entonces las proteínas en polvo traen su botón de compra en línea. */
+export const TiendaAbierta = createContext(false);
+
 export function useCambios(planId: string | null) {
   const key = `cambios-${planId ?? "plan"}`;
   const [v, setV] = useState<Record<string, Ingrediente>>({});
@@ -143,7 +146,7 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
   // Sin lactosa, la leche se puede cambiar por cualquier leche o bebida sin lactosa (mismas proteínas e hidratos por equivalente)
   const esSup = sistema === "suplementos";
   // Las proteínas en polvo se compran en línea: en vez de en qué países hay, se muestra el link de su tienda.
-  const enLinea = esSup && orig.g === "Proteína en polvo";
+  const enLinea = useContext(TiendaAbierta) && esSup && orig.g === "Proteína en polvo";
   const m = MERCADO_DE[pais];
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
