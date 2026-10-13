@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, SUENO, ACTIVIDADES, MINUTOS, ALCOHOL, BEBIDAS, FUERA, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
+import { TIEMPOS } from "@/lib/types";
+import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, SUENO, ACTIVIDADES, MINUTOS, ALCOHOL, BEBIDAS, FUERA, SACIEDAD, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
 
 /**
  * El diario de la paciente. Sin consentimiento se guarda solo en su teléfono;
@@ -120,6 +121,24 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
         {ANIMOS.map(([e, t]) => (
           <button key={e} aria-pressed={r.animo === e} onClick={() => set({ animo: r.animo === e ? undefined : e })}><span>{e}</span><small>{t}</small></button>
         ))}
+      </div>
+
+      <h5>🍽️ Después de comer me sentí</h5>
+      <div className="hs">
+        {TIEMPOS.map(([t], i) => {
+          const v = r.hs?.[i]?.s;
+          const poner = (x?: number) => {
+            const arr = Array.from({ length: TIEMPOS.length }, (_, k) => r.hs?.[k] ?? null);
+            arr[i] = x ? { s: x } : null;
+            set({ hs: arr.some(Boolean) ? arr : undefined });
+          };
+          return (
+            <div key={t} className="hs-fila">
+              <span>{t}</span>
+              <Chips label={`Después de ${t.toLowerCase()}`} ops={SACIEDAD} value={v} onPick={poner} />
+            </div>
+          );
+        })}
       </div>
 
       <h5>😴 Anoche dormí</h5>

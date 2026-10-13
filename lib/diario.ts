@@ -15,6 +15,7 @@ export type Registro = {
   act?: string[]; // valores de ACTIVIDADES
   min?: string; // valor de MINUTOS
   alcohol?: string; // valor de ALCOHOL
+  hs?: ({ s?: number } | null)[]; // por tiempo de comida: cómo se sintió después (valor de SACIEDAD)
   bebida?: string[]; // valores de BEBIDAS
   fuera?: string; // valor de FUERA
   fueraQue?: string; // qué comió fuera del plan (opcional)
@@ -33,6 +34,7 @@ export const ACTIVIDADES: [string, string][] = [["rutina", "🍑 Mi rutina"], ["
 export const MINUTOS: [string, string][] = [["15", "15 min"], ["30", "30 min"], ["45", "45 min"], ["60", "1 hora"], ["90", "Más de 1 hora"]];
 export const ALCOHOL: [string, string][] = [["no", "No"], ["1", "1 vaso o copa"], ["2", "2"], ["3+", "3 o más"]];
 export const BEBIDAS: [string, string][] = [["vino", "🍷 Vino"], ["cerveza", "🍺 Cerveza"], ["shots", "🥃 Shots"], ["coctel", "🍹 Cócteles o preparadas"], ["refresco", "🥤 Con refresco"]];
+export const SACIEDAD: [number, string][] = [[1, "Con hambre"], [2, "Saciada"]];
 export const FUERA: [string, string][] = [["no", "No, todo de mi plan"], ["1", "1 comida"], ["2+", "2 o más"]];
 export const SUENO: [string, string][] = [["<6", "Menos de 6 h"], ["6-7", "6 a 7 h"], ["7-8", "7 a 8 h"], ["8.5-10", "8½ a 10 h"], [">10", "Más de 10 h"]];
 export const CICLO: [string, string][] = [["normal", "Todo normal"], ["regla", "Estoy en mi regla"], ["irregular", "Algo irregular"], ["na", "No aplica"]];

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export type Fila = { id: string; nombre: string; activa: boolean; comparte: boolean; dias: number; ultima: string | null };
+export type Fila = { id: string; nombre: string; activa: boolean; comparte: boolean; dias: number; ultima: string | null; alertas?: string[] };
 
 const corta = (iso: string) => `${Number(iso.slice(8))}/${Number(iso.slice(5, 7))}`;
 
@@ -12,20 +12,23 @@ export default function ListaDomingo({ filas, semana }: { filas: Fila[]; semana:
   useEffect(() => { try { setHechas(JSON.parse(localStorage.getItem(key) || "{}")); } catch {} }, [key]);
   const marcar = (id: string) => setHechas((o) => { const n = { ...o, [id]: !o[id] }; try { localStorage.setItem(key, JSON.stringify(n)); } catch {} return n; });
 
-  const registraron = filas.filter((f) => f.comparte && f.dias > 0).sort((a, b) => b.dias - a.dias);
+  const registraron = filas.filter((f) => f.comparte && f.dias > 0).sort((a, b) => (b.alertas?.length ?? 0) - (a.alertas?.length ?? 0) || b.dias - a.dias);
   const sinRegistro = filas.filter((f) => f.comparte && f.dias === 0);
   const noComparten = filas.filter((f) => !f.comparte && f.activa);
   const listas = registraron.filter((f) => hechas[f.id]).length;
+  const conAlertas = registraron.filter((f) => f.alertas?.length).length;
 
   const fila = (f: Fila, pill: React.ReactNode, check = true) => (
     <li key={f.id} className={hechas[f.id] ? "hecha" : ""}>
       {check && <input type="checkbox" checked={!!hechas[f.id]} onChange={() => marcar(f.id)} aria-label={`Ya le escribí a ${f.nombre}`} />}
       <Link href={`/consultorio/${f.id}?tab=semana`}>{f.nombre}</Link>
       {pill}
+      {!!f.alertas?.length && <div className="alertas">{f.alertas.map((a) => <span key={a}>{a}</span>)}</div>}
     </li>
   );
   return (
     <div className="grid domingo">
+      {conAlertas > 0 && <div className="tint t-warn"><h4>⚠️ {conAlertas} {conAlertas === 1 ? "paciente tiene" : "pacientes tienen"} algo para revisar</h4><p>Van primero en la lista, con lo que conviene platicar.</p></div>}
       <div className="card">
         <h3>Registraron su semana <span className="note">{listas} de {registraron.length} ya con mensaje</span></h3>
         {registraron.length ? <ul>{registraron.map((f) => fila(f, <span className={`pill ${f.dias >= 5 ? "p-ok" : "p-mid"}`}>{f.dias} de 7 días{f.ultima ? ` · último ${corta(f.ultima)}` : ""}</span>))}</ul>

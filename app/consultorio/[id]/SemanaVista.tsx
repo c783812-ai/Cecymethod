@@ -3,6 +3,7 @@ import type { Registro } from "@/lib/diario";
 import { resumenSemana } from "@/lib/resumen";
 import type { Patient, Plan } from "@/lib/types";
 import Copiar from "./Copiar";
+import { alertasDe, hambrePorTiempo } from "@/lib/alertas";
 
 const CORTOS = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 
@@ -14,6 +15,9 @@ export default function SemanaVista({ p, plan, regs, fechas, antes, despues }: {
 }) {
   const vasos = plan?.agua || 8;
   const s = resumenSemana(regs, fechas, { nombre: p.nombre, meta: plan?.meta, vasos });
+  const semana = fechas.map((f) => regs[f]).filter((r): r is Registro => !!r);
+  const alertas = alertasDe(semana).filter((a) => !a.startsWith("💊"));
+  const hambre = hambrePorTiempo(semana);
   const fmt = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString("es-MX", { day: "numeric", month: "short" });
   return (
     <div className="grid">
@@ -28,6 +32,9 @@ export default function SemanaVista({ p, plan, regs, fechas, antes, despues }: {
         <div className="card"><p style={{ margin: 0 }}>No registró nada esta semana.</p></div>
       ) : (
         <>
+          {alertas.length > 0 && (
+            <div className="tint t-warn"><h4>⚠️ Para revisar esta semana</h4><div className="alertas">{alertas.map((a) => <span key={a}>{a}</span>)}</div></div>
+          )}
           {s.meds.length > 0 && (
             <div className="tint t-pink"><h4>💊 Empezó algo nuevo</h4>{s.meds.map((m) => <p key={m.fecha} style={{ margin: "4px 0 0" }}><b>{m.fecha.slice(8)}/{m.fecha.slice(5, 7)}:</b> {m.que}</p>)}</div>
           )}
@@ -70,6 +77,27 @@ export default function SemanaVista({ p, plan, regs, fechas, antes, despues }: {
               </table>
             </div>
           </div>
+          {hambre.some((h) => h.marcadas) && (
+            <div className="card">
+              <h3 style={{ marginTop: 0 }}>Hambre y saciedad</h3>
+              <p className="note" style={{ marginTop: 0 }}>Cómo se sintió después de cada tiempo de comida, en la semana.</p>
+              <div style={{ overflowX: "auto" }}>
+                <table>
+                  <thead><tr><th>Tiempo</th><th>Días que marcó</th><th>Saciada</th><th>Con hambre</th></tr></thead>
+                  <tbody>
+                    {hambre.map((h, i) => (
+                      <tr key={h.tiempo}>
+                        <td><b>{h.tiempo}</b> <span className="note">{plan?.horarios?.[i] ?? ""}</span></td>
+                        <td>{h.marcadas || "—"}</td>
+                        <td>{h.saciada || "—"}</td>
+                        <td className={h.conHambre >= 2 ? "rojo" : ""}>{h.conHambre || "—"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
           <div className="card grid" style={{ gap: 10 }}>
             <h3 style={{ margin: 0 }}>Mensaje para mandarle</h3>
             <p className="note" style={{ margin: 0 }}>Un borrador con lo que marcó. Cópialo, ajústalo a tu estilo y mándaselo por WhatsApp.</p>
