@@ -11,7 +11,10 @@ export type Registro = {
   heces?: "normal" | "diarrea" | "estrenimiento";
   animo?: string; // emoji de ÁNIMOS
   sueno?: string; // valor de SUENO
-  pasos?: string; // valor de PASOS
+  pasos?: number; // pasos que marca su cel o reloj
+  act?: string[]; // valores de ACTIVIDADES
+  min?: string; // valor de MINUTOS
+  kcal?: number; // calorías activas que marca su reloj
   estres?: number; // 1 a 5
   ciclo?: string; // valor de CICLO
   meds?: string; // "" = ninguno; si no, lo que escribió
@@ -22,7 +25,8 @@ export const META = { proteina: "Proteína", carbohidratos: "Carbohidratos", gra
 export type Meta = keyof typeof META;
 
 export const ANIMOS: [string, string][] = [["😄", "Feliz"], ["🙂", "Bien"], ["😐", "Normal"], ["😔", "Triste"], ["😰", "Ansiosa"], ["😤", "Irritable"], ["😴", "Cansada"]];
-export const PASOS: [string, string][] = [["1-5k", "1,000 a 5,000"], ["5-7k", "5,000 a 7,000"], ["7-10k", "7,000 a 10,000"], [">10k", "Más de 10,000"]];
+export const ACTIVIDADES: [string, string][] = [["rutina", "🍑 Mi rutina"], ["caminar", "🚶‍♀️ Caminar"], ["correr", "🏃‍♀️ Correr"], ["bici", "🚴‍♀️ Bici"], ["clase", "💃 Clase o cardio"], ["yoga", "🧘‍♀️ Yoga o pilates"], ["nadar", "🏊‍♀️ Nadar"], ["descanso", "😴 Descansé"]];
+export const MINUTOS: [string, string][] = [["15", "15 min"], ["30", "30 min"], ["45", "45 min"], ["60", "1 hora"], ["90", "Más de 1 hora"]];
 export const SUENO: [string, string][] = [["<6", "Menos de 6 h"], ["6-7", "6 a 7 h"], ["7-8", "7 a 8 h"], ["8.5-10", "8½ a 10 h"], [">10", "Más de 10 h"]];
 export const CICLO: [string, string][] = [["normal", "Todo normal"], ["regla", "Estoy en mi regla"], ["irregular", "Algo irregular"], ["na", "No aplica"]];
 export const HECES: [Registro["heces"] & string, string][] = [["normal", "Normal"], ["estrenimiento", "Estreñida"], ["diarrea", "Diarrea"]];

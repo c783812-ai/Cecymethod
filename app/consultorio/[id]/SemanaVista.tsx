@@ -35,14 +35,15 @@ export default function SemanaVista({ p, plan, regs, fechas, antes, despues }: {
             <Dato t="Agua" v={s.agua != null ? `${s.agua.toFixed(1)} vasos` : "—"} n={`meta: ${vasos} al día`} />
             <Dato t="Baño" v={s.bano != null ? `${s.bano.toFixed(1)} veces al día` : "—"} n={[s.estrenida ? `estreñida ${s.estrenida} d` : "", s.diarrea ? `diarrea ${s.diarrea} d` : ""].filter(Boolean).join(" · ")} />
             <Dato t="Estrés" v={s.estres != null ? s.textoEstres(Math.round(s.estres)) ?? "—" : "—"} n={s.suenoCorto ? `durmió menos de 6 h ${s.suenoCorto} noches` : ""} />
-            <Dato t="Pasos" v={s.pasos.length ? `${s.pasos7} de ${s.pasos.length} días` : "—"} n={s.pasos.length ? "días con más de 7,000" : ""} />
+            <Dato t="Actividad" v={`${s.activos} de 7 días`} n="días que hizo ejercicio" />
+            <Dato t="Pasos" v={s.pasos.length ? s.pasosProm.toLocaleString("en-US") : "—"} n={s.pasos.length ? `promedio · ${s.pasos7} de ${s.pasos.length} días con 7,000+` : ""} />
             <Dato t="Ánimo" v={s.animos.join(" ")} n={s.ciclo.join(" · ")} />
           </div>
           <div className="card">
             <h3>Día por día</h3>
             <div className="tablewrap">
               <table>
-                <thead><tr><th>Día</th><th>Comidas</th><th>Meta</th><th>Agua</th><th>Baño</th><th>Ánimo</th><th>Sueño</th><th>Pasos</th><th>Estrés</th><th>Ciclo</th></tr></thead>
+                <thead><tr><th>Día</th><th>Comidas</th><th>Meta</th><th>Agua</th><th>Baño</th><th>Ánimo</th><th>Sueño</th><th>Pasos</th><th>Actividad</th><th>Estrés</th><th>Ciclo</th></tr></thead>
                 <tbody>
                   {s.dias.map(({ fecha, r }, i) => (
                     <tr key={fecha}>
@@ -54,6 +55,7 @@ export default function SemanaVista({ p, plan, regs, fechas, antes, despues }: {
                       <td>{r?.animo ? `${r.animo} ${s.textoAnimo(r.animo)}` : "—"}</td>
                       <td>{s.textoSueno(r?.sueno) ?? "—"}</td>
                       <td>{s.textoPasos(r?.pasos) ?? "—"}</td>
+                      <td>{s.textoActividad(r) ?? "—"}</td>
                       <td>{s.textoEstres(r?.estres) ?? "—"}</td>
                       <td className="note">{r?.ciclo && r.ciclo !== "na" && r.ciclo !== "normal" ? (r.ciclo === "regla" ? "En su regla" : "Irregular") : ""}</td>
                     </tr>

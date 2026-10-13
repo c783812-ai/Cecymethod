@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, PASOS, SUENO, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
+import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, SUENO, ACTIVIDADES, MINUTOS, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
 
 /**
  * El diario de la paciente. Sin consentimiento se guarda solo en su teléfono;
@@ -125,8 +125,30 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
       <h5>😴 Anoche dormí</h5>
       <Chips label="Horas de sueño" ops={SUENO} value={r.sueno} onPick={(v) => set({ sueno: v })} />
 
-      <h5>👟 Pasos de hoy</h5>
-      <Chips label="Pasos de hoy" ops={PASOS} value={r.pasos} onPick={(v) => set({ pasos: v })} />
+      <h5>🏃‍♀️ Mi actividad de hoy</h5>
+      <div className="chips" role="group" aria-label="Qué hiciste hoy">
+        {ACTIVIDADES.map(([v, t]) => {
+          const on = !!r.act?.includes(v);
+          const sig = v === "descanso" ? (on ? [] : ["descanso"]) : on ? r.act!.filter((x) => x !== v) : [...(r.act ?? []).filter((x) => x !== "descanso"), v];
+          return <button key={v} aria-pressed={on} onClick={() => set({ act: sig.length ? sig : undefined, ...(v === "descanso" && !on ? { min: undefined, kcal: undefined } : {}) })}>{t}</button>;
+        })}
+      </div>
+      {!!r.act?.length && !r.act.includes("descanso") && (
+        <>
+          <p className="note" style={{ margin: "8px 0 4px" }}>¿Cuánto tiempo en total?</p>
+          <Chips label="Minutos de ejercicio" ops={MINUTOS} value={r.min} onPick={(v) => set({ min: v })} />
+          <label className="note" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8 }}>
+            Calorías activas de tu reloj (si tienes)
+            <input className="medtxt" inputMode="numeric" style={{ width: 90, flex: "none" }} placeholder="kcal" defaultValue={r.kcal ?? ""} key={`kcal-${fecha}-${r.kcal ?? ""}`}
+              onBlur={(e) => { const n = parseInt(e.target.value, 10); set({ kcal: Number.isFinite(n) && n > 0 && n < 5000 ? n : undefined }); }} />
+          </label>
+        </>
+      )}
+      <label className="note" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10 }}>
+        👟 Pasos de hoy (los marca tu cel o reloj)
+        <input className="medtxt" inputMode="numeric" style={{ width: 90, flex: "none" }} placeholder="pasos" defaultValue={r.pasos ?? ""} key={`pasos-${fecha}-${r.pasos ?? ""}`}
+          onBlur={(e) => { const n = parseInt(e.target.value.replace(/[^0-9]/g, ""), 10); set({ pasos: Number.isFinite(n) && n > 0 && n < 100000 ? n : undefined }); }} />
+      </label>
 
       <h5>🌡️ Estrés</h5>
       <Chips label="Nivel de estrés" ops={ESTRES.map((t, i) => [i + 1, t] as [number, string])} value={r.estres} onPick={(v) => set({ estres: v })} />
