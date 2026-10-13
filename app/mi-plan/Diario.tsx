@@ -86,7 +86,7 @@ function Chips<T extends string | number>({ ops, value, onPick, label }: { ops: 
   );
 }
 
-/** Registro de hoy: agua, baño, ánimo, sueño, estrés, ciclo y medicamentos. */
+/** Registro de hoy: agua, baño, ánimo, sueño, actividad y pasos, comida fuera del plan, alcohol, estrés, ciclo y medicamentos. */
 export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: number }) {
   const fecha = hoyISO();
   const r = diario[0][fecha] ?? {};
@@ -208,7 +208,7 @@ function Compartir({ diario }: { diario: DiarioHook }) {
   return (
     <div className="compartir">
       <b>¿Compartes tu registro con Cecy?</b>
-      <p className="note" style={{ margin: "4px 0 8px" }}>Así lo revisa cada domingo y te escribe cómo vas. Son datos de salud: solo tú y ella los ven, y se borran cuando terminas tu seguimiento o cuando tú lo pidas. Por ahora se guarda solo en tu teléfono.</p>
+      <p className="note" style={{ margin: "4px 0 8px" }}>Así lo revisa cada domingo y te escribe cómo vas. Incluye tus comidas, comidas fuera del plan, alcohol, agua, baño, ánimo, sueño, actividad, pasos, estrés, ciclo y medicamentos. Son datos de salud: solo tú y ella los ven, y se borran cuando terminas tu seguimiento o cuando tú lo pidas. Por ahora se guarda solo en tu teléfono.</p>
       <label className="check"><input type="checkbox" checked={acepto} onChange={(e) => setAcepto(e.target.checked)} /> Acepto que Cecy vea mi registro diario</label>
       <button className="btn primary" disabled={!acepto || estado === "enviando"} style={{ marginTop: 8 }}
         onClick={async () => { setEstado("enviando"); setEstado((await consentir()) ? "" : "error"); }}>
