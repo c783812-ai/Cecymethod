@@ -208,7 +208,7 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
                 {fila}
                 <div className="opt-links">
                   <a href={linkAmazon(pr, m!)} target="_blank" rel="sponsored noopener">🛒 Amazon</a>
-                  {pais === "MX" && <a className="ml" href={linkML(pr)} target="_blank" rel="sponsored noopener">🛒 Mercado Libre</a>}
+                  {pais === "MX" && pr.ml && <a className="ml" href={linkML(pr)} target="_blank" rel="sponsored noopener">🛒 Mercado Libre</a>}
                 </div>
               </div>
             );

@@ -28,5 +28,15 @@ for x in out:
                 x["urls"].setdefault(k, v)
             if y.get("ml"):
                 x.setdefault("ml", y["ml"])
+# Links de afiliada de Mercado Libre (los saca Cecy): link nuevo, o null si el producto ya no se vende ahí.
+mla = os.path.join(D, "ml_afiliados.json")
+if os.path.exists(mla):
+    m = json.load(open(mla))
+    for x in out:
+        if x.get("ml") in m:
+            if m[x["ml"]]:
+                x["ml"] = m[x["ml"]]
+            else:
+                del x["ml"]
 json.dump(out, open(os.path.join(D, "..", "lib", "tiendaProductos.json"), "w"), ensure_ascii=False, indent=1)
 print(len(out), "productos")
