@@ -22,10 +22,10 @@ const nutrientes = [
   ["🌾 Fibra", "Baja cuando comemos más pan blanco y menos frijoles y fruta."],
 ];
 const porque: [string, string, string][] = [
-  ["🌮 Comida de casa, súper de aquí", "Tu menú sabe a México y se arma con lo que venden Lidl, Aldi, Mercadona, EDEKA o el súper de tu ciudad, con su nombre en el idioma del país.", "t-yellow"],
+  ["🏡 Comida de casa, súper de aquí", "Tu menú sabe a casa y se arma con lo que venden Lidl, Aldi, Mercadona, EDEKA o el súper de tu ciudad, con su nombre en el idioma del país.", "t-yellow"],
   ["📱 Tu app incluida", "Tu plan, tu lista del súper, tu registro diario y tu rutina en el celular. No es un PDF que se pierde en el WhatsApp.", "t-blue"],
   ["🩸 Salud hormonal y metabólica", "Trabajo con tus análisis y con lo que más vemos en mujeres: SOP, resistencia a la insulina, endometriosis y tiroides.", "t-pink"],
-  ["🕐 Horarios de Europa y México", "Agendamos en tu zona horaria, vivas en Madrid, Berlín, Zúrich, Londres o Guadalajara.", "t-green"],
+  ["🕐 Horarios en tu zona", "Agendamos en tu zona horaria, vivas en Alemania, Suiza, Colombia, México o Dubái.", "t-green"],
 ];
 const app: [string, string, string][] = [
   ["/app-hoy.webp", "Tu día", "Cada comida con su hora y sus cantidades. La marcas como lista y ves tu meta del día."],
@@ -33,7 +33,7 @@ const app: [string, string, string][] = [
   ["/app-stats.webp", "Tu registro y tus estadísticas", "Agua, sueño, ánimo y actividad en un minuto al día. Ves tu avance de la semana y del mes."],
   ["/app-rutina.webp", "Tu rutina del mes", "Una rutina nueva cada mes, con videos, series y un lugar para anotar tus pesos."],
 ];
-const temas = ["SOP", "Resistencia a la insulina", "Endometriosis", "Hipotiroidismo", "Diabetes tipo 2", "Colitis y salud intestinal", "Anemia y hierro bajo", "Si usas Ozempic o similares", "Bajar grasa y ganar músculo", "Glúteos y fuerza"];
+const temas = ["SOP", "Resistencia a la insulina", "Endometriosis", "Hipotiroidismo", "Diabetes tipo 2", "Colitis y salud intestinal", "Anemia y hierro bajo", "Bajar grasa y ganar músculo", "Glúteos y fuerza"];
 const precios: { titulo: string; etiqueta: string; items: string[]; destacado: boolean; precio: [string, string, string]; nota?: string }[] = [
   {
     titulo: "Consulta nutricional online personalizada",
@@ -79,7 +79,7 @@ const precios: { titulo: string; etiqueta: string; items: string[]; destacado: b
 const faq = [
   ["¿Necesito análisis de sangre para empezar?", "Sí, mi trabajo parte de ahí. Al agendar te mando la lista. Si no consigues todos, con biometría, ferritina y vitamina D ya podemos empezar."],
   ["¿Atiendes en cualquier país?", "Sí, todo es en línea. Agendamos en tu zona horaria y el menú se arma con lo que hay en tu súper."],
-  ["¿En qué horario atiendes?", "Tengo horarios para Europa y para México. Al escribirme dime en qué ciudad vives y te paso los horarios en tu zona."],
+  ["¿En qué horario atiendes?", "Atiendo en varias zonas horarias. Al escribirme dime en qué ciudad vives y te paso los horarios en tu zona."],
   ["¿Necesito descargar algo?", "No. Tu app se abre desde el navegador con tu correo y la puedes poner en la pantalla de inicio de tu celular, como cualquier app."],
   ["¿Cómo pago?", "Por transferencia. Tengo cuenta en México y en Europa, así pagas en pesos o en euros. Te mando los datos al agendar."],
   ["¿Cuándo recibo mi plan?", "De 2 a 3 días después de tu primera consulta, en tu página y con una nota de voz para empezar."],
@@ -131,7 +131,7 @@ export default function Home() {
 
       <section className="sec" id="porque">
         <h2>Por qué conmigo</h2>
-        <p>Soy mexicana y sé lo que es buscar tortillas en otro idioma.</p>
+        <p>Soy latina y sé lo que es extrañar la comida de casa y hacer el súper en otro idioma.</p>
         <div className="porque">
           {porque.map(([t, d, c]) => (
             <div key={t} className={c}>
