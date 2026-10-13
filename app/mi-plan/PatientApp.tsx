@@ -10,6 +10,7 @@ import Antojos from "./Antojos";
 import Instalar from "./Instalar";
 import Logros from "./Logros";
 import Suplementos from "./Suplementos";
+import { Encuesta, Renovar } from "./Renovar";
 import Estadisticas from "./Estadisticas";
 import { Descanso, SeriesLog, useCargas } from "./Cargas";
 import { MetaBar, RegistroHoy, useDiario, type DiarioHook } from "./Diario";
@@ -49,6 +50,7 @@ export default function PatientApp(props: {
   plan: Plan | null;
   planId: string | null;
   planExiste: boolean;
+  planDesde?: string | null; // cuándo se hizo su plan, para la encuesta y el botón de seguimiento
   rutina: Rutina | null;
   ciclo?: Rutina[] | null;
   videos: Record<string, string>;
@@ -86,7 +88,7 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} planId={props.planId} planDesde={props.planDesde} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} />}
             {tab === "registro" && <><Logros diario={diario[0]} vasos={plan?.agua || 8} /><Estadisticas diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "semana" && <Semana plan={plan} planExiste={props.planExiste} cambios={cambios} orden={orden} />}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
@@ -144,7 +146,7 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste, cambios, orden, diario, gustos, instalar }: { p: Patient; plan: Plan | null; planExiste: boolean; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean }) {
+function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, gustos, instalar }: { p: Patient; plan: Plan | null; planExiste: boolean; planId: string | null; planDesde?: string | null; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean }) {
   const [di, setDi] = useState<number | null>(null);
   const [hoyIdx, setHoyIdx] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); setHoyIdx(d === 0 ? 6 : d - 1); }, []);
@@ -167,6 +169,7 @@ function Hoy({ p, plan, planExiste, cambios, orden, diario, gustos, instalar }: 
   return (
     <>
       {instalar && <Instalar />}
+      <Renovar nombre={p.nombre} desde={planDesde} proxima={p.proxima_cita} />
       {p.proxima_cita && <div className="card proxima"><span aria-hidden="true">📅</span><span><span className="eyebrow">Tu próxima consulta</span><br /><b>{p.proxima_cita}</b></span></div>}
       <div className="daychips" aria-label="Día">
         {CORTO.map((l, i) => (
@@ -201,6 +204,7 @@ function Hoy({ p, plan, planExiste, cambios, orden, diario, gustos, instalar }: 
         </div>
       )}
       {plan.tips[0] && <div className={`tint ${tint(plan.tips[0].color)}`}><h4>{plan.tips[0].icono} {plan.tips[0].titulo}</h4><p>{plan.tips[0].texto}</p></div>}
+      <Encuesta nombre={p.nombre} desde={planDesde} planId={planId} />
       <Metas p={p} />
       <Whats />
     </>

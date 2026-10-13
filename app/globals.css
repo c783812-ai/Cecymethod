@@ -482,3 +482,13 @@ td.rojo{color:var(--warn);font-weight:700}
 .opt-links{display:flex;gap:6px;padding:6px 4px 10px}
 .opt-links a{font-size:12.5px;font-weight:700;text-decoration:none;background:#FFD814;color:#111;border-radius:999px;padding:4px 12px}
 .opt-links a.ml{background:#FFE600;color:#2D3277}
+.renovar,.encuesta{padding:14px}
+.renovar h4,.encuesta h4{font-size:16px;margin:4px 0}
+.renovar .note{margin:0 0 10px}
+.renovar .btn,.encuesta .btn{text-decoration:none;display:inline-block}
+.encuesta .q{margin:12px 0 6px;font-size:14px;font-weight:600}
+.encuesta .caritas{display:flex;gap:8px}
+.encuesta .caritas button{font-size:26px;width:48px;height:48px;border-radius:14px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.encuesta .caritas button[aria-pressed=true]{border-color:var(--accent);background:var(--accent-soft)}
+.encuesta .medtxt{width:100%}
+.btn.disabled{opacity:.45;pointer-events:auto}
