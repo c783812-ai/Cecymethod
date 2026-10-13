@@ -474,3 +474,6 @@ td.rojo{color:var(--warn);font-weight:700}
 .ideas .idea h4{margin:0 0 4px;font-size:15px}
 .ideas ul{margin:0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:6px}
 .ideas details summary{cursor:pointer;font-weight:600;color:var(--accent);margin-top:12px}
+.prod .nivel{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px;vertical-align:1px}
+.prod .nivel.accesible{background:var(--ok-bg);color:var(--ok)}
+.prod .nivel.premium{background:var(--lilac);color:#5B3FA6}

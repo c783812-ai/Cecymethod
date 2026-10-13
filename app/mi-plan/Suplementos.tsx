@@ -72,7 +72,7 @@ function Tarjeta({ c, pais, abierta, onAbrir, dosis }: { c: Categoria; pais: str
             <div className="prods">
               {prods.map((p) => (
                 <div key={p.n + p.marca} className="prod">
-                  <div><b>{p.marca}</b> · {p.n}{p.pres && <span className="note"> · {p.pres}</span>}</div>
+                  <div><b>{p.marca}</b> · {p.n}{p.pres && <span className="note"> · {p.pres}</span>}{p.nivel && <span className={`nivel ${p.nivel}`}>{p.nivel === "accesible" ? "Accesible" : "Premium"}</span>}</div>
                   <div className="prod-btns">
                     {enMercado(p, m) && <a className="btn amz" href={linkAmazon(p, m)} target="_blank" rel="sponsored noopener">Amazon</a>}
                     {pais === "MX" && p.ml && <a className="btn ml" href={linkML(p)} target="_blank" rel="sponsored noopener">Mercado Libre</a>}
