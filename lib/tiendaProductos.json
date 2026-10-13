@@ -15,7 +15,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 2 tabletas (200 mg de magnesio) 1 a 2 veces al día con comida."
  },
  {
   "cat": "magnesio-glicinato",
@@ -33,7 +34,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 2 tabletas (200 mg de magnesio) dos veces al día."
  },
  {
   "cat": "magnesio-glicinato",
@@ -51,7 +53,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 1 cápsula (120 mg de magnesio) de 1 a 4 veces al día."
  },
  {
   "cat": "magnesio-citrato",
@@ -69,7 +72,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 3 cápsulas (400 mg de magnesio) al día, de preferencia repartidas y con comida."
  },
  {
   "cat": "magnesio-citrato",
@@ -87,7 +91,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 3 cápsulas blandas (400 mg de magnesio) al día, de preferencia repartidas y con comida."
  },
  {
   "cat": "omega-3",
@@ -105,7 +110,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 2 cápsulas blandas al día con comida."
  },
  {
   "cat": "omega-3",
@@ -123,7 +129,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 2 cápsulas blandas (2150 mg de omega-3) al día con comida."
  },
  {
   "cat": "vitamina-d3-k2",
@@ -159,7 +166,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 4 gotas (400 UI) de 1 a 5 veces al día. Niños de 4 años en adelante: 4 gotas una vez al día. De preferencia con comida con grasa."
  },
  {
   "cat": "vitamina-d3-k2",
@@ -177,7 +185,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 1 cápsula blanda (45 mcg de vitamina K2) al día con comida."
  },
  {
   "cat": "hierro",
@@ -195,7 +204,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 1 cápsula (36 mg de hierro) al día con una comida."
  },
  {
   "cat": "hierro",
@@ -213,7 +223,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 1 cápsula al día, de preferencia con una comida."
  },
  {
   "cat": "proteina-whey",
@@ -231,7 +242,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "1 medida (31 g, 25 g de proteína) en 180 a 240 ml de agua fría, leche u otra bebida. Mejor 30 a 60 min después de entrenar o como colación."
  },
  {
   "cat": "proteina-whey",
@@ -249,7 +261,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "1 medida (25 g de proteína) en 150 a 180 ml de agua, leche u otra bebida. 1 a 2 porciones al día, antes o después de entrenar o como colación."
  },
  {
   "cat": "proteina-vegetal",
@@ -267,7 +280,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "1 medida al ras (33 g, 24 g de proteína) al día en 355 ml de agua fría, jugo u otra bebida. Mezclar o licuar."
  },
  {
   "cat": "proteina-vegetal",
@@ -285,7 +299,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "1 medida al ras (33 g, 22 g de proteína) en 300 ml de agua."
  },
  {
   "cat": "creatina",
@@ -303,7 +318,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "1 cucharadita copeteada (5 g de creatina) en un licuado de proteína o un vaso de tu bebida favorita."
  },
  {
   "cat": "creatina",
@@ -317,7 +333,8 @@
   "nivel": "premium",
   "paises": [
    "MX"
-  ]
+  ],
+  "dosis": "Mezclar 5 g en 500 ml de agua. No requiere etapa de carga."
  },
  {
   "cat": "psyllium",
@@ -335,7 +352,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "1 a 2 cucharadas al ras (5 a 10 g) al día en al menos 355 ml de agua o jugo; tomar de inmediato. Empezar con poco y subir poco a poco. Tomar mucha agua."
  },
  {
   "cat": "psyllium",
@@ -353,7 +371,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 2 cápsulas con un vaso de líquido (240 ml), 2 a 3 veces al día."
  },
  {
   "cat": "probiotico",
@@ -371,7 +390,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 1 cápsula 1 a 2 veces al día entre comidas o con el estómago vacío."
  },
  {
   "cat": "probiotico",
@@ -389,7 +409,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 1 cápsula al día, con o sin comida."
  },
  {
   "cat": "inositol",
@@ -403,7 +424,8 @@
   "nivel": "accesible",
   "paises": [
    "MX"
-  ]
+  ],
+  "dosis": "Disolver 1 medida (4.1 g) en un vaso de agua fría y tomar una vez al día, de preferencia en la mañana."
  },
  {
   "cat": "colageno",
@@ -421,7 +443,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 1 medida (11 g de colágeno) en tu bebida o comida favorita, 1 a 2 veces al día. Mezclar bien."
  },
  {
   "cat": "colageno",
@@ -439,7 +462,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "4 cucharadas al ras (20 g de colágeno) en 240 ml de líquido frío o caliente. Mezclar bien."
  },
  {
   "cat": "b12",
@@ -457,7 +481,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 1 cápsula blanda al día con agua y una comida."
  },
  {
   "cat": "b12",
@@ -475,7 +500,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "1 pastilla al día (1000 mcg de B12). Masticar o dejar que se disuelva en la boca."
  },
  {
   "cat": "multivitaminico-mujer",
@@ -493,7 +519,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 1 tableta al día con agua y una comida."
  },
  {
   "cat": "multivitaminico-mujer",
@@ -529,7 +556,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 1 cápsula (1 mg) con agua media hora antes de dormir."
  },
  {
   "cat": "melatonina",
@@ -547,7 +575,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 1 cápsula (3 mg) con agua media hora antes de dormir."
  },
  {
   "cat": "electrolitos",
@@ -561,7 +590,8 @@
   "nivel": "accesible",
   "paises": [
    "MX"
-  ]
+  ],
+  "dosis": "1 medida en 475 ml (16 oz) de agua. Agitar o mezclar."
  },
  {
   "cat": "electrolitos",
@@ -579,7 +609,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "1 sobre (1000 mg de sodio) en 475 a 950 ml (16 a 32 oz) de agua, al gusto."
  },
  {
   "cat": "zinc",
@@ -597,7 +628,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 1 cápsula (50 mg de zinc) al día con una comida."
  },
  {
   "cat": "zinc",
@@ -615,7 +647,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Tomar 1 cápsula (15 mg de zinc) 1 a 2 veces al día."
  },
  {
   "cat": "prenatal",
@@ -633,7 +666,8 @@
    "CA",
    "UK",
    "AE"
-  ]
+  ],
+  "dosis": "Adultos: 1 cápsula 3 veces al día, con o sin comida."
  },
  {
   "cat": "magnesio-glicinato",
@@ -644,7 +678,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/31NwHcQ",
-  "paises": []
+  "paises": [],
+  "dosis": "Tomar 2 tabletas (200 mg de magnesio) 1 a 2 veces al día con comida."
  },
  {
   "cat": "magnesio-glicinato",
@@ -655,7 +690,8 @@
   "urls": {},
   "nivel": "premium",
   "ml": "https://www.mercadolibre.com.mx/doctors-best-magnesio-200-mg-120-tabletas-vegano/up/MLMU3952896616?pdp_filters=item_id%3AMLM2913864325",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 2 tabletas (200 mg de magnesio) dos veces al día."
  },
  {
   "cat": "magnesio-citrato",
@@ -666,7 +702,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/2sC2wZv",
-  "paises": []
+  "paises": [],
+  "dosis": "Tomar 3 cápsulas blandas (400 mg de magnesio) al día, de preferencia repartidas y con comida."
  },
  {
   "cat": "magnesio-citrato",
@@ -676,7 +713,8 @@
   "busca": "Natural Vitality magnesium citrate",
   "urls": {},
   "nivel": "premium",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: empezar con ½ cucharadita (1 g) al día y subir poco a poco a 2 cucharaditas (4 g, 325 mg de magnesio), repartidas en 2 o 3 tomas."
  },
  {
   "cat": "omega-3",
@@ -686,7 +724,8 @@
   "busca": "Nordic Naturals omega-3 fish oil",
   "urls": {},
   "nivel": "premium",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 2 cápsulas blandas (1280 mg de omega-3) al día con comida."
  },
  {
   "cat": "omega-3",
@@ -696,7 +735,8 @@
   "busca": "Nordic Naturals omega-3 fish oil",
   "urls": {},
   "nivel": "premium",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 2 cápsulas blandas al día con comida (1280 mg de omega-3)."
  },
  {
   "cat": "vitamina-d3-k2",
@@ -706,7 +746,8 @@
   "busca": "Nature Made vitamin D3",
   "urls": {},
   "nivel": "accesible",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 1 tableta al día con agua y una comida."
  },
  {
   "cat": "vitamina-d3-k2",
@@ -717,7 +758,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/1TUQGxC",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cápsula al día con una comida que tenga grasa (5000 UI de D3 + 180 mcg de K2 MK-7)."
  },
  {
   "cat": "vitamina-d3-k2",
@@ -728,7 +770,8 @@
   "urls": {},
   "nivel": "premium",
   "ml": "https://www.mercadolibre.com.mx/p/MLM25905090?pdp_filters=item_id:MLM3500710525",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cápsula blanda al día (5000 UI de D3 + 100 mcg de K2)."
  },
  {
   "cat": "hierro",
@@ -739,7 +782,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/2FEWk6d",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cápsula al día con una comida (18 mg de hierro)."
  },
  {
   "cat": "hierro",
@@ -750,7 +794,8 @@
   "urls": {},
   "nivel": "premium",
   "ml": "https://meli.la/1zDXeJy",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cápsula una vez al día con comida (27 mg de hierro)."
  },
  {
   "cat": "proteina-whey",
@@ -760,7 +805,8 @@
   "busca": "Optimum Nutrition whey isolate",
   "urls": {},
   "nivel": "accesible",
-  "paises": []
+  "paises": [],
+  "dosis": "1 medida (30 g, 25 g de proteína) en 180 a 240 ml de agua fría."
  },
  {
   "cat": "proteina-whey",
@@ -771,7 +817,8 @@
   "urls": {},
   "nivel": "premium",
   "ml": "https://meli.la/1SMofWs",
-  "paises": []
+  "paises": [],
+  "dosis": "1 medida (32 g, 25 g de proteína) en 150 a 180 ml de agua, jugo o leche; mezclar bien."
  },
  {
   "cat": "proteina-vegetal",
@@ -781,7 +828,8 @@
   "busca": "Birdman plant protein",
   "urls": {},
   "nivel": "accesible",
-  "paises": []
+  "paises": [],
+  "dosis": "1 medida (32 g, 23 g de proteína) en 350 ml de agua. No pasar de 1 porción al día."
  },
  {
   "cat": "proteina-vegetal",
@@ -791,7 +839,8 @@
   "busca": "Birdman plant protein",
   "urls": {},
   "nivel": "premium",
-  "paises": []
+  "paises": [],
+  "dosis": "1 medida (32 g, 23 g de proteína) en 350 ml de agua. No pasar de 1 porción al día."
  },
  {
   "cat": "creatina",
@@ -801,7 +850,8 @@
   "busca": "Optimum Nutrition creatine monohydrate",
   "urls": {},
   "nivel": "accesible",
-  "paises": []
+  "paises": [],
+  "dosis": "5 g (1 cucharadita colmada) en un licuado de proteína o un vaso de tu bebida favorita."
  },
  {
   "cat": "creatina",
@@ -812,7 +862,8 @@
   "urls": {},
   "nivel": "premium",
   "ml": "https://meli.la/1rXTo9K",
-  "paises": []
+  "paises": [],
+  "dosis": "5 g en 500 ml de agua. No requiere etapa de carga. No pasar la dosis diaria."
  },
  {
   "cat": "psyllium",
@@ -823,7 +874,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/17z6aq9",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 1 cucharadita colmada en 240 ml (8 oz) de líquido, hasta 3 veces al día. Empieza con 1 porción al día y sube poco a poco."
  },
  {
   "cat": "psyllium",
@@ -833,7 +885,8 @@
   "busca": "NOW Foods psyllium husk",
   "urls": {},
   "nivel": "premium",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cucharada rasa al día en al menos 350 ml de agua o jugo; mezclar fuerte y tomar de inmediato. Empieza con menos y sube poco a poco."
  },
  {
   "cat": "probiotico",
@@ -844,7 +897,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/1jjP41K",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cápsula 1 a 2 veces al día entre comidas o en ayunas."
  },
  {
   "cat": "probiotico",
@@ -854,7 +908,8 @@
   "busca": "Garden of Life probiotic",
   "urls": {},
   "nivel": "premium",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 1 cápsula al día, con o sin comida (40 mil millones UFC)."
  },
  {
   "cat": "inositol",
@@ -886,7 +941,8 @@
   "busca": "Vital Proteins collagen peptides",
   "urls": {},
   "nivel": "accesible",
-  "paises": []
+  "paises": [],
+  "dosis": "1 a 2 medidas al día en 250 ml de líquido frío o caliente; mezclar bien (2 medidas = 20 g de colágeno)."
  },
  {
   "cat": "colageno",
@@ -897,7 +953,8 @@
   "urls": {},
   "nivel": "premium",
   "ml": "https://meli.la/1Bncqpv",
-  "paises": []
+  "paises": [],
+  "dosis": "1 a 2 medidas al día en 250 ml de líquido frío o caliente; mezclar bien (2 medidas = 20 g de colágeno)."
  },
  {
   "cat": "b12",
@@ -908,7 +965,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/2LJ7JPd",
-  "paises": []
+  "paises": [],
+  "dosis": "1 pastilla al día. Mastícala o déjala deshacer en la boca y trágala (2000 mcg de B12)."
  },
  {
   "cat": "b12",
@@ -918,7 +976,8 @@
   "busca": "Jarrow Formulas vitamin B12",
   "urls": {},
   "nivel": "premium",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 1 tableta masticable una vez al día."
  },
  {
   "cat": "multivitaminico-mujer",
@@ -928,7 +987,8 @@
   "busca": "Nature Made women's multivitamin",
   "urls": {},
   "nivel": "accesible",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cápsula blanda al día con agua y una comida."
  },
  {
   "cat": "multivitaminico-mujer",
@@ -938,7 +998,8 @@
   "busca": "Garden of Life women's multivitamin",
   "urls": {},
   "nivel": "premium",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 1 cápsula al día, con o sin comida. Se puede abrir y mezclar con agua o jugo."
  },
  {
   "cat": "ashwagandha",
@@ -948,7 +1009,8 @@
   "busca": "Nature's Bounty ashwagandha KSM-66",
   "urls": {},
   "nivel": "accesible",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 2 tabletas al día, de preferencia con comida (600 mg de ashwagandha KSM-66)."
  },
  {
   "cat": "melatonina",
@@ -959,7 +1021,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/2dLc6xR",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cápsula cerca de la hora de dormir, con agua (3 mg de melatonina)."
  },
  {
   "cat": "melatonina",
@@ -970,7 +1033,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/1gZhMjS",
-  "paises": []
+  "paises": [],
+  "dosis": "Agitar antes de usar. Adultos: 4 goteros de 1 ml (4 ml = 1 mg de melatonina) 30 minutos antes de dormir. Se puede tomar directo."
  },
  {
   "cat": "electrolitos",
@@ -981,7 +1045,8 @@
   "urls": {},
   "nivel": "premium",
   "ml": "https://meli.la/1nsk1HZ",
-  "paises": []
+  "paises": [],
+  "dosis": "1 sobre en 480 a 950 ml (16 a 32 oz) de agua, agua mineral, té o licuado (1000 mg de sodio)."
  },
  {
   "cat": "electrolitos",
@@ -992,7 +1057,8 @@
   "urls": {},
   "nivel": "premium",
   "ml": "https://meli.la/1nSSDja",
-  "paises": []
+  "paises": [],
+  "dosis": "1 sobre en 480 a 950 ml (16 a 32 oz) de agua, agua mineral, té o licuado (1000 mg de sodio)."
  },
  {
   "cat": "zinc",
@@ -1003,7 +1069,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/2i82T55",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cápsula al día con una comida (50 mg de zinc)."
  },
  {
   "cat": "zinc",
@@ -1013,7 +1080,8 @@
   "busca": "Thorne zinc",
   "urls": {},
   "nivel": "premium",
-  "paises": []
+  "paises": [],
+  "dosis": "1 cápsula al día (30 mg de zinc)."
  },
  {
   "cat": "prenatal",
@@ -1024,7 +1092,8 @@
   "urls": {},
   "nivel": "accesible",
   "ml": "https://meli.la/1ikJ15M",
-  "paises": []
+  "paises": [],
+  "dosis": "Adultos: 1 cápsula blanda al día con agua y una comida (200 mg de DHA)."
  },
  {
   "cat": "prenatal",
@@ -1035,7 +1104,8 @@
   "urls": {},
   "nivel": "premium",
   "ml": "https://meli.la/2tUxiBf",
-  "paises": []
+  "paises": [],
+  "dosis": "3 cápsulas al día con comida."
  },
  {
   "cat": "magnesio-glicinato",
@@ -1050,7 +1120,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 cápsula 3 veces al día (300 mg de magnesio al día), con agua."
  },
  {
   "cat": "magnesio-glicinato",
@@ -1065,7 +1136,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "2 cápsulas al día repartidas en el día, cada una con 200 ml de agua (300 mg de magnesio)."
  },
  {
   "cat": "magnesio-citrato",
@@ -1080,7 +1152,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 cápsula 3 veces al día con suficiente líquido (360 mg de magnesio al día)."
  },
  {
   "cat": "magnesio-citrato",
@@ -1095,7 +1168,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 cápsula 3 veces al día con un vaso de agua, sin masticar (360 mg de magnesio al día)."
  },
  {
   "cat": "omega-3",
@@ -1110,7 +1184,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "4 cápsulas al día (1500 mg de omega-3)."
  },
  {
   "cat": "omega-3",
@@ -1125,7 +1200,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "2 cápsulas blandas al día con una comida (1280 mg de omega-3)."
  },
  {
   "cat": "vitamina-d3-k2",
@@ -1140,7 +1216,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 gota al día bajo la lengua, de preferencia después de comer (1000 UI de D3 + 20 mcg de K2)."
  },
  {
   "cat": "vitamina-d3-k2",
@@ -1155,7 +1232,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 gota al día con una comida (1000 UI de D3 + 20 mcg de K2)."
  },
  {
   "cat": "hierro",
@@ -1170,7 +1248,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 cápsula al día con suficiente líquido (20 mg de hierro + 43 mg de vitamina C)."
  },
  {
   "cat": "hierro",
@@ -1185,7 +1264,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 cápsula al día (20 mg de hierro y 42 mg de vitamina C), con un vaso de agua, sin masticar."
  },
  {
   "cat": "proteina-whey",
@@ -1200,7 +1280,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "30 g de polvo en 500 ml de agua, 1 a 3 porciones al día (al despertar, durante o después de entrenar, o entre comidas)."
  },
  {
   "cat": "proteina-whey",
@@ -1215,7 +1296,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 medida (31 g, 25 g de proteína) en 180-240 ml de agua, leche u otra bebida; de preferencia 30-60 min después de entrenar."
  },
  {
   "cat": "proteina-vegetal",
@@ -1230,7 +1312,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 medida (35 g) en 350 ml de agua o bebida vegetal, 1 a 3 porciones al día (al despertar, antes o después de entrenar, o como colación)."
  },
  {
   "cat": "proteina-vegetal",
@@ -1260,7 +1343,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 medida (3,4 g; 3 g de creatina) al día, disuelta en 250 ml de agua."
  },
  {
   "cat": "creatina",
@@ -1275,7 +1359,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "3,5 g (3 g de creatina) en 100 ml de agua u otra bebida, diario, también en días sin entrenar."
  },
  {
   "cat": "psyllium",
@@ -1320,7 +1405,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "2 cápsulas al día con suficiente líquido."
  },
  {
   "cat": "probiotico",
@@ -1335,7 +1421,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "2 cápsulas 2 veces al día (4 cápsulas = 120 mil millones de UFC) con suficiente líquido."
  },
  {
   "cat": "inositol",
@@ -1350,7 +1437,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 medida al ras (2 g: 1,8 g de mio-inositol y 0,2 g de D-chiro-inositol) al día, disuelta en un poco de agua."
  },
  {
   "cat": "inositol",
@@ -1365,7 +1453,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "3 cápsulas al día con suficiente líquido, de preferencia 30 minutos antes de una comida."
  },
  {
   "cat": "colageno",
@@ -1380,7 +1469,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "10 g (aprox. 2 cucharadas; 10 g de colágeno) en 300 ml de agua, 1 vez al día. Se disuelve mejor en shaker."
  },
  {
   "cat": "colageno",
@@ -1395,7 +1485,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "2 medidas (10 g de colágeno) al día en 200-300 ml de agua fría o caliente u otra bebida, sopa, yogur o avena."
  },
  {
   "cat": "b12",
@@ -1410,7 +1501,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 tableta al día (500 µg de vitamina B12) con suficiente líquido."
  },
  {
   "cat": "b12",
@@ -1425,7 +1517,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 cápsula al día con suficiente líquido."
  },
  {
   "cat": "multivitaminico-mujer",
@@ -1440,7 +1533,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 tableta al día con una comida principal, con suficiente líquido."
  },
  {
   "cat": "multivitaminico-mujer",
@@ -1455,7 +1549,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 cápsula 2 veces al día, con o después de una comida."
  },
  {
   "cat": "ashwagandha",
@@ -1470,7 +1565,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "2 cápsulas al día (600 mg de ashwagandha KSM-66) con suficiente líquido."
  },
  {
   "cat": "ashwagandha",
@@ -1485,7 +1581,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "2 cápsulas al día (500 mg de extracto de ashwagandha por cápsula) con 200 ml de agua."
  },
  {
   "cat": "melatonina",
@@ -1500,7 +1597,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 minitableta (0,5 mg de melatonina) al día, unos 30 minutos antes de dormir, de preferencia siempre a la misma hora."
  },
  {
   "cat": "electrolitos",
@@ -1515,7 +1613,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 sobre en 500 ml a 1 litro de agua (16-32 oz), agua mineral, té o licuado."
  },
  {
   "cat": "zinc",
@@ -1530,7 +1629,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 tableta al día (25 mg de zinc) con suficiente líquido."
  },
  {
   "cat": "zinc",
@@ -1545,7 +1645,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 cápsula al día (25 mg de zinc)."
  },
  {
   "cat": "prenatal",
@@ -1560,7 +1661,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 tableta y 1 cápsula al día con suficiente agua, de preferencia con una comida."
  },
  {
   "cat": "prenatal",
@@ -1575,7 +1677,8 @@
   "paises": [
    "DE",
    "ES"
-  ]
+  ],
+  "dosis": "1 cápsula al día con bastante líquido, de preferencia con o después de una comida."
  },
  {
   "cat": "proteina-whey",
@@ -1595,7 +1698,8 @@
   ],
   "sup": "dymatize-iso100-vainilla",
   "nota": "La que usa Cecy",
-  "ml": "https://meli.la/1SMofWs"
+  "ml": "https://meli.la/1SMofWs",
+  "dosis": "1 medida (25 g de proteína) en 150-180 ml de agua, jugo o leche; antes y/o después de entrenar y en otros momentos del día."
  },
  {
   "cat": "proteina-vegetal",
@@ -1635,7 +1739,8 @@
    "DE",
    "ES"
   ],
-  "sup": "esn-designer-whey-vanilla-milk"
+  "sup": "esn-designer-whey-vanilla-milk",
+  "dosis": "1 medida (30 g; 24 g de proteína) en 300 ml de agua o leche light, 1 a 3 porciones al día (p. ej., al despertar y después de entrenar)."
  },
  {
   "cat": "proteina-whey",
@@ -1648,7 +1753,8 @@
    "DE",
    "ES"
   ],
-  "sup": "esn-flexpresso-protein-coffee"
+  "sup": "esn-flexpresso-protein-coffee",
+  "dosis": "1 medida (30 g) en 200 ml de agua en shaker, 1 a 3 porciones al día."
  },
  {
   "cat": "proteina-whey",
@@ -1663,7 +1769,8 @@
    "DE",
    "ES"
   ],
-  "sup": "esn-isoclear-whey-isolate"
+  "sup": "esn-isoclear-whey-isolate",
+  "dosis": "1 medida (30 g) en 500 ml de agua, 1 a 3 porciones al día (al despertar, durante o después de entrenar, o entre comidas)."
  },
  {
   "cat": "proteina-whey",
@@ -1684,7 +1791,8 @@
    "UK",
    "US"
   ],
-  "sup": "on-gold-standard-double-rich-chocolate"
+  "sup": "on-gold-standard-double-rich-chocolate",
+  "dosis": "1 medida (24 g de proteína) en 180-240 ml de agua fría, leche u otra bebida; después de entrenar o en cualquier momento del día."
  },
  {
   "cat": "proteina-whey",
@@ -1701,7 +1809,8 @@
    "UK",
    "US"
   ],
-  "sup": "myprotein-impact-whey-vainilla"
+  "sup": "myprotein-impact-whey-vainilla",
+  "dosis": "1 medida (25 g; 21 g de proteína) con agua o leche, 30-60 min después de entrenar o en cualquier momento del día."
  },
  {
   "cat": "proteina-whey",
@@ -1714,7 +1823,8 @@
    "DE",
    "ES"
   ],
-  "sup": "foodspring-whey-protein-vanille"
+  "sup": "foodspring-whey-protein-vanille",
+  "dosis": "30 g (aprox. 3 cucharadas) en 300 ml de agua o leche light; 1 a 3 porciones al día, justo después de entrenar o en la mañana."
  },
  {
   "cat": "proteina-whey",
@@ -1728,7 +1838,8 @@
    "ES",
    "UK"
   ],
-  "sup": "bulk-pure-whey-isolate-90"
+  "sup": "bulk-pure-whey-isolate-90",
+  "dosis": "1 medida (30 g) en 200 ml de agua, agitar bien; 1 a 3 porciones al día según tus necesidades de proteína."
  },
  {
   "cat": "proteina-whey",
@@ -1741,7 +1852,8 @@
    "DE",
    "ES"
   ],
-  "sup": "hsn-evowhey-2-0"
+  "sup": "hsn-evowhey-2-0",
+  "dosis": "1 medida de 70 ml (aprox. 30 g) en 200-250 ml de leche descremada o agua."
  },
  {
   "cat": "proteina-whey",
@@ -1754,7 +1866,8 @@
    "CA",
    "US"
   ],
-  "sup": "allmax-isoflex"
+  "sup": "allmax-isoflex",
+  "dosis": "1 medida (30 g; 27 g de proteína) en unos 150 ml de agua fría o leche light, justo antes de tomarla."
  },
  {
   "cat": "proteina-whey",
@@ -1766,7 +1879,8 @@
   "paises": [
    "CA"
   ],
-  "sup": "canadian-protein-whey-isolate-sin-sabor"
+  "sup": "canadian-protein-whey-isolate-sin-sabor",
+  "dosis": "1 porción (30 g; 27 g de proteína) en 250-500 ml de agua u otro líquido; tomar dentro de 30 minutos de prepararla."
  },
  {
   "cat": "proteina-vegetal",
@@ -1779,6 +1893,7 @@
    "CA",
    "US"
   ],
-  "sup": "vega-sport-premium-protein-chocolate"
+  "sup": "vega-sport-premium-protein-chocolate",
+  "dosis": "1 medida en 355 ml (12 oz) de agua helada o bebida vegetal, o en un licuado con fruta y verdura."
  }
 ]
