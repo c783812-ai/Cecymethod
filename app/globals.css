@@ -509,3 +509,14 @@ td.rojo{color:var(--warn);font-weight:700}
 .reco{background:var(--surface);border-radius:12px;padding:10px 12px;margin:8px 0 0;font-size:14px}
 .reco b{display:block;font-size:13px;margin-bottom:2px}
 .prod .etq{font-size:12.5px;color:var(--muted);margin-top:3px}
+/* Testimonios */
+.estrellas{color:#E0A100;letter-spacing:2px}
+.testis{columns:3 260px;column-gap:12px}
+.testi{break-inside:avoid;margin:0 0 12px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.testi blockquote{margin:0;font-size:15px;line-height:1.55}
+.testi blockquote::before{content:"“";display:block;font-family:var(--display);font-size:34px;line-height:.6;color:var(--accent);margin-bottom:6px}
+.testi figcaption{margin-top:10px;font-size:13.5px;color:var(--muted)}
+.testi figcaption b{color:var(--ink);font-family:var(--display)}
+.testis-mas summary{cursor:pointer;font-weight:600;color:var(--accent);margin:4px 0 12px;list-style:none}
+.testis-mas summary::-webkit-details-marker{display:none}
+.testis-mas[open] summary{display:none}

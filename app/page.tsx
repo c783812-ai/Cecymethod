@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { RESENAS, TESTIMONIOS } from "@/lib/testimonios";
 
 const WHATSAPP = "+971 55 688 9063";
 const WA_LINK = "https://wa.me/971556889063?text=" + encodeURIComponent("Hola Cecy, quiero agendar una consulta 🙂");
@@ -92,6 +93,7 @@ export default function Home() {
       <nav className="lnav" aria-label="Secciones">
         <a href="#porque">Por qué conmigo</a>
         <a href="#app">Tu app</a>
+        <a href="#testimonios">Testimonios</a>
         <a href="#precios">Precios</a>
         <a href="#preguntas">Preguntas</a>
         <a href="#contacto">Contacto</a>
@@ -114,7 +116,7 @@ export default function Home() {
           <span className="b" style={{ width: "30%", height: "24%", left: "2%", bottom: "4%", background: "var(--yellow)" }} aria-hidden="true" />
           <span className="b" style={{ width: "34%", height: "27%", right: 0, top: "2%", background: "var(--blue)" }} aria-hidden="true" />
           <div className="photo">
-            <Image src="/cecilia.jpg" alt="Cecilia Rivera, nutrióloga" width={760} height={927} priority />
+            <Image src="/cecilia-hero.jpg" alt="Cecilia Rivera, nutrióloga" width={509} height={717} priority />
           </div>
           <div className="card" style={{ left: 0, top: "56%", width: "44%", padding: 12 }} aria-hidden="true">
             <div className="eyebrow">Ferritina</div>
@@ -189,12 +191,26 @@ export default function Home() {
 
       <section className="about">
         <div className="ph" style={{ overflow: "hidden" }}>
-          <Image src="/cecilia.jpg" alt="" width={240} height={293} style={{ width: "100%", height: "100%", objectFit: "cover", transform: "scale(2.3)", transformOrigin: "50% 22%" }} />
+          <Image src="/cecilia-sobre-mi.jpg" alt="" width={509} height={716} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 30%" }} />
         </div>
         <div>
           <q>Nutrióloga. Trabajo con tus análisis de sangre para encontrar lo que te falta y corregirlo con tu alimentación.</q>
           <p className="note" style={{ margin: "10px 0 0" }}>No diagnostico ni receto: lo que necesite tratamiento lo ve tu médico, y yo trabajo tu alimentación.</p>
         </div>
+      </section>
+
+      <section className="sec" id="testimonios">
+        <h2>Lo que dicen mis pacientes</h2>
+        <p><span className="estrellas" aria-hidden="true">★★★★★</span> {RESENAS.promedio} · {RESENAS.total} reseñas</p>
+        <div className="testis">
+          {TESTIMONIOS.slice(0, 6).map((t) => <Testimonio key={t.nombre} t={t} />)}
+        </div>
+        <details className="testis-mas">
+          <summary>Ver más testimonios</summary>
+          <div className="testis">
+            {TESTIMONIOS.slice(6).map((t) => <Testimonio key={t.nombre} t={t} />)}
+          </div>
+        </details>
       </section>
 
       <section className="sec" id="precios">
@@ -248,5 +264,17 @@ export default function Home() {
         <Link href="/privacidad">Aviso de privacidad</Link>
       </footer>
     </div>
+  );
+}
+
+function Testimonio({ t }: { t: (typeof TESTIMONIOS)[number] }) {
+  return (
+    <figure className="testi">
+      <blockquote>{t.texto}</blockquote>
+      <figcaption>
+        <b>{t.nombre}</b> · {t.tema}
+        {t.traducido && <span className="note"> (traducido del inglés)</span>}
+      </figcaption>
+    </figure>
   );
 }
