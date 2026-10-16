@@ -191,7 +191,7 @@ export default function Home() {
 
       <section className="about">
         <div className="ph" style={{ overflow: "hidden" }}>
-          <Image src="/cecilia-sobre-mi.jpg" alt="" width={509} height={716} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 30%" }} />
+          <Image src="/cecilia-sobre-mi.jpg" alt="" width={490} height={490} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </div>
         <div>
           <q>Nutrióloga. Trabajo con tus análisis de sangre para encontrar lo que te falta y corregirlo con tu alimentación.</q>
