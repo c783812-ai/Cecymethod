@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { RESENAS, TESTIMONIOS } from "@/lib/testimonios";
+import { RESENAS } from "@/lib/testimonios";
+import Testimonios from "./Testimonios";
 
 const WHATSAPP = "+971 55 688 9063";
 const WA_LINK = "https://wa.me/971556889063?text=" + encodeURIComponent("Hola Cecy, quiero agendar una consulta 🙂");
@@ -202,15 +203,7 @@ export default function Home() {
       <section className="sec" id="testimonios">
         <h2>Lo que dicen mis pacientes</h2>
         <p><span className="estrellas" aria-hidden="true">★★★★★</span> {RESENAS.promedio} · {RESENAS.total} reseñas</p>
-        <div className="testis">
-          {TESTIMONIOS.slice(0, 6).map((t) => <Testimonio key={t.nombre} t={t} />)}
-        </div>
-        <details className="testis-mas">
-          <summary>Ver más testimonios</summary>
-          <div className="testis">
-            {TESTIMONIOS.slice(6).map((t) => <Testimonio key={t.nombre} t={t} />)}
-          </div>
-        </details>
+        <Testimonios />
       </section>
 
       <section className="sec" id="guias">
@@ -281,16 +274,5 @@ export default function Home() {
         <Link href="/privacidad">Aviso de privacidad</Link>
       </footer>
     </div>
-  );
-}
-
-function Testimonio({ t }: { t: (typeof TESTIMONIOS)[number] }) {
-  return (
-    <figure className="testi" lang={t.ingles ? "en" : undefined}>
-      <blockquote>{t.texto}</blockquote>
-      <figcaption>
-        <b>{t.nombre}</b> · {t.tema}
-      </figcaption>
-    </figure>
   );
 }
