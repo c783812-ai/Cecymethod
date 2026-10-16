@@ -520,8 +520,9 @@ td.rojo{color:var(--warn);font-weight:700}
 .testis-mas summary{cursor:pointer;font-weight:600;color:var(--accent);margin:4px 0 12px;list-style:none}
 .testis-mas summary::-webkit-details-marker{display:none}
 .testis-mas[open] summary{display:none}
-/* Descargables (próximamente) */
-.descargables{background:var(--lilac);border-radius:22px;padding:22px 24px;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
-.descargables h2{margin:0}
-.descargables p{margin:0;max-width:60ch}
-.descargables a{color:var(--accent);font-weight:600}
+/* Guías (próximamente) */
+.guias{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}
+.guias div{border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.guias b{font-family:var(--display);font-size:18px}
+.guias p{margin:0;font-size:14.5px}
+.guias .pill{background:var(--surface)}

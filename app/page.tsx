@@ -213,11 +213,20 @@ export default function Home() {
         </details>
       </section>
 
-      <section className="sec" id="descargables">
-        <div className="descargables">
-          <span className="pill p-info">Próximamente</span>
-          <h2>Guías gratis para descargar</h2>
-          <p>Muy pronto vas a encontrar aquí guías gratis para comer bien lejos de casa. Sígueme en Instagram <a href="https://instagram.com/cecy.method" target="_blank" rel="noopener">@cecy.method</a> para enterarte cuando salgan.</p>
+      <section className="sec" id="guias">
+        <h2>Mis guías</h2>
+        <p>Muy pronto vas a encontrar aquí mis guías para comer bien lejos de casa. Sígueme en Instagram <a href="https://instagram.com/cecy.method" target="_blank" rel="noopener" style={{ color: "var(--accent)", fontWeight: 600 }}>@cecy.method</a> para enterarte cuando salgan.</p>
+        <div className="guias">
+          <div className="t-green">
+            <span className="pill p-ok">Próximamente</span>
+            <b>🎁 Guías gratis</b>
+            <p>Para descargar sin costo: tips y recursos cortos para empezar.</p>
+          </div>
+          <div className="t-yellow">
+            <span className="pill p-mid">Próximamente</span>
+            <b>📘 Guías de pago</b>
+            <p>Guías completas y más detalladas, con su precio, que podrás comprar aquí.</p>
+          </div>
         </div>
       </section>
 
