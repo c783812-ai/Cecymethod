@@ -269,11 +269,10 @@ export default function Home() {
 
 function Testimonio({ t }: { t: (typeof TESTIMONIOS)[number] }) {
   return (
-    <figure className="testi">
+    <figure className="testi" lang={t.ingles ? "en" : undefined}>
       <blockquote>{t.texto}</blockquote>
       <figcaption>
         <b>{t.nombre}</b> · {t.tema}
-        {t.traducido && <span className="note"> (traducido del inglés)</span>}
       </figcaption>
     </figure>
   );
