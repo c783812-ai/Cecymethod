@@ -520,3 +520,8 @@ td.rojo{color:var(--warn);font-weight:700}
 .testis-mas summary{cursor:pointer;font-weight:600;color:var(--accent);margin:4px 0 12px;list-style:none}
 .testis-mas summary::-webkit-details-marker{display:none}
 .testis-mas[open] summary{display:none}
+/* Descargables (próximamente) */
+.descargables{background:var(--lilac);border-radius:22px;padding:22px 24px;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.descargables h2{margin:0}
+.descargables p{margin:0;max-width:60ch}
+.descargables a{color:var(--accent);font-weight:600}

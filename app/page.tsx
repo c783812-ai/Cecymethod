@@ -213,6 +213,14 @@ export default function Home() {
         </details>
       </section>
 
+      <section className="sec" id="descargables">
+        <div className="descargables">
+          <span className="pill p-info">Próximamente</span>
+          <h2>Guías gratis para descargar</h2>
+          <p>Muy pronto vas a encontrar aquí guías gratis para comer bien lejos de casa. Sígueme en Instagram <a href="https://instagram.com/cecy.method" target="_blank" rel="noopener">@cecy.method</a> para enterarte cuando salgan.</p>
+        </div>
+      </section>
+
       <section className="sec" id="precios">
         <h2>Consultas y precios</h2>
         <p>Todo en línea. Pago por transferencia a cuenta en México o en Europa. Precios claros: no se emiten facturas.</p>
