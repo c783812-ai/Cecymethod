@@ -3,17 +3,22 @@ import { useEffect, useMemo, useState } from "react";
 import { BANDERA, PAIS } from "@/lib/alimentos";
 import { CATEGORIAS, MERCADOS, MERCADO_DE, PARA, PRODUCTOS, enMercado, linkAmazon, linkML, type Categoria } from "@/lib/tienda";
 import type { Suplemento } from "@/lib/types";
+import { useAjustes } from "@/lib/paciente";
+
+// Para un paciente hombre no salen el filtro ni los suplementos que son solo de salud femenina.
+const SOLO_ELLAS = ["Embarazo", "SOP", "Ciclo"];
 
 /** Suplementos por categoría, con para qué sirven, cómo tomarlos y dónde comprarlos en su país. */
 export default function Suplementos({ recomendados }: { recomendados: Suplemento[] }) {
   const [pais, setPais] = useState("");
   const [para, setPara] = useState("");
   const [abierta, setAbierta] = useState<string | null>(null);
+  const hombre = useAjustes().genero === "m";
   useEffect(() => { try { setPais(localStorage.getItem("pais") || ""); } catch {} }, []);
   const elegirPais = (c: string) => { setPais(c); try { localStorage.setItem("pais", c); } catch {} };
 
   const suyas = useMemo(() => CATEGORIAS.filter((c) => recomendados.some((s) => c.r.test(s.que))), [recomendados]);
-  const lista = CATEGORIAS.filter((c) => !para || c.para.includes(para));
+  const lista = CATEGORIAS.filter((c) => (!para || c.para.includes(para)) && !(hombre && c.para.every((x) => SOLO_ELLAS.includes(x))));
   const m = MERCADO_DE[pais];
 
   return (
@@ -36,12 +41,12 @@ export default function Suplementos({ recomendados }: { recomendados: Suplemento
       <div className="eyebrow" style={{ marginTop: 4 }}>Todos, según para qué te sirven</div>
       <div className="chips scroll" role="group" aria-label="Para qué">
         <button aria-pressed={!para} onClick={() => setPara("")}>Todos</button>
-        {PARA.map((p) => <button key={p} aria-pressed={para === p} onClick={() => setPara(para === p ? "" : p)}>{p}</button>)}
+        {PARA.filter((p) => !hombre || !SOLO_ELLAS.includes(p)).map((p) => <button key={p} aria-pressed={para === p} onClick={() => setPara(para === p ? "" : p)}>{p}</button>)}
       </div>
       {lista.map((c) => <Tarjeta key={c.id} c={c} pais={pais} abierta={abierta === c.id} onAbrir={() => setAbierta(abierta === c.id ? null : c.id)} />)}
 
       <p className="note tienda-aviso">
-        Antes de empezar un suplemento nuevo, pregúntale a Cecy, sobre todo si tomas medicamentos, estás embarazada o tienes alguna enfermedad.
+        Antes de empezar un suplemento nuevo, pregúntale a Cecy, sobre todo si tomas medicamentos{hombre ? "" : ", estás embarazada"} o tienes alguna enfermedad.
         Algunos links son de afiliada: si compras con ellos, Cecy gana una pequeña comisión y a ti no te cuesta más.
         Como Afiliado de Amazon, percibo dinero con las compras elegibles.{["DE", "CH", "EU"].includes(pais) && " Als Amazon-Partner verdiene ich an qualifizierten Verkäufen."}
       </p>

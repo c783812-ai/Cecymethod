@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { BANDERA, NOTA_EU, PAIS } from "@/lib/alimentos";
+import { prohibido, useAjustes } from "@/lib/paciente";
 
 type Antojo = { id: string; n: string; tipo: "dulce" | "salado"; porcion: string; k: number | null; p: number | null; nota?: string; paises: string[] };
 
@@ -24,9 +25,10 @@ export default function Antojos() {
   useEffect(() => { try { setPais(localStorage.getItem("pais") || ""); } catch {} }, []);
   useEffect(() => { if (abierto && !lista) cargar().then(setLista, () => setLista([])); }, [abierto, lista]);
   const elegirPais = (c: string) => { setPais(c); try { localStorage.setItem("pais", c); } catch {} };
+  const { evitar } = useAjustes();
   const ver = useMemo(
-    () => (lista ?? []).filter((a) => a.tipo === tipo && (!pais || a.paises.includes(pais))).sort((a, b) => (a.k ?? 999) - (b.k ?? 999)),
-    [lista, tipo, pais],
+    () => (lista ?? []).filter((a) => a.tipo === tipo && (!pais || a.paises.includes(pais)) && !prohibido(a.n, evitar)).sort((a, b) => (a.k ?? 999) - (b.k ?? 999)),
+    [lista, tipo, pais, evitar],
   );
   return (
     <details className="card antojos" onToggle={(e) => setAbierto((e.target as HTMLDetailsElement).open)}>

@@ -61,6 +61,23 @@
   "fuente": "https://www.fatsecret.com.mx/calor%C3%ADas-nutrici%C3%B3n/birdman/prote%C3%ADna-choco-bronze/1-porci%C3%B3n"
  },
  {
+  "id": "birdman-falcon-proteina-vegetal-vainilla",
+  "n": "Birdman – Falcon Proteína vegetal (Vainilla)",
+  "marca": "Birdman",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida",
+  "k": 119,
+  "p": 24,
+  "h": 3,
+  "l": 1.5,
+  "nota": "vegetal; mejor en licuado con leche; datos de la etiqueta que mandó Cecy (foto de su paciente)",
+  "paises": [
+   "MX",
+   "US"
+  ],
+  "fuente": "etiqueta del producto (foto, 2026-10-18)"
+ },
+ {
   "id": "esn-designer-whey-vanilla-milk",
   "n": "ESN – Designer Whey (Vanilla Milk)",
   "marca": "ESN",

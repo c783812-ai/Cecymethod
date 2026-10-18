@@ -13,6 +13,7 @@ export type Color = (typeof COLORES)[number];
 
 import type { Ingrediente, Sistema } from "./alimentos";
 import type { Meta } from "./diario";
+import type { Genero } from "./paciente";
 
 /** detalle: texto libre (o cómo prepararlo si hay ingredientes). */
 export type Comida = { titulo: string; detalle: string; ingredientes?: Ingrediente[]; recomendacion?: string };
@@ -37,6 +38,9 @@ export type Plan = {
   sistema?: Sistema; // de qué lista salen los cambios; smae si no se dice
   agua?: number; // vasos de 250 ml al día
   meta?: Meta; // la barrita de avance del día
+  genero?: Genero; // "m": los textos de la app van en masculino y no sale lo del ciclo
+  evitar?: string[]; // grupos de lib/paciente EVITAR que no salen en "Cambiar" ni en antojos
+  evitar_otros?: string[]; // palabras sueltas que tampoco salen (por ejemplo "betabel")
 };
 
 export type Ejercicio = { nombre: string; series: string; descanso: string; aproximacion?: string[] };

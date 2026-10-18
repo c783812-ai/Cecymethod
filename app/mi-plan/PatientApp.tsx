@@ -16,6 +16,7 @@ import { Descanso, SeriesLog, useCargas } from "./Cargas";
 import { MetaBar, RegistroHoy, useDiario, type DiarioHook } from "./Diario";
 import { aporte, hoyISO } from "@/lib/diario";
 import { tint } from "@/components/shared";
+import { AjustesPaciente, evitarDe, useG } from "@/lib/paciente";
 
 const MEAL_TINT = ["t-yellow", "t-pink", "t-blue", "t-lilac", "t-green"];
 const CORTO = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
@@ -73,6 +74,7 @@ export default function PatientApp(props: {
   const tabs: [Tab, string][] = [["hoy", "Hoy"], ["registro", "Registro"], ["super", "Súper"], ["suple", "Suplementos"], ["rutina", "Rutina"]];
 
   return (
+    <AjustesPaciente.Provider value={{ genero: plan?.genero === "m" ? "m" : "f", evitar: evitarDe(plan) }}>
     <TiendaAbierta.Provider value={!!p.suplementos_visible}>
     <div className="patient">
       <div style={{ width: "100%", maxWidth: 430 }}>
@@ -109,6 +111,7 @@ export default function PatientApp(props: {
       </div>
     </div>
     </TiendaAbierta.Provider>
+    </AjustesPaciente.Provider>
   );
 }
 
@@ -143,15 +146,45 @@ function Locked({ planExiste }: { planExiste: boolean }) {
   );
 }
 
+/** Sus metas se marcan cada día; la racha cuenta los días seguidos que la cumplió (hasta hoy, o hasta ayer si hoy aún no la marca). */
 function Metas({ p }: { p: Patient }) {
-  const [hechas, toggle] = useLocalChecks(`metas-${p.id}`);
+  const key = `metas-dia-${p.id}`;
+  const [dias, setDias] = useState<Record<string, string[]>>({});
+  useEffect(() => {
+    try { setDias(JSON.parse(localStorage.getItem(key) || "{}")); } catch {}
+  }, [key]);
   if (!p.metas.length) return null;
+  const hoy = hoyISO();
+  const toggle = (t: string) =>
+    setDias((old) => {
+      const s = new Set(old[t] ?? []);
+      if (s.has(hoy)) s.delete(hoy); else s.add(hoy);
+      const n = { ...old, [t]: [...s].sort().slice(-120) };
+      try { localStorage.setItem(key, JSON.stringify(n)); } catch {}
+      return n;
+    });
+  const racha = (t: string) => {
+    const s = new Set(dias[t] ?? []);
+    const d = new Date();
+    if (!s.has(hoyISO(d))) d.setDate(d.getDate() - 1);
+    let n = 0;
+    while (s.has(hoyISO(d))) { n++; d.setDate(d.getDate() - 1); }
+    return n;
+  };
   return (
     <div className="card" style={{ padding: 14 }}>
-      <div className="eyebrow" style={{ marginBottom: 6 }}>Tus metas{p.proxima_cita ? ` hasta el ${p.proxima_cita}` : ""}</div>
-      {p.metas.map((t, i) => (
-        <label key={i} className="check"><input type="checkbox" checked={!!hechas[t]} onChange={() => toggle(t)} /> {t}</label>
-      ))}
+      <div className="eyebrow" style={{ marginBottom: 2 }}>Tus metas de hoy</div>
+      {p.proxima_cita && <p className="note" style={{ margin: "0 0 6px" }}>Hasta tu consulta del {p.proxima_cita}. Márcalas cada día que las cumplas.</p>}
+      {p.metas.map((t, i) => {
+        const r = racha(t);
+        return (
+          <label key={i} className="check" style={{ alignItems: "center" }}>
+            <input type="checkbox" checked={(dias[t] ?? []).includes(hoy)} onChange={() => toggle(t)} />
+            <span style={{ flex: 1 }}>{t}</span>
+            {r > 0 && <span className="note" style={{ whiteSpace: "nowrap" }}>🔥 {r} {r === 1 ? "día" : "días"}</span>}
+          </label>
+        );
+      })}
     </div>
   );
 }
@@ -247,12 +280,13 @@ function RutinaView({ rutina: fija, ciclo, videos, pid, remoto }: { rutina: Ruti
   const [g, setG] = useState(0);
   const [done, toggle] = useLocalChecks(`hechos-${pid}`);
   const cargas = useCargas(pid, remoto);
+  const t = useG();
   if (!rutina) return <div className="locked">Cecy todavía no comparte una rutina contigo.<br />Si quieres una, pídesela en tu próxima consulta.</div>;
   const d = rutina.dias[g];
   return (
     <>
       <div className="eyebrow">{ciclo?.length ? `Rutina del mes · Mes ${mes + 1} · ` : ""}{rutina.titulo} · {rutina.subtitulo}</div>
-      {ciclo?.length ? <p className="note" style={{ margin: "-4px 0 0" }}>Todas hacemos esta rutina este mes. Cambia el {proximoCambio()}.</p> : null}
+      {ciclo?.length ? <p className="note" style={{ margin: "-4px 0 0" }}>{t("Todas hacemos")} esta rutina este mes. Cambia el {proximoCambio()}.</p> : null}
       <div className="seg" role="group" aria-label="Dónde entrenas" style={{ display: "flex" }}>
         {(["a", "b", "c"] as const).map((k, i) => (
           <button key={k} aria-pressed={o === k} onClick={() => setO(k)} style={{ flex: 1, padding: "7px 6px", fontSize: 12.5 }}>{rutina.opciones[i]}</button>

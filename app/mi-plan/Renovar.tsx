@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useG } from "@/lib/paciente";
 
 const WA = "971556889063";
 const wa = (texto: string) => `https://wa.me/${WA}?text=${encodeURIComponent(texto)}`;
@@ -26,6 +27,7 @@ const FACIL = ["Muy fácil", "Fácil", "Regular", "Difícil"];
 /** Encuesta de 1 minuto a las 3 semanas del plan. Las respuestas se las manda a Cecy por WhatsApp; no se guardan en la página. */
 export function Encuesta({ nombre, desde, planId }: { nombre: string; desde?: string | null; planId: string | null }) {
   const key = `encuesta-${planId ?? "plan"}`;
+  const t = useG();
   const [estado, setEstado] = useState<"" | "lista" | "luego">("lista");
   const [cal, setCal] = useState<number>();
   const [facil, setFacil] = useState<string>();
@@ -42,7 +44,7 @@ export function Encuesta({ nombre, desde, planId }: { nombre: string; desde?: st
   const guardar = (v: string) => { try { localStorage.setItem(key, v); } catch {} };
   const msg = [
     `Hola Cecy, soy ${nombre.split(" ")[0]}. Mi encuesta de cómo voy con mi plan:`,
-    cal ? `• ¿Qué tan contenta estoy?: ${CARITAS.find(([n]) => n === cal)?.[1]} (${cal} de 5)` : "",
+    cal ? `• ${t("¿Qué tan contenta estoy?")}: ${CARITAS.find(([n]) => n === cal)?.[1]} (${cal} de 5)` : "",
     facil ? `• ¿Qué tan fácil es seguirlo?: ${facil}` : "",
     gusto.trim() ? `• Lo que más me ha gustado: ${gusto.trim()}` : "",
     cambiar.trim() ? `• Lo que cambiaría: ${cambiar.trim()}` : "",
@@ -52,8 +54,8 @@ export function Encuesta({ nombre, desde, planId }: { nombre: string; desde?: st
     <div className="card encuesta">
       <div className="eyebrow">1 minuto · Tu opinión</div>
       <h4>💬 ¿Cómo te va con tu plan?</h4>
-      <p className="q">¿Qué tan contenta estás?</p>
-      <div className="caritas" role="group" aria-label="Qué tan contenta estás">
+      <p className="q">{t("¿Qué tan contenta estás?")}</p>
+      <div className="caritas" role="group" aria-label={t("Qué tan contenta estás")}>
         {CARITAS.map(([n, e]) => <button key={n} aria-pressed={cal === n} aria-label={`${n} de 5`} onClick={() => setCal(n)}>{e}</button>)}
       </div>
       <p className="q">¿Qué tan fácil se te hace seguirlo?</p>

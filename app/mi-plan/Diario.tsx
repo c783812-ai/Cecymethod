@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { TIEMPOS } from "@/lib/types";
+import { useG } from "@/lib/paciente";
 import { ANIMOS, BANO_SUGERIDO, CICLO, ESTRES, HECES, META, SUENO, ACTIVIDADES, MINUTOS, ALCOHOL, BEBIDAS, FUERA, SACIEDAD, hoyISO, type Diario, type Meta, type Registro } from "@/lib/diario";
 
 /**
@@ -95,6 +96,9 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
   const agua = r.agua ?? 0;
   const bano = r.bano ?? 0;
   const [otro, setOtro] = useState(r.meds && r.meds !== "" ? true : false);
+  const t = useG();
+  const hombre = t("Cansada") !== "Cansada";
+  const tl = <V,>(ops: [V, string][]) => ops.map(([v, l]) => [v, t(l)] as [V, string]);
   useEffect(() => { setOtro(!!r.meds); }, [r.meds]);
   return (
     <div className="card registro">
@@ -114,18 +118,18 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
         <b className="num">{bano}</b><span className="note">{bano === 1 ? "vez" : "veces"}</span>
         <button aria-label="Una vez más" onClick={() => set({ bano: bano + 1 })}>+</button>
       </div>
-      <Chips label="Cómo estuvo" ops={HECES} value={r.heces} onPick={(v) => set({ heces: v })} />
+      <Chips label="Cómo estuvo" ops={tl(HECES)} value={r.heces} onPick={(v) => set({ heces: v })} />
 
       <h5>💭 Hoy me sentí</h5>
       <div className="caritas" role="group" aria-label="Hoy me sentí">
-        {ANIMOS.map(([e, t]) => (
-          <button key={e} aria-pressed={r.animo === e} onClick={() => set({ animo: r.animo === e ? undefined : e })}><span>{e}</span><small>{t}</small></button>
+        {ANIMOS.map(([e, txt]) => (
+          <button key={e} aria-pressed={r.animo === e} onClick={() => set({ animo: r.animo === e ? undefined : e })}><span>{e}</span><small>{t(txt)}</small></button>
         ))}
       </div>
 
       <h5>🍽️ Después de comer me sentí</h5>
       <div className="hs">
-        {TIEMPOS.map(([t], i) => {
+        {TIEMPOS.map(([tiempo], i) => {
           const v = r.hs?.[i]?.s;
           const poner = (x?: number) => {
             const arr = Array.from({ length: TIEMPOS.length }, (_, k) => r.hs?.[k] ?? null);
@@ -133,9 +137,9 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
             set({ hs: arr.some(Boolean) ? arr : undefined });
           };
           return (
-            <div key={t} className="hs-fila">
-              <span>{t}</span>
-              <Chips label={`Después de ${t.toLowerCase()}`} ops={SACIEDAD} value={v} onPick={poner} />
+            <div key={tiempo} className="hs-fila">
+              <span>{tiempo}</span>
+              <Chips label={`Después de ${tiempo.toLowerCase()}`} ops={tl(SACIEDAD)} value={v} onPick={poner} />
             </div>
           );
         })}
@@ -144,12 +148,12 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
       <h5>😴 Anoche dormí</h5>
       <Chips label="Horas de sueño" ops={SUENO} value={r.sueno} onPick={(v) => set({ sueno: v })} />
 
-      <h5>🏃‍♀️ Mi actividad de hoy</h5>
+      <h5>{t("🏃‍♀️ Mi actividad de hoy")}</h5>
       <div className="chips" role="group" aria-label="Qué hiciste hoy">
-        {ACTIVIDADES.map(([v, t]) => {
+        {ACTIVIDADES.map(([v, txt]) => {
           const on = !!r.act?.includes(v);
           const sig = v === "descanso" ? (on ? [] : ["descanso"]) : on ? r.act!.filter((x) => x !== v) : [...(r.act ?? []).filter((x) => x !== "descanso"), v];
-          return <button key={v} aria-pressed={on} onClick={() => set({ act: sig.length ? sig : undefined, ...(v === "descanso" && !on ? { min: undefined, kcal: undefined } : {}) })}>{t}</button>;
+          return <button key={v} aria-pressed={on} onClick={() => set({ act: sig.length ? sig : undefined, ...(v === "descanso" && !on ? { min: undefined, kcal: undefined } : {}) })}>{t(txt)}</button>;
         })}
       </div>
       {!!r.act?.length && !r.act.includes("descanso") && (
@@ -194,8 +198,12 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
       <h5>🌡️ Estrés</h5>
       <Chips label="Nivel de estrés" ops={ESTRES.map((t, i) => [i + 1, t] as [number, string])} value={r.estres} onPick={(v) => set({ estres: v })} />
 
-      <h5>🌸 Mi ciclo</h5>
-      <Chips label="Ciclo menstrual" ops={CICLO} value={r.ciclo} onPick={(v) => set({ ciclo: v })} />
+      {!hombre && (
+        <>
+          <h5>🌸 Mi ciclo</h5>
+          <Chips label="Ciclo menstrual" ops={CICLO} value={r.ciclo} onPick={(v) => set({ ciclo: v })} />
+        </>
+      )}
 
       <h5>💊 Suplementos o medicamentos nuevos</h5>
       <div className="chips" role="group" aria-label="Suplementos o medicamentos nuevos">
@@ -206,13 +214,13 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
         <input className="medtxt" placeholder="¿Qué empezaste a tomar y por qué?" defaultValue={r.meds ?? ""} maxLength={200}
           onBlur={(e) => set({ meds: e.target.value.trim() || undefined })} />
       )}
-      <Compartir diario={diario} />
+      <Compartir diario={diario} hombre={hombre} />
     </div>
   );
 }
 
 /** Consentimiento para que Cecy vea el registro. */
-function Compartir({ diario }: { diario: DiarioHook }) {
+function Compartir({ diario, hombre }: { diario: DiarioHook; hombre: boolean }) {
   const { remoto, consentido, consentir, retirar } = diario[2];
   const [acepto, setAcepto] = useState(false);
   const [estado, setEstado] = useState<"" | "enviando" | "error">("");
@@ -227,7 +235,7 @@ function Compartir({ diario }: { diario: DiarioHook }) {
   return (
     <div className="compartir">
       <b>¿Compartes tu registro con Cecy?</b>
-      <p className="note" style={{ margin: "4px 0 8px" }}>Así lo revisa cada domingo y te escribe cómo vas. Incluye tus comidas, hambre o saciedad, comidas fuera del plan, alcohol, agua, baño, ánimo, sueño, actividad, pasos, estrés, ciclo y medicamentos. Son datos de salud: solo tú y ella los ven, y se borran cuando terminas tu seguimiento o cuando tú lo pidas. Por ahora se guarda solo en tu teléfono.</p>
+      <p className="note" style={{ margin: "4px 0 8px" }}>Así lo revisa cada domingo y te escribe cómo vas. Incluye tus comidas, hambre o saciedad, comidas fuera del plan, alcohol, agua, baño, ánimo, sueño, actividad, pasos, estrés, {hombre ? "" : "ciclo "}y medicamentos. Son datos de salud: solo tú y ella los ven, y se borran cuando terminas tu seguimiento o cuando tú lo pidas. Por ahora se guarda solo en tu teléfono.</p>
       <label className="check"><input type="checkbox" checked={acepto} onChange={(e) => setAcepto(e.target.checked)} /> Acepto que Cecy vea mi registro diario</label>
       <button className="btn primary" disabled={!acepto || estado === "enviando"} style={{ marginTop: 8 }}
         onClick={async () => { setEstado("enviando"); setEstado((await consentir()) ? "" : "error"); }}>

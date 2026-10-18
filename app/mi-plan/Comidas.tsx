@@ -4,6 +4,7 @@ import { BANDERA, NOTA_EU, PAIS, buscar, cantidad, cargarAlimentos, comoIngredie
 import { MERCADO_DE, linkAmazon, linkML, productoDeSup } from "@/lib/tienda";
 import { DIAS, type Comida, type Dia, type Plan } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { prohibido, useAjustes } from "@/lib/paciente";
 
 // Los cambios que hace la paciente se guardan solo en su teléfono, por plan.
 /** Si la paciente ya tiene abierta la sección de Suplementos: entonces las proteínas en polvo traen su botón de compra en línea. */
@@ -149,6 +150,7 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
   // Las proteínas en polvo se compran en línea: en vez de en qué países hay, se muestra el link de su tienda.
   const enLinea = useContext(TiendaAbierta) && esSup && orig.g === "Proteína en polvo";
   const m = MERCADO_DE[pais];
+  const { evitar } = useAjustes();
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", k);
@@ -156,8 +158,8 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
     return () => { document.removeEventListener("keydown", k); document.body.style.overflow = ""; };
   }, [onClose]);
   const opciones = useMemo(
-    () => (lista ? buscar(lista, q, sinLac && /^Leche/.test(orig.g) ? /^Leche/ : orig.g).filter((a) => a.id !== orig.id && (!pais || !a.paises?.length || a.paises.includes(pais)) && !(sinLac && a.lac)).sort((a, b) => a.n.localeCompare(b.n, "es")) : []),
-    [lista, q, orig, pais, sinLac],
+    () => (lista ? buscar(lista, q, sinLac && /^Leche/.test(orig.g) ? /^Leche/ : orig.g).filter((a) => a.id !== orig.id && (!pais || !a.paises?.length || a.paises.includes(pais)) && !(sinLac && a.lac) && !prohibido(a.n, evitar)).sort((a, b) => a.n.localeCompare(b.n, "es")) : []),
+    [lista, q, orig, pais, sinLac, evitar],
   );
   return (
     <div className="sheet-bg" onClick={onClose}>

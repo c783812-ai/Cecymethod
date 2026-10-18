@@ -7,6 +7,7 @@ import BuscarAlimento from "@/components/BuscarAlimento";
 import { cantidad, comoIngrediente, fraccion, icono } from "@/lib/alimentos";
 import { META } from "@/lib/diario";
 import { GUIA, choques, guiaDe, type Guia } from "@/lib/guiaSuplementos";
+import { EVITAR } from "@/lib/paciente";
 
 const EQS = [0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6];
 
@@ -26,6 +27,16 @@ function normalizar(x: unknown): Plan {
   p.suplementos ??= [];
   p.tips ??= [];
   return p;
+}
+
+/** Lee el texto pegado aunque traiga basura alrededor o dos copias juntas: se queda con el último plan completo. */
+function leerPlan(texto: string): unknown {
+  const t = texto.replace(/[\u200B-\u200D\uFEFF]/g, "").trim();
+  try { return JSON.parse(t); } catch {}
+  const fin = t.lastIndexOf("}");
+  const inicios = [...t.matchAll(/\{\s*"titulo"/g)].map((m) => m.index).reverse();
+  for (const i of inicios) try { return JSON.parse(t.slice(i, fin + 1)); } catch {}
+  throw new Error("plan");
 }
 
 /** Solo para Cecy: cuándo conviene el suplemento y con qué no juntarlo. */
@@ -77,11 +88,12 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
       <details className="card">
         <summary style={{ cursor: "pointer", fontWeight: 600 }}>Pegar un plan que te preparó Claude</summary>
         <p className="note">Pide el plan en el proyecto y pega aquí el texto que empieza con {"{"}. Reemplaza lo que tienes abajo; revísalo antes de guardar.</p>
-        <label className="field">Plan<textarea value={pegar} onChange={(e) => setPegar(e.target.value)} style={{ minHeight: 120, fontFamily: "ui-monospace, monospace", fontSize: 12 }} /></label>
+        <label className="field">Plan<textarea value={pegar} onChange={(e) => setPegar(e.target.value)} onPaste={(e) => { const t = e.clipboardData.getData("text"); if (t) { e.preventDefault(); setPegar(t); } }} style={{ minHeight: 120, fontFamily: "ui-monospace, monospace", fontSize: 12 }} /></label>
         <button className="btn" style={{ marginTop: 8 }} onClick={() => {
-          try { setPlan(normalizar(JSON.parse(pegar))); setDirty(true); setPegar(""); setMsg({ ok: true, msg: "Plan cargado. Revísalo y guarda." }); }
-          catch { setMsg({ ok: false, msg: "Ese texto no es un plan válido." }); }
+          try { setPlan(normalizar(leerPlan(pegar))); setDirty(true); setPegar(""); setMsg({ ok: true, msg: "Plan cargado. Revísalo y guarda." }); }
+          catch { setMsg({ ok: false, msg: "Ese texto no es un plan válido. Toca Vaciar y pega el plan una sola vez." }); }
         }}>Cargar</button>
+        {pegar && <button className="btn" style={{ marginTop: 8, marginLeft: 8 }} onClick={() => setPegar("")}>Vaciar</button>}
       </details>
 
       <div className="card grid" style={{ gap: 12 }}>
@@ -101,6 +113,33 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
           </label>
         </div>
         <label className="field">Objetivo, como lo lee ella<textarea value={plan.objetivo} onChange={(e) => up((p) => { p.objetivo = e.target.value; })} placeholder="Recuperar tu energía y tus reservas de hierro, sin dejar de comer lo que te gusta." /></label>
+      </div>
+
+      <div className="card grid" style={{ gap: 12 }}>
+        <h3 style={{ margin: 0 }}>Paciente</h3>
+        <div className="field">La app le habla como
+          <div className="chips">
+            {([["f", "Mujer"], ["m", "Hombre"]] as const).map(([k, t]) => (
+              <button key={k} type="button" aria-pressed={(plan.genero ?? "f") === k} onClick={() => up((p) => { p.genero = k === "m" ? "m" : undefined; })}>{t}</button>
+            ))}
+          </div>
+          <span className="note">Hombre: textos en masculino y sin lo del ciclo menstrual.</span>
+        </div>
+        <div className="field">No puede comer <span className="note">(se esconde en Cambiar y en antojos)</span>
+          <div className="chips">
+            {EVITAR.map((e) => {
+              const on = plan.evitar?.includes(e.id) ?? false;
+              return <button key={e.id} type="button" aria-pressed={on} onClick={() => up((p) => {
+                const s = new Set(p.evitar ?? []);
+                if (on) s.delete(e.id); else s.add(e.id);
+                p.evitar = s.size ? [...s] : undefined;
+              })}>{e.nombre}</button>;
+            })}
+          </div>
+        </div>
+        <label className="field">Otros alimentos que no puede comer, separados por coma
+          <input value={(plan.evitar_otros ?? []).join(",")} onChange={(e) => up((p) => { const v = e.target.value.split(","); p.evitar_otros = v.some((w) => w.trim()) ? v : undefined; })} placeholder="betabel, piña" />
+        </label>
       </div>
 
       <div className="card">
