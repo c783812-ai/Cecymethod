@@ -1,6 +1,6 @@
 import { requireNutri } from "@/lib/auth";
 import { GUIA_GLUTEOS, NOMBRE_EN, ejerciciosDe } from "@/lib/gluteos";
-import { CICLO } from "@/lib/ciclo";
+import { CICLO, mesDelCiclo } from "@/lib/ciclo";
 import { actualizarGluteos } from "../actions";
 import type { Rutina } from "@/lib/types";
 import VideoRow from "./VideoRow";
@@ -21,7 +21,11 @@ export default async function Videos() {
       ej.set(e.nombre, { dias: [...new Set([...(prev?.dias ?? []), ...e.dias])], calentamiento: e.calentamiento, rutinas: [...(prev?.rutinas ?? []), t.titulo] });
     }
   const lista = [...ej.entries()];
-  const ok = lista.filter(([n]) => listos.has(n)).length;
+  const mes = mesDelCiclo();
+  const delMes = new Set(ejerciciosDe(CICLO[mes].rutina).map((e) => e.nombre));
+  const ahora = lista.filter(([n]) => delMes.has(n)), despues = lista.filter(([n]) => !delMes.has(n));
+  const ok = ahora.filter(([n]) => listos.has(n)).length;
+  const fila = ([n, i]: (typeof lista)[number]) => <VideoRow key={n} nombre={n} dias={i.dias.join(", ")} calentamiento={i.calentamiento} listo={!!listos.get(n)} />;
   return (
     <section className="main" style={{ maxWidth: 1100, margin: "0 auto", width: "100%" }}>
       <div className="phead">
@@ -30,7 +34,7 @@ export default async function Videos() {
           <h1>Videos de ejercicios</h1>
           <div className="meta">Subes cada video una sola vez y aparece en todas las rutinas y pacientes que usen ese ejercicio.</div>
         </div>
-        <span className="pill p-info num">{ok} de {lista.length} listos</span>
+        <span className="pill p-info num">Este mes: {ok} de {ahora.length} listos</span>
       </div>
       {(viejaGluteos(tpls?.find((t) => t.key === "gluteos")?.data as Rutina | undefined) || CICLO.some((c, i) => tpls?.find((t) => t.key === c.key)?.titulo !== `Mes ${i + 1} · ${c.rutina.titulo}`)) && (
         <form action={actualizarGluteos} className="tint t-yellow" style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
@@ -39,18 +43,27 @@ export default async function Videos() {
         </form>
       )}
       <div className="card">
+        <h3 style={{ marginTop: 0 }}>Rutina de este mes · Mes {mes + 1} ({CICLO[mes].rutina.titulo})</h3>
+        <p className="note">Solo estos los ven tus pacientes ahora. Gimnasio y Mancuernas y bandas.</p>
         <div className="tablewrap">
           <table>
             <thead><tr><th>Ejercicio</th><th>Días</th><th>Video</th></tr></thead>
-            <tbody>
-              {lista.map(([n, i]) => (
-                <VideoRow key={n} nombre={n} dias={i.dias.join(", ")} calentamiento={i.calentamiento} listo={!!listos.get(n)} />
-              ))}
-            </tbody>
+            <tbody>{ahora.map(fila)}</tbody>
           </table>
         </div>
         <p className="note">De 15 a 30 segundos, sin sonido. Expórtalo en 720p y 30 FPS (unos 25 MB). Formatos MP4 o MOV, máximo 50 MB por video.</p>
       </div>
+      {despues.length > 0 && (
+        <details className="card">
+          <summary><b>Meses siguientes</b> <span className="note">({despues.filter(([n]) => listos.has(n)).length} de {despues.length} listos · todavía no urgen)</span></summary>
+          <div className="tablewrap" style={{ marginTop: 12 }}>
+            <table>
+              <thead><tr><th>Ejercicio</th><th>Días</th><th>Video</th></tr></thead>
+              <tbody>{despues.map(fila)}</tbody>
+            </table>
+          </div>
+        </details>
+      )}
     </section>
   );
 }
