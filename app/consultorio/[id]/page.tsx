@@ -10,6 +10,7 @@ import PlanEditor from "./PlanEditor";
 import SemanaVista from "./SemanaVista";
 import IdeasSuplementos from "./IdeasSuplementos";
 import Historial from "./Historial";
+import Pagos from "./Pagos";
 import { hoyISO, type Registro } from "@/lib/diario";
 import { CICLO, CICLO_KEY, mesDelCiclo, proximoCambio } from "@/lib/ciclo";
 
@@ -18,6 +19,7 @@ const TABS = [
   ["semana", "Su semana"],
   ["plan", "Plan de alimentación"],
   ["rutina", "Rutina"],
+  ["pagos", "Pagos"],
 ] as const;
 type Tab = (typeof TABS)[number][0];
 
@@ -78,6 +80,7 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
 
         {tab === "semana" && <SemanaTab p={p} lunes={semana} />}
         {tab === "plan" && <PlanTab id={id} />}
+        {tab === "pagos" && <Pagos id={id} />}
         {tab === "rutina" && <RutinaTab p={p} />}
       </section>
     </div>

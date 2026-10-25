@@ -132,3 +132,42 @@ export async function borrarConsulta(id: string, consulta: string) {
   await sb.from("consultas").delete().eq("id", consulta).eq("patient_id", id);
   revalidatePath(`/consultorio/${id}`);
 }
+
+const num = (f: FormData, k: string) => {
+  const n = Number((str(f, k) ?? "").replace(/[^\d.,-]/g, "").replace(",", "."));
+  return Number.isFinite(n) ? n : 0;
+};
+const MONEDA = (v: string | null) => (v === "USD" || v === "MXN" ? v : "EUR");
+const recargarPagos = (id: string) => { revalidatePath(`/consultorio/${id}`); revalidatePath("/consultorio/pagos"); };
+
+export async function crearPaquete(id: string, f: FormData) {
+  const { sb } = await requireNutri();
+  const nombre = str(f, "nombre") ?? "Paquete";
+  await sb.from("paquetes").insert({ patient_id: id, nombre, moneda: MONEDA(str(f, "moneda")), total: num(f, "total"), inicio: str(f, "inicio") ?? undefined, nota: str(f, "nota") });
+  recargarPagos(id);
+}
+
+export async function editarPaquete(id: string, paquete: string, f: FormData) {
+  const { sb } = await requireNutri();
+  await sb.from("paquetes").update({ nombre: str(f, "nombre") ?? "Paquete", moneda: MONEDA(str(f, "moneda")), total: num(f, "total"), nota: str(f, "nota") }).eq("id", paquete).eq("patient_id", id);
+  recargarPagos(id);
+}
+
+export async function borrarPaquete(id: string, paquete: string) {
+  const { sb } = await requireNutri();
+  await sb.from("paquetes").delete().eq("id", paquete).eq("patient_id", id);
+  recargarPagos(id);
+}
+
+export async function registrarPago(id: string, paquete: string, f: FormData) {
+  const { sb } = await requireNutri();
+  const monto = num(f, "monto");
+  if (monto > 0) await sb.from("pagos").insert({ patient_id: id, paquete_id: paquete, monto, fecha: str(f, "fecha") ?? undefined, nota: str(f, "nota") });
+  recargarPagos(id);
+}
+
+export async function borrarPago(id: string, pago: string) {
+  const { sb } = await requireNutri();
+  await sb.from("pagos").delete().eq("id", pago).eq("patient_id", id);
+  recargarPagos(id);
+}

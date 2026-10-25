@@ -12,6 +12,7 @@ export default async function ConsultorioLayout({ children }: { children: React.
         <nav>
           <Link href="/consultorio">Pacientes</Link>
           <Link href="/consultorio/domingo">Domingo</Link>
+          <Link href="/consultorio/pagos">Pagos</Link>
           <Link href="/consultorio/alimentos">Alimentos</Link>
           <Link href="/consultorio/videos">Videos</Link>
           <Link href="/" target="_blank">Mi página</Link>
