@@ -27,7 +27,7 @@ export default function SemanaVista({ p, plan, regs, fechas, antes, despues }: {
         <Link className="btn" href={despues} scroll={false}>Siguiente ›</Link>
       </div>
       {!p.diario_consentido_at && !s.registrados ? (
-        <div className="card"><p style={{ margin: 0 }}>{p.nombre.split(" ")[0]} todavía no comparte su registro diario. Se lo pide su página, en &quot;Hoy&quot;, al final de su registro.</p></div>
+        <div className="card"><p style={{ margin: 0 }}>{p.nombre.split(" ")[0]} todavía no comparte su registro diario. Se lo pide su app en la pestaña &quot;Registro&quot;, hasta abajo.</p></div>
       ) : !s.registrados ? (
         <div className="card"><p style={{ margin: 0 }}>No registró nada esta semana.</p></div>
       ) : (
