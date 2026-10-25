@@ -400,6 +400,14 @@ a{color:inherit}
 .descanso .l{font-size:12.5px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .descanso .cuenta{font-size:24px;font-variant-numeric:tabular-nums}
 .descanso button{border:0;border-radius:10px;padding:8px 10px;background:rgba(255,255,255,.18);color:#fff;font:inherit;font-weight:600}
+.serieslog .trabajo{display:grid;grid-template-columns:1fr 96px;gap:10px;align-items:center;background:var(--accent-soft);border-radius:12px;padding:10px 12px;margin:2px 0 10px}
+.serieslog .trabajo label{display:flex;flex-direction:column;gap:2px;font-size:14px}
+.serieslog .trabajo .note{font-size:12px}
+.serieslog .apx{background:var(--bg);border-radius:12px;padding:10px;margin-bottom:10px}
+.serieslog .apx .note{font-size:12.5px;margin:2px 0 8px}
+.serieslog .apx-t{font-weight:700;font-size:13px;margin:0 0 4px}
+.serieslog .n.a{background:var(--surface);border:1px dashed var(--line);display:flex;flex-direction:column;line-height:1.1;padding:5px 0}
+.serieslog .n.a small{font-size:10.5px;font-weight:600;color:var(--muted)}
 .serieslog .h{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
 .serieslog .n{font-weight:700;text-align:center;background:var(--accent-soft);border-radius:8px;padding:8px 0}
 .serieslog input{width:100%;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:16px;background:var(--surface)}

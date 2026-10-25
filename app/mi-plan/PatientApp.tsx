@@ -323,13 +323,7 @@ function RutinaView({ rutina: fija, ciclo, videos, pid, remoto }: { rutina: Ruti
                 <span className="chip num"><b>{e.series}</b></span>
                 <span className="chip">Descanso {e.descanso}</span>
               </div>
-              <SeriesLog ejercicio={e.nombre} txt={e.series} descanso={e.descanso} cargas={cargas} />
-              {e.aproximacion && (
-                <details className="warm">
-                  <summary>Series de aproximación</summary>
-                  {e.aproximacion.map((t) => <div key={t} className="note">{t}</div>)}
-                </details>
-              )}
+              <SeriesLog ejercicio={e.nombre} txt={e.series} descanso={e.descanso} cargas={cargas} aproximacion={e.aproximacion} />
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginTop: 6, flexWrap: "wrap" }}>
                 <div style={{ flex: "1 1 100%" }}><VideoBtn n={e.nombre} videos={videos} /></div>
                 <label className="check" style={{ padding: 0 }}>
