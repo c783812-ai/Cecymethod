@@ -24,7 +24,7 @@ export function PagosVista({ id, paquetes, pagos }: { id: string; paquetes: Paqu
         return (
           <div key={pq.id} className="card pagos">
             <div className="pq-head">
-              <div><h3 style={{ margin: 0 }}>{pq.nombre}</h3><span className="note">Desde {fechaCorta(pq.inicio)}{pq.nota ? ` · ${pq.nota}` : ""}</span></div>
+              <div><h3 style={{ margin: 0 }}>{pq.nombre}</h3><span className="note">Desde {fechaCorta(pq.inicio)}{pq.fin ? ` · termina ${fechaCorta(pq.fin)}` : ""}{pq.nota ? ` · ${pq.nota}` : ""}</span></div>
               <span className={`pill ${pendiente > 0 ? "p-mid" : "p-ok"}`}>{pendiente > 0 ? "Debe" : "Pagado"}</span>
             </div>
             <div className="cuentas">
@@ -54,6 +54,7 @@ export function PagosVista({ id, paquetes, pagos }: { id: string; paquetes: Paqu
                 <label className="field">Nombre<input name="nombre" defaultValue={pq.nombre} /></label>
                 <label className="field">Moneda<select name="moneda" defaultValue={pq.moneda}>{MONEDAS.map((m) => <option key={m}>{m}</option>)}</select></label>
                 <label className="field">Total<input name="total" inputMode="decimal" defaultValue={String(pq.total)} /></label>
+                <label className="field">Termina<input type="date" name="fin" defaultValue={pq.fin ?? ""} /></label>
                 <label className="field">Nota<input name="nota" defaultValue={pq.nota ?? ""} /></label>
                 <div><button className="btn">Guardar cambios</button></div>
               </form>

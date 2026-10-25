@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useCita, esFutura } from "@/lib/cita";
 import { DIAS7, TIEMPOS, tieneDomingo, type Patient, type Plan, type Rutina } from "@/lib/types";
 import { CALENTAMIENTO } from "@/lib/gluteos";
 import { mesDelCiclo, proximoCambio } from "@/lib/ciclo";
@@ -148,6 +149,7 @@ function Locked({ planExiste }: { planExiste: boolean }) {
 
 /** Sus metas se marcan cada día; la racha cuenta los días seguidos que la cumplió (hasta hoy, o hasta ayer si hoy aún no la marca). */
 function Metas({ p }: { p: Patient }) {
+  const cita = useCita(p);
   const key = `metas-dia-${p.id}`;
   const [dias, setDias] = useState<Record<string, string[]>>({});
   useEffect(() => {
@@ -174,7 +176,7 @@ function Metas({ p }: { p: Patient }) {
   return (
     <div className="card" style={{ padding: 14 }}>
       <div className="eyebrow" style={{ marginBottom: 2 }}>Tus metas de hoy</div>
-      {p.proxima_cita && <p className="note" style={{ margin: "0 0 6px" }}>Hasta tu consulta del {p.proxima_cita}. Márcalas cada día que las cumplas.</p>}
+      {cita && <p className="note" style={{ margin: "0 0 6px" }}>Hasta tu consulta del {cita}. Márcalas cada día que las cumplas.</p>}
       {p.metas.map((t, i) => {
         const r = racha(t);
         return (
@@ -190,6 +192,7 @@ function Metas({ p }: { p: Patient }) {
 }
 
 function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, gustos, instalar }: { p: Patient; plan: Plan | null; planExiste: boolean; planId: string | null; planDesde?: string | null; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean }) {
+  const cita = useCita(p);
   const [di, setDi] = useState<number | null>(null);
   const [hoyIdx, setHoyIdx] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); setHoyIdx(d === 0 ? 6 : d - 1); }, []);
@@ -213,8 +216,8 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
   return (
     <>
       {instalar && <Instalar />}
-      <Renovar nombre={p.nombre} desde={planDesde} proxima={p.proxima_cita} />
-      {p.proxima_cita && <div className="card proxima"><span aria-hidden="true">📅</span><span><span className="eyebrow">Tu próxima consulta</span><br /><b>{p.proxima_cita}</b></span></div>}
+      <Renovar nombre={p.nombre} desde={planDesde} proxima={p.cita_at ? (esFutura(p.cita_at) ? p.cita_at : null) : p.proxima_cita} />
+      {cita && <div className="card proxima"><span aria-hidden="true">📅</span><span><span className="eyebrow">Tu próxima consulta</span><br /><b>{cita}</b><br /><span className="note">En la hora de tu teléfono</span></span></div>}
       <div className="daychips" aria-label="Día">
         {CORTO.map((l, i) => (
           <button key={l} aria-pressed={i === d} onClick={() => setDi(i)} aria-label={DIAS7[i]}>

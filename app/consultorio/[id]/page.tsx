@@ -11,6 +11,8 @@ import SemanaVista from "./SemanaVista";
 import IdeasSuplementos from "./IdeasSuplementos";
 import Historial from "./Historial";
 import Pagos from "./Pagos";
+import CitaInput from "../CitaInput";
+import { FechaLocal } from "@/lib/cita";
 import { hoyISO, type Registro } from "@/lib/diario";
 import { CICLO, CICLO_KEY, mesDelCiclo, proximoCambio } from "@/lib/ciclo";
 
@@ -38,7 +40,7 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
       <section className="main">
         <div className="phead">
           <div>
-            <div className="eyebrow">{p.proxima_cita ? `Próxima cita: ${p.proxima_cita}` : "Sin cita"}</div>
+            <div className="eyebrow">{p.cita_at ? <>Próxima cita: <FechaLocal iso={p.cita_at} /></> : p.proxima_cita ? `Próxima cita: ${p.proxima_cita}` : "Sin cita"}</div>
             <h1>{p.nombre}</h1>
             {p.ciudad && <div className="meta">Vive en {p.ciudad}</div>}
           </div>
@@ -58,7 +60,8 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
                 <div className="form-grid">
                   <label className="field">Nombre<input name="nombre" defaultValue={p.nombre} /></label>
                   <label className="field">Vive en<input name="ciudad" defaultValue={p.ciudad ?? ""} /></label>
-                  <label className="field">Próxima consulta · ella la ve<input name="proxima_cita" defaultValue={p.proxima_cita ?? ""} placeholder="16 oct, 18:00 (hora de Alemania)" /></label>
+                  <CitaInput iso={p.cita_at} nombre={p.nombre} />
+                  {!p.cita_at && p.proxima_cita && <p className="note" style={{ margin: 0 }}>Antes tenías escrito: “{p.proxima_cita}”. Ponla con fecha y hora para guardarla.</p>}
                 </div>
                 <label className="field">Sus metas hasta la próxima consulta (una por renglón, máximo 3) · ella las ve<textarea name="metas" defaultValue={p.metas.join("\n")} /></label>
                 <p className="note" style={{ margin: 0 }}>Su historia clínica, análisis y mediciones se quedan en tus archivos. Aquí no se guardan.</p>

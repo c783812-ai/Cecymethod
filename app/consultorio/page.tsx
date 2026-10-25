@@ -1,5 +1,6 @@
 import { crearPaciente } from "./actions";
 import Sidebar from "./Sidebar";
+import CitaInput from "./CitaInput";
 
 export const metadata = { title: "Mi consultorio · Cecy" };
 
@@ -16,7 +17,7 @@ export default async function Consultorio({ searchParams }: { searchParams: Prom
             <label className="field">Nombre<input name="nombre" required placeholder="Mariana G." /></label>
             <label className="field">Correo<input name="email" type="email" required placeholder="correo@ejemplo.com" /></label>
             <label className="field">Ciudad y país donde vive<input name="ciudad" placeholder="Stuttgart, Alemania (para su súper)" /></label>
-            <label className="field">Primera consulta<input name="proxima_cita" placeholder="16 oct 2026, 18:00 (su hora)" /></label>
+            <CitaInput label="Primera consulta (tu hora)" />
           </div>
           <p className="note" style={{ margin: 0 }}>Crearla no le manda nada. La invitas desde su ficha cuando su plan esté listo.</p>
           <div><button className="btn primary">Crear paciente</button></div>

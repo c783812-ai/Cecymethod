@@ -22,7 +22,7 @@ export async function crearPaciente(f: FormData) {
   if (!nombre || !email) throw new Error("Falta nombre o correo");
   const { data, error } = await sb
     .from("patients")
-    .insert({ nombre, email, ciudad: str(f, "ciudad"), proxima_cita: str(f, "proxima_cita") })
+    .insert({ nombre, email, ciudad: str(f, "ciudad"), cita_at: str(f, "cita_at") })
     .select("id")
     .single();
   if (error) redirect(`/consultorio?error=${encodeURIComponent(error.code === "23505" ? "Ya hay una paciente con ese correo." : error.message)}`);
@@ -57,7 +57,8 @@ export async function guardarResumen(id: string, f: FormData) {
     .update({
       nombre: str(f, "nombre") ?? undefined,
       ciudad: str(f, "ciudad"),
-      proxima_cita: str(f, "proxima_cita"),
+      cita_at: str(f, "cita_at"),
+      proxima_cita: null, // ya no se escribe a mano: la fecha va en cita_at
       metas: lines(str(f, "metas")).slice(0, 3),
     })
     .eq("id", id);
@@ -143,13 +144,13 @@ const recargarPagos = (id: string) => { revalidatePath(`/consultorio/${id}`); re
 export async function crearPaquete(id: string, f: FormData) {
   const { sb } = await requireNutri();
   const nombre = str(f, "nombre") ?? "Paquete";
-  await sb.from("paquetes").insert({ patient_id: id, nombre, moneda: MONEDA(str(f, "moneda")), total: num(f, "total"), inicio: str(f, "inicio") ?? undefined, nota: str(f, "nota") });
+  await sb.from("paquetes").insert({ patient_id: id, nombre, moneda: MONEDA(str(f, "moneda")), total: num(f, "total"), inicio: str(f, "inicio") ?? undefined, fin: str(f, "fin"), nota: str(f, "nota") });
   recargarPagos(id);
 }
 
 export async function editarPaquete(id: string, paquete: string, f: FormData) {
   const { sb } = await requireNutri();
-  await sb.from("paquetes").update({ nombre: str(f, "nombre") ?? "Paquete", moneda: MONEDA(str(f, "moneda")), total: num(f, "total"), nota: str(f, "nota") }).eq("id", paquete).eq("patient_id", id);
+  await sb.from("paquetes").update({ nombre: str(f, "nombre") ?? "Paquete", moneda: MONEDA(str(f, "moneda")), total: num(f, "total"), fin: str(f, "fin"), nota: str(f, "nota") }).eq("id", paquete).eq("patient_id", id);
   recargarPagos(id);
 }
 

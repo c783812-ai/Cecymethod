@@ -10,6 +10,7 @@ export default async function ConsultorioLayout({ children }: { children: React.
       <header className="top">
         <Link className="brand" href="/consultorio"><b>Cecilia Rivera</b><span>Mi consultorio</span></Link>
         <nav>
+          <Link href="/consultorio/pendientes">Pendientes</Link>
           <Link href="/consultorio">Pacientes</Link>
           <Link href="/consultorio/domingo">Domingo</Link>
           <Link href="/consultorio/pagos">Pagos</Link>
