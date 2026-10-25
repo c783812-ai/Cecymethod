@@ -12,10 +12,12 @@ type Item = { id: string; nombre: string; texto: React.ReactNode; detalle?: Reac
 /** Lo que necesita tu atención: citas, pagos, programas por terminar, planes viejos y quién no abre la app. */
 export default function Tablero({ pacientes, paquetes, pagos, planes, hoy }: { pacientes: Patient[]; paquetes: Paquete[]; pagos: Pago[]; planes: { patient_id: string; created_at: string }[]; hoy: string }) {
   const ahora = Date.parse(hoy);
+  const activas = pacientes.filter((p) => (p.estado ?? "activa") === "activa");
+  const activa = new Set(activas.map((p) => p.id));
   const nombre = new Map(pacientes.map((p) => [p.id, p.nombre]));
   const hoyISO = hoy.slice(0, 10);
 
-  const citas: Item[] = pacientes
+  const citas: Item[] = pacientes.filter((p) => p.estado !== "termino")
     .filter((p) => p.cita_at && Date.parse(p.cita_at) > ahora - 2 * 3600e3 && Date.parse(p.cita_at) < ahora + 7 * DIA)
     .sort((a, b) => Date.parse(a.cita_at!) - Date.parse(b.cita_at!))
     .map((p) => ({ id: p.id, nombre: p.nombre, texto: <FechaLocal iso={p.cita_at!} /> }));
@@ -26,17 +28,17 @@ export default function Tablero({ pacientes, paquetes, pagos, planes, hoy }: { p
     .map((x) => ({ id: x.pq.patient_id, nombre: nombre.get(x.pq.patient_id) ?? "", texto: <b className="num">{dinero(x.pendiente, x.pq.moneda)}</b>, detalle: x.pq.nombre, tab: "pagos" }));
 
   const terminan: Item[] = paquetes
-    .filter((pq) => pq.fin && pq.fin >= new Date(ahora - 7 * DIA).toISOString().slice(0, 10) && pq.fin <= new Date(ahora + 14 * DIA).toISOString().slice(0, 10))
+    .filter((pq) => activa.has(pq.patient_id) && pq.fin && pq.fin >= new Date(ahora - 7 * DIA).toISOString().slice(0, 10) && pq.fin <= new Date(ahora + 14 * DIA).toISOString().slice(0, 10))
     .sort((a, b) => a.fin!.localeCompare(b.fin!))
     .map((pq) => ({ id: pq.patient_id, nombre: nombre.get(pq.patient_id) ?? "", texto: pq.fin! < hoyISO ? `Terminó el ${fechaCorta(pq.fin!)}` : `Termina el ${fechaCorta(pq.fin!)}`, detalle: `${pq.nombre} · ofrécele renovar`, tab: "pagos" }));
 
   const planViejo: Item[] = planes
     .map((pl) => ({ pl, dias: Math.floor((ahora - Date.parse(pl.created_at)) / DIA) }))
-    .filter((x) => x.dias >= 28 && nombre.has(x.pl.patient_id))
+    .filter((x) => x.dias >= 28 && activa.has(x.pl.patient_id))
     .sort((a, b) => b.dias - a.dias)
     .map((x) => ({ id: x.pl.patient_id, nombre: nombre.get(x.pl.patient_id)!, texto: `${Math.floor(x.dias / 7)} semanas con el mismo plan`, tab: "plan" }));
 
-  const sinAbrir: Item[] = pacientes
+  const sinAbrir: Item[] = activas
     .filter((p) => p.user_id && (p.ultima_visita ? ahora - Date.parse(p.ultima_visita) >= 7 * DIA : ahora > REGISTRO_VISITAS))
     .map((p) => ({ id: p.id, nombre: p.nombre, texto: p.ultima_visita ? `${Math.floor((ahora - Date.parse(p.ultima_visita)) / DIA)} días sin abrirla` : "No ha abierto la app" }));
 

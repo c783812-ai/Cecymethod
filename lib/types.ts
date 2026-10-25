@@ -63,6 +63,7 @@ export type Patient = {
   suplementos_visible?: boolean; // puede ver la pestaña Suplementos (columna de la migración 0004)
   invitada_at: string | null;
   diario_consentido_at?: string | null; // aceptó compartir su diario con Cecy
+  estado?: "activa" | "pausa" | "termino"; // migración 0007; sin columna cuenta como activa
   cita_at?: string | null; // fecha y hora exacta de la próxima consulta (migración 0007)
   ultima_visita?: string | null; // última vez que abrió la app (migración 0005)
   created_at: string;

@@ -60,6 +60,7 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
                 <div className="form-grid">
                   <label className="field">Nombre<input name="nombre" defaultValue={p.nombre} /></label>
                   <label className="field">Vive en<input name="ciudad" defaultValue={p.ciudad ?? ""} /></label>
+                  <label className="field">Estado<select name="estado" defaultValue={p.estado ?? "activa"}><option value="activa">Activa</option><option value="pausa">En pausa</option><option value="termino">Terminó</option></select></label>
                   <CitaInput iso={p.cita_at} nombre={p.nombre} />
                   {!p.cita_at && p.proxima_cita && <p className="note" style={{ margin: 0 }}>Antes tenías escrito: “{p.proxima_cita}”. Ponla con fecha y hora para guardarla.</p>}
                 </div>
