@@ -33,21 +33,41 @@ export async function invitar(id: string) {
   const { sb } = await requireNutri();
   const { data: p } = await sb.from("patients").select("email, user_id").eq("id", id).single();
   if (!p) return { ok: false, msg: "No encontré a la paciente." };
-  const admin = supabaseAdmin();
-  if (!p.user_id) {
-    const { data, error } = await admin.auth.admin.inviteUserByEmail(p.email, { redirectTo: `${siteUrl()}/auth/confirm` });
-    if (error && !/already been registered/i.test(error.message)) return { ok: false, msg: `No se pudo mandar: ${error.message}` };
-    if (data?.user) await sb.from("patients").update({ user_id: data.user.id }).eq("id", id);
-    if (error) {
-      // Ya tenía cuenta: le mandamos un enlace de acceso normal.
-      await admin.auth.signInWithOtp({ email: p.email, options: { shouldCreateUser: false, emailRedirectTo: `${siteUrl()}/auth/confirm` } });
-    }
-  } else {
-    await admin.auth.signInWithOtp({ email: p.email, options: { shouldCreateUser: false, emailRedirectTo: `${siteUrl()}/auth/confirm` } });
-  }
+  const r = await mandarAcceso(p.email, p.user_id, id);
+  if (!r.ok) return r;
   await sb.from("patients").update({ invitada_at: new Date().toISOString() }).eq("id", id);
   revalidatePath(`/consultorio/${id}`);
   return { ok: true, msg: `Invitación enviada a ${p.email}.` };
+}
+
+/**
+ * Manda el correo para entrar. Si la cuenta nunca se confirmó (no abrió la invitación o ya caducó),
+ * Supabase no manda enlaces de acceso: se borra esa cuenta vacía y se invita de nuevo.
+ */
+async function mandarAcceso(email: string, userId: string | null, pid: string) {
+  const admin = supabaseAdmin();
+  const redirectTo = `${siteUrl()}/auth/confirm`;
+  if (userId) {
+    const { data } = await admin.auth.admin.getUserById(userId);
+    if (data?.user?.email_confirmed_at) {
+      const { error } = await admin.auth.signInWithOtp({ email, options: { shouldCreateUser: false, emailRedirectTo: redirectTo } });
+      return error ? { ok: false, msg: `No se pudo mandar: ${error.message}` } : { ok: true, msg: "" };
+    }
+    if (data?.user) await admin.auth.admin.deleteUser(userId); // patients.user_id queda en null (on delete set null)
+  }
+  const { data, error } = await admin.auth.admin.inviteUserByEmail(email, { redirectTo });
+  if (error) return { ok: false, msg: `No se pudo mandar: ${error.message}` };
+  if (data?.user) await admin.from("patients").update({ user_id: data.user.id }).eq("id", pid);
+  return { ok: true, msg: "" };
+}
+
+/** Desde "Entrar": si el correo es de una paciente cuya cuenta no se confirmó, le vuelve a llegar la invitación. */
+export async function reenviarAcceso(email: string) {
+  const admin = supabaseAdmin();
+  const { data: p } = await admin.from("patients").select("id, email, user_id").eq("email", email.trim().toLowerCase()).maybeSingle();
+  if (!p) return false;
+  const r = await mandarAcceso(p.email, p.user_id, p.id);
+  return r.ok;
 }
 
 export async function guardarResumen(id: string, f: FormData) {

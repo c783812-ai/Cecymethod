@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { reenviarAcceso } from "../consultorio/actions";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,11 @@ export default function LoginForm() {
       email: email.trim(),
       options: { shouldCreateUser: false, emailRedirectTo: `${window.location.origin}/auth/confirm` },
     });
+    // Si nunca abrió su invitación, Supabase dice que no existe: se la mandamos otra vez.
+    if (error && /not found|signups not allowed/i.test(error.message) && (await reenviarAcceso(email).catch(() => false))) {
+      setState("sent");
+      return;
+    }
     if (error) {
       setState("error");
       setError(
