@@ -90,7 +90,7 @@ export function ejerciciosDe(r: Rutina) {
   m.set(CALENTAMIENTO, { dias: new Set(r.dias.map((d) => d.dia)), calentamiento: true });
   for (const d of r.dias) {
     for (const f of d.ejercicios)
-      for (const o of [f.a, f.b, f.c]) {
+      for (const o of [f.a, f.c]) { // la opción b (En casa) está escondida en la app
         if (!m.has(o.nombre)) m.set(o.nombre, { dias: new Set(), calentamiento: false });
         m.get(o.nombre)!.dias.add(d.dia);
       }

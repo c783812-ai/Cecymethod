@@ -49,7 +49,7 @@ export default async function Videos() {
             </tbody>
           </table>
         </div>
-        <p className="note">Graba en vertical, de 15 a 30 segundos, de frente y de lado. Formatos MP4 o MOV, máximo 50 MB por video.</p>
+        <p className="note">De 15 a 30 segundos, sin sonido. Expórtalo en 720p y 30 FPS (unos 25 MB). Formatos MP4 o MOV, máximo 50 MB por video.</p>
       </div>
     </section>
   );
