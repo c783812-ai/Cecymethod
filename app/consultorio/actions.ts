@@ -59,6 +59,7 @@ export async function guardarResumen(id: string, f: FormData) {
       ciudad: str(f, "ciudad"),
       cita_at: str(f, "cita_at"),
       ...(str(f, "estado") ? { estado: str(f, "estado") } : {}),
+      ...(f.has("origen") ? { origen: str(f, "origen") || null } : {}),
       proxima_cita: null, // ya no se escribe a mano: la fecha va en cita_at
       metas: lines(str(f, "metas")).slice(0, 3),
     })

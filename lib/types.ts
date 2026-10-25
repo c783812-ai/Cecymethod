@@ -64,6 +64,7 @@ export type Patient = {
   invitada_at: string | null;
   diario_consentido_at?: string | null; // aceptó compartir su diario con Cecy
   estado?: "activa" | "pausa" | "termino"; // migración 0007; sin columna cuenta como activa
+  origen?: string | null; // de dónde llegó (ORIGENES en lib/mes), migración 0007
   cita_at?: string | null; // fecha y hora exacta de la próxima consulta (migración 0007)
   ultima_visita?: string | null; // última vez que abrió la app (migración 0005)
   created_at: string;

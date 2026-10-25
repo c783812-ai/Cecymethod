@@ -12,6 +12,7 @@ import IdeasSuplementos from "./IdeasSuplementos";
 import Historial from "./Historial";
 import Pagos from "./Pagos";
 import Previo from "./Previo";
+import { ORIGENES } from "@/lib/mes";
 import CitaInput from "../CitaInput";
 import { FechaLocal } from "@/lib/cita";
 import { hoyISO, type Registro } from "@/lib/diario";
@@ -63,6 +64,7 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
                   <label className="field">Nombre<input name="nombre" defaultValue={p.nombre} /></label>
                   <label className="field">Vive en<input name="ciudad" defaultValue={p.ciudad ?? ""} /></label>
                   <label className="field">Estado<select name="estado" defaultValue={p.estado ?? "activa"}><option value="activa">Activa</option><option value="pausa">En pausa</option><option value="termino">Terminó</option></select></label>
+                  <label className="field">Cómo llegó<select name="origen" defaultValue={p.origen ?? ""}><option value="">Sin anotar</option>{ORIGENES.map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select></label>
                   <CitaInput iso={p.cita_at} nombre={p.nombre} />
                   {!p.cita_at && p.proxima_cita && <p className="note" style={{ margin: 0 }}>Antes tenías escrito: “{p.proxima_cita}”. Ponla con fecha y hora para guardarla.</p>}
                 </div>
