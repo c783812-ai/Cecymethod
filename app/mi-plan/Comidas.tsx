@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState, createContext, useContext } from "react";
 import { BANDERA, NOTA_EU, PAIS, buscar, cantidad, cargarAlimentos, comoIngrediente, icono, iconoGrupo, nombreSubgrupo, type Alimento, type Ingrediente, type Sistema } from "@/lib/alimentos";
 import { MERCADO_DE, linkAmazon, linkML, productoDeSup } from "@/lib/tienda";
-import { DIAS, type Comida, type Dia, type Plan } from "@/lib/types";
+import { diasDe, type Comida, type Dia, type Plan } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { prohibido, useAjustes } from "@/lib/paciente";
 
@@ -50,14 +50,14 @@ export type Orden = ReturnType<typeof useOrden>;
 /** La comida que toca en ese día y tiempo, y de qué día del plan viene. Los cambios de ingredientes viajan con el platillo. */
 export function comidaDe(plan: Plan, orden: Record<string, Dia>, dia: Dia, i: number) {
   const src = orden[`${dia}|${i}`] ?? dia;
-  return { m: plan.menu[src]?.[i] ?? plan.menu[dia][i], src };
+  return { m: plan.menu[src]?.[i] ?? plan.menu[dia]?.[i] ?? { titulo: "", detalle: "" }, src };
 }
 
 /** Las opciones de ese tiempo de comida en la semana (sin repetir platillos iguales). */
 export function opcionesDe(plan: Plan, i: number) {
   const vistos = new Set<string>();
-  return DIAS.filter((d) => {
-    const t = plan.menu[d][i]?.titulo?.trim();
+  return diasDe(plan).filter((d) => {
+    const t = plan.menu[d]?.[i]?.titulo?.trim();
     if (!t || vistos.has(t)) return false;
     vistos.add(t);
     return true;

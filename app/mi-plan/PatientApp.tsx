@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { DIAS, TIEMPOS, type Patient, type Plan, type Rutina } from "@/lib/types";
+import { DIAS7, TIEMPOS, tieneDomingo, type Patient, type Plan, type Rutina } from "@/lib/types";
 import { CALENTAMIENTO } from "@/lib/gluteos";
 import { mesDelCiclo, proximoCambio } from "@/lib/ciclo";
 import { MealCard, useGustos, type Gustos, comidaDe, opcionesDe, slotDe, useCambios, useOrden, type Cambios, type Orden, TiendaAbierta } from "./Comidas";
@@ -196,10 +196,11 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
   if (!plan) return <><Locked planExiste={planExiste} /><Metas p={p} /><Whats /></>;
   const d = di ?? 0;
   const esHoy = d === hoyIdx;
+  const conMenu = d < 6 || tieneDomingo(plan); // el domingo es libre si no trae menú
   const fecha = hoyISO();
   const listas = diario[0][fecha]?.comidas ?? [];
-  const delDia = d < 6 ? TIEMPOS.map((_, i) => {
-    const { m, src } = comidaDe(plan, orden[0], DIAS[d], i);
+  const delDia = conMenu ? TIEMPOS.map((_, i) => {
+    const { m, src } = comidaDe(plan, orden[0], DIAS7[d], i);
     return { ...m, ingredientes: m.ingredientes?.map((o, j) => cambios[0][slotDe(src, i, j)] ?? o) };
   }) : [];
   const aportes = aporte(delDia, plan.meta ?? "comidas");
@@ -216,22 +217,22 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
       {p.proxima_cita && <div className="card proxima"><span aria-hidden="true">📅</span><span><span className="eyebrow">Tu próxima consulta</span><br /><b>{p.proxima_cita}</b></span></div>}
       <div className="daychips" aria-label="Día">
         {CORTO.map((l, i) => (
-          <button key={l} aria-pressed={i === d} onClick={() => setDi(i)} aria-label={i === 6 ? "Domingo" : DIAS[i]}>
+          <button key={l} aria-pressed={i === d} onClick={() => setDi(i)} aria-label={DIAS7[i]}>
             <b>{l[0]}</b>{l}
           </button>
         ))}
       </div>
-      <div className="eyebrow">{d === 6 ? "Domingo" : DIAS[d]}</div>
-      {esHoy && d < 6 && plan.meta && <MetaBar meta={plan.meta} aportes={aportes} listas={listas} />}
-      {d === 6 ? (
+      <div className="eyebrow">{DIAS7[d]}</div>
+      {esHoy && conMenu && plan.meta && <MetaBar meta={plan.meta} aportes={aportes} listas={listas} />}
+      {!conMenu ? (
         <div className="tint t-yellow"><h4>🌤️ Domingo libre</h4><p>{plan.domingo}</p></div>
       ) : (
         TIEMPOS.map((_, i) => {
-          const { m, src } = comidaDe(plan, orden[0], DIAS[d], i);
+          const { m, src } = comidaDe(plan, orden[0], DIAS7[d], i);
           return m.titulo ? (
             <MealCard key={`${d}-${i}-${src}`} m={m} hora={plan.horarios?.[i] ?? TIEMPOS[i][1]} tiempo={TIEMPOS[i][0]} tintClass={MEAL_TINT[i]}
               slot={(j) => slotDe(src, i, j)} cambios={cambios} sistema={plan.sistema ?? "smae"}
-              opciones={opcionesDe(plan, i).map((o) => [o, plan.menu[o][i].titulo])} actual={src} onElegir={(o) => orden[1](DIAS[d], i, o)}
+              opciones={opcionesDe(plan, i).map((o) => [o, plan.menu[o][i].titulo])} actual={src} onElegir={(o) => orden[1](DIAS7[d], i, o)}
               {...(esHoy ? { lista: listas.includes(i), onLista: () => marcar(i) } : {})}
               gusto={gustos[0][m.titulo]} onGusto={(v) => gustos[1](m.titulo, v)} />
           ) : null;
@@ -288,7 +289,8 @@ function RutinaView({ rutina: fija, ciclo, videos, pid, remoto }: { rutina: Ruti
       <div className="eyebrow">{ciclo?.length ? `Rutina del mes · Mes ${mes + 1} · ` : ""}{rutina.titulo} · {rutina.subtitulo}</div>
       {ciclo?.length ? <p className="note" style={{ margin: "-4px 0 0" }}>{t("Todas hacemos")} esta rutina este mes. Cambia el {proximoCambio()}.</p> : null}
       <div className="seg" role="group" aria-label="Dónde entrenas" style={{ display: "flex" }}>
-        {(["a", "b", "c"] as const).map((k, i) => (
+        {/* Cecy quitó la opción "En casa" (b): solo gimnasio y mancuernas y bandas */}
+        {([["a", 0], ["c", 2]] as const).map(([k, i]) => (
           <button key={k} aria-pressed={o === k} onClick={() => setO(k)} style={{ flex: 1, padding: "7px 6px", fontSize: 12.5 }}>{rutina.opciones[i]}</button>
         ))}
       </div>

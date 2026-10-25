@@ -1,6 +1,6 @@
 "use client";
 import { useState, useTransition } from "react";
-import { COLORES, DIAS, GRUPOS, TIEMPOS, planVacio, type Color, type Plan } from "@/lib/types";
+import { COLORES, DIAS7, GRUPOS, TIEMPOS, planVacio, type Color, type Plan } from "@/lib/types";
 import { tint } from "@/components/shared";
 import { guardarPlan } from "../actions";
 import BuscarAlimento from "@/components/BuscarAlimento";
@@ -16,7 +16,7 @@ function normalizar(x: unknown): Plan {
   const base = planVacio();
   const p = { ...base, ...(x as Partial<Plan>) };
   p.menu = { ...base.menu, ...(p.menu ?? {}) };
-  for (const d of DIAS)
+  for (const d of DIAS7)
     p.menu[d] = TIEMPOS.map((_, i) => {
       const m = p.menu[d]?.[i];
       return { titulo: m?.titulo ?? "", detalle: m?.detalle ?? "", ...(m?.ingredientes?.length ? { ingredientes: m.ingredientes } : {}), ...(m?.recomendacion ? { recomendacion: m.recomendacion } : {}) };
@@ -194,8 +194,8 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
       </div>
 
       <div className="card">
-        <h3>Menú de lunes a sábado</h3>
-        <p className="note" style={{ marginTop: -4 }}>Arroz, pasta y leguminosas se miden ya cocidos. Deja vacío un tiempo de comida para que no aparezca. Con ingredientes, ella ve la cantidad de cada uno y puede tocar Cambiar; el texto queda como nota de preparación.</p>
+        <h3>Menú de la semana</h3>
+        <p className="note" style={{ marginTop: -4 }}>Arroz, pasta y leguminosas se miden ya cocidos. Deja vacío un tiempo de comida para que no aparezca. Si dejas todo el domingo vacío, a ella le sale como domingo libre. Con ingredientes, ella ve la cantidad de cada uno y puede tocar Cambiar; el texto queda como nota de preparación.</p>
         <label className="field" style={{ maxWidth: 320, marginBottom: 10 }}>Lista de alimentos para los cambios
           <select value={plan.sistema ?? "smae"} onChange={(e) => up((p) => { p.sistema = e.target.value as "smae" | "renal"; })}>
             <option value="smae">SMAE + europeos</option>
@@ -203,7 +203,7 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
           </select>
         </label>
         <div className="menu-grid">
-          {DIAS.map((d) => (
+          {DIAS7.map((d) => (
             <div key={d} className="day">
               <h4>{d}</h4>
               {TIEMPOS.map((t, i) => (
@@ -238,7 +238,7 @@ export default function PlanEditor({ id, planId, inicial, anteriores }: { id: st
             </div>
           ))}
         </div>
-        <label className="field" style={{ marginTop: 12 }}>Domingo libre<textarea value={plan.domingo} onChange={(e) => up((p) => { p.domingo = e.target.value; })} /></label>
+        <label className="field" style={{ marginTop: 12 }}>Domingo libre (solo si el domingo no tiene menú)<textarea value={plan.domingo} onChange={(e) => up((p) => { p.domingo = e.target.value; })} /></label>
       </div>
 
       <div className="card">

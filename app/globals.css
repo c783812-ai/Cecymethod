@@ -41,6 +41,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:600;color:var(--ink)}
 .pbtn .n{font-weight:600}
 .pbtn .s{font-size:12.5px;color:var(--muted)}
+.pbtn .visto{font-size:12px}.pbtn .visto.lejos{color:var(--warn)}
 .newp{margin-top:auto;border:1px dashed var(--line);background:none;border-radius:12px;padding:10px;color:var(--muted);font-weight:600}
 
 .main{padding:22px clamp(16px,3vw,36px) 40px;min-width:0}

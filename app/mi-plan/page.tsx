@@ -30,6 +30,9 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
     );
   }
 
+  // Para que Cecy vea cuándo abrió la app por última vez (no cuenta cuando Cecy la ve como paciente).
+  if (patient.user_id === user.id) await sb.rpc("marcar_visita").then(() => {}, () => {});
+
   const [planRes, rutRes, vidRes] = await Promise.all([
     sb.from("plans").select("id, data, created_at").eq("patient_id", patient.id).eq("activo", true).order("updated_at", { ascending: false }).limit(1).maybeSingle(),
     patient.routine_key && patient.routine_key !== CICLO_KEY ? sb.from("routine_templates").select("key, data").in("key", [patient.routine_key]) : Promise.resolve({ data: null }),

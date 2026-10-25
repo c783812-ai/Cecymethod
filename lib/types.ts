@@ -1,5 +1,6 @@
 export const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] as const;
-export type Dia = (typeof DIAS)[number];
+export const DIAS7 = [...DIAS, "Domingo"] as const;
+export type Dia = (typeof DIAS7)[number];
 export const TIEMPOS = [
   ["Desayuno", "8:00"],
   ["Colación 1", "11:00"],
@@ -31,8 +32,8 @@ export type Plan = {
   horarios: string[]; // 5 horas, una por tiempo de comida
   enfoques: Enfoque[];
   porciones: Record<string, (number | null)[]>; // grupo -> 5 valores
-  menu: Record<Dia, Comida[]>; // 5 comidas por día
-  domingo: string;
+  menu: Record<Dia, Comida[]>; // 5 comidas por día; los planes viejos no traen Domingo
+  domingo: string; // texto del domingo libre, cuando el domingo no tiene menú
   suplementos: Suplemento[];
   tips: Tip[];
   sistema?: Sistema; // de qué lista salen los cambios; smae si no se dice
@@ -62,11 +63,16 @@ export type Patient = {
   suplementos_visible?: boolean; // puede ver la pestaña Suplementos (columna de la migración 0004)
   invitada_at: string | null;
   diario_consentido_at?: string | null; // aceptó compartir su diario con Cecy
+  ultima_visita?: string | null; // última vez que abrió la app (migración 0005)
   created_at: string;
 };
 
+/** El domingo tiene menú solo si Cecy le puso platillos; si no, es domingo libre. */
+export const tieneDomingo = (p: Plan) => !!p.menu.Domingo?.some((m) => m?.titulo?.trim());
+export const diasDe = (p: Plan): readonly Dia[] => (tieneDomingo(p) ? DIAS7 : DIAS);
+
 export function planVacio(): Plan {
-  const menu = Object.fromEntries(DIAS.map((d) => [d, TIEMPOS.map(() => ({ titulo: "", detalle: "" }))])) as Record<Dia, Comida[]>;
+  const menu = Object.fromEntries(DIAS7.map((d) => [d, TIEMPOS.map(() => ({ titulo: "", detalle: "" }))])) as Record<Dia, Comida[]>;
   return {
     titulo: "Plan 1 · Nutrición basada en tus análisis",
     inicio: "",

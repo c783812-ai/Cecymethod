@@ -1,12 +1,15 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { diasSinAbrir, haceCuanto } from "@/lib/visita";
 
-type Row = { id: string; nombre: string; ciudad: string | null; proxima_cita: string | null };
+type Row = { id: string; nombre: string; ciudad: string | null; proxima_cita: string | null; user_id?: string | null; ultima_visita?: string | null };
 const COLORS = ["var(--pink)", "var(--blue)", "var(--yellow)", "var(--green)", "var(--lilac)"];
 
 export default function PatientList({ rows, current }: { rows: Row[]; current?: string }) {
   const [q, setQ] = useState("");
+  const [ahora, setAhora] = useState<Date | null>(null); // la fecha se calcula en su teléfono, no en el servidor
+  useEffect(() => setAhora(new Date()), []);
   const list = rows.filter((r) => r.nombre.toLowerCase().includes(q.toLowerCase()));
   return (
     <>
@@ -16,7 +19,8 @@ export default function PatientList({ rows, current }: { rows: Row[]; current?: 
           <li key={x.id}>
             <Link className="pbtn" href={`/consultorio/${x.id}`} aria-current={x.id === current}>
               <span className="av" style={{ background: COLORS[i % COLORS.length] }}>{x.nombre.split(" ").map((w) => w[0]).join("").slice(0, 2)}</span>
-              <span><span className="n">{x.nombre}</span><br /><span className="s">{[x.ciudad, x.proxima_cita && `cita: ${x.proxima_cita}`].filter(Boolean).join(" · ")}</span></span>
+              <span><span className="n">{x.nombre}</span><br /><span className="s">{[x.ciudad, x.proxima_cita && `cita: ${x.proxima_cita}`].filter(Boolean).join(" · ")}</span>
+                {ahora && x.user_id && <><br /><span className={`s visto ${(diasSinAbrir(x.ultima_visita, ahora) ?? 99) >= 4 ? "lejos" : ""}`}>📱 {x.ultima_visita ? `Abrió la app: ${haceCuanto(x.ultima_visita, ahora).toLowerCase()}` : "Todavía no abre la app"}</span></>}</span>
             </Link>
           </li>
         ))}

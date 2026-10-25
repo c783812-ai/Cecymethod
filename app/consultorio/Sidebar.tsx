@@ -4,7 +4,7 @@ import PatientList from "./PatientList";
 
 export default async function Sidebar({ current }: { current?: string }) {
   const sb = await supabaseServer();
-  const { data } = await sb.from("patients").select("id, nombre, ciudad, proxima_cita").order("nombre");
+  const { data } = await sb.from("patients").select("*").order("nombre");
   return (
     <aside className="side">
       <h2>Mis pacientes <span className="note">({data?.length ?? 0})</span></h2>
