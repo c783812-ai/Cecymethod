@@ -90,7 +90,9 @@ function Chips<T extends string | number>({ ops, value, onPick, label }: { ops: 
 
 /** Registro de hoy: agua, baño, ánimo, sueño, actividad y pasos, comida fuera del plan, alcohol, estrés, ciclo y medicamentos. */
 export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: number }) {
-  const fecha = hoyISO();
+  // Se puede completar hoy o cualquiera de los 6 días anteriores (si se le olvidó en la noche).
+  const dias = Array.from({ length: 7 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() - i); return d; });
+  const [fecha, setFecha] = useState(hoyISO());
   const r = diario[0][fecha] ?? {};
   const set = (c: Partial<Registro>) => diario[1](fecha, c);
   const agua = r.agua ?? 0;
@@ -102,7 +104,13 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
   useEffect(() => { setOtro(!!r.meds); }, [r.meds]);
   return (
     <div className="card registro">
-      <div className="eyebrow">Mi registro de hoy</div>
+      <div className="eyebrow">{fecha === hoyISO() ? "Mi registro de hoy" : "Completando mi registro de otro día"}</div>
+      <div className="chips dias" role="group" aria-label="Día del registro">
+        {dias.map((d, i) => {
+          const f = hoyISO(d);
+          return <button key={f} aria-pressed={fecha === f} onClick={() => setFecha(f)}>{i === 0 ? "Hoy" : i === 1 ? "Ayer" : d.toLocaleDateString("es-MX", { weekday: "short", day: "numeric" })}</button>;
+        })}
+      </div>
 
       <h5>💧 Agua <span className="note">{agua} de {vasos} vasos de 250 ml</span></h5>
       <div className="vasos">
@@ -211,7 +219,7 @@ export function RegistroHoy({ diario, vasos }: { diario: DiarioHook; vasos: numb
         <button aria-pressed={otro} onClick={() => { setOtro(true); if (!r.meds) set({ meds: undefined }); }}>Empecé algo nuevo</button>
       </div>
       {otro && (
-        <input className="medtxt" placeholder="¿Qué empezaste a tomar y por qué?" defaultValue={r.meds ?? ""} maxLength={200}
+        <input className="medtxt" placeholder="¿Qué empezaste a tomar y por qué?" defaultValue={r.meds ?? ""} key={`meds-${fecha}`} maxLength={200}
           onBlur={(e) => set({ meds: e.target.value.trim() || undefined })} />
       )}
       <Compartir diario={diario} hombre={hombre} />
