@@ -6,41 +6,57 @@ import { diasDe, type Comida, type Dia, type Plan } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { prohibido, useAjustes } from "@/lib/paciente";
 
-// Los cambios que hace la paciente se guardan solo en su teléfono, por plan.
-/** Si la paciente ya tiene abierta la sección de Suplementos: entonces las proteínas en polvo traen su botón de compra en línea. */
-export const TiendaAbierta = createContext(false);
-
-export function useCambios(planId: string | null) {
-  const key = `cambios-${planId ?? "plan"}`;
-  const [v, setV] = useState<Record<string, Ingrediente>>({});
+/** Un objeto que se guarda en el teléfono y, si ya entró con su cuenta, también en la página (para no perderlo si borra el acceso o cambia de celular). */
+function useGuardado<T extends object>(clave: string, pid: string, remoto: boolean) {
+  const [v, setV] = useState<T>({} as T);
   useEffect(() => {
-    try { setV(JSON.parse(localStorage.getItem(key) || "{}")); } catch {}
-  }, [key]);
-  const set = (slot: string, ing: Ingrediente | null) =>
+    let l = {} as T;
+    try { l = JSON.parse(localStorage.getItem(clave) || "{}"); } catch {}
+    setV(l);
+    if (!remoto) return;
+    supabaseBrowser().from("preferencias").select("data").eq("patient_id", pid).eq("clave", clave).maybeSingle().then(({ data, error }) => {
+      if (error) return;
+      if (data) { setV(data.data as T); try { localStorage.setItem(clave, JSON.stringify(data.data)); } catch {} }
+      else if (Object.keys(l).length) subir(l); // lo que ya tenía solo en su teléfono se sube la primera vez
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clave, pid, remoto]);
+  const subir = (n: T) => { if (remoto) supabaseBrowser().from("preferencias").upsert({ patient_id: pid, clave, data: n, updated_at: new Date().toISOString() }).then(() => {}); };
+  const cambiar = (f: (old: T) => T) =>
     setV((old) => {
+      const n = f(old);
+      try { localStorage.setItem(clave, JSON.stringify(n)); } catch {}
+      subir(n);
+      return n;
+    });
+  return [v, cambiar] as const;
+}
+
+/** Los ingredientes que la paciente cambió, por plan. */
+export function useCambios(planId: string | null, pid: string, remoto: boolean) {
+  const [v, cambiar] = useGuardado<Record<string, Ingrediente>>(`cambios-${planId ?? "plan"}`, pid, remoto);
+  const set = (slot: string, ing: Ingrediente | null) =>
+    cambiar((old) => {
       const n = { ...old };
       if (ing) n[slot] = ing; else delete n[slot];
-      try { localStorage.setItem(key, JSON.stringify(n)); } catch {}
       return n;
     });
   return [v, set] as const;
 }
 export type Cambios = ReturnType<typeof useCambios>;
 
+/** Si la paciente ya tiene abierta la sección de Suplementos: entonces las proteínas en polvo traen su botón de compra en línea. */
+export const TiendaAbierta = createContext(false);
+
 export const slotDe = (dia: string, comida: number, ing: number) => `${dia}|${comida}|${ing}`;
 
 // Qué platillo come cada día: "Miércoles|2" -> "Lunes" quiere decir la comida del lunes, el miércoles.
-export function useOrden(planId: string | null) {
-  const key = `orden-${planId ?? "plan"}`;
-  const [v, setV] = useState<Record<string, Dia>>({});
-  useEffect(() => {
-    try { setV(JSON.parse(localStorage.getItem(key) || "{}")); } catch {}
-  }, [key]);
+export function useOrden(planId: string | null, pid: string, remoto: boolean) {
+  const [v, cambiar] = useGuardado<Record<string, Dia>>(`orden-${planId ?? "plan"}`, pid, remoto);
   const set = (dia: Dia, i: number, src: Dia) =>
-    setV((old) => {
+    cambiar((old) => {
       const n = { ...old };
       if (src === dia) delete n[`${dia}|${i}`]; else n[`${dia}|${i}`] = src;
-      try { localStorage.setItem(key, JSON.stringify(n)); } catch {}
       return n;
     });
   return [v, set] as const;

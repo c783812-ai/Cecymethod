@@ -26,14 +26,14 @@ export const comoIngrediente = (a: Alimento, x = 1): Ingrediente => ({
   ...(a.p != null || a.h != null || a.l != null ? { m: [a.p ?? 0, a.h ?? 0, a.l ?? 0] as [number, number, number] } : {}),
 });
 
-const FR: [number, string][] = [[0.25, "¼"], [1 / 3, "⅓"], [0.5, "½"], [2 / 3, "⅔"], [0.75, "¾"]];
+const FR: [number, string][] = [[0, ""], [0.25, "¼"], [1 / 3, "⅓"], [0.5, "½"], [2 / 3, "⅔"], [0.75, "¾"], [1, ""]];
+/** Siempre en fracciones de cocina (¼, ⅓, ½, ⅔, ¾), nunca "0.2": se redondea a la más cercana. */
 export function fraccion(v: number) {
   const w = Math.floor(v + 1e-6), r = v - w;
-  if (r < 0.04) return String(w);
-  if (r > 0.96) return String(w + 1);
-  const f = FR.find(([x]) => Math.abs(r - x) < 0.04);
-  if (f) return (w ? String(w) : "") + f[1];
-  return String(Math.round(v * 10) / 10);
+  const [x, f] = FR.reduce((a, b) => (Math.abs(r - b[0]) < Math.abs(r - a[0]) ? b : a));
+  if (x === 1) return String(w + 1);
+  if (x === 0) return w ? String(w) : "¼";
+  return (w ? String(w) : "") + f;
 }
 
 const PLURAL: Record<string, string> = { taza: "tazas", pieza: "piezas", rebanada: "rebanadas", cucharada: "cucharadas", cucharadita: "cucharaditas", medida: "medidas", cuadrito: "cuadritos", lata: "latas", vaso: "vasos", sobre: "sobres", galleta: "galletas", hoja: "hojas", rollo: "rollos", paquete: "paquetes", filete: "filetes", copa: "copas", botella: "botellas", "cápsula": "cápsulas", tableta: "tabletas", comprimido: "comprimidos", gota: "gotas", cazo: "cazos", barra: "barras", pastilla: "pastillas", perla: "perlas" };
@@ -50,6 +50,11 @@ export function cantidad(a: { c: number; u: string; pn: number }, x: number) {
   const g = Math.round((a.pn * x) / (a.pn * x >= 20 ? 5 : 1)) * (a.pn * x >= 20 ? 5 : 1);
   const peso = (n: number, u = "g") => (n >= 1000 ? `${String(Math.round(n / 100) / 10).replace(".", ",")} ${u === "ml" ? "l" : "kg"}` : `${n} ${u}`);
   if (a.u === "g" || a.u === "ml" || !a.u) return peso(Math.round(v), a.u || "g");
+  // Menos de ¼ de taza se entiende mejor en cucharadas (1 taza = 16 cucharadas).
+  if (/^taza/i.test(a.u.trim()) && v < 0.21) {
+    const cda = Math.max(1, Math.round(v * 16 * 2) / 2);
+    return `${fraccion(cda)} ${cda <= 1 ? "cucharada" : "cucharadas"}${a.pn ? ` · ${peso(g)}` : ""}`;
+  }
   return `${fraccion(v)} ${unidad(a.u, v)}${a.pn ? ` · ${peso(g)}` : ""}`;
 }
 

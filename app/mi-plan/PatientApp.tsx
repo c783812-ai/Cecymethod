@@ -59,10 +59,10 @@ export default function PatientApp(props: {
 }) {
   const { patient: p, plan, rutina, videos, vistaPrevia } = props;
   const [tab, setTab] = useState<Tab>("hoy");
-  const cambios = useCambios(props.planId);
-  const orden = useOrden(props.planId);
   const first = p.nombre.split(" ")[0];
   const remoto = !vistaPrevia && p.id !== "demo";
+  const cambios = useCambios(props.planId, p.id, remoto);
+  const orden = useOrden(props.planId, p.id, remoto);
   const diario = useDiario(p.id, remoto, !!p.diario_consentido_at);
   const gustos = useGustos(p.id, remoto);
   const heads: Record<Tab, [string, React.ReactNode]> = {
