@@ -24,14 +24,22 @@ export function useDiario(pid: string, remoto: boolean, consentidoInicial: boole
     supabaseBrowser().from("diario").select("fecha, data").eq("patient_id", pid).gte("fecha", desde).then(({ data, error }) => {
       if (error || !data) return;
       const remotoD = Object.fromEntries(data.map((r) => [r.fecha as string, r.data as Registro]));
-      setV({ ...l, ...remotoD });
-      guardarLocal({ ...l, ...remotoD });
+      // Lo que anotó en su teléfono y no llegó a la página se sube ahora (lo del teléfono es lo más nuevo).
+      const todo: Diario = { ...remotoD };
+      for (const [f, r] of Object.entries(l)) todo[f] = { ...remotoD[f], ...r };
+      const faltan = Object.entries(todo).filter(([f, r]) => f >= desde && JSON.stringify(r) !== JSON.stringify(remotoD[f]));
+      setV(todo);
+      guardarLocal(todo);
+      subir(faltan);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, consentido]);
 
-  const subir = (filas: [string, Registro][]) =>
-    supabaseBrowser().from("diario").upsert(filas.map(([fecha, data]) => ({ patient_id: pid, fecha, data, updated_at: new Date().toISOString() })));
+  // Ojo: la consulta de Supabase solo se manda cuando se le hace then/await.
+  const subir = async (filas: [string, Registro][]) => {
+    if (!filas.length) return;
+    await supabaseBrowser().from("diario").upsert(filas.map(([fecha, data]) => ({ patient_id: pid, fecha, data, updated_at: new Date().toISOString() })));
+  };
 
   const set = (fecha: string, cambio: Partial<Registro>) =>
     setV((old) => {
