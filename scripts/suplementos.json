@@ -78,6 +78,25 @@
   "fuente": "etiqueta del producto (foto, 2026-10-18)"
  },
  {
+  "id": "isopure-low-carb-chocolate",
+  "n": "Isopure – Proteína aislada de suero Low Carb (Chocolate)",
+  "marca": "Isopure",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (31 g)",
+  "porcion_g": 31,
+  "k": 110,
+  "p": 25,
+  "h": 2,
+  "l": 1,
+  "nota": "aislado de suero (whey isolate), casi sin azúcar; datos aproximados de la etiqueta, revisar el empaque",
+  "paises": [
+   "MX",
+   "US",
+   "DE"
+  ],
+  "fuente": "etiqueta Isopure Low Carb Dutch Chocolate (aprox.); paciente Lore, 2026-11-08"
+ },
+ {
   "id": "esn-designer-whey-vanilla-milk",
   "n": "ESN – Designer Whey (Vanilla Milk)",
   "marca": "ESN",
