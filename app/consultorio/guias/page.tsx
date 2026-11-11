@@ -5,6 +5,7 @@ import { linkDescarga, mensajeGuia, preciosTexto, type Compra, type Guia } from 
 import { borrarCompra, borrarGuia, guardarGuia, marcarCompraPagada } from "../actions";
 import SubirPdf from "./SubirPdf";
 import Copiar from "./Copiar";
+import SubirTodas from "./SubirTodas";
 
 export const metadata = { title: "Guías · Mi consultorio" };
 
@@ -74,6 +75,7 @@ export default async function GuiasConsultorio() {
     <section className="main" style={{ padding: 20, maxWidth: 980, margin: "0 auto" }}>
       <div className="phead"><div><div className="eyebrow">Venta por transferencia</div><h1>Mis guías</h1></div><Link className="btn" href="/guias" target="_blank">Ver en mi página</Link></div>
       <div className="grid">
+        {guias.some((g) => !g.storage_path) && <SubirTodas ids={guias.map((g) => g.id)} />}
         <div className="card">
           <h3 style={{ marginTop: 0 }}>Por confirmar pago ({pendientes.length})</h3>
           {pendientes.length ? <ul className="ventas">{pendientes.map((c) => <Venta key={c.id} c={c} />)}</ul> : <p className="note" style={{ margin: 0 }}>Nadie esperando. Cuando alguien pida una guía te aparece aquí; tocas “Ya pagó” cuando veas su transferencia.</p>}

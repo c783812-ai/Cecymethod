@@ -284,3 +284,10 @@ export async function borrarCompra(compra: string) {
   await sb.from("compras").delete().eq("id", compra);
   revalidatePath("/consultorio/guias");
 }
+
+/** Después de subir su PDF desde "Subir todas": la guía se muestra en la página. */
+export async function mostrarGuia(id: string) {
+  const { sb } = await requireNutri();
+  await sb.from("guias").update({ activa: true, updated_at: new Date().toISOString() }).eq("id", id);
+  recargarGuias();
+}
