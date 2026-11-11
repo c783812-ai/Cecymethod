@@ -1,43 +1,40 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { supabaseAdmin } from "@/lib/supabase/admin";
-import { preciosTexto, type Guia } from "@/lib/guias";
-import { comprarGuia } from "../actions";
+import Cuentas from "@/components/Cuentas";
+import { GUIAS, precioTexto, whatsGuia } from "@/lib/guiasCatalogo";
 
-export const revalidate = 600;
-
-async function guia(id: string) {
-  const { data } = await supabaseAdmin().from("guias").select("*").eq("id", id).eq("activa", true).maybeSingle<Guia>();
-  return data;
-}
+export const generateStaticParams = () => GUIAS.map((g) => ({ id: g.id }));
+export const dynamicParams = false;
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
-  const g = await guia((await params).id).catch(() => null);
-  return { title: g ? `${g.titulo} · Cecy Method` : "Guía · Cecy Method", description: g?.descripcion ?? undefined };
+  const { id } = await params;
+  const g = GUIAS.find((x) => x.id === id);
+  return { title: g ? `${g.titulo} · Cecy Method` : "Guía · Cecy Method", description: g?.texto };
 }
 
-export default async function GuiaPag({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ error?: string }> }) {
+export default async function GuiaPag({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { error } = await searchParams;
-  const g = await guia(id).catch(() => null);
+  const g = GUIAS.find((x) => x.id === id);
   if (!g) notFound();
   return (
     <div className="auth">
       <div className="card">
-        <div className="eyebrow">{g.gratis ? "Guía gratis" : "Guía"}</div>
+        <div className="eyebrow">{g.precio ? "Guía en PDF" : "Guía gratis en PDF"}</div>
         <h1>{g.titulo}</h1>
-        {g.descripcion && <p style={{ margin: 0, whiteSpace: "pre-line" }}>{g.descripcion}</p>}
-        <p className="num" style={{ margin: 0, fontWeight: 700 }}>{preciosTexto(g)}</p>
-        {error && <div className="msg err">{error}</div>}
-        <form action={comprarGuia.bind(null, g.id)} className="empezar-form">
-          <label className="field">Tu nombre<input name="nombre" required autoComplete="name" /></label>
-          {!g.gratis && <label className="field">Tu WhatsApp, con lada<input name="telefono" type="tel" required autoComplete="tel" placeholder="+52 55 1234 5678" /></label>}
-          <label className="field">Tu correo{g.gratis ? "" : " (opcional)"}<input name="email" type="email" required={g.gratis} autoComplete="email" /></label>
-          {!g.gratis && <label className="field">¿En qué moneda pagas?<select name="moneda" defaultValue="EUR"><option value="EUR">Euros</option><option value="USD">Dólares</option><option value="MXN">Pesos mexicanos</option></select></label>}
-          <input name="web" tabIndex={-1} autoComplete="off" aria-hidden="true" className="trampa" />
-          <button className="btn primary lg">{g.gratis ? "Descargar gratis" : "Quiero esta guía"}</button>
-          {!g.gratis && <p className="note" style={{ margin: 0 }}>Después se abre WhatsApp con tu mensaje listo para mí. Pagas por transferencia, me mandas el comprobante y te envío tu guía por WhatsApp.</p>}
-        </form>
+        <p style={{ margin: 0 }}>{g.texto}</p>
+        <div>
+          <b>Qué encuentras</b>
+          <ul className="fuera-l" style={{ marginTop: 4 }}>{g.incluye.map((x) => <li key={x}>{x}</li>)}</ul>
+        </div>
+        <p className="num" style={{ margin: 0, fontWeight: 700, fontSize: 18 }}>{precioTexto(g)}</p>
+        <a className="btn primary lg" href={whatsGuia(g)} target="_blank" rel="noopener">{g.precio ? "Pedirla por WhatsApp" : "Pedirla gratis por WhatsApp"}</a>
+        {g.precio && (
+          <>
+            <h3 style={{ margin: "6px 0 0" }}>Datos para tu pago</h3>
+            <p className="note" style={{ margin: 0 }}>Transfiere y mándame tu comprobante en el mismo chat. En cuanto lo vea, te envío tu guía.</p>
+            <Cuentas que={`la guía “${g.titulo}”`} />
+          </>
+        )}
         <Link className="btn" href="/guias">Ver todas las guías</Link>
       </div>
     </div>
