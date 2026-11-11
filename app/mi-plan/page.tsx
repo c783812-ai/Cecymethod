@@ -3,6 +3,7 @@ import { getUser, isNutri } from "@/lib/auth";
 import type { Patient, Plan, Rutina } from "@/lib/types";
 import PatientApp from "./PatientApp";
 import { CICLO, CICLO_KEY } from "@/lib/ciclo";
+import { clavePush } from "@/lib/push";
 
 export const metadata = { title: "Mi plan · Cecy" };
 export const dynamic = "force-dynamic";
@@ -63,6 +64,7 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
       ciclo={patient.routine_visible ? ciclo : null}
       videos={videos}
       vistaPrevia={nutri && !!como}
+      clavePush={nutri && como ? null : await clavePush().catch(() => null)}
     />
   );
 }

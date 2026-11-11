@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Recordatorio from "./Recordatorio";
 import Link from "next/link";
 import { useCita, esFutura } from "@/lib/cita";
 import { DIAS7, TIEMPOS, tieneDomingo, type Patient, type Plan, type Rutina } from "@/lib/types";
@@ -56,6 +57,7 @@ export default function PatientApp(props: {
   ciclo?: Rutina[] | null;
   videos: Record<string, string>;
   vistaPrevia: boolean;
+  clavePush?: string | null;
 }) {
   const { patient: p, plan, rutina, videos, vistaPrevia } = props;
   const [tab, setTab] = useState<Tab>("hoy");
@@ -91,7 +93,7 @@ export default function PatientApp(props: {
           </div>
           <div className="ph-body">
             {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} planId={props.planId} planDesde={props.planDesde} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} />}
-            {tab === "registro" && <><Logros diario={diario[0]} vasos={plan?.agua || 8} /><Estadisticas diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
+            {tab === "registro" && <>{remoto && <Recordatorio pid={p.id} clave={props.clavePush ?? null} />}<Logros diario={diario[0]} vasos={plan?.agua || 8} /><Estadisticas diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
             {tab === "suple" && (p.suplementos_visible ? <Suplementos recomendados={plan?.suplementos ?? []} /> : <PorAbrir />)}
             {tab === "rutina" && <RutinaView rutina={rutina} ciclo={props.ciclo ?? null} videos={videos} pid={p.id} remoto={remoto} />}
