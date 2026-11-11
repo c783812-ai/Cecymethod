@@ -12,6 +12,7 @@ import Antojos from "./Antojos";
 import Instalar from "./Instalar";
 import Logros from "./Logros";
 import Suplementos from "./Suplementos";
+import MisPagos, { type MisPagosData } from "./MisPagos";
 import { Encuesta, Renovar } from "./Renovar";
 import Estadisticas from "./Estadisticas";
 import { Descanso, SeriesLog, useCargas } from "./Cargas";
@@ -58,6 +59,7 @@ export default function PatientApp(props: {
   videos: Record<string, string>;
   vistaPrevia: boolean;
   clavePush?: string | null;
+  pagos?: MisPagosData | null;
 }) {
   const { patient: p, plan, rutina, videos, vistaPrevia } = props;
   const [tab, setTab] = useState<Tab>("hoy");
@@ -92,7 +94,7 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} planId={props.planId} planDesde={props.planDesde} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} planId={props.planId} planDesde={props.planDesde} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} pagos={props.pagos ?? null} />}
             {tab === "registro" && <>{remoto && <Recordatorio pid={p.id} clave={props.clavePush ?? null} />}<Logros diario={diario[0]} vasos={plan?.agua || 8} /><Estadisticas diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
             {tab === "suple" && (p.suplementos_visible ? <Suplementos recomendados={plan?.suplementos ?? []} /> : <PorAbrir />)}
@@ -193,12 +195,12 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, gustos, instalar }: { p: Patient; plan: Plan | null; planExiste: boolean; planId: string | null; planDesde?: string | null; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean }) {
+function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, gustos, instalar, pagos }: { pagos: MisPagosData | null; p: Patient; plan: Plan | null; planExiste: boolean; planId: string | null; planDesde?: string | null; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean }) {
   const cita = useCita(p);
   const [di, setDi] = useState<number | null>(null);
   const [hoyIdx, setHoyIdx] = useState<number | null>(null);
   useEffect(() => { const d = new Date().getDay(); setDi(d === 0 ? 6 : d - 1); setHoyIdx(d === 0 ? 6 : d - 1); }, []);
-  if (!plan) return <><Locked planExiste={planExiste} /><Metas p={p} /><Whats /></>;
+  if (!plan) return <><Locked planExiste={planExiste} /><Metas p={p} /><MisPagos d={pagos} /><Whats /></>;
   const d = di ?? 0;
   const esHoy = d === hoyIdx;
   const conMenu = d < 6 || tieneDomingo(plan); // el domingo es libre si no trae menú
@@ -260,6 +262,7 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
       )}
       <Encuesta nombre={p.nombre} desde={planDesde} planId={planId} />
       <Metas p={p} />
+      <MisPagos d={pagos} />
       <Whats />
     </>
   );

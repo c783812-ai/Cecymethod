@@ -3,7 +3,7 @@ import { MONEDAS, dinero, fechaCorta, saldo, type Pago, type Paquete } from "@/l
 import { borrarPago, borrarPaquete, crearPaquete, editarPaquete, registrarPago } from "../actions";
 import NuevoPaquete from "./NuevoPaquete";
 
-/** Paquetes que compró la paciente y lo que va pagando. Solo lo ve Cecy. */
+/** Paquetes que compró la paciente y lo que va pagando. La paciente lo ve en su app (Hoy > Mis pagos), sin las notas. */
 export default async function Pagos({ id }: { id: string }) {
   const { sb } = await requireNutri();
   const [{ data: pqs, error }, { data: pgs }] = await Promise.all([
@@ -18,6 +18,7 @@ export function PagosVista({ id, paquetes, pagos }: { id: string; paquetes: Paqu
   const hoy = new Date().toISOString().slice(0, 10);
   return (
     <div className="grid">
+      {paquetes.length > 0 && <p className="note" style={{ margin: 0 }}>Ella ve esto en su app (Hoy, al final: Mis pagos), sin tus notas.</p>}
       {paquetes.map((pq) => {
         const { pagado, pendiente } = saldo(pq, pagos);
         const suyos = pagos.filter((p) => p.paquete_id === pq.id);

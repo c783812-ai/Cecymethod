@@ -4,6 +4,8 @@ import type { Patient, Plan, Rutina } from "@/lib/types";
 import PatientApp from "./PatientApp";
 import { CICLO, CICLO_KEY } from "@/lib/ciclo";
 import { clavePush } from "@/lib/push";
+import { supabaseAdmin } from "@/lib/supabase/admin";
+import type { MisPagosData } from "./MisPagos";
 
 export const metadata = { title: "Mi plan · Cecy" };
 export const dynamic = "force-dynamic";
@@ -46,6 +48,17 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
   const ciclo = patient.routine_key === CICLO_KEY ? CICLO.map((c) => c.rutina) : null;
   const rutina = patient.routine_visible ? (ciclo ? ciclo[0] : (CICLO.find((c) => c.key === patient.routine_key)?.rutina ?? filas[0]?.data ?? null)) : null;
 
+  // Sus pagos, solo para que los vea (sin las notas de Cecy). Se leen del lado del servidor y solo los de esta paciente.
+  let pagos: MisPagosData | null = null;
+  try {
+    const admin = supabaseAdmin();
+    const [pq, pg] = await Promise.all([
+      admin.from("paquetes").select("id, patient_id, nombre, moneda, total, inicio, fin").eq("patient_id", patient.id).order("inicio", { ascending: false }),
+      admin.from("pagos").select("id, paquete_id, patient_id, fecha, monto").eq("patient_id", patient.id).order("fecha", { ascending: false }),
+    ]);
+    if (!pq.error && !pg.error) pagos = { paquetes: (pq.data ?? []).map((x) => ({ ...x, nota: null })), pagos: (pg.data ?? []).map((x) => ({ ...x, nota: null })) } as MisPagosData;
+  } catch {}
+
   let videos: Record<string, string> = {};
   const vids = vidRes.data ?? [];
   if (rutina && vids.length) {
@@ -64,6 +77,7 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
       ciclo={patient.routine_visible ? ciclo : null}
       videos={videos}
       vistaPrevia={nutri && !!como}
+      pagos={pagos}
       clavePush={nutri && como ? null : await clavePush().catch(() => null)}
     />
   );
