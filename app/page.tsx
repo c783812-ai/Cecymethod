@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { guiasActivas } from "@/lib/guiasServer";
+import { preciosTexto } from "@/lib/guias";
 import { RESENAS } from "@/lib/testimonios";
 import Testimonios from "./Testimonios";
 
 const WHATSAPP = "+971 55 688 9063";
+export const revalidate = 600;
+
 const WA_LINK = "https://wa.me/971556889063?text=" + encodeURIComponent("Hola Cecy, quiero agendar una consulta 🙂");
 const CORREO = "cecilia.nutdxb@gmail.com";
 
@@ -88,7 +92,8 @@ const faq = [
   ["¿Quién ve mis datos?", "Tu historia clínica y tus análisis los guardo yo, fuera de la página. En tu página solo están tu plan y tu rutina, y solo tú entras con tu correo."],
 ];
 
-export default function Home() {
+export default async function Home() {
+  const guias = await guiasActivas();
   return (
     <div className="land">
       <nav className="lnav" aria-label="Secciones">
@@ -208,8 +213,19 @@ export default function Home() {
 
       <section className="sec" id="guias">
         <h2>Mis guías</h2>
-        <p>Muy pronto vas a encontrar aquí mis guías para comer bien lejos de casa. Sígueme en Instagram <a href="https://instagram.com/cecy.method" target="_blank" rel="noopener" style={{ color: "var(--accent)", fontWeight: 600 }}>@cecy.method</a> para enterarte cuando salgan.</p>
-        <div className="guias">
+        <p>{guias.length ? "Para comer bien lejos de casa. Pagas por transferencia y te mando tu link para descargarla." : "Muy pronto vas a encontrar aquí mis guías para comer bien lejos de casa."} Sígueme en Instagram <a href="https://instagram.com/cecy.method" target="_blank" rel="noopener" style={{ color: "var(--accent)", fontWeight: 600 }}>@cecy.method</a> para enterarte cuando salgan.</p>
+        {guias.length > 0 ? (
+          <div className="guias">
+            {guias.map((g) => (
+              <Link key={g.id} href={`/guias/${g.id}`} className={g.gratis ? "t-green" : "t-yellow"} style={{ textDecoration: "none", color: "inherit" }}>
+                <span className={`pill ${g.gratis ? "p-ok" : "p-mid"}`}>{g.gratis ? "Gratis" : preciosTexto(g)}</span>
+                <b>{g.gratis ? "🎁" : "📘"} {g.titulo}</b>
+                {g.descripcion && <p>{g.descripcion}</p>}
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="guias">
           <div className="t-green">
             <span className="pill p-ok">Próximamente</span>
             <b>🎁 Guías gratis</b>
@@ -221,6 +237,7 @@ export default function Home() {
             <p>Guías completas y más detalladas, con su precio, que podrás comprar aquí.</p>
           </div>
         </div>
+        )}
       </section>
 
       <section className="sec" id="precios">

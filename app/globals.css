@@ -612,3 +612,7 @@ td.rojo{color:var(--warn);font-weight:700}
 .cuentas-pago .cfila b{font-size:15px;word-break:break-all}
 .cuentas-pago .cfila .btn{padding:6px 12px;font-size:13px;flex:none}
 .cuentas-pago .eyebrow + .cfila{border-top:0}
+.guia-item{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.ventas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.venta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:10px}
+.venta-btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap}

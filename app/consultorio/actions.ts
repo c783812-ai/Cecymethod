@@ -236,3 +236,51 @@ export async function usarDescuento(id: string) {
   await sb.from("patients").update({ descuentos_usados: (p?.descuentos_usados ?? 0) + 1 }).eq("id", id);
   revalidatePath(`/consultorio/${id}`);
 }
+
+// ── Guías ──
+const slugGuia = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 50);
+const recargarGuias = () => { revalidatePath("/consultorio/guias"); revalidatePath("/guias", "layout"); revalidatePath("/"); };
+
+/** Crea o cambia una guía del catálogo. */
+export async function guardarGuia(f: FormData) {
+  const { sb } = await requireNutri();
+  const titulo = str(f, "titulo");
+  if (!titulo) return;
+  const id = str(f, "id") ?? slugGuia(titulo);
+  await sb.from("guias").upsert({
+    id, titulo, descripcion: str(f, "descripcion"),
+    precio_eur: num(f, "precio_eur"), precio_usd: num(f, "precio_usd"), precio_mxn: num(f, "precio_mxn"),
+    gratis: !!f.get("gratis"), activa: !!f.get("activa"), orden: num(f, "orden"), updated_at: new Date().toISOString(),
+  });
+  recargarGuias();
+}
+
+export async function guardarPdfGuia(id: string, storage_path: string) {
+  const { sb } = await requireNutri();
+  const { data: old } = await sb.from("guias").select("storage_path").eq("id", id).maybeSingle();
+  await sb.from("guias").update({ storage_path, updated_at: new Date().toISOString() }).eq("id", id);
+  if (old?.storage_path && old.storage_path !== storage_path) await sb.storage.from("guias").remove([old.storage_path]);
+  recargarGuias();
+}
+
+export async function borrarGuia(id: string, f: FormData) {
+  const { sb } = await requireNutri();
+  if (str(f, "confirmar") !== "BORRAR") return;
+  const { data: g } = await sb.from("guias").select("storage_path").eq("id", id).maybeSingle();
+  if (g?.storage_path) await sb.storage.from("guias").remove([g.storage_path]);
+  await sb.from("guias").delete().eq("id", id);
+  recargarGuias();
+}
+
+/** Ya vio la transferencia: su link de descarga empieza a funcionar. */
+export async function marcarCompraPagada(compra: string) {
+  const { sb } = await requireNutri();
+  await sb.from("compras").update({ estado: "pagada", pagada_at: new Date().toISOString() }).eq("id", compra);
+  revalidatePath("/consultorio/guias");
+}
+
+export async function borrarCompra(compra: string) {
+  const { sb } = await requireNutri();
+  await sb.from("compras").delete().eq("id", compra);
+  revalidatePath("/consultorio/guias");
+}
