@@ -1,4 +1,5 @@
 "use client";
+import { useAjustesApp } from "./guardado";
 import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { hoyISO } from "@/lib/diario";
@@ -20,10 +21,11 @@ export function series(txt: string): string[] {
 export function useCargas(pid: string, remoto: boolean) {
   const key = `cargas-${pid}`;
   const [v, setV] = useState<Cargas>({});
-  const [u, setU] = useState<"kg" | "lb">("kg");
+  const [aj, setAj] = useAjustesApp();
+  const u = aj.unidad ?? "kg";
   useEffect(() => {
     let l: Cargas = {};
-    try { l = JSON.parse(localStorage.getItem(key) || "{}"); setU((localStorage.getItem("unidad") as "kg" | "lb") || "kg"); } catch {}
+    try { l = JSON.parse(localStorage.getItem(key) || "{}"); } catch {}
     setV(l);
     if (!remoto) return;
     supabaseBrowser().from("cargas").select("ejercicio, fecha, data").eq("patient_id", pid).then(({ data, error }) => {
@@ -41,7 +43,7 @@ export function useCargas(pid: string, remoto: boolean) {
       if (remoto) supabaseBrowser().from("cargas").upsert({ patient_id: pid, ejercicio, fecha, data: c, updated_at: new Date().toISOString() }).then(() => {});
       return n;
     });
-  const unidad = (x: "kg" | "lb") => { setU(x); try { localStorage.setItem("unidad", x); } catch {} };
+  const unidad = (x: "kg" | "lb") => setAj("unidad", x);
   return { v, guardar, u, unidad };
 }
 export type CargasHook = ReturnType<typeof useCargas>;

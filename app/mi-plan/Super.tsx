@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { cantidad, icono, type Ingrediente } from "@/lib/alimentos";
 import { DIAS7, TIEMPOS, diasDe, type Dia, type Plan } from "@/lib/types";
 import { comidaDe, slotDe } from "./Comidas";
+import { useAjustesApp, useGuardadoCuenta } from "./guardado";
 
 const SECCIONES: [RegExp, string][] = [
   [/verdura/i, "🥦 Verduras"], [/fruta/i, "🍎 Frutas"], [/cereal/i, "🌾 Cereales, pan y tubérculos"], [/legumin/i, "🫘 Leguminosas"],
@@ -15,15 +16,21 @@ const MODOS: [Modo, string][] = [["dia", "Un día"], ["semana", "Esta semana"], 
 
 /** Lista del súper que sale del menú que eligió la paciente, con sus cambios. Lunes a sábado, y el domingo si tiene menú. */
 export default function Super({ plan, cambios, orden, planId }: { plan: Plan; cambios: Record<string, Ingrediente>; orden: Record<string, Dia>; planId: string | null }) {
-  const [modo, setModoE] = useState<Modo>("semana");
+  const [aj, setAj] = useAjustesApp();
+  const modo: Modo = MODOS.some(([k]) => k === aj.superModo) ? (aj.superModo as Modo) : "semana";
   const dias = diasDe(plan);
   const [dia, setDia] = useState<Dia>(() => DIAS7[Math.min((new Date().getDay() + 6) % 7, dias.length - 1)]); // hoy; el domingo libre, el sábado
-  useEffect(() => { try { const m = localStorage.getItem("super-modo") as Modo | null; if (m && MODOS.some(([k]) => k === m)) setModoE(m); } catch {} }, []);
-  const setModo = (m: Modo) => { setModoE(m); try { localStorage.setItem("super-modo", m); } catch {} };
-  const key = `super-${planId ?? "plan"}-${modo === "dia" ? `dia-${dia}` : modo}`;
-  const [hecho, setHecho] = useState<Record<string, boolean>>({});
-  useEffect(() => { try { setHecho(JSON.parse(localStorage.getItem(key) || "{}")); } catch { setHecho({}); } }, [key]);
-  const toggle = (id: string) => setHecho((o) => { const n = { ...o, [id]: !o[id] }; try { localStorage.setItem(key, JSON.stringify(n)); } catch {} return n; });
+  const setModo = (m: Modo) => setAj("superModo", m);
+  // Las palomitas de la lista, por periodo ("semana", "mes", "dia-Lunes"), guardadas en su cuenta.
+  const base = `super-${planId ?? "plan"}`;
+  const [todas, cambiar] = useGuardadoCuenta<Record<string, Record<string, boolean>>>(base, () => {
+    const r: Record<string, Record<string, boolean>> = {};
+    try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i)!; if (k.startsWith(`${base}-`)) r[k.slice(base.length + 1)] = JSON.parse(localStorage.getItem(k) || "{}"); } } catch {}
+    return r;
+  });
+  const sub = modo === "dia" ? `dia-${dia}` : modo;
+  const hecho = todas[sub] ?? {};
+  const toggle = (id: string) => cambiar((o) => ({ ...o, [sub]: { ...o[sub], [id]: !o[sub]?.[id] } }));
 
   const { grupos, sinIngredientes } = useMemo(() => {
     const total = new Map<string, { a: Ingrediente; x: number }>();

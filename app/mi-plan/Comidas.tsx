@@ -5,32 +5,7 @@ import { MERCADO_DE, linkAmazon, linkML, productoDeSup } from "@/lib/tienda";
 import { diasDe, type Comida, type Dia, type Plan } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { prohibido, useAjustes } from "@/lib/paciente";
-
-/** Un objeto que se guarda en el teléfono y, si ya entró con su cuenta, también en la página (para no perderlo si borra el acceso o cambia de celular). */
-function useGuardado<T extends object>(clave: string, pid: string, remoto: boolean) {
-  const [v, setV] = useState<T>({} as T);
-  useEffect(() => {
-    let l = {} as T;
-    try { l = JSON.parse(localStorage.getItem(clave) || "{}"); } catch {}
-    setV(l);
-    if (!remoto) return;
-    supabaseBrowser().from("preferencias").select("data").eq("patient_id", pid).eq("clave", clave).maybeSingle().then(({ data, error }) => {
-      if (error) return;
-      if (data) { setV(data.data as T); try { localStorage.setItem(clave, JSON.stringify(data.data)); } catch {} }
-      else if (Object.keys(l).length) subir(l); // lo que ya tenía solo en su teléfono se sube la primera vez
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [clave, pid, remoto]);
-  const subir = (n: T) => { if (remoto) supabaseBrowser().from("preferencias").upsert({ patient_id: pid, clave, data: n, updated_at: new Date().toISOString() }).then(() => {}); };
-  const cambiar = (f: (old: T) => T) =>
-    setV((old) => {
-      const n = f(old);
-      try { localStorage.setItem(clave, JSON.stringify(n)); } catch {}
-      subir(n);
-      return n;
-    });
-  return [v, cambiar] as const;
-}
+import { useAjustesApp, useGuardado } from "./guardado";
 
 /** Los ingredientes que la paciente cambió, por plan. */
 export function useCambios(planId: string | null, pid: string, remoto: boolean) {
@@ -41,7 +16,8 @@ export function useCambios(planId: string | null, pid: string, remoto: boolean) 
       if (ing) n[slot] = ing; else delete n[slot];
       return n;
     });
-  return [v, set] as const;
+  const limpiar = () => cambiar(() => ({}));
+  return [v, set, limpiar] as const;
 }
 export type Cambios = ReturnType<typeof useCambios>;
 
@@ -59,7 +35,15 @@ export function useOrden(planId: string | null, pid: string, remoto: boolean) {
       if (src === dia) delete n[`${dia}|${i}`]; else n[`${dia}|${i}`] = src;
       return n;
     });
-  return [v, set] as const;
+  /** El mismo platillo en ese tiempo de comida todos los días con menú. */
+  const repetir = (i: number, src: Dia, dias: readonly Dia[]) =>
+    cambiar((old) => {
+      const n = { ...old };
+      for (const d of dias) { if (d === src) delete n[`${d}|${i}`]; else n[`${d}|${i}`] = src; }
+      return n;
+    });
+  const limpiar = () => cambiar(() => ({}));
+  return [v, set, repetir, limpiar] as const;
 }
 export type Orden = ReturnType<typeof useOrden>;
 
@@ -80,9 +64,9 @@ export function opcionesDe(plan: Plan, i: number) {
   });
 }
 
-export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, opciones = [], actual, onElegir, lista, onLista, gusto, onGusto }: {
+export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, opciones = [], actual, onElegir, onRepetir, lista, onLista, gusto, onGusto }: {
   m: Comida; hora: string; tiempo: string; tintClass: string; slot: (j: number) => string; cambios: Cambios; sistema: Sistema;
-  opciones?: [Dia, string][]; actual?: Dia; onElegir?: (d: Dia) => void; lista?: boolean; onLista?: () => void; gusto?: 1 | -1; onGusto?: (v: 1 | -1) => void;
+  opciones?: [Dia, string][]; actual?: Dia; onElegir?: (d: Dia) => void; onRepetir?: () => void; lista?: boolean; onLista?: () => void; gusto?: 1 | -1; onGusto?: (v: 1 | -1) => void;
 }) {
   const [hechos, setCambio] = cambios;
   const [abierto, setAbierto] = useState<number | null>(null);
@@ -105,6 +89,7 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, o
             {opciones.map(([d, t]) => <option key={d} value={d}>{d === actual ? "↻ Elegir otro platillo de la semana" : `${t} (del ${d.toLowerCase()})`}</option>)}
           </select>
         )}
+        {opciones.length > 1 && onRepetir && <Repetir onRepetir={onRepetir} />}
         {ings.length > 0 && (
           <ul className="ings">
             {ings.map((orig, j) => {
@@ -147,6 +132,15 @@ export function MealCard({ m, hora, tiempo, tintClass, slot, cambios, sistema, o
   );
 }
 
+/** "Repetir toda la semana": pide confirmación con un segundo toque, sin ventanas. */
+function Repetir({ onRepetir }: { onRepetir: () => void }) {
+  const [paso, setPaso] = useState<0 | 1 | 2>(0);
+  if (paso === 2) return <p className="note repetir">✓ Listo, lo tienes toda la semana.</p>;
+  return paso === 0
+    ? <button className="linklike repetir" onClick={() => setPaso(1)}>🔁 Repetir este platillo toda la semana</button>
+    : <p className="note repetir">¿Comer este mismo platillo todos los días? <button className="linklike" onClick={() => { onRepetir(); setPaso(2); }}>Sí, repetirlo</button> · <button className="linklike" onClick={() => setPaso(0)}>No</button></p>;
+}
+
 function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
   orig: Ingrediente; actual: Ingrediente; sistema: Sistema; onPick: (a: Alimento | null) => void; onClose: () => void;
 }) {
@@ -155,11 +149,12 @@ function SwapSheet({ orig, actual, sistema, onPick, onClose }: {
   const [q, setQ] = useState("");
   const [pais, setPais] = useState("");
   useEffect(() => { cargarAlimentos(sistema).then(setLista, () => setError(true)); }, [sistema]);
-  useEffect(() => { try { setPais(localStorage.getItem("pais") || ""); } catch {} }, []);
-  const elegirPais = (c: string) => { setPais(c); try { localStorage.setItem("pais", c); } catch {} };
+  const [aj, setAj] = useAjustesApp();
+  useEffect(() => { setPais(aj.pais ?? ""); }, [aj.pais]);
+  const elegirPais = (c: string) => { setPais(c); setAj("pais", c); };
   const [sinLac, setSinLac] = useState(false);
-  useEffect(() => { try { setSinLac(localStorage.getItem("sinlactosa") === "1"); } catch {} }, []);
-  const toggleLac = () => setSinLac((v) => { try { localStorage.setItem("sinlactosa", v ? "0" : "1"); } catch {} return !v; });
+  useEffect(() => { setSinLac(!!aj.sinlactosa); }, [aj.sinlactosa]);
+  const toggleLac = () => { setSinLac(!sinLac); setAj("sinlactosa", !sinLac); };
   const hayLac = !!lista?.some((a) => a.g === orig.g && a.lac);
   // Sin lactosa, la leche se puede cambiar por cualquier leche o bebida sin lactosa (mismas proteínas e hidratos por equivalente)
   const esSup = sistema === "suplementos";

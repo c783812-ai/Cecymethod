@@ -1,4 +1,5 @@
 "use client";
+import { useAjustesApp } from "./guardado";
 import { useEffect, useMemo, useState } from "react";
 import { BANDERA, PAIS } from "@/lib/alimentos";
 import { CATEGORIAS, MERCADOS, MERCADO_DE, PARA, PRODUCTOS, enMercado, linkAmazon, linkML, type Categoria } from "@/lib/tienda";
@@ -14,8 +15,9 @@ export default function Suplementos({ recomendados }: { recomendados: Suplemento
   const [para, setPara] = useState("");
   const [abierta, setAbierta] = useState<string | null>(null);
   const hombre = useAjustes().genero === "m";
-  useEffect(() => { try { setPais(localStorage.getItem("pais") || ""); } catch {} }, []);
-  const elegirPais = (c: string) => { setPais(c); try { localStorage.setItem("pais", c); } catch {} };
+  const [aj, setAj] = useAjustesApp();
+  useEffect(() => { setPais(aj.pais ?? ""); }, [aj.pais]);
+  const elegirPais = (c: string) => { setPais(c); setAj("pais", c); };
 
   const suyas = useMemo(() => CATEGORIAS.filter((c) => recomendados.some((s) => c.r.test(s.que))), [recomendados]);
   const lista = CATEGORIAS.filter((c) => (!para || c.para.includes(para)) && !(hombre && c.para.every((x) => SOLO_ELLAS.includes(x))));

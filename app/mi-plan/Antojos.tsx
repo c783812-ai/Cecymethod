@@ -1,4 +1,5 @@
 "use client";
+import { useAjustesApp } from "./guardado";
 import { useEffect, useMemo, useState } from "react";
 import { BANDERA, NOTA_EU, PAIS } from "@/lib/alimentos";
 import { prohibido, useAjustes } from "@/lib/paciente";
@@ -22,9 +23,10 @@ export default function Antojos() {
   const [abierto, setAbierto] = useState(false);
   const [tipo, setTipo] = useState<"dulce" | "salado">("dulce");
   const [pais, setPais] = useState("");
-  useEffect(() => { try { setPais(localStorage.getItem("pais") || ""); } catch {} }, []);
+  const [aj, setAj] = useAjustesApp();
+  useEffect(() => { setPais(aj.pais ?? ""); }, [aj.pais]);
   useEffect(() => { if (abierto && !lista) cargar().then(setLista, () => setLista([])); }, [abierto, lista]);
-  const elegirPais = (c: string) => { setPais(c); try { localStorage.setItem("pais", c); } catch {} };
+  const elegirPais = (c: string) => { setPais(c); setAj("pais", c); };
   const { evitar } = useAjustes();
   const ver = useMemo(
     () => (lista ?? []).filter((a) => a.tipo === tipo && (!pais || a.paises.includes(pais)) && !prohibido(a.n, evitar)).sort((a, b) => (a.k ?? 999) - (b.k ?? 999)),

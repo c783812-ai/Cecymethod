@@ -28,7 +28,7 @@ export default function MisPagos({ d }: { d: MisPagosData | null }) {
             </div>
             {suyos.length > 0 && (
               <ul className="consultas" style={{ margin: 0, paddingLeft: 18 }}>
-                {suyos.map((p) => <li key={p.id}>{fechaCorta(p.fecha)} · <b className="num">{dinero(Number(p.monto), pq.moneda)}</b></li>)}
+                {suyos.map((p) => <li key={p.id}><span>Pago del {fechaCorta(p.fecha)}</span><b className="num">{dinero(Number(p.monto), pq.moneda)}</b></li>)}
               </ul>
             )}
           </div>

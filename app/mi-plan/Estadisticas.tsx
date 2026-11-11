@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useAjustesApp } from "./guardado";
 import { estadisticas, fechasDe, type Periodo } from "@/lib/estadisticas";
 import { hoyISO, type Diario } from "@/lib/diario";
 
@@ -16,9 +16,9 @@ function animo(pct: number | null) {
 
 /** Estadísticas de la semana o del mes, para motivarla con lo que ella misma registra. */
 export default function Estadisticas({ diario, vasos, hoy = hoyISO() }: { diario: Diario; vasos: number; hoy?: string }) {
-  const [p, setP] = useState<Periodo>("semana");
-  useEffect(() => { try { const g = localStorage.getItem("stats-periodo"); if (g === "mes" || g === "semana") setP(g); } catch {} }, []);
-  const elegir = (x: Periodo) => { setP(x); try { localStorage.setItem("stats-periodo", x); } catch {} };
+  const [aj, setAj] = useAjustesApp();
+  const p: Periodo = aj.stats ?? "semana";
+  const elegir = (x: Periodo) => setAj("stats", x);
 
   const fechas = fechasDe(p, hoy);
   const s = estadisticas(diario, fechas, vasos);

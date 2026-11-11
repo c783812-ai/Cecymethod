@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import Recordatorio from "./Recordatorio";
 import Link from "next/link";
 import { useCita, esFutura } from "@/lib/cita";
-import { DIAS7, TIEMPOS, tieneDomingo, type Patient, type Plan, type Rutina } from "@/lib/types";
+import { DIAS7, TIEMPOS, diasDe, tieneDomingo, type Dia, type Patient, type Plan, type Rutina } from "@/lib/types";
+import { cantidad, icono, type Ingrediente } from "@/lib/alimentos";
 import { CALENTAMIENTO } from "@/lib/gluteos";
 import { mesDelCiclo, proximoCambio } from "@/lib/ciclo";
 import { MealCard, useGustos, type Gustos, comidaDe, opcionesDe, slotDe, useCambios, useOrden, type Cambios, type Orden, TiendaAbierta } from "./Comidas";
@@ -12,6 +13,9 @@ import Antojos from "./Antojos";
 import Instalar from "./Instalar";
 import Logros from "./Logros";
 import Suplementos from "./Suplementos";
+import { AjustesApp, Cuenta, useAjustesGuardados, useGuardadoCuenta } from "./guardado";
+import SinInternet from "./SinInternet";
+import Guia from "./Guia";
 import MisPagos, { type MisPagosData } from "./MisPagos";
 import { Encuesta, Renovar } from "./Renovar";
 import Estadisticas from "./Estadisticas";
@@ -33,18 +37,10 @@ const ICON: Record<Tab, React.ReactNode> = {
   rutina: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12" /></svg>,
 };
 
-// Lo que la paciente palomea se guarda solo en su teléfono.
-function useLocalChecks(key: string) {
-  const [v, setV] = useState<Record<string, boolean>>({});
-  useEffect(() => {
-    try { setV(JSON.parse(localStorage.getItem(key) || "{}")); } catch {}
-  }, [key]);
-  const toggle = (k: string) =>
-    setV((old) => {
-      const n = { ...old, [k]: !old[k] };
-      try { localStorage.setItem(key, JSON.stringify(n)); } catch {}
-      return n;
-    });
+// Lo que la paciente palomea se guarda en su teléfono y en su cuenta.
+function useChecks(key: string) {
+  const [v, cambiar] = useGuardadoCuenta<Record<string, boolean>>(key);
+  const toggle = (k: string) => cambiar((old) => ({ ...old, [k]: !old[k] }));
   return [v, toggle] as const;
 }
 
@@ -69,6 +65,7 @@ export default function PatientApp(props: {
   const orden = useOrden(props.planId, p.id, remoto);
   const diario = useDiario(p.id, remoto, !!p.diario_consentido_at);
   const gustos = useGustos(p.id, remoto);
+  const ajustes = useAjustesGuardados(p.id, remoto);
   const heads: Record<Tab, [string, React.ReactNode]> = {
     hoy: [`Hola, ${first}`, <>Tu <mark>día</mark></>],
     registro: ["Cómo te sentiste hoy", <>Mi <mark>registro</mark></>],
@@ -81,6 +78,8 @@ export default function PatientApp(props: {
   return (
     <AjustesPaciente.Provider value={{ genero: plan?.genero === "m" ? "m" : "f", evitar: evitarDe(plan) }}>
     <TiendaAbierta.Provider value={!!p.suplementos_visible}>
+    <Cuenta.Provider value={{ pid: p.id, remoto }}>
+    <AjustesApp.Provider value={ajustes}>
     <div className="patient">
       <div style={{ width: "100%", maxWidth: 430 }}>
         {vistaPrevia && (
@@ -94,6 +93,8 @@ export default function PatientApp(props: {
             <h1>{heads[tab][1]}</h1>
           </div>
           <div className="ph-body">
+            {!vistaPrevia && <SinInternet />}
+            {!vistaPrevia && plan && <Guia />}
             {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} planId={props.planId} planDesde={props.planDesde} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} pagos={props.pagos ?? null} />}
             {tab === "registro" && <>{remoto && <Recordatorio pid={p.id} clave={props.clavePush ?? null} />}<Logros diario={diario[0]} vasos={plan?.agua || 8} /><Estadisticas diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
@@ -115,6 +116,8 @@ export default function PatientApp(props: {
         </div>
       </div>
     </div>
+    </AjustesApp.Provider>
+    </Cuenta.Provider>
     </TiendaAbierta.Provider>
     </AjustesPaciente.Provider>
   );
@@ -155,19 +158,14 @@ function Locked({ planExiste }: { planExiste: boolean }) {
 function Metas({ p }: { p: Patient }) {
   const cita = useCita(p);
   const key = `metas-dia-${p.id}`;
-  const [dias, setDias] = useState<Record<string, string[]>>({});
-  useEffect(() => {
-    try { setDias(JSON.parse(localStorage.getItem(key) || "{}")); } catch {}
-  }, [key]);
+  const [dias, cambiar] = useGuardadoCuenta<Record<string, string[]>>(key);
   if (!p.metas.length) return null;
   const hoy = hoyISO();
   const toggle = (t: string) =>
-    setDias((old) => {
+    cambiar((old) => {
       const s = new Set(old[t] ?? []);
       if (s.has(hoy)) s.delete(hoy); else s.add(hoy);
-      const n = { ...old, [t]: [...s].sort().slice(-120) };
-      try { localStorage.setItem(key, JSON.stringify(n)); } catch {}
-      return n;
+      return { ...old, [t]: [...s].sort().slice(-120) };
     });
   const racha = (t: string) => {
     const s = new Set(dias[t] ?? []);
@@ -229,6 +227,7 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
           </button>
         ))}
       </div>
+      {esHoy && conMenu && <Ahora plan={plan} orden={orden[0]} cambios={cambios[0]} dia={DIAS7[d]} listas={listas} onLista={marcar} />}
       <div className="eyebrow">{DIAS7[d]}</div>
       {esHoy && conMenu && plan.meta && <MetaBar meta={plan.meta} aportes={aportes} listas={listas} />}
       {!conMenu ? (
@@ -239,12 +238,13 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
           return m.titulo ? (
             <MealCard key={`${d}-${i}-${src}`} m={m} hora={plan.horarios?.[i] ?? TIEMPOS[i][1]} tiempo={TIEMPOS[i][0]} tintClass={MEAL_TINT[i]}
               slot={(j) => slotDe(src, i, j)} cambios={cambios} sistema={plan.sistema ?? "smae"}
-              opciones={opcionesDe(plan, i).map((o) => [o, plan.menu[o][i].titulo])} actual={src} onElegir={(o) => orden[1](DIAS7[d], i, o)}
+              opciones={opcionesDe(plan, i).map((o) => [o, plan.menu[o][i].titulo])} actual={src} onElegir={(o) => orden[1](DIAS7[d], i, o)} onRepetir={() => orden[2](i, src, diasDe(plan))}
               {...(esHoy ? { lista: listas.includes(i), onLista: () => marcar(i) } : {})}
               gusto={gustos[0][m.titulo]} onGusto={(v) => gustos[1](m.titulo, v)} />
           ) : null;
         })
       )}
+      {conMenu && <VolverAlPlan cambios={cambios} orden={orden} />}
       <Antojos />
       {plan.suplementos.length > 0 && (
         <div className="card" style={{ padding: 14 }}>
@@ -268,6 +268,71 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
   );
 }
 
+/** "8:30", "1:00 pm", "13 h" -> minutos del día. */
+function minutos(h: string) {
+  const m = /(\d{1,2})(?:[:.](\d{2}))?\s*(a\.?\s?m|p\.?\s?m)?/i.exec(h ?? "");
+  if (!m) return null;
+  let hh = Number(m[1]);
+  const pm = m[3] && /p/i.test(m[3]);
+  if (pm && hh < 12) hh += 12;
+  if (m[3] && !pm && hh === 12) hh = 0;
+  return hh * 60 + Number(m[2] ?? 0);
+}
+
+/** Lo que le toca comer ahora, con cantidades: la primera comida de hoy que no ha marcado y cuya hora no pasó hace más de hora y media. */
+function Ahora({ plan, orden, cambios, dia, listas, onLista }: { plan: Plan; orden: Record<string, Dia>; cambios: Record<string, Ingrediente>; dia: Dia; listas: number[]; onLista: (i: number) => void }) {
+  const [ahora, setAhora] = useState<number | null>(null);
+  useEffect(() => {
+    const tic = () => { const d = new Date(); setAhora(d.getHours() * 60 + d.getMinutes()); };
+    tic();
+    const t = setInterval(tic, 60_000);
+    return () => clearInterval(t);
+  }, []);
+  if (ahora === null) return null;
+  const idx = TIEMPOS.map((_, i) => i).find((i) => {
+    const { m } = comidaDe(plan, orden, dia, i);
+    const h = minutos(plan.horarios?.[i] ?? TIEMPOS[i][1]);
+    return m.titulo && !listas.includes(i) && h !== null && h + 90 > ahora;
+  });
+  if (idx === undefined) return null;
+  const { m, src } = comidaDe(plan, orden, dia, idx);
+  const hora = plan.horarios?.[idx] ?? TIEMPOS[idx][1];
+  const h = minutos(hora) ?? 0;
+  const cuando = h <= ahora ? "Te toca ahora" : h - ahora <= 60 ? `En ${h - ahora} min` : `A las ${hora}`;
+  return (
+    <div className="card ahora">
+      <div className="eyebrow">{cuando} · {TIEMPOS[idx][0]}</div>
+      <b>{m.titulo}</b>
+      {m.ingredientes?.length ? (
+        <ul className="ings">
+          {m.ingredientes.map((o, j) => {
+            const a = cambios[slotDe(src, idx, j)] ?? o;
+            return <li key={j}><span className="ic" aria-hidden="true">{icono(a.n, a.g)}</span><span className="nm">{a.n}<b className="qt num">{cantidad(a, o.x)}</b></span></li>;
+          })}
+        </ul>
+      ) : m.detalle ? <p className="note" style={{ margin: "4px 0 0" }}>{m.detalle}</p> : null}
+      <button className="lista" style={{ marginTop: 8 }} onClick={() => onLista(idx)}>Marcar como lista</button>
+    </div>
+  );
+}
+
+/** Quita todos sus cambios de platillos e ingredientes y deja el menú como lo armó Cecy. */
+function VolverAlPlan({ cambios, orden }: { cambios: Cambios; orden: Orden }) {
+  const [paso, setPaso] = useState<0 | 1 | 2>(0);
+  const hay = Object.keys(cambios[0]).length + Object.keys(orden[0]).length > 0;
+  if (paso === 2) return <p className="note" style={{ textAlign: "center", margin: 0 }}>✓ Tu menú volvió a como lo armó Cecy.</p>;
+  if (!hay) return null;
+  return (
+    <div className="card volver" style={{ padding: "10px 14px", textAlign: "center" }}>
+      {paso === 0 ? (
+        <button className="linklike" onClick={() => setPaso(1)}>↺ Volver al plan original de Cecy</button>
+      ) : (
+        <p className="note" style={{ margin: 0 }}>Se quitan todos tus cambios de platillos y alimentos de la semana. <button className="linklike" onClick={() => { cambios[2](); orden[3](); setPaso(2); }}>Sí, volver</button> · <button className="linklike" onClick={() => setPaso(0)}>No</button></p>
+      )}
+    </div>
+  );
+}
+
 function VideoBtn({ n, videos }: { n: string; videos: Record<string, string> }) {
   const url = videos[n];
   const [open, setOpen] = useState(false);
@@ -287,7 +352,7 @@ function RutinaView({ rutina: fija, ciclo, videos, pid, remoto }: { rutina: Ruti
   const rutina = ciclo?.length ? ciclo[mes] : fija;
   const [o, setO] = useState<"a" | "b" | "c">("a");
   const [g, setG] = useState(0);
-  const [done, toggle] = useLocalChecks(`hechos-${pid}`);
+  const [done, toggle] = useChecks(`hechos-${pid}`);
   const cargas = useCargas(pid, remoto);
   const t = useG();
   if (!rutina) return <div className="locked">Cecy todavía no comparte una rutina contigo.<br />Si quieres una, pídesela en tu próxima consulta.</div>;
