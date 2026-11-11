@@ -20,14 +20,13 @@ export function useDiario(pid: string, remoto: boolean, consentidoInicial: boole
     const l = local();
     setV(l);
     if (!consentido) return;
-    const desde = new Date(Date.now() - 60 * 864e5).toISOString().slice(0, 10);
-    supabaseBrowser().from("diario").select("fecha, data").eq("patient_id", pid).gte("fecha", desde).then(({ data, error }) => {
+    supabaseBrowser().from("diario").select("fecha, data").eq("patient_id", pid).then(({ data, error }) => {
       if (error || !data) return;
       const remotoD = Object.fromEntries(data.map((r) => [r.fecha as string, r.data as Registro]));
-      // Lo que anotó en su teléfono y no llegó a la página se sube ahora (lo del teléfono es lo más nuevo).
+      // Todo lo que anotó en su teléfono desde el primer día y no llegó a la página se sube ahora (lo del teléfono es lo más nuevo).
       const todo: Diario = { ...remotoD };
       for (const [f, r] of Object.entries(l)) todo[f] = { ...remotoD[f], ...r };
-      const faltan = Object.entries(todo).filter(([f, r]) => f >= desde && JSON.stringify(r) !== JSON.stringify(remotoD[f]));
+      const faltan = Object.entries(todo).filter(([f, r]) => JSON.stringify(r) !== JSON.stringify(remotoD[f]));
       setV(todo);
       guardarLocal(todo);
       subir(faltan);
