@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { CUENTAS } from "@/lib/cuentas";
+import { CUENTAS, REVOLUT } from "@/lib/cuentas";
 
 /** Las cuentas de Cecy para transferir, con botón de copiar, y el botón para mandarle el comprobante por WhatsApp. */
 export default function Cuentas({ que, nombre }: { que?: string; nombre?: string }) {
@@ -15,11 +15,12 @@ export default function Cuentas({ que, nombre }: { que?: string; nombre?: string
           {c.filas.map(([k, v]) => (
             <div key={k} className="cfila">
               <span><small>{k}</small><b className="num">{v}</b></span>
-              {k !== "Titular" && <button type="button" className="btn" onClick={() => copiar(v)}>{copiado === v ? "✓" : "Copiar"}</button>}
+              {!["Titular", "Beneficiaria", "Banco"].includes(k) && <button type="button" className="btn" onClick={() => copiar(v)}>{copiado === v ? "✓" : "Copiar"}</button>}
             </div>
           ))}
         </div>
       ))}
+      <a className="btn" style={{ width: "100%", textAlign: "center" }} href={REVOLUT} target="_blank" rel="noopener">¿Tienes Revolut? Paga aquí</a>
       <a className="btn primary" style={{ width: "100%", textAlign: "center" }} href={`https://wa.me/971556889063?text=${encodeURIComponent(msg)}`} target="_blank" rel="noopener">Mandar mi comprobante por WhatsApp</a>
     </div>
   );
