@@ -117,6 +117,46 @@
   "fuente": "https://www.vitalabo.com/esn/designer-whey-protein-1"
  },
  {
+  "id": "esn-designer-whey-dark-cookies-cream",
+  "n": "ESN – Designer Whey (Dark Cookies & Cream)",
+  "marca": "ESN",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "paises": [
+   "CH",
+   "DE",
+   "ES",
+   "EU"
+  ],
+  "k": 114,
+  "p": 22,
+  "h": 2.3,
+  "l": 1.9,
+  "nota": "whey concentrado; la prueba Viridiana",
+  "fuente": "https://www.dm.de/p/d/3117785/esn-whey-proteinpulver-designer-dark-cookie-und-cream-geschmack"
+ },
+ {
+  "id": "esn-designer-whey-matcha",
+  "n": "ESN – Designer Whey (Matcha)",
+  "marca": "ESN",
+  "g": "Proteína en polvo",
+  "porcion": "1 medida (30 g)",
+  "porcion_g": 30,
+  "paises": [
+   "CH",
+   "DE",
+   "ES",
+   "EU"
+  ],
+  "k": 113,
+  "p": 22,
+  "h": 2.0,
+  "l": 1.7,
+  "nota": "whey concentrado; la prueba Viridiana",
+  "fuente": "https://ie.esn.com/products/esn-designer-whey-protein"
+ },
+ {
   "id": "esn-flexpresso-protein-coffee",
   "n": "ESN – Flexpresso Protein Coffee (Coffee Caramel)",
   "marca": "ESN",
