@@ -7,11 +7,11 @@ export default function Privacidad() {
     <div className="legal">
       <Link href="/" className="note">← Volver al inicio</Link>
       <h1>Aviso de privacidad</h1>
-      <p className="note">Última actualización: octubre de 2026</p>
+      <p className="note">Última actualización: noviembre de 2026</p>
       <h2>Quién cuida tus datos</h2>
       <p>Cecilia Rivera, nutrióloga (@cecy.method). Contacto: cecilia.nutdxb@gmail.com.</p>
       <h2>Qué datos guardo</h2>
-      <p>En esta página solo guardo tu nombre, tu correo, la ciudad donde vives, tu plan de alimentación, tus metas y tu rutina. Tu historia clínica, tus análisis y tus mediciones no se guardan en esta página: los guardo yo en mis archivos.</p>
+      <p>En esta página solo guardo tu nombre, tu correo, tu WhatsApp, la ciudad donde vives, lo que quieres lograr, el paquete que elegiste y tus pagos, tu plan de alimentación, tus metas y tu rutina. Si aceptas compartir tu registro diario, también lo que anotas ahí. Tu historia clínica, tus análisis y tus mediciones no se guardan en esta página: los guardo yo en mis archivos.</p>
       <h2>Para qué</h2>
       <p>Solo para darte tu consulta, armar tu plan y darte seguimiento. No los vendo ni los comparto con nadie para publicidad.</p>
       <h2>Dónde se guardan</h2>

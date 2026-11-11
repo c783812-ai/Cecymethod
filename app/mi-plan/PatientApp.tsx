@@ -10,6 +10,8 @@ import { mesDelCiclo, proximoCambio } from "@/lib/ciclo";
 import { MealCard, useGustos, type Gustos, comidaDe, opcionesDe, slotDe, useCambios, useOrden, type Cambios, type Orden, TiendaAbierta } from "./Comidas";
 import Super from "./Super";
 import Antojos from "./Antojos";
+import ComerFuera from "./ComerFuera";
+import Ciclo from "./Ciclo";
 import Instalar from "./Instalar";
 import Logros from "./Logros";
 import Suplementos from "./Suplementos";
@@ -17,6 +19,7 @@ import { AjustesApp, Cuenta, useAjustesGuardados, useGuardadoCuenta } from "./gu
 import SinInternet from "./SinInternet";
 import Guia from "./Guia";
 import MisPagos, { type MisPagosData } from "./MisPagos";
+import InvitaAmiga, { type AmigasData } from "./Amigas";
 import { Encuesta, Renovar } from "./Renovar";
 import Estadisticas from "./Estadisticas";
 import { Descanso, SeriesLog, useCargas } from "./Cargas";
@@ -56,6 +59,7 @@ export default function PatientApp(props: {
   vistaPrevia: boolean;
   clavePush?: string | null;
   pagos?: MisPagosData | null;
+  amigas?: AmigasData | null;
 }) {
   const { patient: p, plan, rutina, videos, vistaPrevia } = props;
   const [tab, setTab] = useState<Tab>("hoy");
@@ -95,7 +99,7 @@ export default function PatientApp(props: {
           <div className="ph-body">
             {!vistaPrevia && <SinInternet />}
             {!vistaPrevia && plan && <Guia />}
-            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} planId={props.planId} planDesde={props.planDesde} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} pagos={props.pagos ?? null} />}
+            {tab === "hoy" && <Hoy p={p} plan={plan} planExiste={props.planExiste} planId={props.planId} planDesde={props.planDesde} cambios={cambios} orden={orden} diario={diario} gustos={gustos} instalar={!vistaPrevia} pagos={props.pagos ?? null} amigas={props.amigas ?? null} />}
             {tab === "registro" && <>{remoto && <Recordatorio pid={p.id} clave={props.clavePush ?? null} />}<Logros diario={diario[0]} vasos={plan?.agua || 8} /><Estadisticas diario={diario[0]} vasos={plan?.agua || 8} /><RegistroHoy diario={diario} vasos={plan?.agua || 8} /></>}
             {tab === "super" && (plan ? <Super plan={plan} cambios={cambios[0]} orden={orden[0]} planId={props.planId} /> : <Locked planExiste={props.planExiste} />)}
             {tab === "suple" && (p.suplementos_visible ? <Suplementos recomendados={plan?.suplementos ?? []} /> : <PorAbrir />)}
@@ -193,7 +197,7 @@ function Metas({ p }: { p: Patient }) {
   );
 }
 
-function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, gustos, instalar, pagos }: { pagos: MisPagosData | null; p: Patient; plan: Plan | null; planExiste: boolean; planId: string | null; planDesde?: string | null; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean }) {
+function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, gustos, instalar, pagos, amigas }: { pagos: MisPagosData | null; amigas: AmigasData | null; p: Patient; plan: Plan | null; planExiste: boolean; planId: string | null; planDesde?: string | null; cambios: Cambios; orden: Orden; diario: DiarioHook; gustos: Gustos; instalar: boolean }) {
   const cita = useCita(p);
   const [di, setDi] = useState<number | null>(null);
   const [hoyIdx, setHoyIdx] = useState<number | null>(null);
@@ -245,7 +249,9 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
         })
       )}
       {conMenu && <VolverAlPlan cambios={cambios} orden={orden} />}
+      <Ciclo diario={diario[0]} />
       <Antojos />
+      <ComerFuera />
       {plan.suplementos.length > 0 && (
         <div className="card" style={{ padding: 14 }}>
           <div className="eyebrow" style={{ marginBottom: 6 }}>Tus suplementos</div>
@@ -263,6 +269,7 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
       <Encuesta nombre={p.nombre} desde={planDesde} planId={planId} />
       <Metas p={p} />
       <MisPagos d={pagos} />
+      <InvitaAmiga d={amigas} />
       <Whats />
     </>
   );

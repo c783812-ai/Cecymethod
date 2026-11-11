@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireNutri } from "@/lib/auth";
 import { supabaseAdmin } from "@/lib/supabase/admin";
+import { codigoNuevo } from "@/lib/codigo";
 import type { Plan } from "@/lib/types";
 
 const str = (f: FormData, k: string) => {
@@ -193,4 +194,45 @@ export async function borrarPago(id: string, pago: string) {
   const { sb } = await requireNutri();
   await sb.from("pagos").delete().eq("id", pago).eq("patient_id", id);
   recargarPagos(id);
+}
+
+/** Le da su código de amiga si aún no tiene. Devuelve el código. */
+export async function asegurarCodigo(id: string) {
+  const { sb } = await requireNutri();
+  const { data: p } = await sb.from("patients").select("nombre, codigo").eq("id", id).single();
+  if (!p || p.codigo) return p?.codigo ?? null;
+  const codigo = await codigoNuevo(p.nombre);
+  await sb.from("patients").update({ codigo }).eq("id", id);
+  revalidatePath(`/consultorio/${id}`);
+  return codigo;
+}
+
+/** Solicitud de la página: Cecy ya vio su pago. Se crea su paquete (con el pago), se activa y le llega el correo para entrar. */
+export async function activarSolicitud(id: string, f: FormData) {
+  const { sb } = await requireNutri();
+  const { data: p } = await sb.from("patients").select("nombre, email, user_id, codigo").eq("id", id).single();
+  if (!p) return;
+  const nombre = str(f, "paquete") ?? "Consulta online";
+  const moneda = MONEDA(str(f, "moneda"));
+  const total = num(f, "total");
+  const monto = num(f, "monto");
+  const hoy = new Date().toISOString().slice(0, 10);
+  const fin = /3 meses/i.test(nombre) ? (() => { const d = new Date(); d.setMonth(d.getMonth() + 3); return d.toISOString().slice(0, 10); })() : null;
+  const { data: pq } = await sb.from("paquetes").insert({ patient_id: id, nombre, moneda, total, inicio: hoy, fin, nota: str(f, "nota") }).select("id").single();
+  if (pq && monto > 0) await sb.from("pagos").insert({ patient_id: id, paquete_id: pq.id, monto, fecha: hoy });
+  await sb.from("patients").update({ estado: "activa", codigo: p.codigo ?? (await codigoNuevo(p.nombre)) }).eq("id", id);
+  if (str(f, "invitar")) {
+    const r = await mandarAcceso(p.email, p.user_id, id);
+    if (r.ok) await sb.from("patients").update({ invitada_at: new Date().toISOString() }).eq("id", id);
+  }
+  recargarPagos(id);
+  revalidatePath("/consultorio", "layout");
+}
+
+/** Ya le aplicó a la paciente el descuento por una amiga que trajo. */
+export async function usarDescuento(id: string) {
+  const { sb } = await requireNutri();
+  const { data: p } = await sb.from("patients").select("descuentos_usados").eq("id", id).single();
+  await sb.from("patients").update({ descuentos_usados: (p?.descuentos_usados ?? 0) + 1 }).eq("id", id);
+  revalidatePath(`/consultorio/${id}`);
 }

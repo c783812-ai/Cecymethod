@@ -109,7 +109,7 @@ export default function Home() {
           </h1>
           <p className="lead">Encuentro lo que te falta y lo corregimos con tu alimentación, con la comida de tu súper y sin dejar lo que te gusta.</p>
           <div className="cta">
-            <a className="btn primary lg" href={WA_LINK} target="_blank" rel="noopener">Agenda tu consulta</a>
+            <Link className="btn primary lg" href="/empezar">Agenda tu consulta</Link>
             <Link className="btn lg" href="/entrar">Ya soy paciente · Entrar</Link>
           </div>
         </div>
@@ -235,7 +235,9 @@ export default function Home() {
               <div className="note num" style={{ marginTop: -8 }}>{p.precio[1]} · {p.precio[2]}</div>
               {p.nota && <span className="pill p-ok" style={{ alignSelf: "flex-start", whiteSpace: "normal" }}>{p.nota}</span>}
               <ul>{p.items.map((i) => <li key={i}>{i}</li>)}</ul>
-              <a className={`btn ${p.destacado ? "primary" : ""}`} href={WA_LINK} target="_blank" rel="noopener">Agendar</a>
+              {/gu[ií]a/i.test(p.titulo)
+                ? <Link className={`btn ${p.destacado ? "primary" : ""}`} href={`/pagar?que=${encodeURIComponent(p.titulo)}`}>Comprarla</Link>
+                : <Link className={`btn ${p.destacado ? "primary" : ""}`} href={`/empezar?p=${encodeURIComponent(/3 meses/.test(p.titulo) ? "Programa 3 meses" : "Consulta online")}`}>Agendar</Link>}
             </div>
           ))}
         </div>

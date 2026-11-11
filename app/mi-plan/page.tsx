@@ -6,6 +6,7 @@ import { CICLO, CICLO_KEY } from "@/lib/ciclo";
 import { clavePush } from "@/lib/push";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import type { MisPagosData } from "./MisPagos";
+import { amigasDe } from "@/lib/codigo";
 
 export const metadata = { title: "Mi plan · Cecy" };
 export const dynamic = "force-dynamic";
@@ -59,6 +60,9 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
     if (!pq.error && !pg.error) pagos = { paquetes: (pq.data ?? []).map((x) => ({ ...x, nota: null })), pagos: (pg.data ?? []).map((x) => ({ ...x, nota: null })) } as MisPagosData;
   } catch {}
 
+  // Su código para invitar amigas (no en la vista previa de Cecy, para no crearlo sin que ella entre).
+  const amigas = patient.user_id === user.id && patient.estado !== "nueva" ? await amigasDe(patient).catch(() => null) : null;
+
   let videos: Record<string, string> = {};
   const vids = vidRes.data ?? [];
   if (rutina && vids.length) {
@@ -78,6 +82,7 @@ export default async function MiPlan({ searchParams }: { searchParams: Promise<{
       videos={videos}
       vistaPrevia={nutri && !!como}
       pagos={pagos}
+      amigas={amigas}
       clavePush={nutri && como ? null : await clavePush().catch(() => null)}
     />
   );

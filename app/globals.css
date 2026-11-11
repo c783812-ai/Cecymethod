@@ -586,3 +586,29 @@ td.rojo{color:var(--warn);font-weight:700}
 .guia-dots{display:flex;gap:6px;margin-bottom:14px}
 .guia-dots span{width:8px;height:8px;border-radius:50%;background:var(--line)}
 .guia-dots span.on{background:var(--accent)}
+.fuera .fuera-h{font-size:14.5px;margin:12px 0 4px}
+.fuera-l{margin:0;padding-left:20px;line-height:1.45;font-size:14.5px}
+.fuera-l li{margin:3px 0}
+.fuera .reco{margin-top:10px}
+.ciclo-form{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ciclo-form .field{font-size:13px}
+.ciclo-form input{width:100%;min-width:0}
+.empezar-form{display:flex;flex-direction:column;gap:12px}
+.empezar-form fieldset{border:0;padding:0;margin:0}
+.empezar-form legend{font-size:12.5px;color:var(--muted);margin-bottom:4px}
+.empezar-form .check.opcion{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 6px;align-items:flex-start;color:var(--ink)}
+.empezar-form .check{color:var(--ink);font-size:14px}
+.trampa{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.solicitud{border:2px solid var(--accent);display:flex;flex-direction:column}
+.amiga-cod{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px dashed var(--accent);border-radius:12px;padding:8px 8px 8px 14px}
+.amiga-cod b{font-size:20px;letter-spacing:.06em}
+.empezar-form .check{display:flex;gap:10px;align-items:flex-start}
+.empezar-form .check input{width:auto;flex:none;margin:3px 0 0;padding:0}
+.cuentas-pago{display:flex;flex-direction:column;gap:10px;text-align:left}
+.cuentas-pago .cuenta{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--surface)}
+.cuentas-pago .cfila{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line)}
+.cuentas-pago .cfila:first-of-type{border-top:0}
+.cuentas-pago .cfila small{display:block;font-size:12px;color:var(--muted)}
+.cuentas-pago .cfila b{font-size:15px;word-break:break-all}
+.cuentas-pago .cfila .btn{padding:6px 12px;font-size:13px;flex:none}
+.cuentas-pago .eyebrow + .cfila{border-top:0}

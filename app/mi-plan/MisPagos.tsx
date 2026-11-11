@@ -1,3 +1,5 @@
+"use client";
+import Cuentas from "@/components/Cuentas";
 import { dinero, fechaCorta, saldo, type Pago, type Paquete } from "@/lib/pagos";
 
 export type MisPagosData = { paquetes: Paquete[]; pagos: Pago[] };
@@ -34,6 +36,12 @@ export default function MisPagos({ d }: { d: MisPagosData | null }) {
           </div>
         );
       })}
+      {debe && (
+        <details style={{ marginTop: 10 }}>
+          <summary className="note" style={{ cursor: "pointer" }}><b>Cómo pagar</b></summary>
+          <div style={{ marginTop: 8 }}><Cuentas que="mi programa" /></div>
+        </details>
+      )}
       <p className="note" style={{ margin: "10px 0 0" }}>Cecy lo actualiza cuando recibe tu pago. Si algo no cuadra, escríbele por WhatsApp.</p>
     </details>
   );

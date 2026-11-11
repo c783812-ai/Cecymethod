@@ -13,7 +13,7 @@ export default function PatientList({ rows, current }: { rows: Row[]; current?: 
   useEffect(() => setAhora(new Date()), []);
   const [todas, setTodas] = useState(false);
   const terminadas = rows.filter((r) => r.estado === "termino").length;
-  const list = rows.filter((r) => (todas || r.estado !== "termino") && r.nombre.toLowerCase().includes(q.toLowerCase()));
+  const list = rows.filter((r) => (todas || r.estado !== "termino") && r.nombre.toLowerCase().includes(q.toLowerCase())).sort((a, b) => Number(b.estado === "nueva") - Number(a.estado === "nueva"));
   return (
     <>
       <input className="search" placeholder="Buscar paciente" aria-label="Buscar paciente" value={q} onChange={(e) => setQ(e.target.value)} />
@@ -22,7 +22,7 @@ export default function PatientList({ rows, current }: { rows: Row[]; current?: 
           <li key={x.id}>
             <Link className="pbtn" href={`/consultorio/${x.id}`} aria-current={x.id === current}>
               <span className="av" style={{ background: COLORS[i % COLORS.length] }}>{x.nombre.split(" ").map((w) => w[0]).join("").slice(0, 2)}</span>
-              <span><span className="n">{x.nombre}</span>{x.estado === "pausa" && <span className="pill p-mid" style={{ marginLeft: 6 }}>En pausa</span>}{x.estado === "termino" && <span className="pill" style={{ marginLeft: 6 }}>Terminó</span>}<br /><span className="s">{[x.ciudad, x.cita_at ? (ahora && esFutura(x.cita_at, ahora) ? `cita: ${citaCorta(x.cita_at)}` : null) : x.proxima_cita && `cita: ${x.proxima_cita}`].filter(Boolean).join(" · ")}</span>
+              <span><span className="n">{x.nombre}</span>{x.estado === "nueva" && <span className="pill p-info" style={{ marginLeft: 6 }}>Nueva</span>}{x.estado === "pausa" && <span className="pill p-mid" style={{ marginLeft: 6 }}>En pausa</span>}{x.estado === "termino" && <span className="pill" style={{ marginLeft: 6 }}>Terminó</span>}<br /><span className="s">{[x.ciudad, x.cita_at ? (ahora && esFutura(x.cita_at, ahora) ? `cita: ${citaCorta(x.cita_at)}` : null) : x.proxima_cita && `cita: ${x.proxima_cita}`].filter(Boolean).join(" · ")}</span>
                 {ahora && x.user_id && <><br /><span className={`s visto ${(diasSinAbrir(x.ultima_visita, ahora) ?? 99) >= 4 ? "lejos" : ""}`}>📱 {x.ultima_visita ? `Abrió la app: ${haceCuanto(x.ultima_visita, ahora).toLowerCase()}` : "Todavía no abre la app"}</span></>}</span>
             </Link>
           </li>
