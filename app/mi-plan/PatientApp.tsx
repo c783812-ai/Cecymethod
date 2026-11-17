@@ -231,7 +231,6 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
           </button>
         ))}
       </div>
-      {esHoy && conMenu && <Ahora plan={plan} orden={orden[0]} cambios={cambios[0]} dia={DIAS7[d]} listas={listas} onLista={marcar} />}
       <div className="eyebrow">{DIAS7[d]}</div>
       {esHoy && conMenu && plan.meta && <MetaBar meta={plan.meta} aportes={aportes} listas={listas} />}
       {!conMenu ? (
@@ -272,54 +271,6 @@ function Hoy({ p, plan, planExiste, planId, planDesde, cambios, orden, diario, g
       <InvitaAmiga d={amigas} />
       <Whats />
     </>
-  );
-}
-
-/** "8:30", "1:00 pm", "13 h" -> minutos del día. */
-function minutos(h: string) {
-  const m = /(\d{1,2})(?:[:.](\d{2}))?\s*(a\.?\s?m|p\.?\s?m)?/i.exec(h ?? "");
-  if (!m) return null;
-  let hh = Number(m[1]);
-  const pm = m[3] && /p/i.test(m[3]);
-  if (pm && hh < 12) hh += 12;
-  if (m[3] && !pm && hh === 12) hh = 0;
-  return hh * 60 + Number(m[2] ?? 0);
-}
-
-/** Lo que le toca comer ahora, con cantidades: la primera comida de hoy que no ha marcado y cuya hora no pasó hace más de hora y media. */
-function Ahora({ plan, orden, cambios, dia, listas, onLista }: { plan: Plan; orden: Record<string, Dia>; cambios: Record<string, Ingrediente>; dia: Dia; listas: number[]; onLista: (i: number) => void }) {
-  const [ahora, setAhora] = useState<number | null>(null);
-  useEffect(() => {
-    const tic = () => { const d = new Date(); setAhora(d.getHours() * 60 + d.getMinutes()); };
-    tic();
-    const t = setInterval(tic, 60_000);
-    return () => clearInterval(t);
-  }, []);
-  if (ahora === null) return null;
-  const idx = TIEMPOS.map((_, i) => i).find((i) => {
-    const { m } = comidaDe(plan, orden, dia, i);
-    const h = minutos(plan.horarios?.[i] ?? TIEMPOS[i][1]);
-    return m.titulo && !listas.includes(i) && h !== null && h + 90 > ahora;
-  });
-  if (idx === undefined) return null;
-  const { m, src } = comidaDe(plan, orden, dia, idx);
-  const hora = plan.horarios?.[idx] ?? TIEMPOS[idx][1];
-  const h = minutos(hora) ?? 0;
-  const cuando = h <= ahora ? "Te toca ahora" : h - ahora <= 60 ? `En ${h - ahora} min` : `A las ${hora}`;
-  return (
-    <div className="card ahora">
-      <div className="eyebrow">{cuando} · {TIEMPOS[idx][0]}</div>
-      <b>{m.titulo}</b>
-      {m.ingredientes?.length ? (
-        <ul className="ings">
-          {m.ingredientes.map((o, j) => {
-            const a = cambios[slotDe(src, idx, j)] ?? o;
-            return <li key={j}><span className="ic" aria-hidden="true">{icono(a.n, a.g)}</span><span className="nm">{a.n}<b className="qt num">{cantidad(a, o.x)}</b></span></li>;
-          })}
-        </ul>
-      ) : m.detalle ? <p className="note" style={{ margin: "4px 0 0" }}>{m.detalle}</p> : null}
-      <button className="lista" style={{ marginTop: 8 }} onClick={() => onLista(idx)}>Marcar como lista</button>
-    </div>
   );
 }
 
